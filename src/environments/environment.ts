@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'https://matchedforever.saltpixels.in/api/Services/',
+
+  // apiUrl: 'http://192.168.1.77/matched_forever/api/Services/',
 };
 
 /*

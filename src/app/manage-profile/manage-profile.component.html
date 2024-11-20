@@ -1,0 +1,563 @@
+<div class="container-fluid">
+    <div class="content-box content-box-main">
+        <div class="main-flex">
+            <div class="search-flex">
+                <div class="page-title">
+                    <h2>
+                        Profiles({{dataObj.total}})
+                    </h2>
+                </div>
+                <div (click)="openPreference();">
+                    <button class="button-style blue-button fix-button">
+                        <p>Filters</p>
+                    </button>
+                </div>
+                <!-- <div class="search-bar relative">
+                    <div class="relative search-box">
+                        <div class="search-button">
+                            <img src="assets/images/search-button-svgrepo-com.svg">
+                        </div>
+                        <input type="text" placeholder="Search here......" [(ngModel)]="dataObj.search"
+                            autocomplete="off" placeholder="Search" (ngModelChange)="onSearchChange($event)"
+                            class="show-search">
+                    </div>
+                    
+                </div> -->
+            </div>
+            <div class="main-content">
+                <div class="table-content section-content">
+                    <table class="list-table">
+                        <thead>
+                            <tr>
+                                <td class="width-5">
+                                    #
+                                </td>
+                                <td class="width-20 text-center">
+                                    Name
+                                </td>
+                                <td class="width-10">
+                                    Contact Details
+                                </td>
+                                <td class="width-5">
+                                    Age
+                                </td>
+                                <td class="width-10">
+                                    Caste
+                                </td>
+                                <td class="width-10">
+                                    Looking For
+                                </td>
+                                <td class="width-10">
+                                    Education
+                                </td>
+                                <td class="width-5 text-right">
+                                    Action
+                                </td>
+                            </tr>
+                        </thead>
+
+                        <tbody *ngIf="profileList.length == 0 && isLoading == false">
+                            <tr>
+                                <td colspan="8">
+                                    <div class="nodata">
+                                        <p class="text-center font-size-22"><i class="ei-sad"></i></p>
+                                        <p class="text-center">No Data found!</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tbody *ngIf="isLoading">
+                            <tr *ngFor="let record of dummyRecords">
+
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tbody *ngIf="profileList.length > 0 && !isLoading">
+                            <tr *ngFor="let data of profileList; let i = index">
+                                <td class="cursor-pointer verticle-middle width-5">{{ (i+1) + (dataObj.page -
+                                    1)*dataObj.limit }}</td>
+                                <td class="cursor-pointer verticle-middle width-20 relative">
+                                    <div class="row-flex aic medium-gap profile-pic-flex">
+                                        <img src="{{data.profile_pic}}" class="art-img" *ngIf="data.profile_pic">
+                                        <img src="assets/images/istockphoto-1451587807-612x612.jpg" class="art-img"
+                                            *ngIf="!data.profile_pic">
+                                        <b>{{data.first_name}} {{data.last_name}}</b>
+                                    </div>
+                                </td>
+                                <td class="cursor-pointer verticle-middle width-10">
+                                    {{data.phone}}<br>
+                                    {{data.email}}
+                                </td>
+                                <td class="cursor-pointer verticle-middle width-10">
+                                    {{data.age}}
+                                </td>
+                                <td class="cursor-pointer verticle-middle width-10">
+                                    {{data.caste}}
+                                </td>
+
+                                <td class="cursor-pointer verticle-middle width-10">
+                                    {{data.looking_for}}
+                                </td>
+                                <td class="cursor-pointer verticle-middle width-10">
+                                    {{data.education}}
+                                </td>
+                                <td routerLink="/preview/{{data.id}}" class="verticle-middle width-5">
+                                    <div class="cursor-pointer view-button">
+                                        <span class="material-symbols-outlined">
+                                            visibility
+                                        </span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <ng-container *ngIf="profileList && profileList.length > 0">
+                <ul *ngIf="usersPager.pages && usersPager.pages.length > 1" class="pagination">
+                    <ng-container *ngIf="usersPager.currentPage > 1">
+                        <li class="page-item pgbtn prev">
+                            <a class="page-link" (click)="setUsersPage(usersPager.currentPage - 1, 1)"><span
+                                    class="material-symbols-outlined prev-button"> arrow_back_ios</span></a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="usersPager.startPage != 1">
+                        <li class="page-item first">
+                            <a class="page-link " (click)="setUsersPage(1,1)">1</a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="usersPager.startPage != 1">
+                        <li class="dots">
+                            <a class="page-link">...</a>
+                        </li>
+                    </ng-container>
+                    <li class="page-item" *ngFor="let page of usersPager.pages"
+                        [ngClass]="{active:usersPager.currentPage === page}">
+                        <a class="page-link" (click)="setUsersPage(page,1)">{{page}}</a>
+                    </li>
+                    <ng-container *ngIf="usersPager.endPage != usersPager.totalPages">
+                        <li class="dots">
+                            <a class="page-link">...</a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="usersPager.endPage != usersPager.totalPages">
+                        <li class="page-item last">
+                            <a class="page-link"
+                                (click)="setUsersPage(usersPager.totalPages,1)">{{usersPager.totalPages}}</a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="usersPager.currentPage < usersPager.totalPages">
+                        <li class="page-item pgbtn next">
+                            <a class="page-link" (click)="setUsersPage(usersPager.currentPage + 1, 1)"><span
+                                    class="material-symbols-outlined next-button"> navigate_next</span></a>
+                        </li>
+                    </ng-container>
+                </ul>
+            </ng-container>
+        </div>
+
+
+
+        <div class="profile-container" *ngIf="!isLoading">
+
+            <div class="profile-card" *ngIf="profileList.length > 0">
+
+                <div class="filter-mobile" (click)="openPreference();">
+                    <img src="assets/images/filter.png">
+                </div>
+
+                <div class="profile-image">
+                    <img *ngIf="getCurrentProfile().profile_pic" [src]="getCurrentProfile().profile_pic"
+                        alt="Profile Picture" class="profile-img"
+                        onerror="this.src='assets/images/istockphoto-1451587807-612x612.jpg'">
+                    <img *ngIf="!getCurrentProfile().profile_pic"
+                        src="assets/images/istockphoto-1451587807-612x612.jpg">
+                </div>
+
+                <!-- Profile Name -->
+                <h2>{{ getCurrentProfile().first_name }} {{ getCurrentProfile().last_name }}</h2>
+
+                <!-- Profile Details -->
+                <p><strong>Age:</strong> {{ getCurrentProfile().age }}</p>
+                <p><strong>Education:</strong> {{ getCurrentProfile().education }}</p>
+                <p><strong>Phone:</strong> {{ getCurrentProfile().phone }}</p>
+
+                <!-- Additional Profile Information -->
+                <p *ngIf="getCurrentProfile().caste"><strong>Caste:</strong> {{ getCurrentProfile().caste }}</p>
+                <p *ngIf="getCurrentProfile().religion"><strong>Religion:</strong> {{ getCurrentProfile().religion }}
+                </p>
+                <p *ngIf="getCurrentProfile().email"><strong>Email:</strong> {{ getCurrentProfile().email }}</p>
+
+                <!-- Profile Buttons -->
+                <div class="action-buttons">
+                    <button (click)="selectOption('Interested')" class="interested-btn"><span
+                            class="material-symbols-outlined">
+                            check
+                        </span></button>
+                    <button (click)="selectOption('Might Be')" class="might-be-btn">Might Be</button>
+                    <button (click)="selectOption('Rejected')" class="rejected-btn"><span
+                            class="material-symbols-outlined">
+                            close
+                        </span></button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Loading spinner or message -->
+        <div *ngIf="isLoading" class="loading-container">
+            <span>Loading profiles...</span>
+        </div>
+
+    </div>
+</div>
+
+<div class="popup-overlay-2" (click)="openPreference();" [class.visible]="preferenceFilterF"></div>
+
+<div class="preference-block" [class.active]="preferenceFilterF">
+    <div class="preference-flex">
+        <div class="upper-filter-section">
+            <div class="cross-button" (click)="openPreference();">
+                <img src="assets/images/close.png">
+            </div>
+        </div>
+        <div class="content-filter-section">
+            <div class="form-grid">
+
+                <div class="form-field">
+                    <label class="md-lable" for="max_age_gap">Max Birth Year Acceptable</label>
+                    <input type="text" class="form-data" name="max_age_gap" [(ngModel)]="dataObj.max_age_gap"
+                        #max_age_gap="ngModel" />
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="min_age_gap">Min Birth Year Acceptable</label>
+                    <input type="text" class="form-data" name="min_age_gap" [(ngModel)]="dataObj.min_age_gap"
+                        #min_age_gap="ngModel" />
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="gender">Select Gender</label>
+                    <ng-select name="gender" id="gender" [(ngModel)]="dataObj.gender" #gender="ngModel"
+                        class="form-data-select" style="width: 100%">
+                        <ng-option value="">Filter By Gender</ng-option>
+                        <ng-option value="Male">
+                            Male
+                        </ng-option>
+                        <ng-option value="Female">
+                            Female
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="height">Height Preference (In Ft.)</label>
+                    <ng-select name="height" id="height" [(ngModel)]="dataObj.height" #height="ngModel"
+                        [multiple]="true" class="form-data-select" style="width: 100%">
+                        <ng-option value="">Filter By Height</ng-option>
+                        <ng-option value="122-137">
+                            4 ft to 4.6 ft
+                        </ng-option>
+                        <ng-option value="137-152">
+                            4.6 ft to 5 ft
+                        </ng-option>
+                        <ng-option value="152-168">
+                            5 ft to 5.6 ft
+                        </ng-option>
+                        <ng-option value="168-183">
+                            5.6 ft to 6 ft
+                        </ng-option>
+                        <ng-option value="183-213">
+                            6.6 ft to 7 ft
+                        </ng-option>
+                        <ng-option value="213-229">
+                            7 ft to 7.6 ft
+                        </ng-option>
+                        <ng-option value="229-244"> 7.6 ft to 8 ft</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="education">Education Preference</label>
+                    <ng-select class="form-data-select" style="width: 100%" name="education" id="education"
+                        [multiple]="true" [(ngModel)]="dataObj.education" #education="ngModel">
+                        <ng-option value="">Select Education</ng-option>
+                        <ng-option value="{{ educ.id }}" *ngFor="let educ of educationListArray">
+                            {{ educ.education }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="education_type">Education Type Preference</label>
+                    <ng-select class="form-data-select" style="width: 100%" name="education_type" id="education_type"
+                        [multiple]="true" [(ngModel)]="dataObj.education_type" #education_type="ngModel">
+                        <ng-option value="">Select Education Type</ng-option>
+                        <ng-option value="{{ educ.id }}" *ngFor="let educ of educationTypeList">
+                            {{ educ.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="believes_in_horoscopes">Believes In Horoscope</label>
+                    <ng-select class="form-data-select" style="width: 100%" name="believes_in_horoscopes"
+                        [(ngModel)]="dataObj.believes_in_horoscopes" #believes_in_horoscopes="ngModel">
+                        <ng-option value="">Select</ng-option>
+                        <ng-option value="yes">Yes</ng-option>
+                        <ng-option value="no">No</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="occupation">Occupation Preference</label>
+                    <ng-select style="width: 100%" class="form-data-select" name="occupation" id="occupation"
+                        [multiple]="true" [(ngModel)]="dataObj.occupation" #occupation="ngModel">
+                        <ng-option value="">Select Occupation</ng-option>
+                        <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationListArray">
+                            {{ occu.occupation }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="occupation_type">Occupation Type Preference</label>
+                    <ng-select style="width: 100%" class="form-data-select" name="occupation_type" id="occupation_type"
+                        [multiple]="true" [(ngModel)]="dataObj.occupation_type" #occupation_type="ngModel">
+                        <ng-option value="">Select Occupation Type</ng-option>
+                        <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationTypeList">
+                            {{ occu.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="user_family_background">Family Background</label>
+                    <ng-select style="width: 100%" name="user_family_background" id="user_family_background"
+                        [multiple]="true" class="form-data-select" [(ngModel)]="dataObj.user_family_background"
+                        #user_family_background="ngModel">
+                        <ng-option value="">Select Family Background</ng-option>
+                        <ng-option value="Professional Background">Professional Background</ng-option>
+                        <ng-option value="Business Background">Business Background</ng-option>
+                        <ng-option value="Government Background">Government Background</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="min_net_worth">Minimum Net Worth</label>
+                    <ng-select name="min_net_worth" style="width: 100%" class="form-data-select" id="min_net_worth"
+                        [multiple]="true" [(ngModel)]="dataObj.min_net_worth" #min_net_worth="ngModel">
+                        <ng-option value="">Filter By Net Worth</ng-option>
+                        <ng-option value="0-2500000">
+                            Upto 25 Lakh
+                        </ng-option>
+                        <ng-option value="2500000-5000000">
+                            25 to 50 Lakh
+                        </ng-option>
+                        <ng-option value="5000000-7500000">
+                            50 to 75 Lakh
+                        </ng-option>
+                        <ng-option value="7500000-10000000">
+                            75 Lakh to 1 Cr
+                        </ng-option>
+                        <ng-option value="10000000-20000000">
+                            1 Cr to 2 Cr
+                        </ng-option>
+                        <ng-option value="20000000-30000000">
+                            2 to 3 Cr
+                        </ng-option>
+                        <ng-option value="30000000-40000000">
+                            3 to 4 Cr
+                        </ng-option>
+                        <ng-option value="40000000-50000000">
+                            4 to 5 Cr
+                        </ng-option>
+                        <ng-option value="50000000-+"> Above 5 Cr </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="food_habits">Food Preferance</label>
+                    <ng-select style="width: 100%" class="form-data-select" name="food_habits" id="food_habits"
+                        [multiple]="true" [(ngModel)]="dataObj.food_habits" #food_habits="ngModel">
+                        <ng-option value="">Select Food Preferance</ng-option>
+                        <ng-option value="Vegeterian">Vegeterian</ng-option>
+                        <ng-option value="Non Vegeterian">Non Vegeterian</ng-option>
+                        <ng-option value="Eggetarian">Eggetarian</ng-option>
+                        <ng-option value="Vegan">Vegan</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="smoking_habits">Smoking Preferance</label>
+                    <ng-select style="width: 100%" class="form-data-select" name="smoking_habits" id="smoking_habits"
+                        [(ngModel)]="dataObj.smoking_habits" #smoking_habits="ngModel">
+                        <ng-option value="">Select Smoking Preferance</ng-option>
+                        <ng-option value="Yes">Yes</ng-option>
+                        <ng-option value="No">No</ng-option>
+                        <ng-option value="Occasional">Occasional</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="drinking_habits">Drinking Preferance</label>
+                    <ng-select style="width: 100%" class="form-data-select" name="drinking_habits" id="drinking_habits"
+                        [(ngModel)]="dataObj.drinking_habits" #drinking_habits="ngModel">
+                        <ng-option value="">Select Drinking Preferance</ng-option>
+                        <ng-option value="Yes">Yes</ng-option>
+                        <ng-option value="No">No</ng-option>
+                        <ng-option value="Occasional">Occasional</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="country_of_settlement">Country of Settlement</label>
+                    <ng-select class="form-data-select" name="country_of_settlement" (change)="prefStateList()"
+                        id="country_of_settlement" [(ngModel)]="dataObj.country_of_settlement"
+                        #country_of_settlement="ngModel" [multiple]="true" style="width: 100%">
+                        <ng-option value="">-Select Country-</ng-option>
+                        <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
+                            {{ country.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="state_of_settlement">State of Settlement</label>
+                    <ng-select class="form-data-select" name="state_of_settlement" (change)="prefCityList()"
+                        id="state_of_settlement" [(ngModel)]="dataObj.state_of_settlement"
+                        #state_of_settlement="ngModel" [multiple]="true" style="width: 100%">
+                        <ng-option value="">-Select State-</ng-option>
+                        <ng-option value="{{ state.id }}" *ngFor="let state of prefstateList">
+                            {{ state.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="city_of_settlement">City of Settlement</label>
+                    <ng-select class="form-data-select" name="city_of_settlement" id="city_of_settlement"
+                        [(ngModel)]="dataObj.city_of_settlement" #city_of_settlement="ngModel" [multiple]="true"
+                        style="width: 100%">
+                        <ng-option value="">-Select City-</ng-option>
+                        <ng-option value="{{ city.id }}" *ngFor="let city of prefcityList">
+                            {{ city.name }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="user_family_type">Family type</label>
+                    <ng-select name="user_family_type" style="width: 100%" id="user_family_type" class="form-data-select"
+                        [multiple]="true" [(ngModel)]="dataObj.user_family_type" #user_family_type="ngModel">
+                        <ng-option value="">Select Family Type</ng-option>
+                        <ng-option value="Nuclear Family">Nuclear Family</ng-option>
+                        <ng-option value="Joint Family">Joint Family</ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="caste">Caste</label>
+                    <ng-select style="width: 100%" name="caste" id="caste" class="form-data-select"
+                        [(ngModel)]="dataObj.caste" #caste="ngModel" [multiple]="true"
+                        (change)="getAllSubCaste(this.dataObj.caste)">
+                        <ng-option value="">Select caste</ng-option>
+                        <ng-option value="{{ caste.id }}" *ngFor="let caste of casteList">
+                            {{ caste.community }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field" *ngIf="subCasteList.length > 1">
+                    <label class="md-lable" for="subcaste">Sub Caste</label>
+
+                    <ng-select style="width: 100%" name="subcaste" id="subcaste" class="form-data-select"
+                        [(ngModel)]="dataObj.subcaste" [multiple]="true" #subcaste="ngModel">
+                        <ng-option value="">Select Subcaste</ng-option>
+                        <ng-option value="{{ caste.id }}" *ngFor="let caste of subCasteList">
+                            {{ caste.community }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="religion">Religion</label>
+
+                    <ng-select style="width: 100%" name="religion" id="religion" class="form-data-select"
+                        [(ngModel)]="dataObj.religion" #religion="ngModel" [multiple]="true">
+                        <ng-option value="">Select Religion</ng-option>
+                        <ng-option value="{{ religion.id }}" *ngFor="let religion of religionList">
+                            {{ religion.religion }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <!-- <div class="form-group"  *ngIf="subCasteList.length == 0"></div> -->
+
+                <div class="form-field">
+                    <label class="md-lable" for="user_citizenship">Citizenship</label>
+                    <ng-select class="form-data-select" name="user_citizenship" id="user_citizenship"
+                        [(ngModel)]="dataObj.user_citizenship" #user_citizenship="ngModel" [multiple]="true"
+                        style="width: 100%" (change)="getAllVisas(dataObj.user_citizenship)">
+                        <ng-option value="">Select Citizenship</ng-option>
+                        <ng-option value="{{ citizen.id }}" *ngFor="let citizen of citizenshipList">
+                            {{ citizen.citizenship }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+
+                <div class="form-field">
+                    <label class="md-lable" for="user_visa">Visa</label>
+                    <ng-select class="form-data-select" name="user_visa" id="user_visa" [(ngModel)]="dataObj.user_visa"
+                        #visa="ngModel" style="width: 100%" [multiple]="true">
+                        <ng-option value="">Select Visa</ng-option>
+                        <ng-option value="{{ visa.visa }}" *ngFor="let visa of visaList">
+                            {{ visa.visa }}
+                        </ng-option>
+                    </ng-select>
+                </div>
+                <div class="form-field">
+                    <label class="md-lable" for="abroad_studies">Abroad Studies</label>
+                    <ng-select name="abroad_studies" style="width: 100%" id="abroad_studies" class="form-data-select"
+                        [(ngModel)]="dataObj.abroad_studies" #abroad_studies="ngModel">
+                        <ng-option value="">Select Education</ng-option>
+                        <ng-option value="Yes">Yes</ng-option>
+                        <ng-option value="No">No</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+
+            <div (click)="submitFilters();">
+                <button class="button-style blue-button fix-button">
+                    <p>Apply Filters</p>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

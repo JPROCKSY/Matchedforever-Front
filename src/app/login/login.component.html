@@ -1,0 +1,64 @@
+<div class="login-page">
+    <div class="login_wrapper">
+        <div class="login-flex">
+            <div class="row-flex big-gap">
+                <div class="logo-login">
+                    <img src="assets/images/logo.svg">
+                </div>
+           
+            </div>
+
+            <form name="admin" id="admin" (ngSubmit)="submitotp(loginForm.form)" #loginForm="ngForm" novalidate
+                class="form-wrapper" autocomplete="off" *ngIf="!otpsentF">
+
+                <div class="form-field relative">
+                    <label class="md-lable" style="font-size: 18px;" for="contact_no">Mobile Number<span>*</span></label>
+                    <input id="contact_no" name="contact_no" type="text"  required
+                        [(ngModel)]="loginObj.contact_no" #contact_no="ngModel" class="form-data" tabindex="1">
+
+                    <div *ngIf="loginForm.submitted && loginObj.contact_no == ''" class="">
+                        <div class="error">
+                            <p>Please enter valid mobile number for login</p>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="submit-button admin-submit-button">
+                    <button class="button-style blue-button " type="submit">
+                        <p>Send Otp</p>
+                    </button>
+                </div>
+            </form>
+
+            <form name="admin" id="admin" (ngSubmit)="submitadmin(loginForm.form)" #loginForm="ngForm" novalidate
+            class="form-wrapper" autocomplete="off" *ngIf="otpsentF">
+
+                <div class="form-field relative">
+                    <label class="md-lable" style="font-size: 18px;" for="otp">Enter OTP<span>*</span></label>
+
+                    <div class="otp-container">
+                        <input id="otp1" name="otp1" type="text" maxlength="1" required
+                            [(ngModel)]="loginObj.otp1" #otp1="ngModel" (input)="moveFocus($event, 2)" class="otp-box" tabindex="1">
+                        <input id="otp2" name="otp2" type="text" maxlength="1" required
+                            [(ngModel)]="loginObj.otp2" #otp2="ngModel" (input)="moveFocus($event, 3)" class="otp-box" tabindex="2">
+                        <input id="otp3" name="otp3" type="text" maxlength="1" required
+                            [(ngModel)]="loginObj.otp3" #otp3="ngModel" (input)="moveFocus($event, 4)" class="otp-box" tabindex="3">
+                        <input id="otp4" name="otp4" type="text" maxlength="1" required
+                            [(ngModel)]="loginObj.otp4" #otp4="ngModel" (input)="moveFocus($event, 5)" class="otp-box" tabindex="4">
+                    </div>
+
+                    <div *ngIf="loginForm.submitted && !loginObj.otp1 && !loginObj.otp2 && !loginObj.otp3 && !loginObj.otp4" class="error">
+                        <p>Please enter a valid OTP</p>
+                    </div>
+                </div>
+
+                <div class="submit-button admin-submit-button">
+                    <button class="button-style blue-button" type="submit" [disabled]="isLoading">
+                        <p>Login</p>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

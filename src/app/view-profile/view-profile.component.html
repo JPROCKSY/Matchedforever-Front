@@ -1,0 +1,1067 @@
+<div class="container-fluid">
+    <div class="content-box content-box-main ">
+        <div class="detail-content">
+            
+                <div class="card">
+                    <div class="card-heading  bottom">
+                        <h4 class="card-title">User</h4>
+                    </div>
+
+                    <div class="card-block information_grid">
+                        <div class="view_content_flex" *ngIf="profileObj.first_name">
+                            <div class="main_text">
+                                <p>First Name</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.first_name }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.middle_name">
+                            <div class="main_text">
+                                <p>Middel Name</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.middle_name }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.last_name">
+                            <div class="main_text">
+                                <p>Last Name</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.last_name }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.phone">
+                            <div class="main_text">
+                                <p>Phone</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.phone }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.alternate_number">
+                            <div class="main_text">
+                                <p>Alternate Number</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.alternate_number }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.email">
+                            <div class="main_text">
+                                <p>Email</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.email }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.caste">
+                            <div class="main_text">
+                                <p>Cast</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.caste_name }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex">
+                            <div class="main_text">
+                                <p>Religion</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.religion_name }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex">
+                            <div class="main_text">
+                                <p>Gender</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.gender }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex">
+                            <div class="main_text">
+                                <p>Relationship Status</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.relationshipStatusName }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.bioData">
+                            <div class="main_text">
+                                <p>Bio Data</p>
+                            </div>
+                            <div class="child_text">
+                                <a href="{{ profileObj.bioData }}" target="_blank"> View </a>
+                            </div>
+                        </div>
+                        <!-- <div class="view_content_flex" *ngIf="profileObj.hobbies.length > 0">
+                  <div class="main_text">
+                    <p>Hobbies</p>
+                  </div>
+                  <div class="child_text">
+                    <p
+                      style="display: inline"
+                      class="main_text"
+                      *ngFor="let hobby of profileObj.hobbies"
+                    >
+                      {{ hobby.hobby }}&nbsp;
+                    </p>
+                  </div>
+                </div> -->
+
+                        <div class="view_content_flex" *ngIf="profileObj.languages.length > 0">
+                            <div class="main_text">
+                                <p>Languages</p>
+                            </div>
+                            <div class="child_text">
+                                <p class="main_text" *ngFor="let lang of profileObj.languages">
+                                    {{ lang.language }}
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+        
+            
+                <div class="card">
+                    <div class="card-heading  bottom">
+                        <h4 class="card-title">Basic Information</h4>
+                    </div>
+                    <div class="card-block information_grid">
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.current_country">
+                            <div class="main_text">
+                                <p>Current Country</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.current_country_name }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.preffered_setlement_country">
+                            <div class="main_text">
+                                <p>Preffered Settlement Country</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.preffered_setlement_country_name }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.birth_year">
+                            <div class="main_text">
+                                <p>Birth Year</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.birth_year }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.birth_time">
+                            <div class="main_text">
+                                <p>Birth Time</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.birth_time }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.birth_place">
+                            <div class="main_text">
+                                <p>Birth Place</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.birth_place }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.height">
+                            <div class="main_text">
+                                <p>Height</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.height }} cm</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.weight">
+                            <div class="main_text">
+                                <p>Weight</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.weight }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.smoking_habits">
+                            <div class="main_text">
+                                <p>Smoking Habits</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.smoking_habits }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.drinking_habits">
+                            <div class="main_text">
+                                <p>Drinking Habits</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.drinking_habits }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.medical_history">
+                            <div class="main_text">
+                                <p>Medical History</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.medical_history }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.medical_history_description">
+                            <div class="main_text">
+                                <p>Medical Description</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.medical_history_description }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.country_of_settlement_name">
+                            <div class="main_text">
+                                <p>Country of Settlement</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.country_of_settlement_name }}</p>
+                            </div>
+                        </div>
+
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.preffered_setlement_state_name">
+                            <div class="main_text">
+                                <p>State of Settlement</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.preffered_setlement_state_name }}</p>
+                            </div>
+                        </div>
+
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.preffered_setlement_city_name">
+                            <div class="main_text">
+                                <p>City of Settlement</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.preffered_setlement_city_name }}</p>
+                            </div>
+                        </div>
+
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.user_citizenship_name">
+                            <div class="main_text">
+                                <p>Citizenship</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.user_citizenship_name }}</p>
+                            </div>
+                        </div>
+
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.mother_tongue_name">
+                            <div class="main_text">
+                                <p>Mother Tongue</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.mother_tongue_name }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.native_place">
+                            <div class="main_text">
+                                <p>Native Place</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.native_place }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.complexion">
+                            <div class="main_text">
+                                <p>Complexion</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.complexion }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.blood_group">
+                            <div class="main_text">
+                                <p>Blood Group</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.blood_group }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.body_type">
+                            <div class="main_text">
+                                <p>Body Type</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.body_type }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.cuisines">
+                            <div class="main_text">
+                                <p>Cuisines</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.cuisines }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.manglik">
+                            <div class="main_text">
+                                <p>Manglik</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.manglik }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.zodiac_sign">
+                            <div class="main_text">
+                                <p>Zodiac Sign</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.zodiac_sign }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.family_value">
+                            <div class="main_text">
+                                <p>Family Values</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.family_value }}</p>
+                            </div>
+                        </div>
+
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.fathersalivestatus">
+                            <div class="main_text">
+                                <p>Father</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.fathersalivestatus }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.mothersalivestatus">
+                            <div class="main_text">
+                                <p>Mother</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.mothersalivestatus }}</p>
+                            </div>
+                        </div>
+
+                        <!-- <div class="view_content_flex" *ngIf="profileObj.basicInfo.user_visa">
+                  <div class="main_text">
+                    <p>Visa</p>
+                  </div>
+                  <div class="child_text">
+                    <p>{{ profileObj.basicInfo.user_visa }}</p>
+                  </div>
+                </div> -->
+
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.user_family_type">
+                            <div class="main_text">
+                                <p>FamilyType</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.user_family_type }}</p>
+                            </div>
+                        </div>
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.net_family_income">
+                            <div class="main_text">
+                                <p>Net Family Income</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.net_family_income }}
+                                    {{profileObj.basicInfo.net_family_income_value}}
+                                    {{profileObj.basicInfo.net_family_income_currency}}</p>
+                            </div>
+                        </div>
+
+                        <div class="view_content_flex" *ngIf="profileObj.hobbies.length > 0">
+                            <div class="main_text">
+                                <p>Hobbies</p>
+                            </div>
+                            <ng-container *ngFor="let hobby of profileObj.hobbies">
+                                <div class="child_text">
+                                    <p style="padding-bottom: 0.5rem">{{ hobby.hobby }}</p>
+                                </div>
+                            </ng-container>
+                        </div>
+
+                        <div class="view_content_flex" *ngIf="profileObj.basicInfo.other_hobby">
+                            <div class="main_text">
+                                <p>Other Hobbies</p>
+                            </div>
+                            <div class="child_text">
+                                <p>{{ profileObj.basicInfo.other_hobby }}</p>
+                            </div>
+                        </div>
+
+                        <div class="view_content_flex" *ngIf="
+                    profileObj.basicInfo.facebook_link ||
+                    profileObj.basicInfo.instagram_link ||
+                    profileObj.basicInfo.linkedin_link
+                  ">
+                            <div class="main_text">
+                                <p>Social Media</p>
+                            </div>
+                            <div class="child_text">
+                                <p *ngIf="profileObj.basicInfo.facebook_link" style="padding-bottom: 0.5rem">
+                                    <a href="{{ profileObj.basicInfo.facebook_link }}">{{
+                                        profileObj.basicInfo.facebook_link
+                                        }}</a>
+                                </p>
+                                <p *ngIf="profileObj.basicInfo.instagram_link" style="padding-bottom: 0.5rem">
+                                    <a href="{{ profileObj.basicInfo.instagram_link }}">{{
+                                        profileObj.basicInfo.instagram_link
+                                        }}</a>
+                                </p>
+                                <p *ngIf="profileObj.basicInfo.linkedin_link" style="padding-bottom: 0.5rem">
+                                    <a href="{{ profileObj.basicInfo.linkedin_link }}">{{
+                                        profileObj.basicInfo.linkedin_link
+                                        }}</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+
+            <div  *ngIf="profileObj.relatives_information">
+                <div class="card">
+                    <div class="card-heading  bottom">
+                        <h4 class="card-title">Sibling Information</h4>
+                    </div>
+                    <div class="card-block information_grid">
+                        <ng-container *ngIf="profileObj?.basicInfo?.relatives_information?.length > 0">
+                            <ng-container *ngFor="let sibling of profileObj.basicInfo.relatives_information">
+                                <div class="view_content_flex" *ngIf="sibling.relation">
+                                    <div class="main_text">
+                                        <p>Relation</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ sibling.relation }}</p>
+                                    </div>
+
+                                </div>
+                                <div class="view_content_flex" *ngIf="sibling.marital_status">
+                                    <div class="main_text">
+                                        <p>Marital Status</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ sibling.marital_status }}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="sibling.first_name">
+                                    <div class="main_text">
+                                        <p>First Name</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ sibling.first_name }}</p>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="" *ngIf="
+            profileObj.basicInfo.residential_address ||
+            profileObj.basicInfo.residential_address_apt ||
+            profileObj.basicInfo.residential_country ||
+            profileObj.basicInfo.residential_state ||
+            profileObj.basicInfo.residential_city ||
+            profileObj.basicInfo.residential_zipcode ||
+            profileObj.basicInfo.residential_type ||
+            profileObj.basicInfo.future_residential_address ||
+            profileObj.basicInfo.future_residential_address_apt ||
+            profileObj.basicInfo.future_residential_country ||
+            profileObj.basicInfo.future_residential_state ||
+            profileObj.basicInfo.future_residential_city ||
+            profileObj.basicInfo.future_residential_zipcode ||
+            profileObj.basicInfo.future_residential_type
+        ">
+                <div class="card">
+                    <div class="card-heading  bottom">
+                        <h4 class="card-title">Address</h4>
+                    </div>
+                    <div class="card-block">
+                        <div class="multi_info_flex">
+                            <div *ngIf="
+                    profileObj.basicInfo.residential_address ||
+                    profileObj.basicInfo.residential_address_apt ||
+                    profileObj.basicInfo.residential_country ||
+                    profileObj.basicInfo.residential_state ||
+                    profileObj.basicInfo.residential_city ||
+                    profileObj.basicInfo.residential_zipcode ||
+                    profileObj.basicInfo.residential_type
+                ">
+                                <div style="margin-bottom: 10px;">
+                                    <p class="card-title-inner">Residential</p>
+                                </div>
+                                <div class="information_grid">
+                                    <div class="view_content_flex" *ngIf="profileObj.basicInfo.residential_address">
+                                        <div class="main_text">
+                                            <p>Address</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.residential_address }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex" *ngIf="profileObj.basicInfo.residential_address_apt">
+                                        <div class="main_text">
+                                            <p>Address Apartment</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.residential_address_apt }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex" *ngIf="profileObj.basicInfo.residential_country">
+                                        <div class="main_text">
+                                            <p>Country</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.residential_country_name }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex" *ngIf="profileObj.basicInfo.residential_state">
+                                        <div class="main_text">
+                                            <p>State</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.residential_state_name }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex" *ngIf="profileObj.basicInfo.residential_city">
+                                        <div class="main_text">
+                                            <p>City</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.residential_city_name }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex" *ngIf="profileObj.basicInfo.residential_zipcode">
+                                        <div class="main_text">
+                                            <p>Zipcode</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.residential_zipcode }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex" *ngIf="profileObj.basicInfo.residential_type">
+                                        <div class="main_text">
+                                            <p>Type</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.residential_type }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="
+                    profileObj.basicInfo.future_residential_address ||
+                    profileObj.basicInfo.future_residential_address_apt ||
+                    profileObj.basicInfo.future_residential_country ||
+                    profileObj.basicInfo.future_residential_state ||
+                    profileObj.basicInfo.future_residential_city ||
+                    profileObj.basicInfo.future_residential_zipcode ||
+                    profileObj.basicInfo.future_residential_type
+                ">
+                                <div style="margin-bottom: 10px;">
+                                    <p class="card-title-inner">Future Residential</p>
+                                </div>
+                                <div class="information_grid">
+                                    <div class="view_content_flex"
+                                        *ngIf="profileObj.basicInfo.future_residential_address">
+                                        <div class="main_text">
+                                            <p>Address</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.future_residential_address }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex"
+                                        *ngIf="profileObj.basicInfo.future_residential_address_apt">
+                                        <div class="main_text">
+                                            <p>Address Apartment</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>
+                                                {{ profileObj.basicInfo.future_residential_address_apt }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex"
+                                        *ngIf="profileObj.basicInfo.future_residential_country">
+                                        <div class="main_text">
+                                            <p>Country</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>
+                                                {{ profileObj.basicInfo.future_residential_country_name }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex"
+                                        *ngIf="profileObj.basicInfo.future_residential_state">
+                                        <div class="main_text">
+                                            <p>State</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>
+                                                {{ profileObj.basicInfo.future_residential_state_name }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex" *ngIf="profileObj.basicInfo.future_residential_city">
+                                        <div class="main_text">
+                                            <p>City</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>
+                                                {{ profileObj.basicInfo.future_residential_city_name }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex"
+                                        *ngIf="profileObj.basicInfo.future_residential_zipcode">
+                                        <div class="main_text">
+                                            <p>Zipcode</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.future_residential_zipcode }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="view_content_flex" *ngIf="profileObj.basicInfo.future_residential_type">
+                                        <div class="main_text">
+                                            <p>Type</p>
+                                        </div>
+                                        <div class="child_text">
+                                            <p>{{ profileObj.basicInfo.future_residential_type }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="" *ngIf="profileObj.education.length > 0">
+                <div class="card">
+                    <div class="card-heading  bottom">
+                        <h4 class="card-title">Education</h4>
+                    </div>
+                    <div class="card-block">
+                        <div class="multi_info_flex">
+                            <div class="information_grid" *ngFor="let data of profileObj.education">
+                                <div class="view_content_flex" *ngIf="data.unversity_name">
+                                    <div class="main_text">
+                                        <p>School/University Name</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.unversity_name }}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.type">
+                                    <div class="main_text">
+                                        <p>Education Type</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.education_type_name }}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.education">
+                                    <div class="main_text">
+                                        <p>Education</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.education_name }}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.description">
+                                    <div class="main_text">
+                                        <p>Education Description</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="" *ngIf="profileObj.occupation.length > 0">
+                <div class="card">
+                    <div class="card-heading  bottom">
+                        <h4 class="card-title">Occupation</h4>
+                    </div>
+                    <div class="card-block">
+                        <div class="multi_info_flex">
+                            <div class="information_grid" *ngFor="let data of profileObj.occupation">
+                                <div class="view_content_flex" *ngIf="data.occupation_type">
+                                    <div class="main_text">
+                                        <p>Occupation Type</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.occupation_type_name }}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.type_of_occupation">
+                                    <div class="main_text">
+                                        <p>Occupation</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.occupation_name }}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.company_name">
+                                    <div class="main_text">
+                                        <p>Company Name</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.company_name }}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.designation">
+                                    <div class="main_text">
+                                        <p>Designation</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.designation }}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.company_revenue">
+                                    <div class="main_text">
+                                        <p>Company Revenue</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.company_revenue }} {{data.company_revenue_value}}
+                                            {{data.company_revenue_currency}}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.monthly_income">
+                                    <div class="main_text">
+                                        <p>Monthly Income</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.monthly_income }} {{data.monthly_income_value}}
+                                            {{data.monthly_income_currency}}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.yearly_income">
+                                    <div class="main_text">
+                                        <p>Yearly Income</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.yearly_income }} {{data.yearly_income_value}}
+                                            {{data.yearly_income_currency}}</p>
+                                    </div>
+                                </div>
+                                <div class="view_content_flex" *ngIf="data.description">
+                                    <div class="main_text">
+                                        <p>Description</p>
+                                    </div>
+                                    <div class="child_text">
+                                        <p>{{ data.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="" *ngIf="profileObj.userPreferances">
+                <div class="card">
+                    <div class="card-heading  bottom">
+                        <h4 class="card-title">Preferances</h4>
+                    </div>
+                    <div class="card-block">
+                        <div class="information_grid">
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.min_age_gap">
+                                <div class="main_text">
+                                    <p>Minimum Age</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.min_age_gap }}</p>
+                                </div>
+                            </div>
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.max_age_gap">
+                                <div class="main_text">
+                                    <p>Maximum Age</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.max_age_gap }}</p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.caste_name">
+                                <div class="main_text">
+                                    <p>Caste</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.caste_name }}</p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.religion_name">
+                                <div class="main_text">
+                                    <p>Caste</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.religion_name }}</p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.height_preferance">
+                                <div class="main_text">
+                                    <p>Height Preferance</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.height_preferance }} cm</p>
+                                </div>
+                            </div>
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.education">
+                                <div class="main_text">
+                                    <p>Education Preferance</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.education_name }}</p>
+                                </div>
+                            </div>
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.believes_in_horoscopes">
+                                <div class="main_text">
+                                    <p>Believes In horoscope</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.believes_in_horoscopes }}</p>
+                                </div>
+                            </div>
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.occuppation">
+                                <div class="main_text">
+                                    <p>Occupation Preferance</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.occuppation_name }}</p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.family_background">
+                                <div class="main_text">
+                                    <p>Family Background</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.family_background }}</p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.family_type">
+                                <div class="main_text">
+                                    <p>Family Type</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.family_type }}</p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex"
+                                *ngIf="profileObj.userPreferances.country_of_settlement_name">
+                                <div class="main_text">
+                                    <p>Country Of Settlement</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>
+                                        {{ profileObj.userPreferances.country_of_settlement_name }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.state_of_settlement_name">
+                                <div class="main_text">
+                                    <p>State Of Settlement</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.state_of_settlement_name }}</p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.city_of_settlement_name">
+                                <div class="main_text">
+                                    <p>City Of Settlement</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.city_of_settlement_name }}</p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.citizenship_name">
+                                <div class="main_text">
+                                    <p>Citizenship</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.citizenship_name }}</p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.mother_tongue_preference">
+                                <div class="main_text">
+                                    <p>Mother Tongue Preferance</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.mother_tongue_preference_name }}</p>
+                                </div>
+                            </div>
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.complexion_preference">
+                                <div class="main_text">
+                                    <p>Complexion Preferance</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.complexion_preference }}</p>
+                                </div>
+                            </div>
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.minimum_weight">
+                                <div class="main_text">
+                                    <p>Minimum Weight Preferance</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.minimum_weight }}</p>
+                                </div>
+                            </div>
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.maximum_weight">
+                                <div class="main_text">
+                                    <p>Maximum Weight Preferance</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.maximum_weight }}</p>
+                                </div>
+                            </div>
+                            <div class="view_content_flex" *ngIf="profileObj.userPreferances.body_type_preference">
+                                <div class="main_text">
+                                    <p>Body Type Preferance</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>{{ profileObj.userPreferances.body_type_preference }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="" *ngIf="familyFlag">
+                <div class="card">
+                    <div class="card-heading  bottom" *ngIf="
+                profileObj.family_information.fathers_info.first_name ||
+                profileObj.family_information.mothers_info.first_name
+            ">
+                        <h4 class="card-title">Family Information</h4>
+                    </div>
+                    <div class="card-block">
+                        <div class="information_grid">
+                            <div class="view_content_flex" *ngIf="
+                    profileObj.family_information &&
+                    profileObj.family_information.fathers_info.first_name
+                ">
+                                <div class="main_text">
+                                    <p>Father's Info</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>
+                                        {{
+                                        profileObj.family_information.fathers_info.first_name +
+                                        " " +
+                                        profileObj.family_information.fathers_info.last_name
+                                        }}
+                                    </p>
+                                    <p style="padding-top: 8px">
+                                        {{ profileObj.family_information.fathers_info.phone }}
+                                    </p>
+                                    <p style="padding-top: 8px">
+                                        {{ profileObj.family_information.fathers_info.email }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="view_content_flex" *ngIf="
+                    profileObj.family_information &&
+                    profileObj.family_information.mothers_info.first_name
+                ">
+                                <div class="main_text">
+                                    <p>Mother's Info</p>
+                                </div>
+                                <div class="child_text">
+                                    <p>
+                                        {{
+                                        profileObj.family_information.mothers_info.first_name +
+                                        " " +
+                                        profileObj.family_information.mothers_info.last_name
+                                        }}
+                                    </p>
+                                    <p style="padding-top: 8px">
+                                        {{ profileObj.family_information.mothers_info.phone }}
+                                    </p>
+                                    <p style="padding-top: 8px">
+                                        {{ profileObj.family_information.mothers_info.email }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="view_content_flex" *ngIf="
+                    profileObj.family_information.siblings &&
+                    profileObj.family_information.siblings.length > 0
+                ">
+                                <div class="main_text">
+                                    <p>Relative's Info</p>
+                                </div>
+                                <div class="child_text">
+                                    <div class="d-flex justify-content-between align-items-center" *ngFor="
+                        let data of profileObj.family_information.siblings;
+                        let i = index
+                    ">
+                                        <div>
+                                            <p class="main_text" style="padding-top: 8px">
+                                                {{
+                                                data.relationship_type +
+                                                " - " +
+                                                data.first_name +
+                                                " " +
+                                                data.last_name
+                                                }}
+                                            </p>
+                                            <p class="main_text" style="padding-top: 8px">
+                                                {{ data.phone + " - " + data.email }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="" *ngIf="profileObj.images.length > 0">
+                <div class="card">
+                    <div class="card-heading  bottom">
+                        <h4 class="card-title">Images</h4>
+                    </div>
+                    <div class="card-block">
+                        <div class="multi_info_flex">
+                            <div class="information_grid media_images_grid">
+                                <div class="media_images" *ngFor="let data of profileObj.images">
+                                    <!-- <img src="{{data.image}}" alt=""> -->
+
+                                    <a data-fancybox="item-fancy" href="{{ data.image }}" target="_self"
+                                        *ngIf="data.image">
+                                        <img src="{{ data.image }}" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

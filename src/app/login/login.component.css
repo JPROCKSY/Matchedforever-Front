@@ -1,0 +1,131 @@
+.login_wrapper{
+    display: flex;
+    width: 540px;
+    max-width: 540px;
+    border-radius: 18px;
+    z-index: 1;
+    box-shadow: rgba(37, 83, 185, 0.1) 0px 2px 30px 15px;
+    background-color: white;
+    padding: 30px;
+    text-align: start;
+}
+.login-flex{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    width: 100%;
+}
+
+.section-title p{
+    font-size: 30px;
+    font-family: var(--bold-font-family);
+    color: black;
+}
+
+.login-page{
+    height: 100vh;
+    background-color: #F2F7FB;
+    display: grid;
+    place-items: center;
+}
+.logo-login{
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+.content-size p{
+    font-family: var(--regular-font-family);
+    font-size: 1.2rem;
+    color: #000000;
+}
+.form-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.submit-button{
+    width: 100%;
+}
+.md-lable{
+    font-size: 1.2rem;
+    font-family: var(--medium-font-family);
+    color: #000000;
+}
+.md-lable span{
+    color: #FF5200;
+    font-size: 1.2rem;
+}
+
+.forgot-text{
+    width: 100%;
+    cursor: pointer;
+}
+.forgot-text-2{
+    cursor: pointer;
+}
+.forgot-text p{
+    font-size: 1.2rem;
+    color: #676767;
+    text-align: right;
+}
+.forgot-text-2 p{
+    font-size: 1.2rem;
+    color: #676767;
+}
+.eye-button{
+    position: absolute;
+    top: 73%;
+    right: 3%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.otp-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .otp-box {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    font-size: 24px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding: 10px;
+  }
+  
+  .otp-box:focus {
+    outline: none;
+    border-color: #c4a483;
+    box-shadow: 0 0 5px #c4a483;
+  }
+  
+  .error p {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+@media only screen and (max-width: 767px) {
+
+    .login_wrapper{
+        display: flex;
+        width: 100%;
+        max-width: 540px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        padding: 30px;
+        text-align: start;
+    }
+
+    .login-page{
+        padding: 0 20px;
+    }
+}
+
+

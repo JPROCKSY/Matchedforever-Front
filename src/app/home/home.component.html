@@ -1,0 +1,91 @@
+<div class="main_wrapper">
+    <div class="side-menu" [class.active]="sidemenuF">
+        <div class="relative">
+            <div class="header-logo">
+                <img src="assets/images/logo.svg">
+            </div>
+            <div class="cross-button" (click)="collapseMenu();">
+                <img src="assets/images/close.png">
+            </div>
+        </div>
+        <ul class="sidebar-links">
+            <!-- <li class="link-title">HOME</li> -->
+            <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                class="link-content">
+                <div class="link-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true" role="img" class="iconify iconify--solar" width="24" height="24"
+                        viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="6" r="4"></circle>
+                            <path stroke-linecap="round"
+                                d="M18 9c1.657 0 3-1.12 3-2.5S19.657 4 18 4M6 9C4.343 9 3 7.88 3 6.5S4.343 4 6 4"
+                                opacity=".5"></path>
+                            <ellipse cx="12" cy="17" rx="6" ry="4"></ellipse>
+                            <path stroke-linecap="round"
+                                d="M20 19c1.754-.385 3-1.359 3-2.5s-1.246-2.115-3-2.5M4 19c-1.754-.385-3-1.359-3-2.5s1.246-2.115 3-2.5"
+                                opacity=".5"></path>
+                        </g>
+                    </svg>
+                </div>
+                <div class="link-text">
+                    Profiles
+                </div>
+            </a>
+        </ul>
+    </div>
+    <div class="margin-left" [class.active]="sidemenuF">
+        <div class="main-content">
+            <div class="upper-header">
+                <div class="collapse-img" (click)="collapseMenu();">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        aria-hidden="true" role="img" class="iconify iconify--solar" width="24" height="24"
+                        viewBox="0 0 24 24">
+                        <path fill="currentColor" fill-rule="evenodd"
+                            d="M3.25 7A.75.75 0 0 1 4 6.25h16a.75.75 0 0 1 0 1.5H4A.75.75 0 0 1 3.25 7"
+                            clip-rule="evenodd"></path>
+                        <path fill="currentColor"
+                            d="M3.25 12a.75.75 0 0 1 .75-.75h11a.75.75 0 0 1 0 1.5H4a.75.75 0 0 1-.75-.75" opacity=".7">
+                        </path>
+                        <path fill="currentColor"
+                            d="M3.25 17a.75.75 0 0 1 .75-.75h5a.75.75 0 0 1 0 1.5H4a.75.75 0 0 1-.75-.75" opacity=".4">
+                        </path>
+                    </svg>
+                </div>
+                <div class="header-logo-mobile">
+                    <img src="assets/images/logo.svg">
+                </div>
+                <div class="profile-flex">
+                    <div class="profile-img">
+                        <img src="assets/images/download.png" style="margin-top: 5px;">
+                    </div>
+                    <div class="inner-flex hide-mobile">
+                        <div class="content-size">
+                            <p>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</p>
+                        </div>
+                    </div>
+                    <div class="profile-popup">
+                        <ul class="header-buttons">
+                            <!-- <li class="show-mobile">
+                                <span>
+                                    {{loggedInUser.first_name}} {{loggedInUser.last_name}}
+                                </span>
+                            </li> -->
+                            <li>
+                                <img src="assets/images/profile-round-1346-svgrepo-com.svg" class="logout-icon">
+                                <span>Update Profile</span>
+                            </li>
+                            <li (click)="getlogout()">
+                                <img src="assets/images/logout-2-svgrepo-com.svg" class="logout-icon">
+                                <span>Logout</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+</div>
