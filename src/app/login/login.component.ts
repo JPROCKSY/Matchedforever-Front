@@ -74,6 +74,15 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
+  _keyPress(event: any) {
+    const pattern = /[0-9]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (!pattern.test(inputChar)) {
+      event.preventDefault();
+    }
+  }
+
   
   moveFocus(event, nextInput) {
     if (event.target.value.length === 1) {

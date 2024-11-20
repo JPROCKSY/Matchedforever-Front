@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
 
 /* @import "~swiper/swiper-bundle.min.css"; */
 
@@ -720,4 +722,25 @@ img {
 
 .ng-select.ng-select-single .ng-select-container {
     height: 26px;
+}
+.form-data-textarea{
+    height: 150px;
+    scrollbar-width: thin;
+}
+.owl-dt-calendar {
+    height: unset !important;
+ }
+ 
+ .owl-dt-popup-container {
+    position: relative;
+    width: 23.5em !important;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+ }
+
+ .owl-dt-calendar-table .owl-dt-calendar-cell-content {
+    font-size: 12px !important;
+}
+
+.owl-dt-container, .owl-dt-container * {
+    font-size: 13px !important;
 }

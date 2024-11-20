@@ -13,7 +13,7 @@
 
                 <div class="form-field relative">
                     <label class="md-lable" style="font-size: 18px;" for="contact_no">Mobile Number<span>*</span></label>
-                    <input id="contact_no" name="contact_no" type="text"  required
+                    <input id="contact_no" (keypress)=_keyPress($event) minlength="8" maxlength="12" name="contact_no" type="text"  required
                         [(ngModel)]="loginObj.contact_no" #contact_no="ngModel" class="form-data" tabindex="1">
 
                     <div *ngIf="loginForm.submitted && loginObj.contact_no == ''" class="">

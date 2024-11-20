@@ -1,1 +1,2642 @@
-<p>profile-update works!</p>
+<div class="container-fluid">
+    <!-- <div class="page-title">
+        <h4>Profile Update</h4>
+    </div> -->
+    <div class="content-box content-box-main">
+        <div class="tabs-master d-flex">
+            <div class="tabs" [class.active]="activeTab == 'User'" (click)="handleActiveTab('User')">
+                User
+            </div>
+            <div class="tabs" [class.active]="activeTab == 'Basic Information'"
+                (click)="handleActiveTab('Basic Information')">
+                Basic&nbsp;Information
+            </div>
+            <div class="tabs" [class.active]="activeTab == 'Family Information'"
+                (click)="handleActiveTab('Family Information')">
+                Family&nbsp;Information
+            </div>
+            <div class="tabs" [class.active]="activeTab == 'Address'" (click)="handleActiveTab('Address')">
+                Address
+            </div>
+            <div class="tabs" [class.active]="activeTab == 'Education'" (click)="handleActiveTab('Education')">
+                Education
+            </div>
+            <div class="tabs" [class.active]="activeTab == 'Occupation'" (click)="handleActiveTab('Occupation')">
+                Occupation
+            </div>
+            <div class="tabs" [class.active]="activeTab == 'Preference'" (click)="handleActiveTab('Preference')">
+                Preference
+            </div>
+            <div class="tabs" [class.active]="activeTab == 'Profile Images'"
+                (click)="handleActiveTab('Profile Images')">
+                Media
+            </div>
+        </div>
+
+        <div *ngIf="activeTab == 'User'">
+            <form name="form" (ngSubmit)="save(createProfileForm.form, 'false', 'Basic Information')"
+                #createProfileForm="ngForm" novalidate>
+                <div class="activeBody content-flex">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label class="md-lable" for="first_name">First Name*</label>
+                            <input type="text" class="form-data" name="first_name" [(ngModel)]="profileObj.first_name"
+                                #first_name="ngModel"
+                                [ngClass]="{'is-invalid': createProfileForm.submitted && first_name.invalid}"
+                                required />
+                            <div *ngIf="createProfileForm.submitted && first_name.invalid" class="invalid-feedback">
+                                <div *ngIf="first_name.errors.required">
+                                    First Name is required
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="middle_name">Middle Name</label>
+                            <input type="text" class="form-data" name="middle_name" [(ngModel)]="profileObj.middle_name"
+                                #middle_name="ngModel"
+                                [ngClass]="{'is-invalid': createProfileForm.submitted && middle_name.invalid}" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="last_name">Last Name*</label>
+                            <input type="text" class="form-data" name="last_name" [(ngModel)]="profileObj.last_name"
+                                #last_name="ngModel" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="gender">Gender*</label>
+                            <ng-select name="gender" id="gender" class="form-data-select"
+                                [(ngModel)]="profileObj.gender" #gender="ngModel">
+                                <ng-option value="">Select Gender</ng-option>
+                                <ng-option value="Male">Male</ng-option>
+                                <ng-option value="Female">Female</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="country_code">Country Code</label>
+                            <ng-select class="form-data-select" name="country_code" id="country_code"
+                                [(ngModel)]="profileObj.country_code" #country_code="ngModel" style="width: 100%">
+                                <ng-option value="">-Select Country Code-</ng-option>
+                                <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
+                                    <div class="row-flex aic small-gap">
+                                        <div>
+                                            <img src="https://flagcdn.com/w40/{{toSmallerCase(country.iso2)}}.webp"
+                                                alt="flag" />
+                                        </div>
+                                        <div>+{{ country.phonecode }}</div>
+                                        <div>
+                                            {{ country.name }}
+                                        </div>
+                                    </div>
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="phone">Contact number*</label>
+                            <input type="text" class="form-data" name="phone" [(ngModel)]="profileObj.phone"
+                                #phone="ngModel" minlength="8" maxlength="13"
+                                [ngClass]="{'is-invalid': createProfileForm.submitted && phone.invalid}" required
+                                (keypress)="_keyPress($event)" />
+                            <div *ngIf="createProfileForm.submitted && phone.invalid" class="invalid-feedback">
+                                <div *ngIf="phone.errors.required">Phone number is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="alternate_country_code">Alternate Number Code</label>
+                            <ng-select class="form-data-select" name="alternate_country_code"
+                                id="alternate_country_code" [(ngModel)]="profileObj.alternate_country_code"
+                                #alternate_country_code="ngModel" style="width: 100%">
+                                <ng-option value="">-Select Country Code-</ng-option>
+                                <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
+                                    <div class="row-flex aic small-gap">
+                                        <div>
+                                            <img src="https://flagcdn.com/w40/{{toSmallerCase(country.iso2)}}.webp"
+                                                alt="flag" />
+                                        </div>
+                                        <div>+{{ country.phonecode }}</div>
+                                        <div>
+                                            {{ country.name }}
+                                        </div>
+                                    </div>
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="alternate_number">Alternate Number*</label>
+                            <input type="text" class="form-data" name="alternate_number"
+                                [(ngModel)]="profileObj.alternate_number" #alternate_number="ngModel" minlength="8"
+                                maxlength="13"
+                                [ngClass]="{'is-invalid':createProfileForm.submitted && alternate_number.invalid}"
+                                (keypress)="_keyPress($event)" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="caste">Caste*</label>
+                            <ng-select name="caste" id="caste" [(ngModel)]="profileObj.caste" class="form-data-select"
+                                #caste="ngModel" (change)="getAllSubCaste(profileObj.caste)">
+                                <ng-option value="">Select caste</ng-option>
+                                <ng-option *ngFor="let caste of casteList" [value]="caste.id">
+                                    {{ caste.community }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="subcaste">Sub Caste</label>
+                            <ng-select name="subcaste" id="subcaste" class="form-data-select"
+                                [(ngModel)]="profileObj.subcaste" #subcaste="ngModel">
+                                <ng-option value="">Select Subcaste</ng-option>
+                                <ng-option *ngFor="let caste of subCasteList" [value]="caste.id">
+                                    {{ caste.community }}
+                                </ng-option>
+                            </ng-select>
+                            <div *ngIf="createProfileForm.submitted && profileObj.caste == ''" class="invalid-feedback">
+                                <div>Caste is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="religion">Religion*</label>
+                            <ng-select name="religion" id="religion" class="form-data-select"
+                                [(ngModel)]="profileObj.religion" #religion="ngModel">
+                                <ng-option value="">Select Religion</ng-option>
+                                <ng-option *ngFor="let religion of religionList" [value]="religion.id">
+                                    {{ religion.religion }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="looking_for">Looking For*</label>
+                            <ng-select name="looking_for" id="looking_for" class="form-data-select"
+                                [(ngModel)]="profileObj.looking_for" #looking_for="ngModel"
+                                [ngClass]="{'is-invalid': createProfileForm.submitted && looking_for.invalid}" required>
+                                <ng-option value="">Select Partner</ng-option>
+                                <ng-option value="Bride">Bride</ng-option>
+                                <ng-option value="Groom">Groom</ng-option>
+                            </ng-select>
+                            <div *ngIf="createProfileForm.submitted && profileObj.looking_for == ''"
+                                class="invalid-feedback">
+                                <div>Please select your preference</div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="email">Email*</label>
+                            <input type="text" class="form-data" name="email" [(ngModel)]="profileObj.email"
+                                #email="ngModel"
+                                [ngClass]="{'is-invalid': createProfileForm.submitted && email.invalid}" required />
+                            <div *ngIf="createProfileForm.submitted && email.invalid" class="invalid-feedback">
+                                <div>Email is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="relationship_status">Relationship Status*</label>
+                            <ng-select class="form-data-select" name="relationship_status" id="relationship_status"
+                                [(ngModel)]="profileObj.relationship_status" #relationship_status="ngModel"
+                                [ngClass]="{'is-invalid':createProfileForm.submitted && relationship_status.invalid}"
+                                required>
+                                <ng-option value="">Select Status</ng-option>
+                                <ng-option *ngFor="let status of relationShipStatusList" [value]="status.id">
+                                    {{ status.title }}
+                                </ng-option>
+                            </ng-select>
+                            <div *ngIf="createProfileForm.submitted &&profileObj.relationship_status == ''"
+                                class="invalid-feedback">
+                                <div>Relationship status is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="is_active">Status</label>
+                            <ng-select class="form-data-select" name="is_active" [(ngModel)]="profileObj.is_active"
+                                #is_active="ngModel">
+                                <ng-option value="">Select Status</ng-option>
+                                <ng-option value="1">Active</ng-option>
+                                <ng-option value="0">Inactive</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="reference">Reference</label>
+                            <ng-select class="form-data-select" name="reference" id="reference"
+                                [(ngModel)]="profileObj.reference" #reference="ngModel"
+                                (change)="handleReference(profileObj.reference)">
+                                <ng-option value="">Select Reference</ng-option>
+                                <ng-option value="Social Media">Social Media</ng-option>
+                                <ng-option value="Marketing">Marketing</ng-option>
+                                <ng-option value="Person">Personal Reference</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field" *ngIf="profileObj.reference == 'Person'">
+                            <label class="md-lable" for="reference_name">Reference Name</label>
+                            <input type="text" class="form-data" name="reference_name"
+                                [(ngModel)]="profileObj.reference_name" #reference_name="ngModel" />
+                        </div>
+
+                        <div class="form-field" *ngIf="profileObj.reference == 'Person'">
+                            <label class="md-lable" for="reference_number">Reference Number</label>
+                            <input type="text" class="form-data" name="reference_number"
+                                [(ngModel)]="profileObj.reference_number" #reference_number="ngModel" />
+                        </div>
+
+                        <div class="form-field" *ngIf="profileObj.reference == 'Person'">
+                            <label class="md-lable" for="reference_profession">Reference Profession</label>
+                            <ng-select name="reference_profession" class="form-data-select" id="reference_profession"
+                                [(ngModel)]="profileObj.reference_profession">
+                                <ng-option value="">Select Profession</ng-option>
+                                <ng-option value="Business Family">Business Family</ng-option>
+                                <ng-option value="Coroporate Family">Coroporate Family</ng-option>
+                                <ng-option value="Government Family">Government Family</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field" *ngIf="profileObj.reference == 'Person'">
+                            <label class="md-lable" for="reference_remark">Remark</label>
+                            <input type="text" class="form-data" name="reference_remark"
+                                [(ngModel)]="profileObj.reference_remark" #reference_remark="ngModel" />
+                        </div>
+
+                        <!-- <div class="form-field">
+                        <label class="md-lable"  for="plan_id">Plan</label>
+                        <ng-select class="form-data-select" name="plan_id" id="plan_id"
+                            [(ngModel)]="profileObj.plan_id" #plan_id="ngModel">
+                            <ng-option value="">Select Plan</ng-option>
+                            <ng-option value="{{ plan.id }}" *ngFor="let plan of paymentPlanList">{{ plan.title
+                                }}</ng-option>
+                        </ng-select>
+                    </div> -->
+
+                        <div class="form-field">
+                            <label class="md-lable" for="about">Bio*</label>
+                            <textarea name="about" id="about" class="form-data form-data-textarea"
+                                [(ngModel)]="profileObj.about" #about="ngModel"></textarea>
+                        </div>
+
+                        <div class="form-field">
+                            <!-- <h4 style="font-size: 1.5rem; font-weight: 700"></h4> -->
+                            <label class="md-lable" for="profile_pic">Profile Image</label>
+    
+                            <div class="default_imageiconcategory">
+                                <img *ngIf="profileObj.profile_pic_view || profileObj.profile_pic;else placeholder"
+                                    [src]="profileObj.profile_pic_view? profileObj.profile_pic_view: profileObj.profile_pic"
+                                    class="categoryiconimg" />
+                                <ng-template #placeholder>
+                                    <img src="assets/images/istockphoto-1451587807-612x612.jpg"
+                                        class="categoryiconimg" />
+                                </ng-template>
+                            </div>
+    
+                            <label class="md-lable" for="profilepic" class="pointer">
+                                <span class="btn choose_btn btn-default display-block no-mrg-btm md-lable">Choose Image</span>
+                                <input type="file" id="profilepic" maxlength="" class="d-none" name="profilepic"
+                                    accept="image/*" (change)="profilePicture($event)" multiple />
+                            </label>
+    
+                        </div>
+                    </div>
+
+                    <div class="submit_comon_btn" style="margin-left: auto">
+                        <button class="button-style blue-button fix-button" type="submit" [disabled]="isLoading">
+                            <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="activeTab == 'Basic Information'">
+            <form name="form" (ngSubmit)="
+          saveAndNext(basicInformationForm.form, 'false', 'Family Information')
+        " #basicInformationForm="ngForm" novalidate>
+                <div class="activeBody content-flex">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label class="md-lable" for="birth_place">Birth Place</label>
+                            <input type="text" class="form-data" name="birth_place" [(ngModel)]="profileObj.birth_place"
+                                #birth_place="ngModel" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="height">Height (In Ft.)</label>
+                            <!-- [ngClass]="{
+                'is-invalid': basicInformationForm.submitted && height.invalid
+              }"
+              required -->
+                            <ng-select name="height" id="height" class="form-data-select" [(ngModel)]="profileObj.height"
+                                #height="ngModel">
+                                <ng-option value="">Select Height</ng-option>
+                                <ng-option value="{{ height.cm }}" *ngFor="let height of heightArray">
+                                    {{
+                                    height.feet +
+                                    " ft " +
+                                    height.inches +
+                                    " inches " +
+                                    "(" +
+                                    height.cm +
+                                    " cm " +
+                                    ")"
+                                    }}
+                                </ng-option>
+                            </ng-select>
+                            <div *ngIf="basicInformationForm.submitted && profileObj.height == ''"
+                                class="invalid-feedback">
+                                <div>Height is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="birth_date">Birth Date *</label>
+                            <input type="text" [(ngModel)]="profileObj.birth_date" #birth_date="ngModel"
+                                name="birth_date" id="birth_date" class="form-data" [min]="minDate" [ngClass]="{
+                  'is-invalid': formError && profileObj.birth_date == ''
+                }" [max]="maxDate" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" placeholder="Birth Date" readonly
+                                required (ngModelChange)="handledate()" />
+                            <div class="invalid-feedback" *ngIf="formError && profileObj.birth_date == ''">
+                                <div>Birthdate is required</div>
+                            </div>
+                            <owl-date-time #dt1 [showSecondsTimer]="false" [hour12Timer]="false"
+                                [pickerType]="'calendar'"></owl-date-time>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="birth_time">Birth Time</label>
+                            <input type="time" class="form-data" name="birth_time" [(ngModel)]="profileObj.birth_time"
+                                #birth_time="ngModel" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="weight">Weight (Kgs)</label>
+                            <input type="text" class="form-data" name="weight" [(ngModel)]="profileObj.weight"
+                                #weight="ngModel" (keypress)="_keyPress($event)" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="smoking_habits">Smoking Habits</label>
+                            <ng-select type="text" class="form-data-select" name="smoking_habits"
+                                [(ngModel)]="profileObj.smoking_habits" #smoking_habits="ngModel">
+                                <ng-option value="">Select Habit</ng-option>
+                                <ng-option value="Yes">Yes</ng-option>
+                                <ng-option value="No">No</ng-option>
+                                <ng-option value="Occasionally">Occasionally</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="drinking_habits">Drinking Habits</label>
+                            <ng-select type="text" class="form-data-select" name="drinking_habits"
+                                [(ngModel)]="profileObj.drinking_habits" #drinking_habits="ngModel">
+                                <ng-option value="">Select Habit</ng-option>
+                                <ng-option value="Yes">Yes</ng-option>
+                                <ng-option value="No">No</ng-option>
+                                <ng-option value="Occasionally">Occasionally</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="doctor">Doctor</label>
+                            <ng-select type="text" class="form-data-select" name="doctor" [(ngModel)]="profileObj.doctor"
+                                #doctor="ngModel">
+                                <ng-option value="">Are you a Doctor</ng-option>
+                                <ng-option value="Yes">Yes</ng-option>
+                                <ng-option value="No">No</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="medical_history">Medical History</label>
+                            <!-- [ngClass]="{
+                'is-invalid':
+                  basicInformationForm.submitted && medical_history.invalid
+              }"
+              required -->
+                            <ng-select name="medical_history" id="medical_history" class="form-data-select"
+                                [(ngModel)]="profileObj.medical_history" #medical_history="ngModel">
+                                <ng-option value="">Medical History</ng-option>
+                                <ng-option value="Yes">Yes</ng-option>
+                                <ng-option value="No">No</ng-option>
+                            </ng-select>
+                            <!-- <div
+                *ngIf="
+                  basicInformationForm.submitted &&
+                  profileObj.medical_history == ''
+                "
+                class="invalid-feedback"
+              >
+                <div>Please select medical history</div>
+              </div> -->
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="medical_history_description">Medical Description</label>
+                            <input type="text" class="form-data" name="medical_history_description"
+                                [(ngModel)]="profileObj.medical_history_description"
+                                #medical_history_description="ngModel" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="food_habits">Food Preference</label>
+                            <ng-select class="form-data-select" name="food_habits" id="food_habits"
+                                [(ngModel)]="profileObj.food_habits" #food_habits="ngModel">
+                                <ng-option value="">Select Food Preference</ng-option>
+                                <ng-option value="Vegetarian">Vegetarian</ng-option>
+                                <ng-option value="Non Vegetarian">Non Vegetarian</ng-option>
+                                <ng-option value="Eggetarian">Eggetarian</ng-option>
+                                <ng-option value="Vegan">Vegan</ng-option>
+                                <ng-option value="Jain">Jain</ng-option>
+                                <ng-option value="Swaminarayan">Swaminarayan</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="instagram_link">Instagram Link</label>
+                            <input type="url" class="form-data" name="instagram_link"
+                                [(ngModel)]="profileObj.instagram_link" #instagram_link="ngModel"
+                                (input)="_urlValidator($event, true)" />
+                            <div *ngIf="urlError" class="text-danger">Invalid Url</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="facebook_link">Facebook Link</label>
+                            <input type="url" class="form-data" name="facebook_link"
+                                [(ngModel)]="profileObj.facebook_link" #facebook_link="ngModel"
+                                (input)="_urlValidator($event, true)" />
+                            <div *ngIf="urlError" class="text-danger">Invalid Url</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="linkedin_link">Linkedin Link</label>
+                            <input type="url" class="form-data" name="linkedin_link"
+                                [(ngModel)]="profileObj.linkedin_link" #linkedin_link="ngModel"
+                                (input)="_urlValidator($event, true)" />
+                            <div *ngIf="urlError" class="text-danger">Invalid Url</div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="languages">Languages</label>
+                            <ng-select class="form-data-select" name="languages" id="languages"
+                                [(ngModel)]="profileObj.languages" #languages="ngModel" [multiple]="true"
+                                style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Language-</ng-option>
+                                <ng-option value="{{ lang.id }}" *ngFor="let lang of languagesList">
+                                    {{ lang.language }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="hobbies">Hobbies</label>
+                            <ng-select class="form-data-select" name="hobbies" id="hobbies" [(ngModel)]="profileObj.hobbies"
+                                #hobbies="ngModel" [multiple]="true" style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Hobby-</ng-option>
+                                <ng-option value="{{ hobby.id }}" *ngFor="let hobby of hobbiesList">
+                                    {{ hobby.hobby }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="other_hobby">Other Hobbies</label>
+                            <input type="text" class="form-data" name="other_hobby" [(ngModel)]="profileObj.other_hobby"
+                                #other_hobby="ngModel" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="user_citizenship">Citizenship</label>
+                            <ng-select class="form-data-select" name="user_citizenship" id="user_citizenship"
+                                [(ngModel)]="profileObj.user_citizenship" #user_citizenship="ngModel"
+                                style="width: 100%; margin-top: -3px"
+                                (change)="getAllVisas(profileObj.user_citizenship)">
+                                <!-- <ng-option value="">Select Citizenship</ng-option> -->
+                                <ng-option value="{{ citizen.id }}" *ngFor="let citizen of citizenshipList">
+                                    {{ citizen.citizenship }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="user_visa">Visa</label>
+                            <ng-select class="form-data-select" name="user_visa" id="user_visa"
+                                [(ngModel)]="profileObj.user_visa" #user_visa="ngModel"
+                                style="width: 100%; margin-top: -3px">
+                                <!-- <ng-option value="">Select Visa</ng-option> -->
+                                <ng-option value="{{ visa.visa }}" *ngFor="let visa of visaList">
+                                    {{ visa.visa }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="preffered_setlement_country">Country of Settlement</label>
+                            <ng-select class="form-data-select" name="preffered_setlement_country" (change)="
+                  getMultiplestate(profileObj.preffered_setlement_country)
+                " id="preffered_setlement_country" [(ngModel)]="profileObj.preffered_setlement_country"
+                                #preffered_setlement_country="ngModel" [multiple]="true" style="width: 100%">
+                                <ng-option value="">-Select Country-</ng-option>
+                                <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
+                                    {{ country.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="preffered_setlement_state">State of Settlement</label>
+                            <ng-select class="form-data-select" name="preffered_setlement_state"
+                                (change)="getMultiplecity(profileObj.preffered_setlement_state)"
+                                id="preffered_setlement_state" [(ngModel)]="profileObj.preffered_setlement_state"
+                                #preffered_setlement_state="ngModel" [multiple]="true" style="width: 100%">
+                                <ng-option value="">-Select State-</ng-option>
+                                <ng-option value="{{ state.id }}" *ngFor="let state of basestateListArray">
+                                    {{ state.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="preffered_setlement_city">City of Settlement</label>
+                            <ng-select class="form-data-select" name="preffered_setlement_city" id="preffered_setlement_city"
+                                [(ngModel)]="profileObj.preffered_setlement_city" #preffered_setlement_city="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="">-Select City-</ng-option>
+                                <ng-option value="{{ city.id }}" *ngFor="let city of basecityListArray">
+                                    {{ city.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="mother_tongue">Mother Tongue</label>
+                            <ng-select class="form-data-select" name="mother_tongue" id="mother_tongue"
+                                [(ngModel)]="profileObj.mother_tongue" #mother_tongue="ngModel" [multiple]="true"
+                                style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Language-</ng-option>
+                                <ng-option value="{{ lang.id }}" *ngFor="let lang of languagesList">
+                                    {{ lang.language }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="native_place">Native Place</label>
+                            <input type="text" class="form-data" name="native_place"
+                                [(ngModel)]="profileObj.native_place" #native_place="ngModel" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="complexion">Complexion</label>
+                            <ng-select class="form-data-select" name="complexion" id="complexion"
+                                [(ngModel)]="profileObj.complexion" #complexion="ngModel"
+                                style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Complexion-</ng-option>
+                                <ng-option value="Fair">Fair</ng-option>
+                                <ng-option value="Medium">Medium</ng-option>
+                                <ng-option value="Very Fair">Very Fair</ng-option>
+                                <ng-option value="Dusky">Dusky</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="blood_group">Blood Group</label>
+                            <ng-select class="form-data-select" name="blood_group" id="blood_group"
+                                [(ngModel)]="profileObj.blood_group" #blood_group="ngModel"
+                                style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Blood Group-</ng-option>
+                                <ng-option value="A+">A positive (A+)</ng-option>
+                                <ng-option value="A-">A negative (A-)</ng-option>
+                                <ng-option value="B+">B positive (B+)</ng-option>
+                                <ng-option value="B-">B negative (B-)</ng-option>
+                                <ng-option value="AB+">AB positive (AB+)</ng-option>
+                                <ng-option value="AB-">AB negative (AB-)</ng-option>
+                                <ng-option value="O+">O positive (O+)</ng-option>
+                                <ng-option value="O-">O negative (O-)</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="body_type">Body Type</label>
+                            <ng-select class="form-data-select" name="body_type" id="body_type"
+                                [(ngModel)]="profileObj.body_type" #body_type="ngModel"
+                                style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Body Type-</ng-option>
+                                <ng-option value="Athletic">Athletic</ng-option>
+                                <ng-option value="Average">Average</ng-option>
+                                <ng-option value="Heavy">Heavy</ng-option>
+                                <ng-option value="Slim">Slim</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="cuisines">Cuisine</label>
+                            <ng-select class="form-data-select" name="cuisines" id="cuisines" [(ngModel)]="profileObj.cuisines"
+                                #cuisines="ngModel" [multiple]="true" style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Cuisine-</ng-option>
+                                <ng-option value="Gujarati">Gujarati</ng-option>
+                                <ng-option value="Italian cuisine">Italian cuisine</ng-option>
+                                <ng-option value="Chinese cuisine">Chinese cuisine</ng-option>
+                                <ng-option value="Indian cuisine">Indian cuisine</ng-option>
+                                <ng-option value="Punjabi">Punjabi</ng-option>
+                                <ng-option value="Mexican">Mexican</ng-option>
+                                <ng-option value="Vietnamese">Vietnamese</ng-option>
+                                <ng-option value="Italian-American">Italian-American</ng-option>
+                                <ng-option value="Indian Chinese">Indian Chinese</ng-option>
+                                <ng-option value="Rajasthani">Rajasthani</ng-option>
+                                <ng-option value="South Indian">South Indian</ng-option>
+                                <ng-option value="Japanese">Japanese</ng-option>
+                                <ng-option value="Turkish">Turkish</ng-option>
+                                <ng-option value="Korean">Korean</ng-option>
+                                <ng-option value="Thai">Thai</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="manglik">Manglik</label>
+                            <ng-select class="form-data-select" name="manglik" id="manglik" [(ngModel)]="profileObj.manglik"
+                                #manglik="ngModel" style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select-</ng-option>
+                                <ng-option value="Yes">Yes</ng-option>
+                                <ng-option value="No">No</ng-option>
+                                <ng-option value="None">None</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="zodiac_sign">Zodiac Sign</label>
+                            <ng-select class="form-data-select" name="zodiac_sign" id="zodiac_sign"
+                                [(ngModel)]="profileObj.zodiac_sign" #zodiac_sign="ngModel"
+                                style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Zodiac Sign-</ng-option>
+                                <ng-option value="Aries">Aries</ng-option>
+                                <ng-option value="Taurus">Taurus</ng-option>
+                                <ng-option value="Gemini">Gemini</ng-option>
+                                <ng-option value="Cancer">Cancer</ng-option>
+                                <ng-option value="Leo">Leo</ng-option>
+                                <ng-option value="Virgo">Virgo</ng-option>
+                                <ng-option value="Libra">Libra</ng-option>
+                                <ng-option value="Scorpio">Scorpio</ng-option>
+                                <ng-option value="Sagittarius">Sagittarius</ng-option>
+                                <ng-option value="Capricorn">Capricorn</ng-option>
+                                <ng-option value="Aquarius">Aquarius</ng-option>
+                                <ng-option value="Pisces">Pisces</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="family_value">Family Value</label>
+                            <ng-select class="form-data-select" name="family_value" id="family_value"
+                                [(ngModel)]="profileObj.family_value" #family_value="ngModel"
+                                style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Family Value-</ng-option>
+                                <ng-option value="Liberal">Liberal</ng-option>
+                                <ng-option value="Moderate">Moderate</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="additionalInformation">Additional Information</label>
+                            <textarea class="form-data form-data-textarea" name="additionalInformation" id="additionalInformation"
+                                [(ngModel)]="profileObj.additionalInformation"
+                                #additionalInformation="ngModel"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row-flex aic small-gap" style="margin-left: auto">
+                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('User')">
+                            <p>Previous</p>
+                        </button>
+                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Family Information')">
+                            <p>Skip</p>
+                        </button>
+                        <button class="button-style blue-button fix-button" type="button" (click)="
+                saveAndNext(
+                  basicInformationForm.form,
+                  'false',
+                  'Family Information'
+                )
+              " [disabled]="isLoading">
+                            <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="activeTab == 'Family Information'">
+            <form name="form" (ngSubmit)="saveAndNext(familyInformationForm.form, 'false', 'Address')"
+                #familyInformationForm="ngForm" novalidate>
+                <div class="activeBody content-flex">
+                    <!-- <h3 style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">
+                        Family Information
+                    </h3> -->
+
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label class="md-lable" for="user_family_background">Family Background</label>
+                            <ng-select name="user_family_background" id="user_family_background" class="form-data-select"
+                                [(ngModel)]="profileObj.user_family_background" #user_family_background="ngModel">
+                                <ng-option value="">Select Family Background</ng-option>
+                                <ng-option value="Professional Background">
+                                    Professional Background
+                                </ng-option>
+                                <ng-option value="Business Background">Business Background</ng-option>
+                                <ng-option value="Government Background">
+                                    Government Background
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="user_family_type">Family type</label>
+                            <ng-select name="user_family_type" id="user_family_type" class="form-data-select"
+                                [(ngModel)]="profileObj.user_family_type" #user_family_type="ngModel">
+                                <ng-option value="">Select Family Type</ng-option>
+                                <ng-option value="Nuclear Family">Nuclear Family</ng-option>
+                                <ng-option value="Joint Family">Joint Family</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="fathersalivestatus">Father Life Status</label>
+                            <ng-select name="fathersalivestatus" id="fathersalivestatus" class="form-data-select"
+                                [(ngModel)]="profileObj.fathersalivestatus" #fathersalivestatus="ngModel">
+                                <ng-option value="">Select Status</ng-option>
+                                <ng-option value="Alive">Alive</ng-option>
+                                <ng-option value="Not ALive">Not ALive</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="mothersalivestatus">Mother Life Status</label>
+                            <ng-select name="mothersalivestatus" id="mothersalivestatus" class="form-data-select"
+                                [(ngModel)]="profileObj.mothersalivestatus" #mothersalivestatus="ngModel">
+                                <ng-option value="">Select Status</ng-option>
+                                <ng-option value="Alive">Alive</ng-option>
+                                <ng-option value="Not ALive">Not ALive</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="net_family_income">Net Family Income</label>
+                            <div class="d-flex" style="gap: 1rem">
+                                <div>
+                                    <input type="text" class="form-data" name="net_family_income"
+                                        [(ngModel)]="profileObj.net_family_income" #net_family_income="ngModel"
+                                        (keypress)="_keyPressAamount($event)" />
+                                </div>
+                                <div>
+                                    <ng-select class="form-data-select" name="net_family_income_value"
+                                        id="net_family_income_value" [(ngModel)]="profileObj.net_family_income_value">
+                                        <ng-option value="">Value</ng-option>
+                                        <ng-option value="Lakh">Lakh</ng-option>
+                                        <ng-option value="Million">Million</ng-option>
+                                        <ng-option value="Crore">Crore</ng-option>
+                                        <ng-option value="Billion">Billion</ng-option>
+                                    </ng-select>
+                                </div>
+                                <div>
+                                    <ng-select class="form-data-select" name="net_family_income_currency"
+                                        id="net_family_income_currency"
+                                        [(ngModel)]="profileObj.net_family_income_currency">
+                                        <ng-option value="">Currency</ng-option>
+                                        <ng-option value="USD">USD</ng-option>
+                                        <ng-option value="Euro">Euro</ng-option>
+                                        <ng-option value="Pound">Pound</ng-option>
+                                        <ng-option value="Rupees">Rupees</ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="additionalFamilyInformation">Additional Family
+                                Information</label>
+                            <textarea class="form-data form-data-textarea" name="additionalFamilyInformation"
+                                id="additionalFamilyInformation" [(ngModel)]="profileObj.additionalFamilyInformation"
+                                #additionalFamilyInformation="ngModel"></textarea>
+                        </div>
+                    </div>
+
+                    <h3 style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">
+                        Father's Information
+                    </h3>
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label class="md-lable" for="fathersfirstname">First Name*</label>
+                            <!-- [ngClass]="{
+            'is-invalid': createProfileForm.submitted && first_name.invalid
+          }" -->
+                            <input type="text" class="form-data" name="fathersfirstname" [(ngModel)]="
+                  profileObj.family_information.fathers_info.first_name
+                " #first_name="ngModel" />
+
+                            <!-- <div
+            *ngIf="
+              createProfileForm.submitted &&
+              profileObj.family_information.fathers_info.first_name == ''
+            "
+            class="invalid-feedback"
+          >
+            <div>This field is required</div>
+          </div> -->
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="fatherlastname">Last Name</label>
+                            <input type="text" class="form-data" name="fatherlastname"
+                                [(ngModel)]="profileObj.family_information.fathers_info.last_name"
+                                #fatherlastname="ngModel" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="fatherphone">Phone Number</label>
+                            <input type="text" class="form-data" name="fatherphone"
+                                [(ngModel)]="profileObj.family_information.fathers_info.phone" #fatherphone="ngModel"
+                                (keypress)="_keyPress($event)" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="fatheremail">Email</label>
+                            <input type="text" class="form-data" name="fatheremail"
+                                [(ngModel)]="profileObj.family_information.fathers_info.email" #fatheremail="ngModel" />
+                        </div>
+                    </div>
+
+                    <!-- <h4 style="font-weight: 700;">Father's Other Information</h4> -->
+
+                    <div class="d-flex justify-content-between">
+                        <div class="form-field form-grid">
+                            <div *ngFor="
+                  let education of profileObj.family_information.fathers_info
+                    .education;
+                  let i = index
+                ">
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-field" style="width: 100%">
+                                        <label class="md-lable" for="fathereducation{{ i }}">Education</label>
+                                        <ng-select class="form-data-select" name="fathereducation{{ i }}"
+                                            id="fathereducation{{ i }}" [(ngModel)]="education.education"
+                                            #fathereducation_i="ngModel">
+                                            <ng-option value="">Select Education</ng-option>
+                                            <ng-option value="{{ edu.id }}" *ngFor="let edu of educationListArray">
+                                                {{ edu.education }}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngFor="
+                  let occupation of profileObj.family_information.fathers_info
+                    .occupation;
+                  let i = index
+                ">
+                                <div class="form-field" style="width: 100%">
+                                    <label class="md-lable" for="fatheroccupation{{ i }}">Occupation</label>
+                                    <!-- [ngClass]="{
+                'is-invalid':
+                  createProfileForm.submitted &&
+                  profileObj.family_information.fathers_info.occupation[0]
+                    .type_of_occupation == ''
+              }" -->
+                                    <ng-select class="form-data-select" name="fatheroccupation{{ i }}"
+                                        id="fatheroccupation{{ i }}" [(ngModel)]="occupation.type_of_occupation"
+                                        #fatheroccupation_i="ngModel">
+                                        <ng-option value="">Select Occupation</ng-option>
+                                        <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationListArray">
+                                            {{ occu.occupation }}
+                                        </ng-option>
+                                    </ng-select>
+                                    <!-- <div
+                *ngIf="
+                  createProfileForm.submitted &&
+                  profileObj.family_information.fathers_info.occupation[0]
+                    .type_of_occupation == ''
+                "
+                class="invalid-feedback"
+              >
+                <div>Occupation is required</div>
+              </div> -->
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label class="md-lable" for="fathersOtherInformation">Father's Other Information</label>
+                                <textarea name="fathersOtherInformation" id="fathersOtherInformation" class="form-data form-data-textarea"
+                                    [(ngModel)]="
+                    profileObj.family_information.fathers_info.additional_info
+                  " #fathersOtherInformation="ngModel"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fathers Information Ends Here -->
+
+                    <!-- Mothers Information Starts Here -->
+
+                    <h3 style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">
+                        Mother's Information
+                    </h3>
+                    <div class="d-flex justify-content-between">
+                        <div class="form-field" style="width: 24%">
+                            <label class="md-lable" for="mothersfirstname">First Name</label>
+                            <!-- [ngClass]="{
+            'is-invalid':
+              createProfileForm.submitted &&
+              profileObj.family_information.mothers_info.first_name == ''
+          }" -->
+                            <input type="text" class="form-data" name="mothersfirstname" [(ngModel)]="
+                  profileObj.family_information.mothers_info.first_name
+                " #mothersfirstname="ngModel" />
+                            <!-- <div
+            *ngIf="
+              createProfileForm.submitted &&
+              profileObj.family_information.mothers_info.first_name == ''
+            "
+            class="invalid-feedback"
+          >
+            <div>This field is required</div>
+          </div> -->
+                        </div>
+
+                        <div class="form-field" style="width: 24%">
+                            <label class="md-lable" for="motherlastname">Last Name</label>
+                            <input type="text" class="form-data" name="motherlastname"
+                                [(ngModel)]="profileObj.family_information.mothers_info.last_name"
+                                #motherlastname="ngModel" />
+                        </div>
+
+                        <div class="form-field" style="width: 24%">
+                            <label class="md-lable" for="motherphone">Phone Number</label>
+                            <input type="text" class="form-data" name="motherphone"
+                                [(ngModel)]="profileObj.family_information.mothers_info.phone" #motherphone="ngModel"
+                                (keypress)="_keyPress($event)" />
+                        </div>
+
+                        <div class="form-field" style="width: 24%">
+                            <label class="md-lable" for="motheremail">Email</label>
+                            <input type="text" class="form-data" name="motheremail"
+                                [(ngModel)]="profileObj.family_information.mothers_info.email" #motheremail="ngModel" />
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="form-field form-grid">
+                            <div *ngFor="
+                  let education of profileObj.family_information.mothers_info
+                    .education;
+                  let i = index
+                ">
+                                <div class="d-flex justify-content-between">
+                                    <div class="form-field" style="width: 100%">
+                                        <label class="md-lable" for="mothereducation{{ i }}">Education</label>
+                                        <ng-select class="form-data-select" name="mothereducation{{ i }}"
+                                            id="mothereducation{{ i }}" [(ngModel)]="education.education"
+                                            #mothereducation_i="ngModel">
+                                            <ng-option value="">Select Education</ng-option>
+                                            <ng-option value="{{ edu.id }}" *ngFor="let edu of educationListArray">
+                                                {{ edu.education }}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngFor="
+                  let occupation of profileObj.family_information.mothers_info
+                    .occupation;
+                  let i = index
+                ">
+                                <div class="form-field" style="width: 100%">
+                                    <label class="md-lable" for="motheroccupation{{ i }}">Occupation</label>
+                                    <ng-select class="form-data-select" name="motheroccupation{{ i }}"
+                                        id="motheroccupation{{ i }}" [(ngModel)]="occupation.type_of_occupation"
+                                        #motheroccupation_i="ngModel">
+                                        <ng-option value="">Select Occupation</ng-option>
+                                        <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationListArray">
+                                            {{ occu.occupation }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label class="md-lable" for="mothersOtherInformation">Mother's Other Information</label>
+                                <textarea name="mothersOtherInformation" id="mothersOtherInformation" class="form-data form-data-textarea"
+                                    [(ngModel)]="
+                    profileObj.family_information.mothers_info.additional_info
+                  " #mothersOtherInformation="ngModel"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mothers Information Ends Here -->
+
+                    <!-- Relatives Information Starts Here -->
+
+                    <div class="d-flex justify-content-between align-center"
+                        style="align-items: center;">
+                        <div>
+                            <h3 style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">Relative's Information</h3>
+                        </div>
+                        <div style="cursor: pointer" (click)="addMoreRelative()">
+                            <p>
+                                <span class="material-symbols-outlined" style="font-size: 2rem">
+                                    add_circle
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div *ngFor="
+              let relative of profileObj.family_information.siblings;
+              let i = index
+            ">
+                        <div style="position: relative">
+                            <div style="position: absolute; top: 0; right: 0; cursor: pointer"
+                                (click)="removeRelative(i, relative.id)">
+                                <span class="material-symbols-outlined" style="color: red">delete</span>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-field">
+                                    <label class="md-lable" for="relationship_type{{ i }}">Relation</label>
+                                    <ng-select class="form-data-select" name="relationship_type{{ i }}"
+                                        id="relationship_type{{ i }}" [(ngModel)]="relative.relationship_type"
+                                        #relationship_type_i="ngModel">
+                                        <ng-option value="Sister">Sister</ng-option>
+                                        <ng-option value="Brother">Brother</ng-option>
+                                        <ng-option value="Uncle">Uncle</ng-option>
+                                        <ng-option value="Aunty">Aunty</ng-option>
+                                    </ng-select>
+                                </div>
+
+                                <div class="form-field">
+                                    <label class="md-lable" for="first_name{{ i }}">First Name</label>
+                                    <input type="text" class="form-data" name="first_name{{ i }}"
+                                        [(ngModel)]="relative.first_name" #first_name_i="ngModel" />
+                                </div>
+
+                                <div class="form-field">
+                                    <label class="md-lable" for="last_name{{ i }}">Last Name</label>
+                                    <input type="text" class="form-data" name="last_name{{ i }}"
+                                        [(ngModel)]="relative.last_name" #last_name_i="ngModel" />
+                                </div>
+
+                                <div class="form-field">
+                                    <label class="md-lable" for="phone{{ i }}">Phone Number</label>
+                                    <input type="text" class="form-data" name="phone{{ i }}"
+                                        [(ngModel)]="relative.phone" #phone_i="ngModel"
+                                        (keypress)="_keyPress($event)" />
+                                </div>
+
+                                <div class="form-field">
+                                    <label class="md-lable" for="email{{ i }}">Email</label>
+                                    <input type="text" class="form-data" name="email{{ i }}"
+                                        [(ngModel)]="relative.email" #email_i="ngModel" />
+                                </div>
+
+                                <div *ngFor="let educ of relative.education; let j = index">
+                                    <div class="form-field">
+                                        <label class="md-lable"
+                                            for="relativeEducation_{{ i }}_{{ j }}">Education</label>
+                                        <ng-select class="form-data-select" name="relativeEducation_{{ i }}_{{ j }}"
+                                            id="relativeEducation_{{ i }}_{{ j }}" [(ngModel)]="educ.education"
+                                            #relativeEducation_i_j="ngModel">
+                                            <ng-option value="">Select Education</ng-option>
+                                            <ng-option value="{{ edu.id }}" *ngFor="let edu of educationListArray">
+                                                {{ edu.education }}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+
+                                <div *ngFor="let occupation of relative.occupation; let k = index">
+                                    <div class="form-field">
+                                        <label class="md-lable"
+                                            for="relativeOccupation_{{ i }}_{{ k }}">Occupation</label>
+                                        <ng-select class="form-data-select" name="relativeOccupation_{{ i }}_{{ k }}"
+                                            id="relativeOccupation_{{ i }}_{{ k }}"
+                                            [(ngModel)]="occupation.type_of_occupation"
+                                            #relativeOccupation_i_k="ngModel">
+                                            <ng-option value="">Select Occupation</ng-option>
+                                            <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationListArray">
+                                                {{ occu.occupation }}
+                                            </ng-option>
+                                        </ng-select>
+                                    </div>
+                                </div>
+
+                                <div class="form-field">
+                                    <label class="md-lable">Marital Status</label>
+                                    <div class="d-flex" style="gap: 2rem; padding-top: 0.5rem">
+                                        <div>
+                                            <input type="radio" id="married{{ i }}" name="is_married_{{ i }}"
+                                                value="Married" [(ngModel)]="relative.is_married"
+                                                #is_married="ngModel" />
+                                            <label class="md-lable" for="married{{ i }}"
+                                                style="padding-left: 0.5rem">Married</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" id="unmarried{{ i }}" name="is_married_{{ i }}"
+                                                value="Unmarried" [(ngModel)]="relative.is_married"
+                                                #is_married="ngModel" />
+                                            <label class="md-lable" for="unmarried{{ i }}"
+                                                style="padding-left: 0.5rem">Unmarried</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" id="divorced{{ i }}" name="is_married_{{ i }}"
+                                                value="Divorced" [(ngModel)]="relative.is_married"
+                                                #is_married="ngModel" />
+                                            <label class="md-lable" for="divorced{{ i }}"
+                                                style="padding-left: 0.5rem">Divorced</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-field">
+                                    <label class="md-lable" for="relativesOtherInformation_{{ i }}">Relatives's Other
+                                        Information</label>
+                                    <textarea name="relativesOtherInformation_{{ i }}"
+                                        id="relativesOtherInformation_{{ i }}" class="form-data form-data-textarea"
+                                        [(ngModel)]="relative.additional_info"
+                                        #relativesOtherInformation="ngModel"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-flex aic small-gap" style="margin-left: auto">
+                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Basic Information')">
+                           <p>Previous</p> 
+                        </button>
+                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Address')">
+                            <p>Skip</p>
+                        </button>
+                        <button class="blue-button button-style fix-button" type="button" (click)="
+                saveAndNext(familyInformationForm.form, 'false', 'Address')
+              " [disabled]="isLoading">
+                           <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p> 
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="activeTab == 'Address'">
+            <form name="form" (ngSubmit)="saveAndNext(saveAddressForm.form, 'false', 'Education')"
+                #saveAddressForm="ngForm" novalidate>
+                <div class="activeBody content-flex">
+                    <div>
+                        <h2 style="font-size: 16px;padding-bottom: 1rem;border-bottom: 1px solid #a4a4a4;margin-bottom: 2rem;width:fit-content;">Current Residential Address</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label class="md-lable" for="residential_address">Address 1</label>
+                            <input type="text" class="form-data" name="residential_address"
+                                [(ngModel)]="profileObj.residential_address" #residential_address="ngModel" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="residential_address_apt">Address 2</label>
+                            <input type="text" class="form-data" name="residential_address_apt"
+                                [(ngModel)]="profileObj.residential_address_apt" #residential_address_apt="ngModel" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="residential_country">Country</label>
+                            <ng-select type="text" class="form-data-select" name="residential_country"
+                                [(ngModel)]="profileObj.residential_country" #residential_country="ngModel"
+                                (change)="states(profileObj.residential_country)">
+                                <ng-option value="">Select Country</ng-option>
+                                <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
+                                    {{ country.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="residential_state">State</label>
+                            <ng-select type="text" class="form-data-select" name="residential_state"
+                                [(ngModel)]="profileObj.residential_state" #residential_state="ngModel"
+                                (change)="cities(profileObj.residential_state)">
+                                <ng-option value="">Select State</ng-option>
+                                <ng-option value="{{ state.id }}" *ngFor="let state of stateList">
+                                    {{ state.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="residential_city">City</label>
+                            <ng-select type="text" class="form-data-select" name="doctor"
+                                [(ngModel)]="profileObj.residential_city" #residential_city="ngModel">
+                                <ng-option value="">Select City</ng-option>
+                                <ng-option value="{{ city.id }}" *ngFor="let city of cityList">
+                                    {{ city.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="residential_zipcode">Zipcode</label>
+                            <input type="text" class="form-data" name="residential_zipcode"
+                                [(ngModel)]="profileObj.residential_zipcode" #residential_zipcode="ngModel"
+                                (keypress)="_keyPress($event)" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="residential_type">Type</label>
+                            <ng-select class="form-data-select" name="residential_type" id="residential_type"
+                                [(ngModel)]="profileObj.residential_type" #residential_type="ngModel">
+                                <ng-option value="">Select Residential Type</ng-option>
+                                <ng-option value="Owner">Owner</ng-option>
+                                <ng-option value="Rent">Rent</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="residential_house_type">House Type</label>
+                            <ng-select class="form-data-select" name="residential_house_type" id="residential_house_type"
+                                [(ngModel)]="profileObj.residential_house_type" #residential_house_type="ngModel">
+                                <ng-option value="">Select House Type</ng-option>
+                                <ng-option value="Bunglow">Bunglow</ng-option>
+                                <ng-option value="Apartment">Apartment</ng-option>
+                                <ng-option value="Row House">Row House</ng-option>
+                                <ng-option value="Penthouse">Penthouse</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="row-flex aic" style="margin-bottom: 2rem;margin-top: 1rem;">
+                        <input type="checkbox" class="checkbox-pref" name="sameAddress" id="sameAddress"
+                            (change)="sameAddress($event)" />
+                        <label class="md-lable" for="sameAddress"
+                            style="padding-left: 0.5rem; vertical-align: middle">Same
+                            as Residential
+                            Address</label>
+                    </div>
+
+                    <div>
+                        <h2 style="font-size: 16px;padding-bottom: 1rem;border-bottom: 1px solid #a4a4a4;margin-bottom: 2rem;width:fit-content;">Future Residential Address</h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label class="md-lable" for="future_residential_address">Residential Address</label>
+                            <input type="text" class="form-data" name="future_residential_address"
+                                [(ngModel)]="profileObj.future_residential_address"
+                                #future_residential_address="ngModel" [disabled]="addressFlag" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="future_residential_address_apt">Residential Address
+                                Apartment</label>
+                            <input type="text" class="form-data" name="future_residential_address_apt"
+                                [(ngModel)]="profileObj.future_residential_address_apt"
+                                #future_residential_address_apt="ngModel" [disabled]="addressFlag" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="future_residential_country">Country</label>
+                            <ng-select type="text" class="form-data-select" name="future_residential_country"
+                                [(ngModel)]="profileObj.future_residential_country"
+                                #future_residential_country="ngModel"
+                                (change)="states(profileObj.future_residential_country)" [disabled]="addressFlag">
+                                <ng-option value="">Select Country</ng-option>
+                                <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
+                                    {{ country.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="future_residential_state">Future State</label>
+                            <ng-select type="text" class="form-data-select" name="future_residential_state"
+                                [(ngModel)]="profileObj.future_residential_state" #future_residential_state="ngModel"
+                                (change)="cities(profileObj.future_residential_state)" [disabled]="addressFlag">
+                                <ng-option value="">Select State</ng-option>
+                                <ng-option value="{{ state.id }}" *ngFor="let state of stateList">
+                                    {{ state.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="future_residential_city">Future City</label>
+                            <ng-select type="text" class="form-data-select" name="future_residential_city"
+                                [(ngModel)]="profileObj.future_residential_city" #future_residential_city="ngModel"
+                                [disabled]="addressFlag">
+                                <ng-option value="">Select City</ng-option>
+                                <ng-option value="{{ city.id }}" *ngFor="let city of cityList">
+                                    {{ city.name }}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="future_residential_zipcode">Future Zipcode</label>
+                            <input type="text" class="form-data" name="future_residential_zipcode"
+                                [(ngModel)]="profileObj.future_residential_zipcode"
+                                #future_residential_zipcode="ngModel" (keypress)="_keyPress($event)"
+                                [disabled]="addressFlag" />
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="future_residential_type">Future Type</label>
+                            <ng-select class="form-data-select" name="future_residential_type" id="future_residential_type"
+                                [(ngModel)]="profileObj.future_residential_type" #future_residential_type="ngModel">
+                                <ng-option value="">Select Residential Type</ng-option>
+                                <ng-option value="Owner">Owner</ng-option>
+                                <ng-option value="Rent">Rent</ng-option>
+                            </ng-select>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="future_residential_house_type">Future House Type</label>
+                            <ng-select class="form-data-select" name="future_residential_house_type"
+                                id="future_residential_house_type"
+                                [(ngModel)]="profileObj.future_residential_house_type"
+                                #future_residential_house_type="ngModel">
+                                <ng-option value="">Select House Type</ng-option>
+                                <ng-option value="Bunglow">Bunglow</ng-option>
+                                <ng-option value="Apartment">Apartment</ng-option>
+                                <ng-option value="Row House">Row House</ng-option>
+                                <ng-option value="Penthouse">Penthouse</ng-option>
+                            </ng-select>
+                        </div>
+                        <div class="form-field">
+                            <label class="md-lable" for="parents_address">Parents Residential Address</label>
+                            <textarea class="form-data" name="parents_address" id="parents_address" cols="30" rows="10"
+                                [(ngModel)]="profileObj.parents_address"></textarea>
+                        </div>
+                        <div class="form-field">
+                            <label class="md-lable" for="company_address">Company Address</label>
+                            <textarea class="form-data" name="company_address" id="company_address" cols="30" rows="10"
+                                [(ngModel)]="profileObj.company_address"></textarea>
+                        </div>
+                        <div class="form-field">
+                            <label class="md-lable" for="weekend_address">Weekend Address</label>
+                            <textarea class="form-data" name="weekend_address" id="weekend_address" cols="30" rows="10"
+                                [(ngModel)]="profileObj.weekend_address"></textarea>
+                        </div>
+                    </div>
+
+
+                    <div class="row-flex aic small-gap" style="margin-left: auto">
+                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Family Information')">
+                            <p>Previous</p>
+                        </button>
+                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Education')">
+                            <p>Skip</p>
+                        </button>
+                        <button class="blue-button button-style fix-button" type="button"
+                            (click)="saveAndNext(saveAddressForm.form, 'false', 'Education')" [disabled]="isLoading">
+                            <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="activeTab == 'Education'">
+            <form name="form" (ngSubmit)="saveAndNext(educationForm.form, 'false', 'Occupation')"
+                #educationForm="ngForm" novalidate>
+                <div class="activeBody content-flex">
+                    <div class="d-flex justify-content-between">
+                        <div class="form-field" style="width: 24%">
+                            <label class="md-lable" for="abroad_studies">Have you ever been studied Abroad ?</label>
+                            <ng-select name="abroad_studies" id="abroad_studies" class="form-data-select"
+                                [(ngModel)]="profileObj.abroad_studies" #abroad_studies="ngModel">
+                                <ng-option value="">Select Education</ng-option>
+                                <ng-option value="Yes">Yes</ng-option>
+                                <ng-option value="No">No</ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+
+                    <div class="col" style="padding-left: 0">
+                        <div class="card">
+                            <div class="card-heading border bottom">
+                                <h4 class="card-title">Education</h4>
+                            </div>
+                            <div class="card-block">
+                                <div class="row">
+                                    <div class="col">
+                                        <div *ngFor="let educations of educationList; let i = index" style="
+                        box-shadow: 0 0 10px rgba(135, 134, 134, 0.2);
+                        padding: 1rem;
+                        margin-bottom: 1rem;
+                      ">
+                                            <div class="d-flex">
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable"
+                                                            for="university_name{{ i }}">School/University Name</label>
+                                                        <input type="text" class="form-data"
+                                                            [name]="'university_name' + i"
+                                                            [(ngModel)]="educations.university_name"
+                                                            #university_name="ngModel" />
+                                                    </div>
+                                                </div>
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable" for="type{{ i }}">Education Type</label>
+                                                        <ng-select class="form-data-select" [name]="'type' + i"
+                                                            [(ngModel)]="educations.type" #type="ngModel" [ngClass]="{
+                                'is-invalid':
+                                  educationForm.submitted && type.invalid
+                              }" required>
+                                                            <ng-option value="">Select Education Type</ng-option>
+                                                            <ng-option value="{{ data.id }}"
+                                                                *ngFor="let data of educationTypeList">
+                                                                {{ data.name }}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                        <div *ngIf="
+                                educationForm.submitted && educations.type == ''
+                              " class="invalid-feedback">
+                                                            <div>Education Type is required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex">
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable" for="is_higher_education{{ i }}">Do You
+                                                            want
+                                                            to study
+                                                            further?</label>
+                                                        <ng-select class="form-data-select" [name]="'is_higher_education' + i"
+                                                            [(ngModel)]="educations.is_higher_education"
+                                                            #is_higher_education="ngModel">
+                                                            <ng-option value="">Higher Studies</ng-option>
+                                                            <ng-option value="1">Yes</ng-option>
+                                                            <ng-option value="0">No</ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable" for="education{{ i }}">Education</label>
+                                                        <ng-select class="form-data-select" [name]="'education' + i"
+                                                            [(ngModel)]="educations.education" #education="ngModel">
+                                                            <ng-option value="">Select Education</ng-option>
+                                                            <ng-option value="{{ education.id }}"
+                                                                *ngFor="let education of educationListArray">
+                                                                {{ education.education }}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col" style="padding-left: 0">
+                                                <div class="form-field">
+                                                    <label class="md-lable" for="description{{ i }}">Education
+                                                        Description</label>
+                                                    <input description="text" class="form-data"
+                                                        [name]="'description' + i" [(ngModel)]="educations.description"
+                                                        #description="ngModel" />
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-danger" (click)="deleteEducation(i)">
+                                                Delete
+                                            </button>
+                                        </div>
+
+                                        <button type="button" class="button-style blue-button fix-button" (click)="addEducation()">
+                                            Add More
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label class="md-lable" for="additionalEducationInformation">Additional Education
+                            Information</label>
+                        <textarea class="form-data" name="additionalEducationInformation"
+                            id="additionalEducationInformation" [(ngModel)]="profileObj.additionalEducationInformation"
+                            #additionalEducationInformation="ngModel"></textarea>
+                    </div>
+
+                    <div class="row-flex aic small-gap" style=" margin-left: auto">
+                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Address')">
+                            <p>Previous</p>
+                        </button>
+                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Occupation')">
+                           <p>Skip</p> 
+                        </button>
+                        <button class="button-style blue-button fix-button" type="button"
+                            (click)="saveAndNext(educationForm.form, 'false', 'Occupation')" [disabled]="isLoading">
+                           <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p> 
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="activeTab == 'Occupation'">
+            <form name="form" (ngSubmit)="saveAndNext(occupationForm.form, 'false', 'Preference')"
+                #occupationForm="ngForm" novalidate>
+                <div class="activeBody content-flex">
+                    <div class="col" style="padding-left: 0">
+                        <div class="card">
+                            <div class="card-heading border bottom">
+                                <h4 class="card-title">Occupation</h4>
+                            </div>
+                            <div class="card-block">
+                                <div class="row">
+                                    <div class="col">
+                                        <div *ngFor="let occupations of occupationList; let i = index" style="
+                        box-shadow: 0 0 10px rgba(135, 134, 134, 0.2);
+                        padding: 1rem;
+                        margin-bottom: 1rem;
+                      ">
+                                            <div class="form-grid">
+                                                <!-- <div class="d-flex"> -->
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable"
+                                                            for="type_of_occupation{{ i }}">Occupation</label>
+                                                        <ng-select class="form-data-select" [name]="'type_of_occupation' + i"
+                                                            [(ngModel)]="occupations.type_of_occupation"
+                                                            #type_of_occupation="ngModel">
+                                                            <ng-option value="">Select Occupation</ng-option>
+                                                            <ng-option value="{{ occu.id }}"
+                                                                *ngFor="let occu of occupationListArray">
+                                                                {{ occu.occupation }}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable" for="occupation_type{{ i }}">Occupation
+                                                            Type</label>
+                                                        <ng-select class="form-data-select" [name]="'occupation_type' + i"
+                                                            [(ngModel)]="occupations.occupation_type"
+                                                            #occupation_type="ngModel" [ngClass]="{
+                                'is-invalid':
+                                  occupationForm.submitted &&
+                                  occupation_type.invalid
+                              }" required>
+                                                            <ng-option value="">Select Occupation Type</ng-option>
+                                                            <ng-option value="{{ occu.id }}"
+                                                                *ngFor="let occu of occupationTypeList">
+                                                                {{ occu.name }}
+                                                            </ng-option>
+                                                        </ng-select>
+                                                        <div *ngIf="
+                                occupationForm.submitted &&
+                                occupations.occupation_type == ''
+                              " class="invalid-feedback">
+                                                            <div>Occupation Type is required</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable" for="company_name{{ i }}">Company
+                                                            Name</label>
+                                                        <input type="text" class="form-data" [name]="'company_name' + i"
+                                                            [(ngModel)]="occupations.company_name"
+                                                            #company_name="ngModel" />
+                                                    </div>
+                                                </div>
+                                                <!-- </div> -->
+
+                                                <!-- <div class="d-flex"> -->
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable"
+                                                            for="designation{{ i }}">Designation</label>
+                                                        <input type="text" class="form-data" [name]="'designation' + i"
+                                                            [(ngModel)]="occupations.designation"
+                                                            #designation="ngModel" />
+                                                    </div>
+                                                </div>
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable" for="company_revenue{{ i }}">Company
+                                                            Revenue</label>
+                                                        <div class="d-flex" style="justify-content: space-between">
+                                                            <div style="width: 50%">
+                                                                <input type="text" class="form-data"
+                                                                    [name]="'company_revenue' + i"
+                                                                    [(ngModel)]="occupations.company_revenue"
+                                                                    #company_revenue="ngModel"
+                                                                    (keypress)="_keyPressAamount($event)" />
+                                                            </div>
+                                                            <div style="width: 24%">
+                                                                <ng-select class="form-data-select"
+                                                                    [name]="'company_revenue_value' + i"
+                                                                    [(ngModel)]="occupations.company_revenue_value"
+                                                                    #company_revenue_value="ngModel">
+                                                                    <ng-option value="">Value</ng-option>
+                                                                    <ng-option value="Lakh">Lakh</ng-option>
+                                                                    <ng-option value="Million">Million</ng-option>
+                                                                    <ng-option value="Crore">Crore</ng-option>
+                                                                    <ng-option value="Billion">Billion</ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                            <div style="width: 24%">
+                                                                <ng-select class="form-data-select"
+                                                                    [name]="'company_revenue_currency' + i" [(ngModel)]="
+                                    occupations.company_revenue_currency
+                                  " #company_revenue_currency="ngModel">
+                                                                    <ng-option value="">Currency</ng-option>
+                                                                    <ng-option value="USD">USD</ng-option>
+                                                                    <ng-option value="Euro">Euro</ng-option>
+                                                                    <ng-option value="Pound">Pound</ng-option>
+                                                                    <ng-option value="Rupees">Rupees</ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- </div> -->
+
+                                                <!-- <div class="d-flex"> -->
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable" for="monthly_income{{ i }}">Monthly
+                                                            Income</label>
+
+                                                        <div class="d-flex" style="justify-content: space-between">
+                                                            <div style="width: 65%">
+                                                                <input type="text" class="form-data"
+                                                                    [name]="'monthly_income' + i"
+                                                                    [(ngModel)]="occupations.monthly_income"
+                                                                    #monthly_income="ngModel"
+                                                                    (keypress)="_keyPressAamount($event)" />
+                                                            </div>
+
+                                                            <div style="width: 24%">
+                                                                <ng-select class="form-data-select"
+                                                                    [name]="'monthly_income_value' + i"
+                                                                    [(ngModel)]="occupations.monthly_income_value"
+                                                                    #monthly_income_value="ngModel">
+                                                                    <ng-option value="">Value</ng-option>
+                                                                    <ng-option value="Lakh">Lakh</ng-option>
+                                                                    <ng-option value="Million">Million</ng-option>
+                                                                    <ng-option value="Crore">Crore</ng-option>
+                                                                    <ng-option value="Billion">Billion</ng-option>
+                                                                </ng-select>
+                                                            </div>
+
+                                                            <div style="width: 30%">
+                                                                <ng-select class="form-data-select"
+                                                                    [name]="'monthly_income_currency' + i" [(ngModel)]="
+                                    occupations.monthly_income_currency
+                                  " #monthly_income_currency="ngModel">
+                                                                    <ng-option value="">Currency</ng-option>
+                                                                    <ng-option value="USD">USD</ng-option>
+                                                                    <ng-option value="Euro">Euro</ng-option>
+                                                                    <ng-option value="Pound">Pound</ng-option>
+                                                                    <ng-option value="Rupees">Rupees</ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable" for="yearly_income{{ i }}">Yearly
+                                                            Income</label>
+
+                                                        <div class="d-flex" style="justify-content: space-between">
+                                                            <div style="width: 50%">
+                                                                <input type="text" class="form-data"
+                                                                    [name]="'yearly_income' + i"
+                                                                    [(ngModel)]="occupations.yearly_income"
+                                                                    #yearly_income="ngModel"
+                                                                    (keypress)="_keyPressAamount($event)" />
+                                                            </div>
+                                                            <div style="width: 24%">
+                                                                <ng-select class="form-data-select"
+                                                                    [name]="'yearly_income_value' + i"
+                                                                    [(ngModel)]="occupations.yearly_income_value"
+                                                                    #yearly_income_value="ngModel">
+                                                                    <ng-option value="">Value</ng-option>
+                                                                    <ng-option value="Lakh">Lakh</ng-option>
+                                                                    <ng-option value="Million">Million</ng-option>
+                                                                    <ng-option value="Crore">Crore</ng-option>
+                                                                    <ng-option value="Billion">Billion</ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                            <div style="width: 24%">
+                                                                <ng-select class="form-data-select"
+                                                                    [name]="'yearly_income_currency' + i"
+                                                                    [(ngModel)]="occupations.yearly_income_currency"
+                                                                    #yearly_income_currency="ngModel">
+                                                                    <ng-option value="">Currency</ng-option>
+                                                                    <ng-option value="USD">USD</ng-option>
+                                                                    <ng-option value="Euro">Euro</ng-option>
+                                                                    <ng-option value="Pound">Pound</ng-option>
+                                                                    <ng-option value="Rupees">Rupees</ng-option>
+                                                                </ng-select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- </div> -->
+
+                                                <div class="col" style="padding-left: 0">
+                                                    <div class="form-field">
+                                                        <label class="md-lable"
+                                                            for="description{{ i }}">Description</label>
+                                                        <input type="text" class="form-data" [name]="'description' + i"
+                                                            [(ngModel)]="occupations.description"
+                                                            #description="ngModel" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="button" class="btn btn-danger" (click)="deleteOccupation(i)">
+                                                Delete
+                                            </button>
+                                        </div>
+
+                                        <button type="button" class="button-style blue-button fix-button" (click)="addOccupation()">
+                                            Add More
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label class="md-lable" for="additionalOccupationInformation">Additional Occupation
+                                Information</label>
+                            <textarea class="form-data" name="additionalOccupationInformation"
+                                id="additionalOccupationInformation"
+                                [(ngModel)]="profileObj.additionalOccupationInformation"
+                                #additionalOccupationInformation="ngModel"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row-flex aic small-gap" style=" margin-left: auto">
+                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Education')">
+                            <p>Previous</p>
+                        </button>
+                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Preference')">
+                            <p>Skip</p>
+                        </button>
+                        <button class="button-style blue-button fix-button" type="button"
+                            (click)="saveAndNext(occupationForm.form, 'false', 'Preference')" [disabled]="isLoading">
+                            <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="activeTab == 'Preference'">
+            <form name="form" (ngSubmit)="saveAndNext(preferenceForm.form, 'false', 'Profile Images')"
+                #preferenceForm="ngForm" novalidate>
+                <div class="activeBody content-flex">
+                    <div class="form-grid">
+                        <!-- <div class="form-field">
+              <label class="md-lable"  for="age_gap">Age Gap</label>   
+                <ng-select name="age_gap" id="age_gap" [(ngModel)]="profileObj.age_gap"
+                #age_gap="ngModel" [multiple]="true" class="form-data" style="width: 100%">
+                <ng-option value="">Select Age Gap</ng-option>
+                <ng-option value="21-23">
+                  21 - 23 years
+                </ng-option>
+                <ng-option value="23-25">
+                  23 - 25 years
+                </ng-option>
+                <ng-option value="25-28">
+                  25 - 28 years
+                </ng-option>
+                <ng-option value="28-30">
+                  28 - 30 years
+                </ng-option>
+                <ng-option value="30-35">
+                  30 - 35 years
+                </ng-option>
+                <ng-option value="35-40">
+                  35 - 40 years
+                </ng-option>
+                <ng-option value="40-45">
+                  40 - 45 years
+                </ng-option>
+                <ng-option value="45-50">
+                  45 - 50 years
+                </ng-option>
+                <ng-option value="50-55">
+                  50 - 55 years
+                </ng-option>
+                <ng-option value="55-60">
+                  55 - 60 years
+                </ng-option>
+              </ng-select>
+              <label class="md-lable"  class="checkbox-preference">
+                <input type="checkbox" class="checkbox-pref" [checked]="isChecked('age_gap')" (change)="toggleFixedPreference('age_gap', $event)" /> Fixed
+              </label>
+            </div> -->
+
+                        <!-- <div class="form-field leaddddd">
+              <label class="md-lable"  for="age_gap">Age Gap</label>
+  
+              <div class="range-slider">
+                <input
+                  type="range"
+                  min="21"
+                  max="100"
+                  name="min_age_gap"
+                  id="min_age_gap"
+                  [(ngModel)]="profileObj.min_age_gap"
+                  #min_age_gap="ngModel"
+                  (input)="updateSlider()"
+                  class="slider thumb-left"
+                />
+                <input
+                  type="range"
+                  min="21"
+                  max="100"
+                  name="max_age_gap"
+                  id="max_age_gap"
+                  [(ngModel)]="profileObj.max_age_gap"
+                  #max_age_gap="ngModel"
+                  (input)="updateSlider()"
+                  class="slider thumb-right"
+                />
+                <div class="slider-track"></div>
+              </div>
+  
+              <div class="range-inputs">
+                <input
+                  type="number"
+                  name="min_age_gap"
+                  id="min_age_gap"
+                  [(ngModel)]="profileObj.min_age_gap"
+                  #min_age_gap="ngModel"
+                  (input)="updateSliderFromInput('min')"
+                  min="2006"
+                  max="2106"
+                  class="range-input"
+                />
+                to
+                <input
+                  type="number"
+                  name="max_age_gap"
+                  id="max_age_gap"
+                  [(ngModel)]="profileObj.max_age_gap"
+                  #max_age_gap="ngModel"
+                  (input)="updateSliderFromInput('max')"
+                  min="2006"
+                  max="2106"
+                  class="range-input"
+                />
+              </div>
+  
+              <label class="md-lable"  class="checkbox-preference">
+                <input
+                  type="checkbox"
+                  class="checkbox-pref"
+                  [checked]="isChecked('age_gap')"
+                  (change)="toggleFixedPreference('age_gap', $event)"
+                />
+                Fixed
+              </label>
+            </div> -->
+
+                        <div class="form-field">
+                            <label class="md-lable" for="max_age_gap">Max Birth Year Acceptable</label>
+                            <input type="text" class="form-data" name="max_age_gap" [(ngModel)]="profileObj.max_age_gap"
+                                #max_age_gap="ngModel" />
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('max_age_gap')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('max_age_gap', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="min_age_gap">Min Birth Year Acceptable</label>
+                            <input type="text" class="form-data" name="min_age_gap" [(ngModel)]="profileObj.min_age_gap"
+                                #min_age_gap="ngModel" />
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('min_age_gap')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('min_age_gap', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="minimum_weight">Minimun Weight Preference</label>
+                            <input type="text" class="form-data" name="minimum_weight"
+                                [(ngModel)]="profileObj.minimum_weight" #minimum_weight="ngModel" />
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('minimum_weight')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('minimum_weight', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="maximum_weight">Maximum Weight Preference</label>
+                            <input type="text" class="form-data" name="maximum_weight"
+                                [(ngModel)]="profileObj.maximum_weight" #maximum_weight="ngModel" />
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('maximum_weight')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('maximum_weight', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="complexion_preference">Complexion</label>
+                            <ng-select class="form-data-select" name="complexion_preference" id="complexion_preference"
+                                [(ngModel)]="profileObj.complexion_preference" [multiple]="true"
+                                #complexion_preference="ngModel" style="width: 100%">
+                                <ng-option value="">-Select complexion_preference-</ng-option>
+                                <ng-option value="Fair">Fair</ng-option>
+                                <ng-option value="Medium">Medium</ng-option>
+                                <ng-option value="Very Fair">Very Fair</ng-option>
+                                <ng-option value="Dusky">Dusky</ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('complexion_preference')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('complexion_preference', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="body_type_preference">Body Type Preference</label>
+                            <ng-select class="form-data-select" name="body_type_preference" id="body_type_preference"
+                                [(ngModel)]="profileObj.body_type_preference" [multiple]="true"
+                                #body_type_preference="ngModel" style="width: 100%; margin-top: -3px">
+                                <ng-option value="">-Select Body Type-</ng-option>
+                                <ng-option value="Athletic">Athletic</ng-option>
+                                <ng-option value="Average">Average</ng-option>
+                                <ng-option value="Heavy">Heavy</ng-option>
+                                <ng-option value="Slim">Slim</ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('body_type_preference')"
+                                    class="checkbox-pref"
+                                    (change)="toggleFixedPreference('body_type_preference', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="mother_tongue_preference">Mother Tongue Preferance</label>
+                            <ng-select class="form-data-select" name="mother_tongue_preference" id="mother_tongue_preference"
+                                [(ngModel)]="profileObj.mother_tongue_preference" #mother_tongue_preference="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="">-Select Language-</ng-option>
+                                <ng-option value="{{ lang.id }}" *ngFor="let lang of languagesList">
+                                    {{ lang.language }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('mother_tongue_preference')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('mother_tongue_preference', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="relationship_status_preferance">Relationship Status
+                                Preference</label>
+                            <ng-select name="relationship_status_preferance" id="relationship_status_preferance"
+                                [(ngModel)]="profileObj.relationship_status_preferance"
+                                #relationship_status_preferance="ngModel" [multiple]="true" class="form-data"
+                                style="width: 100%">
+                                <ng-option value="{{ status.id }}" *ngFor="let status of relationShipStatusList">{{
+                                    status.title }}</ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('relationship_status_preferance')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference(
+                      'relationship_status_preferance',
+                      $event
+                    )
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="doctor_preference">Doctor Preference</label>
+                            <ng-select name="doctor_preference" id="doctor_preference"
+                                [(ngModel)]="profileObj.doctor_preference" #doctor_preference="ngModel"
+                                class="form-data" style="width: 100%">
+                                <ng-option value="">Select Status</ng-option>
+                                <ng-option value="1">Yes</ng-option>
+                                <ng-option value="0">No</ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('doctor_preference')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('doctor_preference', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="height_preferance">Height Preference (In Ft.)</label>
+                            <ng-select name="height_preferance" id="height_preferance"
+                                [(ngModel)]="profileObj.height_preferance" #height_preferance="ngModel"
+                                [multiple]="true" class="form-data" style="width: 100%">
+                                <ng-option value="">Select Height</ng-option>
+                                <ng-option value="122-137"> 4 ft - 4.6 ft </ng-option>
+                                <ng-option value="140-152"> 4.7 ft - 5 ft </ng-option>
+                                <ng-option value="152-168"> 5 ft - 5.6 ft </ng-option>
+                                <ng-option value="170-183"> 5.7 ft - 6 ft </ng-option>
+                                <ng-option value="185-198"> 6.1 ft - 6.6 ft </ng-option>
+                                <ng-option value="198-213"> 6.6 ft - 7 ft </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('height_preferance')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('height_preferance', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="education_preferance">Education Preference</label>
+                            <ng-select class="form-data-select" name="education_preferance" id="education_preferance"
+                                [(ngModel)]="profileObj.education_preferance" #education_preferance="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="">-Select Education-</ng-option>
+                                <ng-option value="{{ educ.id }}" *ngFor="let educ of educationListArray">
+                                    {{ educ.education }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('education_preferance')"
+                                    class="checkbox-pref"
+                                    (change)="toggleFixedPreference('education_preferance', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="education_type_preference">Education Type Preference</label>
+                            <ng-select class="form-data-select" name="education_type_preference" id="education_type_preference"
+                                [(ngModel)]="profileObj.education_type_preference" #education_type_preference="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="">-Select Education Type-</ng-option>
+                                <ng-option value="{{ educ.id }}" *ngFor="let educ of educationTypeList">
+                                    {{ educ.name }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('education_type_preference')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('education_type_preference', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="believes_in_horoscopes">Believes In Horoscope</label>
+                            <ng-select type="text" class="form-data-select" name="doctor"
+                                [(ngModel)]="profileObj.believes_in_horoscopes" #believes_in_horoscopes="ngModel">
+                                <ng-option value="">Select</ng-option>
+                                <ng-option value="yes">Yes</ng-option>
+                                <ng-option value="no">No</ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('believes_in_horoscopes')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('believes_in_horoscopes', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="occuppation_preferance">Occupation Preference</label>
+                            <ng-select class="form-data-select" name="occuppation_preferance" id="occuppation_preferance"
+                                [(ngModel)]="profileObj.occuppation_preferance" #occuppation_preferance="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="">-Select Occupation-</ng-option>
+                                <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationListArray">
+                                    {{ occu.occupation }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('occuppation_preferance')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('occuppation_preferance', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="occupation_type_preference">Occupation Type Preference</label>
+                            <ng-select class="form-data-select" name="occupation_type_preference"
+                                id="occupation_type_preference" [(ngModel)]="profileObj.occupation_type_preference"
+                                #occupation_type_preference="ngModel" [multiple]="true" style="width: 100%">
+                                <ng-option value="">-Select Occupation Type-</ng-option>
+                                <ng-option value="{{ educ.id }}" *ngFor="let educ of occupationTypeList">
+                                    {{ educ.name }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('occupation_type_preference')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('occupation_type_preference', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="family_background">Family Background</label>
+                            <ng-select class="form-data-select" name="family_background" id="family_background"
+                                [(ngModel)]="profileObj.family_background" #family_background="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="Professional Background">
+                                    Professional Background
+                                </ng-option>
+                                <ng-option value="Business Background">
+                                    Business Background
+                                </ng-option>
+                                <ng-option value="Government Background">
+                                    Government Background
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('family_background')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('family_background', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="min_net_worth">Minimum Net Worth</label>
+                            <ng-select class="form-data-select" name="min_net_worth" id="min_net_worth"
+                                [(ngModel)]="profileObj.min_net_worth" #min_net_worth="ngModel" [multiple]="true"
+                                style="width: 100%">
+                                <ng-option value="{{ net.value }}" *ngFor="let net of networthRange">
+                                    {{ net.range }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('min_net_worth')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('min_net_worth', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="food_habits_preferance">Food Preference</label>
+                            <ng-select class="form-data-select" name="food_habits_preferance" id="food_habits_preferance"
+                                [(ngModel)]="profileObj.food_habits_preferance" #food_habits_preferance="ngModel">
+                                <ng-option value="">Select Food Preference</ng-option>
+                                <ng-option value="Vegetarian">Vegetarian</ng-option>
+                                <ng-option value="Non Vegetarian">Non Vegetarian</ng-option>
+                                <ng-option value="Eggetarian">Eggetarian</ng-option>
+                                <ng-option value="Vegan">Vegan</ng-option>
+                                <ng-option value="Jain">Jain</ng-option>
+                                <ng-option value="Swaminarayan">Swaminarayan</ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('food_habits_preferance')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('food_habits_preferance', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="smoking_habits_preferance">Smoking Preference</label>
+                            <ng-select class="form-data-select" name="smoking_habits_preferance" id="smoking_habits_preferance"
+                                [(ngModel)]="profileObj.smoking_habits_preferance" #smoking_habits_preferance="ngModel">
+                                <ng-option value="">Select Smoking Preferance</ng-option>
+                                <ng-option value="Yes">Yes</ng-option>
+                                <ng-option value="No">No</ng-option>
+                                <ng-option value="Occasional">Occasional</ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('smoking_habits_preferance')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('smoking_habits_preferance', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="drinking_habits_preferance">Drinking Preference</label>
+                            <ng-select class="form-data-select" name="drinking_habits_preferance" id="drinking_habits_preferance"
+                                [(ngModel)]="profileObj.drinking_habits_preferance"
+                                #drinking_habits_preferance="ngModel">
+                                <ng-option value="">Select Drinking Preferance</ng-option>
+                                <ng-option value="Yes">Yes</ng-option>
+                                <ng-option value="No">No</ng-option>
+                                <ng-option value="Occasional">Occasional</ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('drinking_habits_preferance')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('drinking_habits_preferance', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="country_of_settlement">Country of Settlement</label>
+                            <ng-select class="form-data-select" name="country_of_settlement"
+                                (change)="prefStateList(profileObj.country_of_settlement)" id="country_of_settlement"
+                                [(ngModel)]="profileObj.country_of_settlement" #country_of_settlement="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
+                                    {{ country.name }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('country_of_settlement')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('country_of_settlement', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="state_of_settlement">State of Settlement</label>
+                            <ng-select class="form-data-select" name="state_of_settlement"
+                                (change)="prefCityList(profileObj.state_of_settlement)" id="state_of_settlement"
+                                [(ngModel)]="profileObj.state_of_settlement" #state_of_settlement="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="{{ state.id }}" *ngFor="let state of prefstateListArray">
+                                    {{ state.name }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('state_of_settlement')"
+                                    class="checkbox-pref"
+                                    (change)="toggleFixedPreference('state_of_settlement', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+                        <div class="form-field">
+                            <label class="md-lable" for="city_of_settlement">City of Settlement</label>
+                            <ng-select class="form-data-select" name="city_of_settlement" id="city_of_settlement"
+                                [(ngModel)]="profileObj.city_of_settlement" #city_of_settlement="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="{{ city.id }}" *ngFor="let city of prefcityListArray">
+                                    {{ city.name }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('city_of_settlement')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('city_of_settlement', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="family_type">Family type</label>
+                            <ng-select class="form-data-select" name="family_type" id="family_type"
+                                [(ngModel)]="profileObj.family_type" #family_type="ngModel" [multiple]="true"
+                                style="width: 100%">
+                                <ng-option value="Nuclear Family"> Nuclear Family </ng-option>
+                                <ng-option value="Joint Family"> Joint Family </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('family_type')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('family_type', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="caste_preference">Caste</label>
+
+                            <ng-select class="form-data-select" name="caste_preference" id="caste_preference"
+                                [(ngModel)]="profileObj.caste_preference" #caste_preference="ngModel" [multiple]="true"
+                                style="width: 100%">
+                                <ng-option value="{{ caste.id }}" *ngFor="let caste of casteList">
+                                    {{ caste.community }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('caste_preference')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('caste_preference', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field" *ngIf="subCasteList.length > 0">
+                            <label class="md-lable" for="subcaste_preference">Sub Caste</label>
+
+                            <ng-select class="form-data-select" name="subcaste_preference" id="subcaste_preference"
+                                [(ngModel)]="profileObj.subcaste_preference" #subcaste_preference="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="{{ caste.id }}" *ngFor="let caste of subCasteList">
+                                    {{ caste.community }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('subcaste_preference')"
+                                    class="checkbox-pref"
+                                    (change)="toggleFixedPreference('subcaste_preference', $event)" />
+                                Fixed
+                            </label>
+                            <!-- <div
+                *ngIf="createProfileForm.submitted && profileObj.caste == ''"
+                class="invalid-feedback"
+              >
+                <div>Caste is required</div>
+              </div> -->
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="religion_preference">Religion</label>
+
+                            <!-- <ng-select name="religion_preference" id="religion_preference" class="form-data"
+                [(ngModel)]="profileObj.religion_preference" #religion_preference="ngModel">
+                <ng-option value="">Select Religion</ng-option>
+                <ng-option value="{{ religion.id }}" *ngFor="let religion of religionList">
+                  {{ religion.religion }}
+                </ng-option>
+              </ng-select> -->
+
+                            <ng-select class="form-data-select" name="religion_preference" id="religion_preference"
+                                [(ngModel)]="profileObj.religion_preference" #religion_preference="ngModel"
+                                [multiple]="true" style="width: 100%">
+                                <ng-option value="{{ religion.id }}" *ngFor="let religion of religionList">
+                                    {{ religion.religion }}
+                                </ng-option>
+                            </ng-select>
+
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('religion_preference')"
+                                    class="checkbox-pref"
+                                    (change)="toggleFixedPreference('religion_preference', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <!-- <div class="form-field"  *ngIf="subCasteList.length == 0"></div> -->
+
+                        <div class="form-field">
+                            <label class="md-lable" for="citizenship">Citizenship</label>
+                            <ng-select class="form-data-select" name="citizenship" id="citizenship"
+                                [(ngModel)]="profileObj.citizenship" #citizenship="ngModel" [multiple]="true"
+                                style="width: 100%" (change)="getAllVisas(profileObj.citizenship)">
+                                <ng-option value="{{ citizen.id }}" *ngFor="let citizen of citizenshipList">
+                                    {{ citizen.citizenship }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('citizenship')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('citizenship', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="visa">Visa</label>
+                            <ng-select class="form-data-select" name="visa" id="visa" [(ngModel)]="profileObj.visa"
+                                #visa="ngModel" style="width: 100%" [multiple]="true">
+                                <ng-option value="">Select Visa</ng-option>
+                                <ng-option value="{{ visa.visa }}" *ngFor="let visa of visaList">
+                                    {{ visa.visa }}
+                                </ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('visa')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('visa', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+                        <div class="form-field">
+                            <label class="md-lable" for="abroad_studies_preference">Abroad Studies</label>
+                            <ng-select name="abroad_studies_preference" id="abroad_studies_preference" class="form-data"
+                                [(ngModel)]="profileObj.abroad_studies_preference" #abroad_studies_preference="ngModel">
+                                <ng-option value="">Select Education</ng-option>
+                                <ng-option value="Yes">Yes</ng-option>
+                                <ng-option value="No">No</ng-option>
+                            </ng-select>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('abroad_studies_preference')"
+                                    class="checkbox-pref" (change)="
+                    toggleFixedPreference('abroad_studies_preference', $event)
+                  " />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="discription">Other Preference</label>
+                            <!-- <input
+                type="text"
+                class="form-data"
+                name="discription"
+                [(ngModel)]="profileObj.discription"
+                #discription="ngModel"
+              /> -->
+
+                            <textarea name="discription" id="discription" class="form-data"
+                                [(ngModel)]="profileObj.discription" #discription="ngModel"></textarea>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('discription')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('discription', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+
+                        <div class="form-field">
+                            <label class="md-lable" for="fathers_preference">Parent's Prefrece</label>
+                            <textarea class="form-data" name="fathers_preference" id="fathers_preference"
+                                [(ngModel)]="profileObj.fathers_preference" #fathers_preference="ngModel"></textarea>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('fathers_preference')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('fathers_preference', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+                        <div class="form-field">
+                            <label class="md-lable" for="mothers_preference">Candidate Other Preference (Admin
+                                Only)</label>
+                            <textarea class="form-data" name="mothers_preference" id="mothers_preference"
+                                [(ngModel)]="profileObj.mothers_preference" #mothers_preference="ngModel"></textarea>
+                            <label class="md-lable" class="checkbox-preference">
+                                <input type="checkbox" [checked]="isChecked('mothers_preference')" class="checkbox-pref"
+                                    (change)="toggleFixedPreference('mothers_preference', $event)" />
+                                Fixed
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row-flex aic small-gap" style=" margin-left: auto">
+                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Occupation')">
+                            <p>Previous</p>
+                        </button>
+                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Profile Images')">
+                            <p>Skip</p>
+                        </button>
+                        <button class="blue-button button-style fix-button" type="button" (click)="
+                saveAndNext(preferenceForm.form, 'false', 'Profile Images')
+              " [disabled]="isLoading">
+                            <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="activeTab == 'Profile Images'">
+            <form name="form" (ngSubmit)="save(mediaForm.form, 'true', 'User')" #mediaForm="ngForm" novalidate>
+                <div class="activeBody content-flex">
+                    <div>
+                        <div class="form-field col" style="padding-left: 0">
+                            <h4 style="font-size: 1.5rem; font-weight: 700">Media Images</h4>
+                            <div class="clearfix"></div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0">
+                                <div class="" *ngFor="let image of profileObj.images; let i = index" style="
+                    width: 20%;
+                    height: 200px;
+                    background-color: #edebebcc;
+                    position: relative;
+                  ">
+                                    <a href="javascript:void(0)" (click)="removeImages(i, image.id)"
+                                        class="removeImage"><span class="material-symbols-outlined"
+                                            style="color: red; position: absolute; right: 8px; top: 8px">cancel</span>
+                                    </a>
+                                    <img src="{{ image.image }}" class=""
+                                        style="width: 100%; height: 78%; object-fit: contain" />
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <label class="md-lable" for="images" class="pointer">
+                                <span class="btn choose_btn btn-default display-block no-mrg-btm">Choose file</span>
+                                <input type="file" id="images" maxlength="" class="d-none" name="images"
+                                    accept="image/*" (change)="profileImages($event)" multiple />
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-field col" style="padding-left: 0">
+                            <h4 style="font-size: 1.5rem; font-weight: 700">KYC Images*</h4>
+                            <p style="color: red">
+                                Please upload your kyc documents for verification
+                            </p>
+                            <div class="clearfix"></div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0">
+                                <div class="" *ngFor="let image of profileObj.kyc; let i = index" style="
+                    width: 20%;
+                    height: 200px;
+                    background-color: #edebebcc;
+                    position: relative;
+                  ">
+                                    <a href="javascript:void(0)" (click)="removeKYCImages(i, image.id)"
+                                        class="removeImage"><span class="material-symbols-outlined"
+                                            style="color: red; position: absolute; right: 8px; top: 8px">cancel</span>
+                                    </a>
+                                    <img src="{{ image.image }}" class=""
+                                        style="width: 100%; height: 78%; object-fit: contain" />
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <label class="md-lable" for="kycImages" class="pointer">
+                                <span class="btn choose_btn btn-default display-block no-mrg-btm">Choose file</span>
+                                <input type="file" id="kycImages" maxlength="" class="d-none" name="kycImages"
+                                    accept="image/*" (change)="kycImages($event)" multiple />
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-field col" style="padding-left: 0">
+                            <h4 style="font-size: 1.5rem; font-weight: 700">BioData</h4>
+                            <div class="clearfix"></div>
+
+                            <div class="clearfix"></div>
+                            <div class="default_imageiconcategory" *ngIf="!profileObj.document">
+                                <img [src]="
+                    profileObj.document
+                      ? profileObj.document
+                      : 'assets/images/pdf.png'
+                  " class="img categoryiconimg" default="assets/images/pdf.png" />
+                            </div>
+                            <div class="default_imageiconcategory" *ngIf="profileObj.document">
+                                <a href="{{ profileObj.document }}" target="_blank" style="
+                    color: #333;
+                    text-decoration: none;
+                    padding: 1rem 0.75rem;
+                    margin: 1rem 0rem;
+                  ">View PDF</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <label class="md-lable" for="pdf" class="pointer">
+                                <span class="btn choose_btn btn-default display-block no-mrg-btm">Choose file</span>
+                                <input type="file" id="pdf" maxlength="" class="d-none" name="pdf"
+                                    (change)="document($event)" />
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-field col" style="padding-left: 0">
+                            <h4 style="font-size: 1.5rem; font-weight: 700">Kundali</h4>
+                            <div class="clearfix"></div>
+
+                            <div class="clearfix"></div>
+                            <div class="default_imageiconcategory" *ngIf="!profileObj.kundali">
+                                <img [src]="
+                    profileObj.kundali
+                      ? profileObj.kundali
+                      : 'assets/images/pdf.png'
+                  " class="img categoryiconimg" default="assets/images/pdf.png" />
+                            </div>
+                            <div class="default_imageiconcategory" *ngIf="profileObj.kundali">
+                                <a href="{{ profileObj.kundali }}" target="_blank" style="
+                    color: #333;
+                    text-decoration: none;
+                    padding: 1rem 0.75rem;
+                    margin: 1rem 0rem;
+                  ">View PDF</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <label class="md-lable" for="kundali" class="pointer">
+                                <span class="btn choose_btn btn-default display-block no-mrg-btm">Choose file</span>
+                                <input type="file" id="kundali" maxlength="" class="d-none" name="kundali"
+                                    (change)="kundali($event)" />
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row-flex aic small-gap" style="width: 4%; margin-left: auto">
+                        <button class="button-style blue-button fix-button">
+                            <p> {{ isLoading ? "Please Wait..." : "Submit" }} </p>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

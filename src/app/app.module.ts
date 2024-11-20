@@ -14,6 +14,8 @@ import { ManageProfileComponent } from './manage-profile/manage-profile.componen
 import { ProfileUpdateComponent } from './profile-update/profile-update.component';
 import { PagerService } from './_services/pager-service';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { OwlDateTimeModule,OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
 
 
 
@@ -34,6 +36,8 @@ import { ViewProfileComponent } from './view-profile/view-profile.component';
     FormsModule,
     HttpClientModule,
     NgSelectModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     ToastrModule.forRoot({
       timeOut: 10000,
       positionClass: 'toast-bottom-right',

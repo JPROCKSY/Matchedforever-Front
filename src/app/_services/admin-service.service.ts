@@ -81,6 +81,30 @@ export class AdminServiceService {
         return this.http.post<any>(environment.apiUrl + 'profile/detail', JSON.stringify(data), httpOptions).pipe();
     }
 
+
+    getSubscription(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders()
+        };
+        return this.http.post<any>(environment.apiUrl + 'subscription/list', JSON.stringify(data), httpOptions).pipe();
+    }
+
+    getRelationship(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders()
+        };
+        return this.http.post<any>(environment.apiUrl + 'relationshipStatus/list', JSON.stringify(data), httpOptions).pipe();
+    }
+
+    
+
+    updateProfile(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthdataHeaders()
+        };
+        return this.http.post<any>(environment.apiUrl + 'profile/update', data, httpOptions).pipe();
+    }
+
     getCaste(data): Observable<any> {
         const httpOptions = {
             headers: this.getAuthHeaders()
