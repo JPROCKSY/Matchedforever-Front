@@ -33,7 +33,6 @@
 }
 
 .checkbox-preference{
-    margin-top: 10px;
     display: flex;
     align-items: flex-start;
     gap: 10px;
@@ -41,7 +40,7 @@
 .checkbox-pref {
     width: 12px;
     height: 12px;
-    color: red !important;
+    accent-color: var(--logo-color);
 }
 .checkbox-pref:focus {
     outline: none;
@@ -128,6 +127,15 @@
     object-fit: cover;
   }
 
+  .form-grid-3{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 15px;
+    row-gap: 24px;
+    align-items: top;
+
+  }
+
 
 
 @media (max-width: 1440px) {
@@ -142,6 +150,14 @@
     }
     .tabs {
         font-size: 16px;
+    }
+    .form-grid-3{
+      display: grid;
+      grid-template-columns: calc(100% / 2 - 7.5px) calc(100% / 2 - 7.5px);
+      column-gap: 15px;
+      row-gap: 24px;
+      align-items: top;
+  
     }
 }
 @media (max-width: 1280px) {
@@ -160,6 +176,9 @@
 @media (max-width: 991px) {
     .form-grid{
         grid-template-columns: calc(100% / 2 - 7.5px) calc(100% / 2 - 7.5px);
+    }
+    .form-grid-3{
+      grid-template-columns: calc(100% / 1);
     }
     .content-box-main {
         padding: 4px;

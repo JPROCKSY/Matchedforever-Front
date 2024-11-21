@@ -302,7 +302,7 @@ button:hover {
   display: grid;
   row-gap: 15px;
   column-gap: 10px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: calc(100% / 3 - 6px) calc(100% / 3 - 6px) calc(100% / 3 - 6px);
   align-items: center;
 }
 

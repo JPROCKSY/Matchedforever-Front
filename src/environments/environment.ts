@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://matchedforever.saltpixels.in/api/Services/',
+  // apiUrl: 'https://matchedforever.saltpixels.in/api/Services/',
 
-  // apiUrl: 'http://192.168.1.77/matched_forever/api/Services/',
+  apiUrl: 'http://192.168.1.77/matched_forever/api/Services/',
 };
 
 /*

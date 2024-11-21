@@ -32,6 +32,7 @@ export class ManageProfileComponent implements OnInit {
     this.getAllHobbies();
     this.getAllCitizenShips();
     this.getAllCountry();
+    this.getpref();
   }
 
   public loggedInUser: any = {};
@@ -224,8 +225,98 @@ educationListArray: any = [];
 
 
   submitFilters() {
+    // if (this.profileObj.height && Array.isArray(this.profileObj.height)) {
+    //   this.profileObj.height = this.profileObj.height.join(',');
+    // }
+  
+    // if (this.profileObj.education && Array.isArray(this.profileObj.education)) {
+    //   this.profileObj.education = this.profileObj.education.join(',');
+    // }
+  
+    // if (this.profileObj.education_type_preference && Array.isArray(this.profileObj.education_type_preference)) {
+    //   this.profileObj.education_type_preference = this.profileObj.education_type_preference.join(',');
+    // }
+  
+    // if (this.profileObj.occuppation && Array.isArray(this.profileObj.occuppation)) {
+    //   this.profileObj.occuppation = this.profileObj.occuppation.join(',');
+    // }
+  
+    // if (this.profileObj.occupation_type_preference && Array.isArray(this.profileObj.occupation_type_preference)) {
+    //   this.profileObj.occupation_type_preference = this.profileObj.occupation_type_preference.join(',');
+    // }
+  
+    // if (this.profileObj.family_background && Array.isArray(this.profileObj.family_background)) {
+    //   this.profileObj.family_background = this.profileObj.family_background.join(',');
+    // }
+  
+    // if (this.profileObj.food_habits && Array.isArray(this.profileObj.food_habits)) {
+    //   this.profileObj.food_habits = this.profileObj.food_habits.join(',');
+    // }
+  
+    // if (this.profileObj.smoking_habits && Array.isArray(this.profileObj.smoking_habits)) {
+    //   this.profileObj.smoking_habits = this.profileObj.smoking_habits.join(',');
+    // }
+  
+    // if (this.profileObj.drinking_habits && Array.isArray(this.profileObj.drinking_habits)) {
+    //   this.profileObj.drinking_habits = this.profileObj.drinking_habits.join(',');
+    // }
+  
+    // if (this.profileObj.country_of_settlement && Array.isArray(this.profileObj.country_of_settlement)) {
+    //   this.profileObj.country_of_settlement = this.profileObj.country_of_settlement.join(',');
+    // }
+  
+    // if (this.profileObj.state_of_settlement && Array.isArray(this.profileObj.state_of_settlement)) {
+    //   this.profileObj.state_of_settlement = this.profileObj.state_of_settlement.join(',');
+    // }
+  
+    // if (this.profileObj.city_of_settlement && Array.isArray(this.profileObj.city_of_settlement)) {
+    //   this.profileObj.city_of_settlement = this.profileObj.city_of_settlement.join(',');
+    // }
+  
+    // if (this.profileObj.caste && Array.isArray(this.profileObj.caste)) {
+    //   this.profileObj.caste = this.profileObj.caste.join(',');
+    // }
+  
+    // if (this.profileObj.subcaste && Array.isArray(this.profileObj.subcaste)) {
+    //   this.profileObj.subcaste = this.profileObj.subcaste.join(',');
+    // }
+  
+    // if (this.profileObj.religion && Array.isArray(this.profileObj.religion)) {
+    //   this.profileObj.religion = this.profileObj.religion.join(',');
+    // }
+  
+    // if (this.profileObj.citizenship && Array.isArray(this.profileObj.citizenship)) {
+    //   this.profileObj.citizenship = this.profileObj.citizenship.join(',');
+    // }
+  
+    // if (this.profileObj.visa && Array.isArray(this.profileObj.visa)) {
+    //   this.profileObj.visa = this.profileObj.visa.join(',');
+    // }
+
+
     this.resetPagination();
-    this.getprofile();
+
+    for (var key in this.profileObj) {
+      if (this.profileObj[key] === undefined) {
+        this.profileObj[key] = "";
+      }
+    }
+
+    let formData = new FormData();
+
+    for (var key in this.profileObj) {
+      formData.append(key, this.profileObj[key]); 
+    }
+
+    this.adminService.savePref(formData).subscribe((response: any) => {
+      if (response.success == 1) {
+        this.getprofile();
+      } else {     
+        this.toastr.error(response.message);
+      }
+      this.isLoading = false; 
+    });
+    
   }
 
   resetPagination() {
@@ -282,7 +373,22 @@ educationListArray: any = [];
 public dummyRecords = [1, 2, 3, 4 , 5, 6, 7, 8, 9, 10];
 public isLoading: boolean = false;
 
+public profileObj:any = {};
+
+getpref() {
+  this.isLoading = true;
+  this.adminService.getPref({id : this.loggedInUser.id}).subscribe((response: any) => {
+      if (response.success) {
+          this.profileObj = response.details;
+      } else {
+
+      }
+      this.isLoading = false;
+  })
+}
+
 public profileList: any = [];
+
 getprofile() {
     this.isLoading = true;
     this.adminService.getProfiles(this.dataObj).subscribe((response: any) => {
@@ -296,6 +402,11 @@ getprofile() {
         this.isLoading = false;
     })
 }
+
+
+
+
+
 
 public usersPager: any = [];
 setUsersPage(page: number, flag: number) {
@@ -324,7 +435,28 @@ nextProfile() {
 
 selectOption(option: string) {
   const selectedProfile = this.profileList[this.currentProfileIndex];
-  // Handle saving or updating the selection based on the profile
+  const userId = this.loggedInUser.id;
+  const candidateId = selectedProfile.id;
+
+  if(option == 'Interested'){
+    this.adminService.requestSend({user_id : userId , candidate_id: candidateId , status : 'request_sent'}).subscribe((response: any) => {
+      if (response.success == 1) {
+        this.toastr.success(response.message);
+      } else {
+        this.toastr.error(response.message);
+      }
+    });
+  }
+  if(option == 'Rejected'){
+    this.adminService.requestreject({user_id : userId , candidate_id: candidateId , status : 'rejected'}).subscribe((response: any) => {
+      if (response.success == 1) {
+        this.toastr.success(response.message);
+      } else {
+        this.toastr.error(response.message);
+      }
+    });
+  }
+
   console.log(`Profile ${selectedProfile.first_name} ${option}`);
 
   // Move to the next profile

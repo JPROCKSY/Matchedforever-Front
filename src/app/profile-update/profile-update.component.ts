@@ -976,7 +976,7 @@ export class ProfileUpdateComponent implements OnInit {
             this.activeTab = nextTab;
             if (routingFlag == "true") {
               this.toastr.success(response.message);
-              this.router.navigate(["/profiles"]);
+              this.router.navigate(["/"]);
             }
           }
           this.isLoading = false;

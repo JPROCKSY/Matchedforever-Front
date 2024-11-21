@@ -114,17 +114,17 @@
                                     {{data.email}}
                                 </td>
                                 <td class="cursor-pointer verticle-middle width-10">
-                                    {{data.age}}
+                                    {{data.basicInfo.age}}
                                 </td>
                                 <td class="cursor-pointer verticle-middle width-10">
-                                    {{data.caste}}
+                                    {{data.caste_name}}
                                 </td>
 
                                 <td class="cursor-pointer verticle-middle width-10">
                                     {{data.looking_for}}
                                 </td>
                                 <td class="cursor-pointer verticle-middle width-10">
-                                    {{data.education}}
+                                    <span *ngFor="let education of data.education">{{education.education_name}}</span>
                                 </td>
                                 <td routerLink="/preview/{{data.id}}" class="verticle-middle width-5">
                                     <div class="cursor-pointer view-button">
@@ -204,13 +204,15 @@
                 <h2>{{ getCurrentProfile().first_name }} {{ getCurrentProfile().last_name }}</h2>
 
                 <!-- Profile Details -->
-                <p><strong>Age:</strong> {{ getCurrentProfile().age }}</p>
-                <p><strong>Education:</strong> {{ getCurrentProfile().education }}</p>
+                <p><strong>Age:</strong> {{ getCurrentProfile().basicInfo.age }}</p>
+                <p><strong>Education:</strong> <span *ngFor="let education of getCurrentProfile().education; let i = index">
+                    <span *ngIf="i === 0">{{education.education_name}}</span>
+                  </span></p>
                 <p><strong>Phone:</strong> {{ getCurrentProfile().phone }}</p>
 
                 <!-- Additional Profile Information -->
-                <p *ngIf="getCurrentProfile().caste"><strong>Caste:</strong> {{ getCurrentProfile().caste }}</p>
-                <p *ngIf="getCurrentProfile().religion"><strong>Religion:</strong> {{ getCurrentProfile().religion }}
+                <p *ngIf="getCurrentProfile().caste"><strong>Caste:</strong> {{ getCurrentProfile().caste_name }}</p>
+                <p *ngIf="getCurrentProfile().religion"><strong>Religion:</strong> {{ getCurrentProfile().religion_name }}
                 </p>
                 <p *ngIf="getCurrentProfile().email"><strong>Email:</strong> {{ getCurrentProfile().email }}</p>
 
@@ -252,19 +254,19 @@
 
                 <div class="form-field">
                     <label class="md-lable" for="max_age_gap">Max Birth Year Acceptable</label>
-                    <input type="text" class="form-data" name="max_age_gap" [(ngModel)]="dataObj.max_age_gap"
+                    <input type="text" class="form-data" name="max_age_gap" [(ngModel)]="profileObj.max_age_gap"
                         #max_age_gap="ngModel" />
                 </div>
 
                 <div class="form-field">
                     <label class="md-lable" for="min_age_gap">Min Birth Year Acceptable</label>
-                    <input type="text" class="form-data" name="min_age_gap" [(ngModel)]="dataObj.min_age_gap"
+                    <input type="text" class="form-data" name="min_age_gap" [(ngModel)]="profileObj.min_age_gap"
                         #min_age_gap="ngModel" />
                 </div>
 
-                <div class="form-field">
+                <!-- <div class="form-field">
                     <label class="md-lable" for="gender">Select Gender</label>
-                    <ng-select name="gender" id="gender" [(ngModel)]="dataObj.gender" #gender="ngModel"
+                    <ng-select name="gender" id="gender" [(ngModel)]="profileObj.gender" #gender="ngModel"
                         class="form-data-select" style="width: 100%">
                         <ng-option value="">Filter By Gender</ng-option>
                         <ng-option value="Male">
@@ -274,11 +276,11 @@
                             Female
                         </ng-option>
                     </ng-select>
-                </div>
+                </div> -->
 
                 <div class="form-field">
                     <label class="md-lable" for="height">Height Preference (In Ft.)</label>
-                    <ng-select name="height" id="height" [(ngModel)]="dataObj.height" #height="ngModel"
+                    <ng-select name="height" id="height" [(ngModel)]="profileObj.height" #height="ngModel"
                         [multiple]="true" class="form-data-select" style="width: 100%">
                         <ng-option value="">Filter By Height</ng-option>
                         <ng-option value="122-137">
@@ -306,7 +308,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="education">Education Preference</label>
                     <ng-select class="form-data-select" style="width: 100%" name="education" id="education"
-                        [multiple]="true" [(ngModel)]="dataObj.education" #education="ngModel">
+                        [multiple]="true" [(ngModel)]="profileObj.education" #education="ngModel">
                         <ng-option value="">Select Education</ng-option>
                         <ng-option value="{{ educ.id }}" *ngFor="let educ of educationListArray">
                             {{ educ.education }}
@@ -317,7 +319,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="education_type">Education Type Preference</label>
                     <ng-select class="form-data-select" style="width: 100%" name="education_type" id="education_type"
-                        [multiple]="true" [(ngModel)]="dataObj.education_type" #education_type="ngModel">
+                        [multiple]="true" [(ngModel)]="profileObj.education_type_preference" #education_type="ngModel">
                         <ng-option value="">Select Education Type</ng-option>
                         <ng-option value="{{ educ.id }}" *ngFor="let educ of educationTypeList">
                             {{ educ.name }}
@@ -328,7 +330,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="believes_in_horoscopes">Believes In Horoscope</label>
                     <ng-select class="form-data-select" style="width: 100%" name="believes_in_horoscopes"
-                        [(ngModel)]="dataObj.believes_in_horoscopes" #believes_in_horoscopes="ngModel">
+                        [(ngModel)]="profileObj.believes_in_horoscopes" #believes_in_horoscopes="ngModel">
                         <ng-option value="">Select</ng-option>
                         <ng-option value="yes">Yes</ng-option>
                         <ng-option value="no">No</ng-option>
@@ -338,7 +340,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="occupation">Occupation Preference</label>
                     <ng-select style="width: 100%" class="form-data-select" name="occupation" id="occupation"
-                        [multiple]="true" [(ngModel)]="dataObj.occupation" #occupation="ngModel">
+                        [multiple]="true" [(ngModel)]="profileObj.occuppation" #occupation="ngModel">
                         <ng-option value="">Select Occupation</ng-option>
                         <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationListArray">
                             {{ occu.occupation }}
@@ -349,7 +351,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="occupation_type">Occupation Type Preference</label>
                     <ng-select style="width: 100%" class="form-data-select" name="occupation_type" id="occupation_type"
-                        [multiple]="true" [(ngModel)]="dataObj.occupation_type" #occupation_type="ngModel">
+                        [multiple]="true" [(ngModel)]="profileObj.occupation_type_preference" #occupation_type="ngModel">
                         <ng-option value="">Select Occupation Type</ng-option>
                         <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationTypeList">
                             {{ occu.name }}
@@ -360,7 +362,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="user_family_background">Family Background</label>
                     <ng-select style="width: 100%" name="user_family_background" id="user_family_background"
-                        [multiple]="true" class="form-data-select" [(ngModel)]="dataObj.user_family_background"
+                        [multiple]="true" class="form-data-select" [(ngModel)]="profileObj.family_background"
                         #user_family_background="ngModel">
                         <ng-option value="">Select Family Background</ng-option>
                         <ng-option value="Professional Background">Professional Background</ng-option>
@@ -372,7 +374,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="min_net_worth">Minimum Net Worth</label>
                     <ng-select name="min_net_worth" style="width: 100%" class="form-data-select" id="min_net_worth"
-                        [multiple]="true" [(ngModel)]="dataObj.min_net_worth" #min_net_worth="ngModel">
+                        [multiple]="true" [(ngModel)]="profileObj.min_net_worth" #min_net_worth="ngModel">
                         <ng-option value="">Filter By Net Worth</ng-option>
                         <ng-option value="0-2500000">
                             Upto 25 Lakh
@@ -405,7 +407,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="food_habits">Food Preferance</label>
                     <ng-select style="width: 100%" class="form-data-select" name="food_habits" id="food_habits"
-                        [multiple]="true" [(ngModel)]="dataObj.food_habits" #food_habits="ngModel">
+                         [(ngModel)]="profileObj.food_habits" #food_habits="ngModel">
                         <ng-option value="">Select Food Preferance</ng-option>
                         <ng-option value="Vegeterian">Vegeterian</ng-option>
                         <ng-option value="Non Vegeterian">Non Vegeterian</ng-option>
@@ -417,7 +419,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="smoking_habits">Smoking Preferance</label>
                     <ng-select style="width: 100%" class="form-data-select" name="smoking_habits" id="smoking_habits"
-                        [(ngModel)]="dataObj.smoking_habits" #smoking_habits="ngModel">
+                        [(ngModel)]="profileObj.smoking_habits" #smoking_habits="ngModel">
                         <ng-option value="">Select Smoking Preferance</ng-option>
                         <ng-option value="Yes">Yes</ng-option>
                         <ng-option value="No">No</ng-option>
@@ -428,7 +430,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="drinking_habits">Drinking Preferance</label>
                     <ng-select style="width: 100%" class="form-data-select" name="drinking_habits" id="drinking_habits"
-                        [(ngModel)]="dataObj.drinking_habits" #drinking_habits="ngModel">
+                        [(ngModel)]="profileObj.drinking_habits" #drinking_habits="ngModel">
                         <ng-option value="">Select Drinking Preferance</ng-option>
                         <ng-option value="Yes">Yes</ng-option>
                         <ng-option value="No">No</ng-option>
@@ -439,7 +441,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="country_of_settlement">Country of Settlement</label>
                     <ng-select class="form-data-select" name="country_of_settlement" (change)="prefStateList()"
-                        id="country_of_settlement" [(ngModel)]="dataObj.country_of_settlement"
+                        id="country_of_settlement" [(ngModel)]="profileObj.country_of_settlement"
                         #country_of_settlement="ngModel" [multiple]="true" style="width: 100%">
                         <ng-option value="">-Select Country-</ng-option>
                         <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
@@ -451,7 +453,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="state_of_settlement">State of Settlement</label>
                     <ng-select class="form-data-select" name="state_of_settlement" (change)="prefCityList()"
-                        id="state_of_settlement" [(ngModel)]="dataObj.state_of_settlement"
+                        id="state_of_settlement" [(ngModel)]="profileObj.state_of_settlement"
                         #state_of_settlement="ngModel" [multiple]="true" style="width: 100%">
                         <ng-option value="">-Select State-</ng-option>
                         <ng-option value="{{ state.id }}" *ngFor="let state of prefstateList">
@@ -463,7 +465,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="city_of_settlement">City of Settlement</label>
                     <ng-select class="form-data-select" name="city_of_settlement" id="city_of_settlement"
-                        [(ngModel)]="dataObj.city_of_settlement" #city_of_settlement="ngModel" [multiple]="true"
+                        [(ngModel)]="profileObj.city_of_settlement" #city_of_settlement="ngModel" [multiple]="true"
                         style="width: 100%">
                         <ng-option value="">-Select City-</ng-option>
                         <ng-option value="{{ city.id }}" *ngFor="let city of prefcityList">
@@ -475,7 +477,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="user_family_type">Family type</label>
                     <ng-select name="user_family_type" style="width: 100%" id="user_family_type" class="form-data-select"
-                        [multiple]="true" [(ngModel)]="dataObj.user_family_type" #user_family_type="ngModel">
+                        [multiple]="true" [(ngModel)]="profileObj.family_type" #user_family_type="ngModel">
                         <ng-option value="">Select Family Type</ng-option>
                         <ng-option value="Nuclear Family">Nuclear Family</ng-option>
                         <ng-option value="Joint Family">Joint Family</ng-option>
@@ -485,8 +487,8 @@
                 <div class="form-field">
                     <label class="md-lable" for="caste">Caste</label>
                     <ng-select style="width: 100%" name="caste" id="caste" class="form-data-select"
-                        [(ngModel)]="dataObj.caste" #caste="ngModel" [multiple]="true"
-                        (change)="getAllSubCaste(this.dataObj.caste)">
+                        [(ngModel)]="profileObj.caste" #caste="ngModel" [multiple]="true"
+                        (change)="getAllSubCaste(this.profileObj.caste)">
                         <ng-option value="">Select caste</ng-option>
                         <ng-option value="{{ caste.id }}" *ngFor="let caste of casteList">
                             {{ caste.community }}
@@ -498,7 +500,7 @@
                     <label class="md-lable" for="subcaste">Sub Caste</label>
 
                     <ng-select style="width: 100%" name="subcaste" id="subcaste" class="form-data-select"
-                        [(ngModel)]="dataObj.subcaste" [multiple]="true" #subcaste="ngModel">
+                        [(ngModel)]="profileObj.subcaste" [multiple]="true" #subcaste="ngModel">
                         <ng-option value="">Select Subcaste</ng-option>
                         <ng-option value="{{ caste.id }}" *ngFor="let caste of subCasteList">
                             {{ caste.community }}
@@ -510,7 +512,7 @@
                     <label class="md-lable" for="religion">Religion</label>
 
                     <ng-select style="width: 100%" name="religion" id="religion" class="form-data-select"
-                        [(ngModel)]="dataObj.religion" #religion="ngModel" [multiple]="true">
+                        [(ngModel)]="profileObj.religion" #religion="ngModel" [multiple]="true">
                         <ng-option value="">Select Religion</ng-option>
                         <ng-option value="{{ religion.id }}" *ngFor="let religion of religionList">
                             {{ religion.religion }}
@@ -523,8 +525,8 @@
                 <div class="form-field">
                     <label class="md-lable" for="user_citizenship">Citizenship</label>
                     <ng-select class="form-data-select" name="user_citizenship" id="user_citizenship"
-                        [(ngModel)]="dataObj.user_citizenship" #user_citizenship="ngModel" [multiple]="true"
-                        style="width: 100%" (change)="getAllVisas(dataObj.user_citizenship)">
+                        [(ngModel)]="profileObj.citizenship" #user_citizenship="ngModel" [multiple]="true"
+                        style="width: 100%" (change)="getAllVisas(profileObj.citizenship)">
                         <ng-option value="">Select Citizenship</ng-option>
                         <ng-option value="{{ citizen.id }}" *ngFor="let citizen of citizenshipList">
                             {{ citizen.citizenship }}
@@ -534,7 +536,7 @@
 
                 <div class="form-field">
                     <label class="md-lable" for="user_visa">Visa</label>
-                    <ng-select class="form-data-select" name="user_visa" id="user_visa" [(ngModel)]="dataObj.user_visa"
+                    <ng-select class="form-data-select" name="user_visa" id="user_visa" [(ngModel)]="profileObj.visa"
                         #visa="ngModel" style="width: 100%" [multiple]="true">
                         <ng-option value="">Select Visa</ng-option>
                         <ng-option value="{{ visa.visa }}" *ngFor="let visa of visaList">
@@ -545,7 +547,7 @@
                 <div class="form-field">
                     <label class="md-lable" for="abroad_studies">Abroad Studies</label>
                     <ng-select name="abroad_studies" style="width: 100%" id="abroad_studies" class="form-data-select"
-                        [(ngModel)]="dataObj.abroad_studies" #abroad_studies="ngModel">
+                        [(ngModel)]="profileObj.abroad_studies" #abroad_studies="ngModel">
                         <ng-option value="">Select Education</ng-option>
                         <ng-option value="Yes">Yes</ng-option>
                         <ng-option value="No">No</ng-option>

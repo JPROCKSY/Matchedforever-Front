@@ -484,6 +484,7 @@ img {
     padding: 1rem;
     border-radius: 25px;
     cursor: pointer;
+    color: #ffffff;
 }
 
 .orange-color-button {
@@ -492,6 +493,7 @@ img {
 
 .button-style.blue-button:hover {
     background-color: #ffffff;
+    color: var(--logo-color);
     border: 1px solid #bd9265;
     transition: var(--common-transition);
 }

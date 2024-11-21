@@ -15,6 +15,7 @@ import { ProfileUpdateComponent } from './profile-update/profile-update.componen
 import { PagerService } from './_services/pager-service';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { OwlDateTimeModule,OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { MatchedProfileComponent } from './matched-profile/matched-profile.component';
 
 
 
@@ -28,6 +29,7 @@ import { OwlDateTimeModule,OwlNativeDateTimeModule } from 'ng-pick-datetime';
     ManageProfileComponent,
     ProfileUpdateComponent,
     ViewProfileComponent,
+    MatchedProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -283,7 +283,7 @@
                         <div class="form-field">
                             <!-- <h4 style="font-size: 1.5rem; font-weight: 700"></h4> -->
                             <label class="md-lable" for="profile_pic">Profile Image</label>
-    
+
                             <div class="default_imageiconcategory">
                                 <img *ngIf="profileObj.profile_pic_view || profileObj.profile_pic;else placeholder"
                                     [src]="profileObj.profile_pic_view? profileObj.profile_pic_view: profileObj.profile_pic"
@@ -293,13 +293,14 @@
                                         class="categoryiconimg" />
                                 </ng-template>
                             </div>
-    
+
                             <label class="md-lable" for="profilepic" class="pointer">
-                                <span class="btn choose_btn btn-default display-block no-mrg-btm md-lable">Choose Image</span>
+                                <span class="btn choose_btn btn-default display-block no-mrg-btm md-lable">Choose
+                                    Image</span>
                                 <input type="file" id="profilepic" maxlength="" class="d-none" name="profilepic"
                                     accept="image/*" (change)="profilePicture($event)" multiple />
                             </label>
-    
+
                         </div>
                     </div>
 
@@ -330,8 +331,8 @@
                 'is-invalid': basicInformationForm.submitted && height.invalid
               }"
               required -->
-                            <ng-select name="height" id="height" class="form-data-select" [(ngModel)]="profileObj.height"
-                                #height="ngModel">
+                            <ng-select name="height" id="height" class="form-data-select"
+                                [(ngModel)]="profileObj.height" #height="ngModel">
                                 <ng-option value="">Select Height</ng-option>
                                 <ng-option value="{{ height.cm }}" *ngFor="let height of heightArray">
                                     {{
@@ -402,8 +403,8 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="doctor">Doctor</label>
-                            <ng-select type="text" class="form-data-select" name="doctor" [(ngModel)]="profileObj.doctor"
-                                #doctor="ngModel">
+                            <ng-select type="text" class="form-data-select" name="doctor"
+                                [(ngModel)]="profileObj.doctor" #doctor="ngModel">
                                 <ng-option value="">Are you a Doctor</ng-option>
                                 <ng-option value="Yes">Yes</ng-option>
                                 <ng-option value="No">No</ng-option>
@@ -493,8 +494,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="hobbies">Hobbies</label>
-                            <ng-select class="form-data-select" name="hobbies" id="hobbies" [(ngModel)]="profileObj.hobbies"
-                                #hobbies="ngModel" [multiple]="true" style="width: 100%; margin-top: -3px">
+                            <ng-select class="form-data-select" name="hobbies" id="hobbies"
+                                [(ngModel)]="profileObj.hobbies" #hobbies="ngModel" [multiple]="true"
+                                style="width: 100%; margin-top: -3px">
                                 <ng-option value="">-Select Hobby-</ng-option>
                                 <ng-option value="{{ hobby.id }}" *ngFor="let hobby of hobbiesList">
                                     {{ hobby.hobby }}
@@ -561,9 +563,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="preffered_setlement_city">City of Settlement</label>
-                            <ng-select class="form-data-select" name="preffered_setlement_city" id="preffered_setlement_city"
-                                [(ngModel)]="profileObj.preffered_setlement_city" #preffered_setlement_city="ngModel"
-                                [multiple]="true" style="width: 100%">
+                            <ng-select class="form-data-select" name="preffered_setlement_city"
+                                id="preffered_setlement_city" [(ngModel)]="profileObj.preffered_setlement_city"
+                                #preffered_setlement_city="ngModel" [multiple]="true" style="width: 100%">
                                 <ng-option value="">-Select City-</ng-option>
                                 <ng-option value="{{ city.id }}" *ngFor="let city of basecityListArray">
                                     {{ city.name }}
@@ -634,8 +636,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="cuisines">Cuisine</label>
-                            <ng-select class="form-data-select" name="cuisines" id="cuisines" [(ngModel)]="profileObj.cuisines"
-                                #cuisines="ngModel" [multiple]="true" style="width: 100%; margin-top: -3px">
+                            <ng-select class="form-data-select" name="cuisines" id="cuisines"
+                                [(ngModel)]="profileObj.cuisines" #cuisines="ngModel" [multiple]="true"
+                                style="width: 100%; margin-top: -3px">
                                 <ng-option value="">-Select Cuisine-</ng-option>
                                 <ng-option value="Gujarati">Gujarati</ng-option>
                                 <ng-option value="Italian cuisine">Italian cuisine</ng-option>
@@ -657,8 +660,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="manglik">Manglik</label>
-                            <ng-select class="form-data-select" name="manglik" id="manglik" [(ngModel)]="profileObj.manglik"
-                                #manglik="ngModel" style="width: 100%; margin-top: -3px">
+                            <ng-select class="form-data-select" name="manglik" id="manglik"
+                                [(ngModel)]="profileObj.manglik" #manglik="ngModel"
+                                style="width: 100%; margin-top: -3px">
                                 <ng-option value="">-Select-</ng-option>
                                 <ng-option value="Yes">Yes</ng-option>
                                 <ng-option value="No">No</ng-option>
@@ -700,17 +704,19 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="additionalInformation">Additional Information</label>
-                            <textarea class="form-data form-data-textarea" name="additionalInformation" id="additionalInformation"
-                                [(ngModel)]="profileObj.additionalInformation"
+                            <textarea class="form-data form-data-textarea" name="additionalInformation"
+                                id="additionalInformation" [(ngModel)]="profileObj.additionalInformation"
                                 #additionalInformation="ngModel"></textarea>
                         </div>
                     </div>
 
                     <div class="row-flex aic small-gap" style="margin-left: auto">
-                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('User')">
+                        <button class="button-style blue-button fix-button" type="button"
+                            (click)="handleActiveTab('User')">
                             <p>Previous</p>
                         </button>
-                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Family Information')">
+                        <button class="button-style blue-button fix-button" type="button"
+                            (click)="handleActiveTab('Family Information')">
                             <p>Skip</p>
                         </button>
                         <button class="button-style blue-button fix-button" type="button" (click)="
@@ -738,8 +744,9 @@
                     <div class="form-grid">
                         <div class="form-field">
                             <label class="md-lable" for="user_family_background">Family Background</label>
-                            <ng-select name="user_family_background" id="user_family_background" class="form-data-select"
-                                [(ngModel)]="profileObj.user_family_background" #user_family_background="ngModel">
+                            <ng-select name="user_family_background" id="user_family_background"
+                                class="form-data-select" [(ngModel)]="profileObj.user_family_background"
+                                #user_family_background="ngModel">
                                 <ng-option value="">Select Family Background</ng-option>
                                 <ng-option value="Professional Background">
                                     Professional Background
@@ -822,7 +829,8 @@
                         </div>
                     </div>
 
-                    <h3 style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">
+                    <h3
+                        style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">
                         Father's Information
                     </h3>
                     <div class="form-grid">
@@ -927,8 +935,8 @@
 
                             <div class="form-field">
                                 <label class="md-lable" for="fathersOtherInformation">Father's Other Information</label>
-                                <textarea name="fathersOtherInformation" id="fathersOtherInformation" class="form-data form-data-textarea"
-                                    [(ngModel)]="
+                                <textarea name="fathersOtherInformation" id="fathersOtherInformation"
+                                    class="form-data form-data-textarea" [(ngModel)]="
                     profileObj.family_information.fathers_info.additional_info
                   " #fathersOtherInformation="ngModel"></textarea>
                             </div>
@@ -939,7 +947,8 @@
 
                     <!-- Mothers Information Starts Here -->
 
-                    <h3 style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">
+                    <h3
+                        style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">
                         Mother's Information
                     </h3>
                     <div class="d-flex justify-content-between">
@@ -1027,8 +1036,8 @@
 
                             <div class="form-field">
                                 <label class="md-lable" for="mothersOtherInformation">Mother's Other Information</label>
-                                <textarea name="mothersOtherInformation" id="mothersOtherInformation" class="form-data form-data-textarea"
-                                    [(ngModel)]="
+                                <textarea name="mothersOtherInformation" id="mothersOtherInformation"
+                                    class="form-data form-data-textarea" [(ngModel)]="
                     profileObj.family_information.mothers_info.additional_info
                   " #mothersOtherInformation="ngModel"></textarea>
                             </div>
@@ -1039,10 +1048,11 @@
 
                     <!-- Relatives Information Starts Here -->
 
-                    <div class="d-flex justify-content-between align-center"
-                        style="align-items: center;">
+                    <div class="d-flex justify-content-between align-center" style="align-items: center;">
                         <div>
-                            <h3 style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">Relative's Information</h3>
+                            <h3
+                                style="padding-bottom: 0.5rem ;border-bottom: 1px solid #a4a4a4; font-size: 16px; font-weight: 300 ; width: fit-content; margin-bottom: 2rem; margin-top: 1rem;">
+                                Relative's Information</h3>
                         </div>
                         <div style="cursor: pointer" (click)="addMoreRelative()">
                             <p>
@@ -1171,16 +1181,18 @@
                         </div>
                     </div>
                     <div class="row-flex aic small-gap" style="margin-left: auto">
-                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Basic Information')">
-                           <p>Previous</p> 
+                        <button class="blue-button button-style fix-button" type="button"
+                            (click)="handleActiveTab('Basic Information')">
+                            <p>Previous</p>
                         </button>
-                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Address')">
+                        <button class="blue-button button-style fix-button" type="button"
+                            (click)="handleActiveTab('Address')">
                             <p>Skip</p>
                         </button>
                         <button class="blue-button button-style fix-button" type="button" (click)="
                 saveAndNext(familyInformationForm.form, 'false', 'Address')
               " [disabled]="isLoading">
-                           <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p> 
+                            <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p>
                         </button>
                     </div>
                 </div>
@@ -1192,7 +1204,9 @@
                 #saveAddressForm="ngForm" novalidate>
                 <div class="activeBody content-flex">
                     <div>
-                        <h2 style="font-size: 16px;padding-bottom: 1rem;border-bottom: 1px solid #a4a4a4;margin-bottom: 2rem;width:fit-content;">Current Residential Address</h2>
+                        <h2
+                            style="font-size: 16px;padding-bottom: 1rem;border-bottom: 1px solid #a4a4a4;margin-bottom: 2rem;width:fit-content;">
+                            Current Residential Address</h2>
                     </div>
 
                     <div class="form-grid">
@@ -1262,8 +1276,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="residential_house_type">House Type</label>
-                            <ng-select class="form-data-select" name="residential_house_type" id="residential_house_type"
-                                [(ngModel)]="profileObj.residential_house_type" #residential_house_type="ngModel">
+                            <ng-select class="form-data-select" name="residential_house_type"
+                                id="residential_house_type" [(ngModel)]="profileObj.residential_house_type"
+                                #residential_house_type="ngModel">
                                 <ng-option value="">Select House Type</ng-option>
                                 <ng-option value="Bunglow">Bunglow</ng-option>
                                 <ng-option value="Apartment">Apartment</ng-option>
@@ -1283,7 +1298,9 @@
                     </div>
 
                     <div>
-                        <h2 style="font-size: 16px;padding-bottom: 1rem;border-bottom: 1px solid #a4a4a4;margin-bottom: 2rem;width:fit-content;">Future Residential Address</h2>
+                        <h2
+                            style="font-size: 16px;padding-bottom: 1rem;border-bottom: 1px solid #a4a4a4;margin-bottom: 2rem;width:fit-content;">
+                            Future Residential Address</h2>
                     </div>
 
                     <div class="form-grid">
@@ -1349,8 +1366,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="future_residential_type">Future Type</label>
-                            <ng-select class="form-data-select" name="future_residential_type" id="future_residential_type"
-                                [(ngModel)]="profileObj.future_residential_type" #future_residential_type="ngModel">
+                            <ng-select class="form-data-select" name="future_residential_type"
+                                id="future_residential_type" [(ngModel)]="profileObj.future_residential_type"
+                                #future_residential_type="ngModel">
                                 <ng-option value="">Select Residential Type</ng-option>
                                 <ng-option value="Owner">Owner</ng-option>
                                 <ng-option value="Rent">Rent</ng-option>
@@ -1389,10 +1407,12 @@
 
 
                     <div class="row-flex aic small-gap" style="margin-left: auto">
-                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Family Information')">
+                        <button class="blue-button button-style fix-button" type="button"
+                            (click)="handleActiveTab('Family Information')">
                             <p>Previous</p>
                         </button>
-                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Education')">
+                        <button class="blue-button button-style fix-button" type="button"
+                            (click)="handleActiveTab('Education')">
                             <p>Skip</p>
                         </button>
                         <button class="blue-button button-style fix-button" type="button"
@@ -1420,106 +1440,96 @@
                         </div>
                     </div>
 
-                    <div class="col" style="padding-left: 0">
-                        <div class="card">
-                            <div class="card-heading border bottom">
-                                <h4 class="card-title">Education</h4>
-                            </div>
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col">
-                                        <div *ngFor="let educations of educationList; let i = index" style="
-                        box-shadow: 0 0 10px rgba(135, 134, 134, 0.2);
-                        padding: 1rem;
-                        margin-bottom: 1rem;
-                      ">
-                                            <div class="d-flex">
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable"
-                                                            for="university_name{{ i }}">School/University Name</label>
-                                                        <input type="text" class="form-data"
-                                                            [name]="'university_name' + i"
-                                                            [(ngModel)]="educations.university_name"
-                                                            #university_name="ngModel" />
-                                                    </div>
-                                                </div>
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable" for="type{{ i }}">Education Type</label>
-                                                        <ng-select class="form-data-select" [name]="'type' + i"
-                                                            [(ngModel)]="educations.type" #type="ngModel" [ngClass]="{
-                                'is-invalid':
-                                  educationForm.submitted && type.invalid
-                              }" required>
-                                                            <ng-option value="">Select Education Type</ng-option>
-                                                            <ng-option value="{{ data.id }}"
-                                                                *ngFor="let data of educationTypeList">
-                                                                {{ data.name }}
-                                                            </ng-option>
-                                                        </ng-select>
-                                                        <div *ngIf="
-                                educationForm.submitted && educations.type == ''
-                              " class="invalid-feedback">
-                                                            <div>Education Type is required</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
 
-                                            <div class="d-flex">
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable" for="is_higher_education{{ i }}">Do You
-                                                            want
-                                                            to study
-                                                            further?</label>
-                                                        <ng-select class="form-data-select" [name]="'is_higher_education' + i"
-                                                            [(ngModel)]="educations.is_higher_education"
-                                                            #is_higher_education="ngModel">
-                                                            <ng-option value="">Higher Studies</ng-option>
-                                                            <ng-option value="1">Yes</ng-option>
-                                                            <ng-option value="0">No</ng-option>
-                                                        </ng-select>
-                                                    </div>
-                                                </div>
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable" for="education{{ i }}">Education</label>
-                                                        <ng-select class="form-data-select" [name]="'education' + i"
-                                                            [(ngModel)]="educations.education" #education="ngModel">
-                                                            <ng-option value="">Select Education</ng-option>
-                                                            <ng-option value="{{ education.id }}"
-                                                                *ngFor="let education of educationListArray">
-                                                                {{ education.education }}
-                                                            </ng-option>
-                                                        </ng-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col" style="padding-left: 0">
-                                                <div class="form-field">
-                                                    <label class="md-lable" for="description{{ i }}">Education
-                                                        Description</label>
-                                                    <input description="text" class="form-data"
-                                                        [name]="'description' + i" [(ngModel)]="educations.description"
-                                                        #description="ngModel" />
-                                                </div>
-                                            </div>
-                                            <button type="button" class="btn btn-danger" (click)="deleteEducation(i)">
-                                                Delete
-                                            </button>
+                    <div class="content-flex">
+                        <div>
+                            <h2
+                                style="font-size: 16px;padding-bottom: 0.5rem;border-bottom: 1px solid #a4a4a4;width:fit-content;">
+                                Education</h2>
+                        </div>
+                        <div class="content-flex">
+                            <div class="content-flex" *ngFor="let educations of educationList; let i = index"
+                                style="box-shadow: 0 0 10px rgba(135, 134, 134, 0.2);padding: 1rem;margin-bottom: 1rem;">
+                                <div class="d-flex">
+                                    <div class="col" style="padding-left: 0">
+                                        <div class="form-field">
+                                            <label class="md-lable" for="university_name{{ i }}">School/University
+                                                Name</label>
+                                            <input type="text" class="form-data" [name]="'university_name' + i"
+                                                [(ngModel)]="educations.university_name" #university_name="ngModel" />
                                         </div>
-
-                                        <button type="button" class="button-style blue-button fix-button" (click)="addEducation()">
-                                            Add More
-                                        </button>
+                                    </div>
+                                    <div class="col" style="padding-left: 0">
+                                        <div class="form-field">
+                                            <label class="md-lable" for="type{{ i }}">Education Type</label>
+                                            <ng-select class="form-data-select" [name]="'type' + i"
+                                                [(ngModel)]="educations.type" #type="ngModel"
+                                                [ngClass]="{'is-invalid':educationForm.submitted && type.invalid}"
+                                                required>
+                                                <ng-option value="">Select Education Type</ng-option>
+                                                <ng-option value="{{ data.id }}" *ngFor="let data of educationTypeList">
+                                                    {{ data.name }}
+                                                </ng-option>
+                                            </ng-select>
+                                            <div *ngIf="educationForm.submitted && educations.type == ''"
+                                                class="invalid-feedback">
+                                                <div>Education Type is required</div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div class="d-flex">
+                                    <div class="col" style="padding-left: 0">
+                                        <div class="form-field">
+                                            <label class="md-lable" for="is_higher_education{{ i }}">Do You
+                                                want
+                                                to study
+                                                further?</label>
+                                            <ng-select class="form-data-select" [name]="'is_higher_education' + i"
+                                                [(ngModel)]="educations.is_higher_education"
+                                                #is_higher_education="ngModel">
+                                                <ng-option value="">Higher Studies</ng-option>
+                                                <ng-option value="1">Yes</ng-option>
+                                                <ng-option value="0">No</ng-option>
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="padding-left: 0">
+                                        <div class="form-field">
+                                            <label class="md-lable" for="education{{ i }}">Education</label>
+                                            <ng-select class="form-data-select" [name]="'education' + i"
+                                                [(ngModel)]="educations.education" #education="ngModel">
+                                                <ng-option value="">Select Education</ng-option>
+                                                <ng-option value="{{ education.id }}"
+                                                    *ngFor="let education of educationListArray">
+                                                    {{ education.education }}
+                                                </ng-option>
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-field">
+                                    <label class="md-lable" for="description{{ i }}">Education
+                                        Description</label>
+                                    <input description="text" class="form-data" [name]="'description' + i"
+                                        [(ngModel)]="educations.description" #description="ngModel" />
+                                </div>
+
+
+                                <button type="button" class="btn btn-danger fix-button" (click)="deleteEducation(i)">
+                                    Delete
+                                </button>
                             </div>
+
+                            <button type="button" class="button-style blue-button fix-button" (click)="addEducation()">
+                                <p>Add More</p>
+                            </button>
                         </div>
                     </div>
+
 
                     <div class="form-field">
                         <label class="md-lable" for="additionalEducationInformation">Additional Education
@@ -1530,15 +1540,17 @@
                     </div>
 
                     <div class="row-flex aic small-gap" style=" margin-left: auto">
-                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Address')">
+                        <button class="button-style blue-button fix-button" type="button"
+                            (click)="handleActiveTab('Address')">
                             <p>Previous</p>
                         </button>
-                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Occupation')">
-                           <p>Skip</p> 
+                        <button class="button-style blue-button fix-button" type="button"
+                            (click)="handleActiveTab('Occupation')">
+                            <p>Skip</p>
                         </button>
                         <button class="button-style blue-button fix-button" type="button"
                             (click)="saveAndNext(educationForm.form, 'false', 'Occupation')" [disabled]="isLoading">
-                           <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p> 
+                            <p>{{ isLoading ? "Please Wait.." : "Save & Next" }}</p>
                         </button>
                     </div>
                 </div>
@@ -1549,248 +1561,219 @@
             <form name="form" (ngSubmit)="saveAndNext(occupationForm.form, 'false', 'Preference')"
                 #occupationForm="ngForm" novalidate>
                 <div class="activeBody content-flex">
-                    <div class="col" style="padding-left: 0">
-                        <div class="card">
-                            <div class="card-heading border bottom">
-                                <h4 class="card-title">Occupation</h4>
+
+                    <div>
+                        <h2
+                            style="font-size: 16px;padding-bottom: 0.5rem;border-bottom: 1px solid #a4a4a4;width:fit-content;">
+                            Occupation</h2>
+                    </div>
+
+                    <div class="content-flex" *ngFor="let occupations of occupationList; let i = index"
+                        style="box-shadow: 0 0 10px rgba(135, 134, 134, 0.2);padding: 1rem;margin-bottom: 1rem;">
+                        <div class="form-grid-3">
+                            <!-- <div class="d-flex"> -->
+                            <div style="padding-left: 0">
+                                <div class="form-field">
+                                    <label class="md-lable" for="type_of_occupation{{ i }}">Occupation</label>
+                                    <ng-select class="form-data-select" [name]="'type_of_occupation' + i"
+                                        [(ngModel)]="occupations.type_of_occupation" #type_of_occupation="ngModel">
+                                        <ng-option value="">Select Occupation</ng-option>
+                                        <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationListArray">
+                                            {{ occu.occupation }}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
                             </div>
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col">
-                                        <div *ngFor="let occupations of occupationList; let i = index" style="
-                        box-shadow: 0 0 10px rgba(135, 134, 134, 0.2);
-                        padding: 1rem;
-                        margin-bottom: 1rem;
-                      ">
-                                            <div class="form-grid">
-                                                <!-- <div class="d-flex"> -->
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable"
-                                                            for="type_of_occupation{{ i }}">Occupation</label>
-                                                        <ng-select class="form-data-select" [name]="'type_of_occupation' + i"
-                                                            [(ngModel)]="occupations.type_of_occupation"
-                                                            #type_of_occupation="ngModel">
-                                                            <ng-option value="">Select Occupation</ng-option>
-                                                            <ng-option value="{{ occu.id }}"
-                                                                *ngFor="let occu of occupationListArray">
-                                                                {{ occu.occupation }}
-                                                            </ng-option>
-                                                        </ng-select>
-                                                    </div>
-                                                </div>
 
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable" for="occupation_type{{ i }}">Occupation
-                                                            Type</label>
-                                                        <ng-select class="form-data-select" [name]="'occupation_type' + i"
-                                                            [(ngModel)]="occupations.occupation_type"
-                                                            #occupation_type="ngModel" [ngClass]="{
-                                'is-invalid':
-                                  occupationForm.submitted &&
-                                  occupation_type.invalid
-                              }" required>
-                                                            <ng-option value="">Select Occupation Type</ng-option>
-                                                            <ng-option value="{{ occu.id }}"
-                                                                *ngFor="let occu of occupationTypeList">
-                                                                {{ occu.name }}
-                                                            </ng-option>
-                                                        </ng-select>
-                                                        <div *ngIf="
-                                occupationForm.submitted &&
-                                occupations.occupation_type == ''
-                              " class="invalid-feedback">
-                                                            <div>Occupation Type is required</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable" for="company_name{{ i }}">Company
-                                                            Name</label>
-                                                        <input type="text" class="form-data" [name]="'company_name' + i"
-                                                            [(ngModel)]="occupations.company_name"
-                                                            #company_name="ngModel" />
-                                                    </div>
-                                                </div>
-                                                <!-- </div> -->
-
-                                                <!-- <div class="d-flex"> -->
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable"
-                                                            for="designation{{ i }}">Designation</label>
-                                                        <input type="text" class="form-data" [name]="'designation' + i"
-                                                            [(ngModel)]="occupations.designation"
-                                                            #designation="ngModel" />
-                                                    </div>
-                                                </div>
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable" for="company_revenue{{ i }}">Company
-                                                            Revenue</label>
-                                                        <div class="d-flex" style="justify-content: space-between">
-                                                            <div style="width: 50%">
-                                                                <input type="text" class="form-data"
-                                                                    [name]="'company_revenue' + i"
-                                                                    [(ngModel)]="occupations.company_revenue"
-                                                                    #company_revenue="ngModel"
-                                                                    (keypress)="_keyPressAamount($event)" />
-                                                            </div>
-                                                            <div style="width: 24%">
-                                                                <ng-select class="form-data-select"
-                                                                    [name]="'company_revenue_value' + i"
-                                                                    [(ngModel)]="occupations.company_revenue_value"
-                                                                    #company_revenue_value="ngModel">
-                                                                    <ng-option value="">Value</ng-option>
-                                                                    <ng-option value="Lakh">Lakh</ng-option>
-                                                                    <ng-option value="Million">Million</ng-option>
-                                                                    <ng-option value="Crore">Crore</ng-option>
-                                                                    <ng-option value="Billion">Billion</ng-option>
-                                                                </ng-select>
-                                                            </div>
-                                                            <div style="width: 24%">
-                                                                <ng-select class="form-data-select"
-                                                                    [name]="'company_revenue_currency' + i" [(ngModel)]="
-                                    occupations.company_revenue_currency
-                                  " #company_revenue_currency="ngModel">
-                                                                    <ng-option value="">Currency</ng-option>
-                                                                    <ng-option value="USD">USD</ng-option>
-                                                                    <ng-option value="Euro">Euro</ng-option>
-                                                                    <ng-option value="Pound">Pound</ng-option>
-                                                                    <ng-option value="Rupees">Rupees</ng-option>
-                                                                </ng-select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- </div> -->
-
-                                                <!-- <div class="d-flex"> -->
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable" for="monthly_income{{ i }}">Monthly
-                                                            Income</label>
-
-                                                        <div class="d-flex" style="justify-content: space-between">
-                                                            <div style="width: 65%">
-                                                                <input type="text" class="form-data"
-                                                                    [name]="'monthly_income' + i"
-                                                                    [(ngModel)]="occupations.monthly_income"
-                                                                    #monthly_income="ngModel"
-                                                                    (keypress)="_keyPressAamount($event)" />
-                                                            </div>
-
-                                                            <div style="width: 24%">
-                                                                <ng-select class="form-data-select"
-                                                                    [name]="'monthly_income_value' + i"
-                                                                    [(ngModel)]="occupations.monthly_income_value"
-                                                                    #monthly_income_value="ngModel">
-                                                                    <ng-option value="">Value</ng-option>
-                                                                    <ng-option value="Lakh">Lakh</ng-option>
-                                                                    <ng-option value="Million">Million</ng-option>
-                                                                    <ng-option value="Crore">Crore</ng-option>
-                                                                    <ng-option value="Billion">Billion</ng-option>
-                                                                </ng-select>
-                                                            </div>
-
-                                                            <div style="width: 30%">
-                                                                <ng-select class="form-data-select"
-                                                                    [name]="'monthly_income_currency' + i" [(ngModel)]="
-                                    occupations.monthly_income_currency
-                                  " #monthly_income_currency="ngModel">
-                                                                    <ng-option value="">Currency</ng-option>
-                                                                    <ng-option value="USD">USD</ng-option>
-                                                                    <ng-option value="Euro">Euro</ng-option>
-                                                                    <ng-option value="Pound">Pound</ng-option>
-                                                                    <ng-option value="Rupees">Rupees</ng-option>
-                                                                </ng-select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable" for="yearly_income{{ i }}">Yearly
-                                                            Income</label>
-
-                                                        <div class="d-flex" style="justify-content: space-between">
-                                                            <div style="width: 50%">
-                                                                <input type="text" class="form-data"
-                                                                    [name]="'yearly_income' + i"
-                                                                    [(ngModel)]="occupations.yearly_income"
-                                                                    #yearly_income="ngModel"
-                                                                    (keypress)="_keyPressAamount($event)" />
-                                                            </div>
-                                                            <div style="width: 24%">
-                                                                <ng-select class="form-data-select"
-                                                                    [name]="'yearly_income_value' + i"
-                                                                    [(ngModel)]="occupations.yearly_income_value"
-                                                                    #yearly_income_value="ngModel">
-                                                                    <ng-option value="">Value</ng-option>
-                                                                    <ng-option value="Lakh">Lakh</ng-option>
-                                                                    <ng-option value="Million">Million</ng-option>
-                                                                    <ng-option value="Crore">Crore</ng-option>
-                                                                    <ng-option value="Billion">Billion</ng-option>
-                                                                </ng-select>
-                                                            </div>
-                                                            <div style="width: 24%">
-                                                                <ng-select class="form-data-select"
-                                                                    [name]="'yearly_income_currency' + i"
-                                                                    [(ngModel)]="occupations.yearly_income_currency"
-                                                                    #yearly_income_currency="ngModel">
-                                                                    <ng-option value="">Currency</ng-option>
-                                                                    <ng-option value="USD">USD</ng-option>
-                                                                    <ng-option value="Euro">Euro</ng-option>
-                                                                    <ng-option value="Pound">Pound</ng-option>
-                                                                    <ng-option value="Rupees">Rupees</ng-option>
-                                                                </ng-select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- </div> -->
-
-                                                <div class="col" style="padding-left: 0">
-                                                    <div class="form-field">
-                                                        <label class="md-lable"
-                                                            for="description{{ i }}">Description</label>
-                                                        <input type="text" class="form-data" [name]="'description' + i"
-                                                            [(ngModel)]="occupations.description"
-                                                            #description="ngModel" />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <button type="button" class="btn btn-danger" (click)="deleteOccupation(i)">
-                                                Delete
-                                            </button>
-                                        </div>
-
-                                        <button type="button" class="button-style blue-button fix-button" (click)="addOccupation()">
-                                            Add More
-                                        </button>
+                            <div style="padding-left: 0">
+                                <div class="form-field">
+                                    <label class="md-lable" for="occupation_type{{ i }}">Occupation
+                                        Type</label>
+                                    <ng-select class="form-data-select" [name]="'occupation_type' + i"
+                                        [(ngModel)]="occupations.occupation_type" #occupation_type="ngModel"
+                                        [ngClass]="{'is-invalid':occupationForm.submitted &&occupation_type.invalid}"
+                                        required>
+                                        <ng-option value="">Select Occupation Type</ng-option>
+                                        <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationTypeList">
+                                            {{ occu.name }}
+                                        </ng-option>
+                                    </ng-select>
+                                    <div *ngIf="occupationForm.submitted &&occupations.occupation_type == ''"
+                                        class="invalid-feedback">
+                                        <div>Occupation Type is required</div>
                                     </div>
                                 </div>
                             </div>
+
+                            <div style="padding-left: 0">
+                                <div class="form-field">
+                                    <label class="md-lable" for="company_name{{ i }}">Company
+                                        Name</label>
+                                    <input type="text" class="form-data" [name]="'company_name' + i"
+                                        [(ngModel)]="occupations.company_name" #company_name="ngModel" />
+                                </div>
+                            </div>
+                            <!-- </div> -->
+
+                            <!-- <div class="d-flex"> -->
+                            <div style="padding-left: 0">
+                                <div class="form-field">
+                                    <label class="md-lable" for="designation{{ i }}">Designation</label>
+                                    <input type="text" class="form-data" [name]="'designation' + i"
+                                        [(ngModel)]="occupations.designation" #designation="ngModel" />
+                                </div>
+                            </div>
+                            <div style="padding-left: 0">
+                                <div class="form-field">
+                                    <label class="md-lable" for="company_revenue{{ i }}">Company
+                                        Revenue</label>
+                                    <div class="row-flex aic small-gap"
+                                        style="justify-content: space-between;width: 100%;">
+                                        <div style="width: 50%;">
+                                            <input type="text" class="form-data" [name]="'company_revenue' + i"
+                                                [(ngModel)]="occupations.company_revenue" #company_revenue="ngModel"
+                                                (keypress)="_keyPressAamount($event)" />
+                                        </div>
+                                        <div style="width: 25%;">
+                                            <ng-select class="form-data-select" [name]="'company_revenue_value' + i"
+                                                [(ngModel)]="occupations.company_revenue_value"
+                                                #company_revenue_value="ngModel">
+                                                <ng-option value="">Value</ng-option>
+                                                <ng-option value="Lakh">Lakh</ng-option>
+                                                <ng-option value="Million">Million</ng-option>
+                                                <ng-option value="Crore">Crore</ng-option>
+                                                <ng-option value="Billion">Billion</ng-option>
+                                            </ng-select>
+                                        </div>
+                                        <div style="width: 25%;">
+                                            <ng-select class="form-data-select" [name]="'company_revenue_currency' + i"
+                                                [(ngModel)]="
+                        occupations.company_revenue_currency
+                        " #company_revenue_currency="ngModel">
+                                                <ng-option value="">Currency</ng-option>
+                                                <ng-option value="USD">USD</ng-option>
+                                                <ng-option value="Euro">Euro</ng-option>
+                                                <ng-option value="Pound">Pound</ng-option>
+                                                <ng-option value="Rupees">Rupees</ng-option>
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+
+                            <!-- <div class="d-flex"> -->
+                            <div style="padding-left: 0">
+                                <div class="form-field">
+                                    <label class="md-lable" for="monthly_income{{ i }}">Monthly
+                                        Income</label>
+
+                                    <div class="row-flex aic small-gap"
+                                        style="justify-content: space-between;width: 100%;">
+                                        <div style="width: 50%;">
+                                            <input type="text" class="form-data" [name]="'monthly_income' + i"
+                                                [(ngModel)]="occupations.monthly_income" #monthly_income="ngModel"
+                                                (keypress)="_keyPressAamount($event)" />
+                                        </div>
+
+                                        <div style="width: 25%;">
+                                            <ng-select class="form-data-select" [name]="'monthly_income_value' + i"
+                                                [(ngModel)]="occupations.monthly_income_value"
+                                                #monthly_income_value="ngModel">
+                                                <ng-option value="">Value</ng-option>
+                                                <ng-option value="Lakh">Lakh</ng-option>
+                                                <ng-option value="Million">Million</ng-option>
+                                                <ng-option value="Crore">Crore</ng-option>
+                                                <ng-option value="Billion">Billion</ng-option>
+                                            </ng-select>
+                                        </div>
+
+                                        <div style="width: 25%;">
+                                            <ng-select class="form-data-select" [name]="'monthly_income_currency' + i"
+                                                [(ngModel)]="
+                        occupations.monthly_income_currency
+                        " #monthly_income_currency="ngModel">
+                                                <ng-option value="">Currency</ng-option>
+                                                <ng-option value="USD">USD</ng-option>
+                                                <ng-option value="Euro">Euro</ng-option>
+                                                <ng-option value="Pound">Pound</ng-option>
+                                                <ng-option value="Rupees">Rupees</ng-option>
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="padding-left: 0">
+                                <div class="form-field">
+                                    <label class="md-lable" for="yearly_income{{ i }}">Yearly
+                                        Income</label>
+
+                                    <div class="row-flex small-gap aic"
+                                        style="justify-content: space-between;width: 100%;">
+                                        <div style="width: 50%;">
+                                            <input type="text" class="form-data" [name]="'yearly_income' + i"
+                                                [(ngModel)]="occupations.yearly_income" #yearly_income="ngModel"
+                                                (keypress)="_keyPressAamount($event)" />
+                                        </div>
+                                        <div style="width: 25%;">
+                                            <ng-select class="form-data-select" [name]="'yearly_income_value' + i"
+                                                [(ngModel)]="occupations.yearly_income_value"
+                                                #yearly_income_value="ngModel">
+                                                <ng-option value="">Value</ng-option>
+                                                <ng-option value="Lakh">Lakh</ng-option>
+                                                <ng-option value="Million">Million</ng-option>
+                                                <ng-option value="Crore">Crore</ng-option>
+                                                <ng-option value="Billion">Billion</ng-option>
+                                            </ng-select>
+                                        </div>
+                                        <div style="width: 25%;">
+                                            <ng-select class="form-data-select" [name]="'yearly_income_currency' + i"
+                                                [(ngModel)]="occupations.yearly_income_currency"
+                                                #yearly_income_currency="ngModel">
+                                                <ng-option value="">Currency</ng-option>
+                                                <ng-option value="USD">USD</ng-option>
+                                                <ng-option value="Euro">Euro</ng-option>
+                                                <ng-option value="Pound">Pound</ng-option>
+                                                <ng-option value="Rupees">Rupees</ng-option>
+                                            </ng-select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- </div> -->
+
+                            <div style="padding-left: 0">
+                                <div class="form-field">
+                                    <label class="md-lable" for="description{{ i }}">Description</label>
+                                    <input type="text" class="form-data" [name]="'description' + i"
+                                        [(ngModel)]="occupations.description" #description="ngModel" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-field">
-                            <label class="md-lable" for="additionalOccupationInformation">Additional Occupation
-                                Information</label>
-                            <textarea class="form-data" name="additionalOccupationInformation"
-                                id="additionalOccupationInformation"
-                                [(ngModel)]="profileObj.additionalOccupationInformation"
-                                #additionalOccupationInformation="ngModel"></textarea>
-                        </div>
+                        <button type="button" class="btn btn-danger fix-button" (click)="deleteOccupation(i)">
+                            Delete
+                        </button>
                     </div>
 
+                    <button type="button" class="button-style blue-button fix-button" (click)="addOccupation()">
+                        <p>Add More</p>
+                    </button>
+
+                    <div class="form-field">
+                        <label class="md-lable" for="additionalOccupationInformation">Additional Occupation
+                            Information</label>
+                        <textarea class="form-data" name="additionalOccupationInformation"
+                            id="additionalOccupationInformation"
+                            [(ngModel)]="profileObj.additionalOccupationInformation"
+                            #additionalOccupationInformation="ngModel"></textarea>
+                    </div>
                     <div class="row-flex aic small-gap" style=" margin-left: auto">
-                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Education')">
+                        <button class="button-style blue-button fix-button" type="button"
+                            (click)="handleActiveTab('Education')">
                             <p>Previous</p>
                         </button>
-                        <button class="button-style blue-button fix-button" type="button" (click)="handleActiveTab('Preference')">
+                        <button class="button-style blue-button fix-button" type="button"
+                            (click)="handleActiveTab('Preference')">
                             <p>Skip</p>
                         </button>
                         <button class="button-style blue-button fix-button" type="button"
@@ -1807,112 +1790,6 @@
                 #preferenceForm="ngForm" novalidate>
                 <div class="activeBody content-flex">
                     <div class="form-grid">
-                        <!-- <div class="form-field">
-              <label class="md-lable"  for="age_gap">Age Gap</label>   
-                <ng-select name="age_gap" id="age_gap" [(ngModel)]="profileObj.age_gap"
-                #age_gap="ngModel" [multiple]="true" class="form-data" style="width: 100%">
-                <ng-option value="">Select Age Gap</ng-option>
-                <ng-option value="21-23">
-                  21 - 23 years
-                </ng-option>
-                <ng-option value="23-25">
-                  23 - 25 years
-                </ng-option>
-                <ng-option value="25-28">
-                  25 - 28 years
-                </ng-option>
-                <ng-option value="28-30">
-                  28 - 30 years
-                </ng-option>
-                <ng-option value="30-35">
-                  30 - 35 years
-                </ng-option>
-                <ng-option value="35-40">
-                  35 - 40 years
-                </ng-option>
-                <ng-option value="40-45">
-                  40 - 45 years
-                </ng-option>
-                <ng-option value="45-50">
-                  45 - 50 years
-                </ng-option>
-                <ng-option value="50-55">
-                  50 - 55 years
-                </ng-option>
-                <ng-option value="55-60">
-                  55 - 60 years
-                </ng-option>
-              </ng-select>
-              <label class="md-lable"  class="checkbox-preference">
-                <input type="checkbox" class="checkbox-pref" [checked]="isChecked('age_gap')" (change)="toggleFixedPreference('age_gap', $event)" /> Fixed
-              </label>
-            </div> -->
-
-                        <!-- <div class="form-field leaddddd">
-              <label class="md-lable"  for="age_gap">Age Gap</label>
-  
-              <div class="range-slider">
-                <input
-                  type="range"
-                  min="21"
-                  max="100"
-                  name="min_age_gap"
-                  id="min_age_gap"
-                  [(ngModel)]="profileObj.min_age_gap"
-                  #min_age_gap="ngModel"
-                  (input)="updateSlider()"
-                  class="slider thumb-left"
-                />
-                <input
-                  type="range"
-                  min="21"
-                  max="100"
-                  name="max_age_gap"
-                  id="max_age_gap"
-                  [(ngModel)]="profileObj.max_age_gap"
-                  #max_age_gap="ngModel"
-                  (input)="updateSlider()"
-                  class="slider thumb-right"
-                />
-                <div class="slider-track"></div>
-              </div>
-  
-              <div class="range-inputs">
-                <input
-                  type="number"
-                  name="min_age_gap"
-                  id="min_age_gap"
-                  [(ngModel)]="profileObj.min_age_gap"
-                  #min_age_gap="ngModel"
-                  (input)="updateSliderFromInput('min')"
-                  min="2006"
-                  max="2106"
-                  class="range-input"
-                />
-                to
-                <input
-                  type="number"
-                  name="max_age_gap"
-                  id="max_age_gap"
-                  [(ngModel)]="profileObj.max_age_gap"
-                  #max_age_gap="ngModel"
-                  (input)="updateSliderFromInput('max')"
-                  min="2006"
-                  max="2106"
-                  class="range-input"
-                />
-              </div>
-  
-              <label class="md-lable"  class="checkbox-preference">
-                <input
-                  type="checkbox"
-                  class="checkbox-pref"
-                  [checked]="isChecked('age_gap')"
-                  (change)="toggleFixedPreference('age_gap', $event)"
-                />
-                Fixed
-              </label>
-            </div> -->
 
                         <div class="form-field">
                             <label class="md-lable" for="max_age_gap">Max Birth Year Acceptable</label>
@@ -1999,9 +1876,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="mother_tongue_preference">Mother Tongue Preferance</label>
-                            <ng-select class="form-data-select" name="mother_tongue_preference" id="mother_tongue_preference"
-                                [(ngModel)]="profileObj.mother_tongue_preference" #mother_tongue_preference="ngModel"
-                                [multiple]="true" style="width: 100%">
+                            <ng-select class="form-data-select" name="mother_tongue_preference"
+                                id="mother_tongue_preference" [(ngModel)]="profileObj.mother_tongue_preference"
+                                #mother_tongue_preference="ngModel" [multiple]="true" style="width: 100%">
                                 <ng-option value="">-Select Language-</ng-option>
                                 <ng-option value="{{ lang.id }}" *ngFor="let lang of languagesList">
                                     {{ lang.language }}
@@ -2094,9 +1971,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="education_type_preference">Education Type Preference</label>
-                            <ng-select class="form-data-select" name="education_type_preference" id="education_type_preference"
-                                [(ngModel)]="profileObj.education_type_preference" #education_type_preference="ngModel"
-                                [multiple]="true" style="width: 100%">
+                            <ng-select class="form-data-select" name="education_type_preference"
+                                id="education_type_preference" [(ngModel)]="profileObj.education_type_preference"
+                                #education_type_preference="ngModel" [multiple]="true" style="width: 100%">
                                 <ng-option value="">-Select Education Type-</ng-option>
                                 <ng-option value="{{ educ.id }}" *ngFor="let educ of educationTypeList">
                                     {{ educ.name }}
@@ -2130,9 +2007,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="occuppation_preferance">Occupation Preference</label>
-                            <ng-select class="form-data-select" name="occuppation_preferance" id="occuppation_preferance"
-                                [(ngModel)]="profileObj.occuppation_preferance" #occuppation_preferance="ngModel"
-                                [multiple]="true" style="width: 100%">
+                            <ng-select class="form-data-select" name="occuppation_preferance"
+                                id="occuppation_preferance" [(ngModel)]="profileObj.occuppation_preferance"
+                                #occuppation_preferance="ngModel" [multiple]="true" style="width: 100%">
                                 <ng-option value="">-Select Occupation-</ng-option>
                                 <ng-option value="{{ occu.id }}" *ngFor="let occu of occupationListArray">
                                     {{ occu.occupation }}
@@ -2206,8 +2083,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="food_habits_preferance">Food Preference</label>
-                            <ng-select class="form-data-select" name="food_habits_preferance" id="food_habits_preferance"
-                                [(ngModel)]="profileObj.food_habits_preferance" #food_habits_preferance="ngModel">
+                            <ng-select class="form-data-select" name="food_habits_preferance"
+                                id="food_habits_preferance" [(ngModel)]="profileObj.food_habits_preferance"
+                                #food_habits_preferance="ngModel">
                                 <ng-option value="">Select Food Preference</ng-option>
                                 <ng-option value="Vegetarian">Vegetarian</ng-option>
                                 <ng-option value="Non Vegetarian">Non Vegetarian</ng-option>
@@ -2227,8 +2105,9 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="smoking_habits_preferance">Smoking Preference</label>
-                            <ng-select class="form-data-select" name="smoking_habits_preferance" id="smoking_habits_preferance"
-                                [(ngModel)]="profileObj.smoking_habits_preferance" #smoking_habits_preferance="ngModel">
+                            <ng-select class="form-data-select" name="smoking_habits_preferance"
+                                id="smoking_habits_preferance" [(ngModel)]="profileObj.smoking_habits_preferance"
+                                #smoking_habits_preferance="ngModel">
                                 <ng-option value="">Select Smoking Preferance</ng-option>
                                 <ng-option value="Yes">Yes</ng-option>
                                 <ng-option value="No">No</ng-option>
@@ -2245,8 +2124,8 @@
 
                         <div class="form-field">
                             <label class="md-lable" for="drinking_habits_preferance">Drinking Preference</label>
-                            <ng-select class="form-data-select" name="drinking_habits_preferance" id="drinking_habits_preferance"
-                                [(ngModel)]="profileObj.drinking_habits_preferance"
+                            <ng-select class="form-data-select" name="drinking_habits_preferance"
+                                id="drinking_habits_preferance" [(ngModel)]="profileObj.drinking_habits_preferance"
                                 #drinking_habits_preferance="ngModel">
                                 <ng-option value="">Select Drinking Preferance</ng-option>
                                 <ng-option value="Yes">Yes</ng-option>
@@ -2490,10 +2369,12 @@
                     </div>
 
                     <div class="row-flex aic small-gap" style=" margin-left: auto">
-                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Occupation')">
+                        <button class="blue-button button-style fix-button" type="button"
+                            (click)="handleActiveTab('Occupation')">
                             <p>Previous</p>
                         </button>
-                        <button class="blue-button button-style fix-button" type="button" (click)="handleActiveTab('Profile Images')">
+                        <button class="blue-button button-style fix-button" type="button"
+                            (click)="handleActiveTab('Profile Images')">
                             <p>Skip</p>
                         </button>
                         <button class="blue-button button-style fix-button" type="button" (click)="
@@ -2512,14 +2393,13 @@
                     <div>
                         <div class="form-field col" style="padding-left: 0">
                             <h4 style="font-size: 1.5rem; font-weight: 700">Media Images</h4>
-                            <div class="clearfix"></div>
                             <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin: 2rem 0">
                                 <div class="" *ngFor="let image of profileObj.images; let i = index" style="
-                    width: 20%;
-                    height: 200px;
-                    background-color: #edebebcc;
-                    position: relative;
-                  ">
+                                        width: 20%;
+                                        height: 200px;
+                                        background-color: #edebebcc;
+                                        position: relative;
+                                    ">
                                     <a href="javascript:void(0)" (click)="removeImages(i, image.id)"
                                         class="removeImage"><span class="material-symbols-outlined"
                                             style="color: red; position: absolute; right: 8px; top: 8px">cancel</span>
@@ -2531,7 +2411,7 @@
 
                             <div class="clearfix"></div>
                             <label class="md-lable" for="images" class="pointer">
-                                <span class="btn choose_btn btn-default display-block no-mrg-btm">Choose file</span>
+                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose file</span>
                                 <input type="file" id="images" maxlength="" class="d-none" name="images"
                                     accept="image/*" (change)="profileImages($event)" multiple />
                             </label>
@@ -2563,7 +2443,7 @@
 
                             <div class="clearfix"></div>
                             <label class="md-lable" for="kycImages" class="pointer">
-                                <span class="btn choose_btn btn-default display-block no-mrg-btm">Choose file</span>
+                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose file</span>
                                 <input type="file" id="kycImages" maxlength="" class="d-none" name="kycImages"
                                     accept="image/*" (change)="kycImages($event)" multiple />
                             </label>
@@ -2593,7 +2473,7 @@
                             </div>
                             <div class="clearfix"></div>
                             <label class="md-lable" for="pdf" class="pointer">
-                                <span class="btn choose_btn btn-default display-block no-mrg-btm">Choose file</span>
+                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose file</span>
                                 <input type="file" id="pdf" maxlength="" class="d-none" name="pdf"
                                     (change)="document($event)" />
                             </label>
@@ -2623,14 +2503,14 @@
                             </div>
                             <div class="clearfix"></div>
                             <label class="md-lable" for="kundali" class="pointer">
-                                <span class="btn choose_btn btn-default display-block no-mrg-btm">Choose file</span>
+                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose file</span>
                                 <input type="file" id="kundali" maxlength="" class="d-none" name="kundali"
                                     (change)="kundali($event)" />
                             </label>
                         </div>
                     </div>
 
-                    <div class="row-flex aic small-gap" style="width: 4%; margin-left: auto">
+                    <div class="row-flex aic small-gap" style="margin-left: auto">
                         <button class="button-style blue-button fix-button">
                             <p> {{ isLoading ? "Please Wait..." : "Submit" }} </p>
                         </button>

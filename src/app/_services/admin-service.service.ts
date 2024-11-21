@@ -81,6 +81,33 @@ export class AdminServiceService {
         return this.http.post<any>(environment.apiUrl + 'profile/detail', JSON.stringify(data), httpOptions).pipe();
     }
 
+    
+    getPref(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders()
+        };
+        return this.http.post<any>(environment.apiUrl + 'profile/preferences', JSON.stringify(data), httpOptions).pipe();
+    }
+    savePref(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthdataHeaders()
+        };
+        return this.http.post<any>(environment.apiUrl + 'profile/update_preferences', data, httpOptions).pipe();
+    }
+
+    requestSend(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders()
+        };
+        return this.http.post<any>(environment.apiUrl + 'handleRequest/send', JSON.stringify(data), httpOptions).pipe();
+    }
+
+    requestreject(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders()
+        };
+        return this.http.post<any>(environment.apiUrl + 'handleRequest/changestatus', JSON.stringify(data), httpOptions).pipe();
+    }
 
     getSubscription(data): Observable<any> {
         const httpOptions = {
