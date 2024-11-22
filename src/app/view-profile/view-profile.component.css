@@ -333,8 +333,43 @@
 }
 
 .card{
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    border-radius: 12px;
+    box-shadow: 2px 4px 6px #00000020;
+}
+
+
+
+@media (max-width: 991px) {
+
+    .card{
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .information_grid{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .information_grid{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .content-box-main {
+        padding: 14px;
+    }
+
 }

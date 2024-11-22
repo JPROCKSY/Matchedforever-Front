@@ -1,1 +1,205 @@
-<p>matched-profile works!</p>
+<div class="container-fluid">
+    <div class="content-box content-box-main">
+        <div class="main-flex">
+            <div class="search-flex">
+                <div class="page-title">
+                    <h2>
+                        Viewed Profiles({{dataObj.total}})
+                    </h2>
+                </div>
+                <div class="form-field  fix-width">
+                    <ng-select name="type_filter" id="type_filter" class="form-data-select logo-border select-width"
+                        [(ngModel)]="dataObj.type" (change)="getprofile();" [clearable]="false">
+                        <ng-option value="sent_by_rm">Sent By RM</ng-option>
+                        <ng-option value="sent_request">Request Sent</ng-option>
+                        <ng-option value="request_received">Request Received</ng-option>
+                        <ng-option value="rejected">Request Rejected</ng-option>
+                        <ng-option value="not_interested">Not Interested</ng-option>
+                        <ng-option value="accepted">Connected</ng-option>
+                    </ng-select>
+                </div>
+                <!-- <div class="search-bar relative">
+                    <div class="relative search-box">
+                        <div class="search-button">
+                            <img src="assets/images/search-button-svgrepo-com.svg">
+                        </div>
+                        <input type="text" placeholder="Search here......" [(ngModel)]="dataObj.search"
+                            autocomplete="off" placeholder="Search" (ngModelChange)="onSearchChange($event)"
+                            class="show-search">
+                    </div>
+                    
+                </div> -->
+            </div>
+            <div class="main-content">
+                <div class="table-content section-content">
+                    <table class="list-table">
+                        <thead>
+                            <tr>
+                                <td class="width-5">
+                                    #
+                                </td>
+                                <td class="width-20 text-center">
+                                    Name
+                                </td>
+                                <td class="width-10">
+                                    Contact Details
+                                </td>
+                                <td class="width-5">
+                                    Status
+                                </td>
+                                <td class="width-10">
+                                    Type
+                                </td>
+                                <td class="width-10">
+                                    Looking For
+                                </td>
+                                <td class="width-5 text-right">
+                                    Action
+                                </td>
+                            </tr>
+                        </thead>
+
+                        <tbody *ngIf="profileList.length == 0 && isLoading == false">
+                            <tr>
+                                <td colspan="7">
+                                    <div class="nodata">
+                                        <p class="text-center font-size-22"><i class="ei-sad"></i></p>
+                                        <p class="text-center">No Data found!</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tbody *ngIf="isLoading">
+                            <tr *ngFor="let record of dummyRecords">
+
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                                <td>
+                                    <p class="bold shine line">&nbsp;</p>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tbody *ngIf="profileList.length > 0 && !isLoading">
+                            <tr *ngFor="let data of profileList; let i = index">
+                                <td class="cursor-pointer verticle-middle width-5">{{ (i+1) }}</td>
+                                <td class="cursor-pointer verticle-middle width-20 relative">
+                                    <div class="row-flex aic medium-gap profile-pic-flex">
+                                        <img src="{{data.profile_details.profile_pic}}" class="art-img"
+                                            *ngIf="data.profile_details.profile_pic">
+                                        <img src="assets/images/istockphoto-1451587807-612x612.jpg" class="art-img"
+                                            *ngIf="!data.profile_details.profile_pic">
+                                        <b>{{data.profile_details.first_name}} {{data.profile_details.last_name}}</b>
+                                    </div>
+                                </td>
+                                <td class="cursor-pointer verticle-middle width-10">
+                                    {{data.profile_details.phone}}<br>
+                                    {{data.profile_details.email}}
+                                </td>
+                                <td class="cursor-pointer verticle-middle width-10">
+                                    {{data.profile_details.age}}
+                                </td>
+                                <td class="cursor-pointer verticle-middle width-10">
+                                    {{data.status_name}}
+                                </td>
+
+                                <td class="cursor-pointer verticle-middle width-10">
+                                    {{data.profile_details.looking_for}}
+                                </td>
+
+                                <td  class="verticle-middle width-5">
+                                    <div class="row-flex aic small-gap">
+                                        <div routerLink="/preview/{{data.profile_details.id}}" class="cursor-pointer view-button">
+                                            <span class="material-symbols-outlined">
+                                                visibility
+                                            </span>
+                                        </div>
+                                        <button (click)="selectOption('Interested' , data.candidate_id)"
+                                            *ngIf="dataObj.type == 'sent_by_rm' || dataObj.type == 'request_received'"
+                                            class="interested-btn"><span class="material-symbols-outlined">
+                                                check
+                                            </span></button>
+                                        <button (click)="selectOption('Rejected' , data.candidate_id)" *ngIf="dataObj.type == 'sent_by_rm' || dataObj.type == 'request_received'" class="rejected-btn"><span
+                                                class="material-symbols-outlined">
+                                                close
+                                            </span></button>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+            <!-- <ng-container *ngIf="profileList && profileList.length > 0">
+                <ul *ngIf="usersPager.pages && usersPager.pages.length > 1" class="pagination">
+                    <ng-container *ngIf="usersPager.currentPage > 1">
+                        <li class="page-item pgbtn prev">
+                            <a class="page-link" (click)="setUsersPage(usersPager.currentPage - 1, 1)"><span
+                                    class="material-symbols-outlined prev-button"> arrow_back_ios</span></a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="usersPager.startPage != 1">
+                        <li class="page-item first">
+                            <a class="page-link " (click)="setUsersPage(1,1)">1</a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="usersPager.startPage != 1">
+                        <li class="dots">
+                            <a class="page-link">...</a>
+                        </li>
+                    </ng-container>
+                    <li class="page-item" *ngFor="let page of usersPager.pages"
+                        [ngClass]="{active:usersPager.currentPage === page}">
+                        <a class="page-link" (click)="setUsersPage(page,1)">{{page}}</a>
+                    </li>
+                    <ng-container *ngIf="usersPager.endPage != usersPager.totalPages">
+                        <li class="dots">
+                            <a class="page-link">...</a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="usersPager.endPage != usersPager.totalPages">
+                        <li class="page-item last">
+                            <a class="page-link"
+                                (click)="setUsersPage(usersPager.totalPages,1)">{{usersPager.totalPages}}</a>
+                        </li>
+                    </ng-container>
+                    <ng-container *ngIf="usersPager.currentPage < usersPager.totalPages">
+                        <li class="page-item pgbtn next">
+                            <a class="page-link" (click)="setUsersPage(usersPager.currentPage + 1, 1)"><span
+                                    class="material-symbols-outlined next-button"> navigate_next</span></a>
+                        </li>
+                    </ng-container>
+                </ul>
+            </ng-container> -->
+        </div>
+
+
+
+
+
+        <!-- Loading spinner or message -->
+        <div *ngIf="isLoading" class="loading-container">
+            <span>Loading profiles...</span>
+        </div>
+
+    </div>
+</div>

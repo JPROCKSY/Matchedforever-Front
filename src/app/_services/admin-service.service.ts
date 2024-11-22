@@ -74,6 +74,13 @@ export class AdminServiceService {
         return this.http.post<any>(environment.apiUrl + 'getProfilesForUser', JSON.stringify(data), httpOptions).pipe();
     }
 
+    getmatchedProfiles(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders()
+        };
+        return this.http.post<any>(environment.apiUrl + 'sharedProfile/list', JSON.stringify(data), httpOptions).pipe();
+    }
+
     profileDetail(data): Observable<any> {
         const httpOptions = {
             headers: this.getAuthHeaders()

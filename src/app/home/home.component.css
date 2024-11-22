@@ -285,6 +285,10 @@ width: 2px !important; /* Scrollbar width */
     display: none;
 }
 
+.collapse-img{
+    width: 45px;
+}
+
 
 
 
@@ -303,6 +307,7 @@ width: 2px !important; /* Scrollbar width */
 
     .upper-header{
         justify-content: space-between;
+        padding: 0 5px;
     }
 
     /* .header-logo-mobile{

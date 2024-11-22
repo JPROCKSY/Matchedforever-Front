@@ -50,9 +50,7 @@ button {
   transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: #ddd;
-}
+
 
 .interested-btn {
   background-color: #4CAF50;
@@ -185,9 +183,7 @@ button {
   text-transform: uppercase;
 }
 
-button:hover {
-  opacity: 0.9;
-}
+
 
 /* Button Colors */
 .interested-btn {
@@ -208,7 +204,7 @@ button:hover {
 
 /* Loading Message */
 .loading-container {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   padding: 40px;
@@ -348,6 +344,7 @@ button:hover {
 
 .filter-mobile img {
   width: 25px;
+  opacity: 0.5;
 }
 
 
@@ -362,6 +359,30 @@ button:hover {
 
 
 @media (max-width: 991px) {
+
+  .view-button{
+      padding: 8px 5px;
+      background-color: var(--logo-color);
+      border: 1px solid var(--logo-color);
+      border-radius: 5px;
+      width: fit-content;
+      margin: 0 auto;
+      margin-bottom: 10px;
+  }
+
+  .view-button a{
+      font-size: 14px;
+      color: #ffffff;
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #777;
+  }
 
   .form-grid {
     grid-template-columns: repeat(2, 1fr);

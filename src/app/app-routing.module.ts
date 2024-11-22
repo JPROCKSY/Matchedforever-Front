@@ -6,6 +6,7 @@ import { AdminAuthGuard } from './_guard/admin-auth.guard';
 import { ManageProfileComponent } from './manage-profile/manage-profile.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { ProfileUpdateComponent } from './profile-update/profile-update.component';
+import { MatchedProfileComponent } from './matched-profile/matched-profile.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,11 @@ const routes: Routes = [
         path : '',
         canActivate: [AdminAuthGuard],
         component: ManageProfileComponent,  
+      },
+      {
+        path : 'matched-profiles',
+        canActivate: [AdminAuthGuard],
+        component: MatchedProfileComponent,  
       },
       {
         path : 'preview/:id',

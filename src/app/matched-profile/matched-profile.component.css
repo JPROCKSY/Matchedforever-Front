@@ -1,0 +1,587 @@
+.art-img {
+    width: 100px;
+    object-fit: cover;
+  }
+  
+  .view-button {
+    text-align: center;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  
+  
+  
+  
+  .profile-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    text-align: center;
+  }
+  
+  /* h2 {
+      font-size: 24px;
+      margin: 10px 0;
+    } */
+  
+  p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  button {
+    padding: 7px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #ddd;
+  }
+  
+  .interested-btn {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .might-be-btn {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .rejected-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  /* @media (max-width: 600px) {
+  
+      .main-flex{
+          display: none;
+      }
+  
+      .profile-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 20px;
+      }
+  
+      .profile-card {
+        width: 100%;
+        padding: 15px;
+      }
+    
+      button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    
+      .action-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    } */
+  
+  
+  
+  
+  /* Container for the profile card list */
+  .profile-container {
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    /* padding: 20px; */
+    /* background-color: #f4f7fc;
+      min-height: 100vh; */
+    display: none;
+  }
+  
+  /* Individual Profile Card */
+  .profile-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: left;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .profile-card:hover {
+    transform: translateY(-5px);
+    /* Slight hover effect */
+  }
+  
+  /* Profile Picture Styling */
+  .profile-image {
+    margin-bottom: 20px;
+  }
+  
+  .profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #4CAF50;
+    /* Green border around the image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Soft shadow for the image */
+  }
+  
+  /* Profile Name and Details */
+  /* h2 {
+      font-size: 28px;
+      color: #333;
+      margin: 10px 0;
+    }
+    
+    p {
+      font-size: 16px;
+      color: #555;
+      margin: 5px 0;
+    } */
+  
+  /* Title for sections like Age, Education, etc. */
+  p strong {
+    color: #333;
+    font-weight: 600;
+  }
+  
+  /* Buttons Section */
+  .action-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  /* Style for each button */
+  button {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Button Colors */
+  .interested-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    
+  }
+  
+  .might-be-btn {
+    background-color: #ff9800;
+    color: white;
+  }
+  
+  .rejected-btn {
+    background-color: #f44336;
+    color: white;
+    
+  }
+  
+  /* Loading Message */
+  .loading-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #777;
+  }
+
+  
+  .popup-overlay-2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9998;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all ease 0.1s;
+    -moz-transition: all ease 0.1s;
+    -webkit-transition: all ease 0.1s;
+    -ms-transition: all ease 0.1s;
+    -o-transition: all ease 0.1s;
+  }
+  
+  .popup-overlay-2.visible {
+    pointer-events: all;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .preference-block {
+    position: fixed;
+    top: 50%;
+    /* left: 50%; */
+    right: -40%;
+    transform: translateY(-50%);
+    width: 40%;
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    background-color: #ffffff;
+    z-index: 9999;
+    /* display: none; */
+    padding: 30px;
+    transition: all ease 0.6s;
+  }
+  
+  .preference-block.active {
+    right: 0%;
+    transition: all ease 0.6s;
+  }
+  
+  .cross-button {
+    width: 25px;
+    cursor: pointer;
+  }
+  
+  .upper-filter-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  
+  .nav-link.active {
+    border-bottom: 2px solid red !important;
+  }
+  
+  .nav-item {
+    cursor: pointer;
+  }
+  
+  .preference-flex {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .form-grid {
+    display: grid;
+    row-gap: 15px;
+    column-gap: 10px;
+    grid-template-columns: calc(100% / 3 - 6px) calc(100% / 3 - 6px) calc(100% / 3 - 6px);
+    align-items: center;
+  }
+  
+  /* Style for import pop up */
+  
+  .popup-overlay-tranfer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    /* Semi-transparent black background */
+  }
+  
+  .popup-import {
+    width: 1000px;
+    background-color: #fff;
+    /* White background for the popup */
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    scrollbar-width: thin;
+    height: 70% !important;
+    overflow: auto;
+    position: relative;
+  }
+  
+  .content-filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .filter-mobile {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .filter-mobile img {
+    width: 25px;
+  }
+  .action-buttons span{
+    color: #ffffff;
+  }
+
+  .interested-btn {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 12px;
+  }
+
+  .might-be-btn {
+    background-color: #ff9800;
+    color: white;
+    font-size: 12px;
+
+  }
+
+  .rejected-btn {
+    background-color: #f44336;
+    color: white;
+    font-size: 12px;
+
+  }
+  .interested-btn span{
+    color: #ffffff !important;
+    padding-top: 3px;
+  }
+
+  
+  .rejected-btn span{
+    color: #ffffff !important;
+    padding-top: 3px;
+
+  }
+  
+  
+  @media (max-width: 1366px) {
+  
+    .profile-pic-flex {
+      /* flex-direction: column; */
+      width: max-content;
+    }
+  
+  }
+  
+  
+  @media (max-width: 991px) {
+
+    .loading-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        font-size: 18px;
+        color: #777;
+      }
+  
+    .form-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .preference-block {
+      right: -110%;
+      width: 100%;
+      padding: 10px;
+    }
+  
+    .profile-card {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .action-buttons {
+      margin-top: 40px;
+    }
+  
+    .profile-img {
+      width: 100%;
+      height: 400px;
+      border-radius: 0%;
+      border: 1px solid transparent;
+      object-fit: cover;
+    }
+  
+    h2 {
+      font-size: 24px;
+    }
+  
+    .profile-card h2 {
+      margin-bottom: 15px;
+    }
+  
+    p {
+      font-size: 16px;
+    }
+  
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+  
+    .main-flex {
+      display: none;
+    }
+  
+    .profile-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* padding: 20px; */
+    }
+  
+    .action-buttons span {
+      color: #ffffff;
+    }
+  
+    .interested-btn {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 12px;
+    }
+  
+    .might-be-btn {
+      background-color: #ff9800;
+      color: white;
+      font-size: 12px;
+  
+    }
+  
+    .rejected-btn {
+      background-color: #f44336;
+      color: white;
+      font-size: 12px;
+  
+    }
+  
+    .profile-card p {
+      display: flex;
+      gap: 10px;
+      padding-top: 5px;
+    }
+  
+    .profile-card p strong {
+      flex-basis: 25%;
+    }
+  
+    .content-box-main {
+      padding: 0px;
+    }
+  }
+  
+  /* Mobile responsiveness */
+  @media (max-width: 600px) {
+  
+    .form-grid {
+      grid-template-columns: calc(100% / 2 - 5px) calc(100% / 2 - 5px);
+    }
+  
+    .profile-card {
+      width: 100%;
+      padding: 15px;
+    }
+  
+    .action-buttons {
+      margin-top: 40px;
+    }
+  
+    .profile-img {
+      width: 100%;
+      height: 400px;
+      border-radius: 0%;
+      border: 1px solid transparent;
+      object-fit: cover;
+    }
+  
+    h2 {
+      font-size: 24px;
+    }
+  
+    .profile-card h2 {
+      margin-bottom: 15px;
+    }
+  
+    p {
+      font-size: 16px;
+    }
+  
+    button {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  
+  
+    .main-flex {
+      display: none;
+    }
+  
+    .profile-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* padding: 20px; */
+    }
+  
+    .action-buttons span {
+      color: #ffffff;
+    }
+  
+    .interested-btn {
+      background-color: #4CAF50;
+      color: white;
+      font-size: 12px;
+    }
+
+
+  
+    .might-be-btn {
+      background-color: #ff9800;
+      color: white;
+      font-size: 12px;
+  
+    }
+  
+    .rejected-btn {
+      background-color: #f44336;
+      color: white;
+      font-size: 12px;
+  
+    }
+  
+    .profile-card p {
+      display: flex;
+      gap: 10px;
+      padding-top: 5px;
+    }
+  
+    .profile-card p strong {
+      flex-basis: 25%;
+    }
+  
+    .content-box-main {
+      padding: 0px;
+    }
+  }

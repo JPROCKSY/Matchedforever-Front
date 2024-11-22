@@ -746,3 +746,67 @@ img {
 .owl-dt-container, .owl-dt-container * {
     font-size: 13px !important;
 }
+
+.fix-width{
+    width: fit-content;
+}
+
+.shine {
+    background: #f6f7f8;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 104px;
+    display: inline-block;
+    position: relative;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeholderShimmer;
+    animation-timing-function: linear;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: placeholderShimmer;
+    -webkit-animation-timing-function: linear;
+    /* width: 100%; */
+}
+
+.shine.line {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.8rem;
+}
+
+.task .shine.line {
+    margin-bottom: 0;
+}
+
+.shine.line:last-child {
+    margin-bottom: 0;
+}
+@keyframes placeholderShimmer {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+@-webkit-keyframes placeholderShimmer {
+    0% {
+        background-position: -468px 0;
+    }
+
+    100% {
+        background-position: 468px 0;
+    }
+}
+.select-width{
+    min-width: 200px;
+}
+
+.logo-border{
+    border: 2px solid var(--logo-color) !important;
+}

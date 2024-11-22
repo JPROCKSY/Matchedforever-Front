@@ -56,4 +56,10 @@ export class HomeComponent implements OnInit {
     this.sidemenuF = !this.sidemenuF
   }
 
+  collapseMenu2(){
+    if (window.innerWidth <= 991) {
+      this.sidemenuF = !this.sidemenuF
+    }
+  }
+
 }
