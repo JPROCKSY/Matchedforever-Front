@@ -57,6 +57,17 @@ button {
   color: white;
 }
 
+.interested-btn span{
+  color: #ffffff;
+}
+
+.might-be-btn span{
+  color: #ffffff;
+}
+.rejected-btn span{
+  color: #ffffff;
+}
+
 .might-be-btn {
   background-color: #ff9800;
   color: white;
@@ -172,8 +183,9 @@ p strong {
 }
 
 /* Style for each button */
+
 button {
-  padding: 12px 25px;
+  padding: 10px 10px 8px 10px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
