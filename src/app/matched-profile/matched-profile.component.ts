@@ -64,6 +64,8 @@ getprofile() {
     })
 }
 
+
+
 selectOption(option: string, id:number) {
   const userId = this.loggedInUser.id;
   const candidateId = id;

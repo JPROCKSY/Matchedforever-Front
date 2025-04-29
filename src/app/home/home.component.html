@@ -1,61 +1,125 @@
-<div class="main_wrapper">
-    <div class="side-menu" [class.active]="sidemenuF">
-        <div class="relative">
-            <div class="header-logo">
-                <img src="assets/images/logo.svg">
+<div class="side-menu" [class.active]="sidemenuF">
+    <ul class="sidebar-links">
+        <a routerLink="/" (click)="collapseMenu2();" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" class="link-content">
+            <div class="link-icon">
+                <span class="material-symbols-outlined">
+                    groups_3
+                </span>
             </div>
-            <div class="cross-button" (click)="collapseMenu();">
-                <img src="assets/images/close.png">
+            <div class="link-text">
+                Profiles
+            </div>
+        </a>
+        <a routerLink="/" (click)="collapseMenu2();" class="link-content">
+            <div class="link-icon">
+                <span class="material-symbols-outlined">
+                    diversity_1
+                </span>
+            </div>
+            <div class="link-text">
+                Intrested
+            </div>
+        </a>
+        <a routerLink="/" (click)="collapseMenu2();" class="link-content">
+            <div class="link-icon">
+                <span class="material-symbols-outlined">
+                    group_remove
+                </span>
+            </div>
+            <div class="link-text">
+                Rejected
+            </div>
+        </a>
+        <a routerLink="/matched-profiles" (click)="collapseMenu2();" class="link-content">
+            <div class="link-icon">
+                <span class="material-symbols-outlined">
+                    contacts
+                </span>
+            </div>
+            <div class="link-text">
+                Profile Sent by RM
+            </div>
+        </a>
+        <a routerLink="/my-profile" (click)="collapseMenu2();" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" class="link-content">
+            <div class="link-icon">
+                <span class="material-symbols-outlined">
+                    person
+                </span>
+            </div>
+            <div class="link-text">
+                My Profile
+            </div>
+        </a>
+        <a routerLink="/profile/update" (click)="collapseMenu2();" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }" class="link-content">
+            <div class="link-icon">
+                <span class="material-symbols-outlined">
+                    edit_square
+                </span>
+            </div>
+            <div class="link-text">
+                Update Profile
+            </div>
+        </a>
+        <a (click)="getlogout()" class="link-content" style="margin-top: auto;">
+            <div class="link-icon">
+                <span class="material-symbols-outlined">
+                    logout
+                </span>
+            </div>
+            <div class="link-text">
+                Logout
+            </div>
+        </a>
+    </ul>
+</div>
+
+
+<!-- <div class="change-password-overlay"></div>
+<div class="change-password-popup">
+    <div class="inner-flex inner-flex-small relative change-password-popup-inner">
+        <div class="close-iconchangepwd section-content">
+            <span class="material-symbols-outlined">
+                close
+                </span>
+        </div>
+        <div class="inner-flex inner-flex-common relative">
+            <label class="md-lable" for="new_password">New Password</label>
+            <div class="relative">
+                <input id="new_password" name="new_password" type="password" [(ngModel)]="loginObj.new_password"
+                    #new_password="ngModel" class="form-control-matched-forever" placeholder="Enter your New Password">
+            </div>
+            <div *ngIf="loginForm.submitted && loginObj.new_password == ''" class="error-msg-label">
+                <div class="error">
+                    <p>Please enter a valid New Password</p>
+                </div>
             </div>
         </div>
-        <ul class="sidebar-links">
-            <!-- <li class="link-title">HOME</li> -->
-            <a routerLink="/" (click)="collapseMenu2();" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                class="link-content">
-                <div class="link-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        aria-hidden="true" role="img" class="iconify iconify--solar" width="24" height="24"
-                        viewBox="0 0 24 24">
-                        <g fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="6" r="4"></circle>
-                            <path stroke-linecap="round"
-                                d="M18 9c1.657 0 3-1.12 3-2.5S19.657 4 18 4M6 9C4.343 9 3 7.88 3 6.5S4.343 4 6 4"
-                                opacity=".5"></path>
-                            <ellipse cx="12" cy="17" rx="6" ry="4"></ellipse>
-                            <path stroke-linecap="round"
-                                d="M20 19c1.754-.385 3-1.359 3-2.5s-1.246-2.115-3-2.5M4 19c-1.754-.385-3-1.359-3-2.5s1.246-2.115 3-2.5"
-                                opacity=".5"></path>
-                        </g>
-                    </svg>
+        <div class="inner-flex inner-flex-common relative">
+            <label class="md-lable" for="cnf_new_password">Confirm Password</label>
+            <div class="relative">
+                <input id="cnf_new_password" name="cnf_new_password" type="password" [(ngModel)]="loginObj.cnf_new_password"
+                    #cnf_new_password="ngModel" class="form-control-matched-forever" placeholder="Confirm New Password">
+            </div>
+            <div *ngIf="loginForm.submitted && loginObj.cnf_new_password == ''" class="error-msg-label">
+                <div class="error">
+                    <p>New Password</p>
                 </div>
-                <div class="link-text">
-                    Profiles
-                </div>
-            </a>
-            <a routerLink="/matched-profiles" (click)="collapseMenu2();" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                class="link-content">
-                <div class="link-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        aria-hidden="true" role="img" class="iconify iconify--solar" width="24" height="24"
-                        viewBox="0 0 24 24">
-                        <g fill="none" stroke="currentColor" stroke-width="1.5">
-                            <circle cx="12" cy="6" r="4"></circle>
-                            <path stroke-linecap="round"
-                                d="M18 9c1.657 0 3-1.12 3-2.5S19.657 4 18 4M6 9C4.343 9 3 7.88 3 6.5S4.343 4 6 4"
-                                opacity=".5"></path>
-                            <ellipse cx="12" cy="17" rx="6" ry="4"></ellipse>
-                            <path stroke-linecap="round"
-                                d="M20 19c1.754-.385 3-1.359 3-2.5s-1.246-2.115-3-2.5M4 19c-1.754-.385-3-1.359-3-2.5s1.246-2.115 3-2.5"
-                                opacity=".5"></path>
-                        </g>
-                    </svg>
-                </div>
-                <div class="link-text">
-                    Viewed Profiles
-                </div>
-            </a>
-        </ul>
+            </div>
+        </div>
+        <div class="submit-button w-100 chng-pwd-mar-top">
+            <button class="matched-forever-button matched-forever-button-more-padd button-style-primary w-100" type="submit">
+                <p>Change Password</p>
+            </button>
+        </div>
     </div>
+</div> -->
+
+
+<!-- <div class="main_wrapper">
+    
     <div class="margin-left" [class.active]="sidemenuF">
         <div class="main-content">
             <div class="upper-header">
@@ -78,21 +142,28 @@
                     <img src="assets/images/logo.svg">
                 </div>
                 <div class="profile-flex">
+
+                    <div class="notification-icon-header">
+                        <span class="material-symbols-outlined secondary-color">
+                            notifications
+                        </span>
+                    </div>
                     <div class="profile-img">
-                        <img src="assets/images/download.png" style="margin-top: 5px;">
+                        <img src="{{loggedInUser.profile_pic}}">
                     </div>
                     <div class="inner-flex hide-mobile">
                         <div class="content-size">
-                            <p>{{loggedInUser.first_name}} {{loggedInUser.last_name}}</p>
+                            <p class="text-capitalise">{{loggedInUser.first_name}} {{loggedInUser.last_name}}</p>
                         </div>
                     </div>
-                    <div class="profile-popup">
+                    <div class="profile-popup" style="display: none;">
                         <ul class="header-buttons">
-                            <!-- <li class="show-mobile">
+                            <li routerLink="/my-profile/">
+                                <img src="assets/images/profile-round-1346-svgrepo-com.svg" class="logout-icon">
                                 <span>
-                                    {{loggedInUser.first_name}} {{loggedInUser.last_name}}
+                                    My Profile
                                 </span>
-                            </li> -->
+                            </li>
                             <li routerLink="/profile/update">
                                 <img src="assets/images/profile-round-1346-svgrepo-com.svg" class="logout-icon">
                                 <span>Update Profile</span>
@@ -106,8 +177,102 @@
                 </div>
             </div>
 
-            <router-outlet></router-outlet>
-
+            
         </div>
+    </div>
+</div> -->
+<div class="header-wrapper">
+    <div class="header-flex">
+
+        <!-- <div (click)="collapseMenu()">
+            <div class="notification-icon">
+                <span class="material-symbols-outlined">
+                    menu_open
+                </span>
+            </div>
+        </div> -->
+        <div class="header-logo" routerLink="/">
+            <img src="assets/images/logo/matched-forever-black.svg" alt="">
+        </div>
+        <div class="header-links-right">
+            <!-- <div class="profile-header-card" routerLink="/my-profile"> -->
+            <div class="profile-header-card" (click)="myprofile(loggedInUser.id)">
+                <div class="profile-pic-header">
+                    <img src="{{loggedInUser.profile_pic}}">
+                </div>
+                <div class="section-text hide-tab-mobile">
+                    <p class="semibold-fonts text-capitalise">
+                        {{loggedInUser.first_name}} {{loggedInUser.last_name}}
+                    </p>
+                    <p class="small-fonts gray-color">
+                        <!-- Elite User -->
+                        {{plan_type == 'Free plan' ? 'In Process' : plan_type}}
+                    </p>
+
+
+                </div>
+            </div>
+            <div class="flex-row alc" (click)="openPopup()">
+                <div class="notification-icon relative">
+                    <span class="material-symbols-outlined">
+                        notifications
+                    </span>
+                    <div class="notification-count" *ngIf="unread_count >0">
+                        <p>{{unread_count}}</p>
+                    </div>
+                </div>
+
+                <div class="notification-icon" (click)="getlogout()">
+                    <span class="material-symbols-outlined">
+                        logout
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-view">
+    <div class="main-container">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+
+<div class="popup-overlay-2" (click)="closePopup();" [class.visible]="isPopupOpen">
+</div>
+<div class="popup" *ngIf="isPopupOpen">
+    <div class="inner-flex inner-flex-small">
+        <div class="section-title-main-flex">
+            <div class="section-subtitle">
+                <h4 class="semibold-fonts">Notifications </h4>
+            </div>
+            <div class="close-btn" (click)="closePopup()">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
+        </div>
+        <div class="inner-flex inner-flex-smallest cursor-pointer notificn-div" *ngFor="let list of notofication_List"
+            [class.new-notification]="list.read_timestamp == ''" (click)="redirct_notification(list,'single')">
+            <div class="section-title-main-flex">
+                <div>
+                    <p class="semibold-fonts capitalize" [class.grey]="list.read_timestamp != ''">{{list.title}}</p>
+                </div>
+                <div>
+                    <p>{{list.timestamp}}</p>
+                </div>
+            </div>
+            <div>
+                {{list.message}}
+            </div>
+        </div>
+        <button class="matched-forever-button button-style-primary-outline" style="max-height: 40px!important;"
+            *ngIf="unread_count > 0" (click)="markallRead()">
+            Mark all as read
+            <!-- <span class="material-symbols-outlined">
+                search
+            </span> -->
+        </button>
+        <!-- <p>Mark All read</p> -->
     </div>
 </div>

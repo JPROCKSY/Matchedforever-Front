@@ -1,0 +1,2008 @@
+<div class="web-profile">
+    <div class="back-button" (click)="backbutton();">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <p>Back</p>
+    </div>
+    <div class="my-profile-detail-wrapper">
+        <div class="left-profile-wrapper inner-flex inner-flex-small">
+            <div class="myprofile-image-wrapper my-profile-detail-card">
+                <a href="{{responseObj.profile_pic}}" data-fancybox="gallery-images" *ngIf="responseObj.profile_pic" >
+                    <img src="{{responseObj.profile_pic}}" alt="">
+                </a>
+                <img src="https://dummyimage.com/512x683/DEDEDE/DEDEDE" *ngIf="!responseObj.profile_pic" alt="">
+            </div>
+            <div class="gallery-images-grid">
+                <div class="gallery-image-card-thumbs" *ngFor="let data of responseObj.images">
+                    <a href="{{data.image}}" data-fancybox="gallery-images" *ngIf="data.image">
+                        <!-- <a href="javascript:void(0);"> -->
+                        <img src="{{ data.image }}" />
+                    </a>
+                </div>
+            </div>
+            <div class="btns-flex">
+                <!-- *ngIf="responseObj.bioData" -->
+                <div class="w100block" routerLink="/profile/update">
+                    <button class="matched-forever-button button-style-primary-outline w100block">
+                        <span class="material-symbols-outlined">
+                            edit_square
+                        </span>
+                        <p>
+                            Edit Profile
+                        </p>
+                    </button>
+                </div>
+                <a href="{{responseObj.bioData}}" data-fancybox="gallery-images"  class="w100block" >
+                    <button class="matched-forever-button button-style-primary w100block">
+                        <span class="material-symbols-outlined">
+                            contact_page
+                        </span>
+                        <p>
+                            Bio Data
+                        </p>
+                    </button>
+                </a>
+            </div>
+
+            <a href="javascript:void(0)" class="btn toggle-btn" [class.active]="responseObj.is_publish == '1'"
+                [attr.aria-pressed]="responseObj.is_publish == '1' ? 'true' : 'false'"
+                (click)="handleVisibility(responseObj.is_publish)">
+                {{ responseObj.is_publish == '1' ? 'Unpublish' : 'Publish' }}
+            </a>
+
+        </div>
+
+        <div class="profile-basic-detail-wrapper inner-flex inner-flex-small ">
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-subtitle">
+                        <p>
+                            Profile Detail
+                        </p>
+                    </div>
+                    <div class="inner-social-profilelinks" *ngIf="responseObj.basicInfo">
+                        <ul
+                            *ngIf="responseObj.basicInfo.facebook_link || responseObj.basicInfo.instagram_link || responseObj.basicInfo.linkedin_link">
+                            <li *ngIf="responseObj.basicInfo.facebook_link">
+                                <a href="{{responseObj.basicInfo.facebook_link}}" class="social-icon-profile"
+                                    *ngIf="responseObj.basicInfo.facebook_link" target="_blank">
+                                    <img src="assets/images/social-icons/fb.svg " alt="">
+                                </a>
+                            </li>
+                            <li *ngIf="responseObj.basicInfo.instagram_link">
+                                <a href="{{responseObj.basicInfo.instagram_link}}" class="social-icon-profile"
+                                    *ngIf="responseObj.basicInfo.instagram_link" target="_blank">
+                                    <img src="assets/images/social-icons/insta.svg" alt="">
+                                </a>
+                            </li>
+                            <li *ngIf="responseObj.basicInfo.linkedin_link">
+                                <a href="{{responseObj.basicInfo.linkedin_link}}" class="social-icon-profile"
+                                    *ngIf="responseObj.basicInfo.linkedin_link" target="_blank">
+                                    <img src="assets/images/social-icons/linkedin.svg " alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail-wrapper-grid-3">
+                    <div class="section-text section-content-detail-flex">
+                        <p class="content-title-p">
+                            Full Name
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.first_name+" "+responseObj.middle_name+" "+responseObj.last_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.phone">
+                        <p class="content-title-p">
+                            Contact Number
+                        </p>
+                        <a href="tel:{{responseObj.phone}}">
+                            <p class="text-capitalise">
+                                {{responseObj.phone}}
+                            </p>
+                        </a>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.alternate_number">
+                        <p class="content-title-p">
+                            Alternate Number
+                        </p>
+                        <a href="tel:{{responseObj.alternate_number}}">
+                            <p class="text-capitalise">
+                                {{responseObj.alternate_number}}
+                            </p>
+                        </a>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.email">
+                        <p class="content-title-p">
+                            Email
+                        </p>
+                        <a href="mailto:{{responseObj.email}}">
+                            <p>
+                                {{responseObj.email}}
+                            </p>
+                        </a>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.caste_name">
+                        <p class="content-title-p">
+                            Caste
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.caste_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.religion_name">
+                        <p class="content-title-p">
+                            Religion
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.religion_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.gender">
+                        <p class="content-title-p">
+                            Gender
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.gender}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo && responseObj.basicInfo.relationshipStatusName">
+                        <p class="content-title-p">
+                            Relationship Status
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.relationshipStatusName}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.languages && responseObj.languages.length > 0">
+                        <p class="content-title-p">
+                            Languages
+                        </p>
+                        <div class="text-capitalise" *ngFor="let lang of responseObj.languages">
+                            <p>
+                                {{ lang.language }}
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-subtitle">
+                        <p>
+                            Basic Information
+                        </p>
+                    </div>
+                </div>
+                <div class="detail-wrapper-grid-3">
+                    <div class="section-text section-content-detail-flex">
+                        <p class="content-title-p">
+                            Birth Time & Date
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.birth_time+", "+responseObj.basicInfo.birth_date}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.birth_place">
+                        <p class="content-title-p">
+                            Birth Place
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.birth_place}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.manglik">
+                        <p class="content-title-p">
+                            Manglik
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.manglik}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.zodiac_sign">
+                        <p class="content-title-p">
+                            Zodiac Sign
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.zodiac_sign}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.complexion">
+                        <p class="content-title-p">
+                            Complexion
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.complexion}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.body_type">
+                        <p class="content-title-p">
+                            Body Type
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.body_type}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.blood_group">
+                        <p class="content-title-p">
+                            Blood Group
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.blood_group}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.smoking_habits">
+                        <p class="content-title-p">
+                            Smoking Habits
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.smoking_habits}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.drinking_habits">
+                        <p class="content-title-p">
+                            Drinking Habits
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.drinking_habits}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.medical_history">
+                        <p class="content-title-p">
+                            Medical History
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.medical_history}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.medical_history == 'Yes' && responseObj.basicInfo.medical_history_description">
+                        <p class="content-title-p">
+                            Medical Description
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.medical_history_description}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.native_place">
+                        <p class="content-title-p">
+                            Native Place
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.native_place}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.residential_city_name">
+                        <p class="content-title-p">
+                            City of Settlement
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.residential_city_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.residential_state_name">
+                        <p class="content-title-p">
+                            State of Settlement
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.residential_state_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.residential_country_name">
+                        <p class="content-title-p">
+                            Citizenship
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.residential_country_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.preffered_setlement_country_name">
+                        <p class="content-title-p">
+                            Preffered Settlement Country
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.preffered_setlement_country_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.user_family_type">
+                        <p class="content-title-p">
+                            Family Type
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.user_family_type}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.fathersalivestatus">
+                        <p class="content-title-p">
+                            Father
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.fathersalivestatus}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.mothersalivestatus">
+                        <p class="content-title-p">
+                            Mother
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.mothersalivestatus}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.family_value">
+                        <p class="content-title-p">
+                            Family Values
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.family_value}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.net_family_income">
+                        <p class="content-title-p">
+                            Net Family Income
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.net_family_income+"
+                            "+responseObj.basicInfo.net_family_income_currency+"
+                            "+responseObj.basicInfo.net_family_income_value }}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.hobby_names">
+                        <p class="content-title-p">
+                            Hobbies
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.hobby_names}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.other_hobby">
+                        <p class="content-title-p">
+                            Other Hobbies
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.other_hobby}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex">
+                        <p class="content-title-p">
+                            Bio
+                        </p>
+                        <div class="text-capitalise">
+                            <p>
+                                {{ responseObj.basicInfo.about }}
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-subtitle">
+                        <p>
+                            Address Details
+                        </p>
+                    </div>
+                </div>
+                <div class="inner-flex inner-flex-small">
+                    <div class="flex-header-rowjsc">
+                        <div class="section-content">
+                            <p class="semibold-fonts content-title-p">
+                                Residential
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail-wrapper-grid-2">
+                        <div class="section-text section-content-detail-flex">
+                            <p class="content-title-p">
+                                Address
+                            </p>
+                            <p class="text-capitalise">
+                                {{responseObj.basicInfo.residential_address+",
+                                "+responseObj.basicInfo.residential_address_apt+",
+                                "+responseObj.basicInfo.residential_city_name+",
+
+                                "+responseObj.basicInfo.residential_country_name+" -
+                                "+responseObj.basicInfo.residential_zipcode}}
+                                <!-- "+responseObj.basicInfo.preffered_setlement_state_name+", -->
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.basicInfo.residential_type">
+                            <p class="content-title-p">
+                                Property Type
+                            </p>
+                            <p class="text-capitalise">
+                                {{responseObj.basicInfo.residential_type}}
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="inner-flex inner-flex-small">
+                    <div class="flex-header-rowjsc">
+                        <div class="section-content">
+                            <p class="semibold-fonts content-title-p">
+                                Future Residential
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail-wrapper-grid-2">
+                        <div class="section-text section-content-detail-flex">
+                            <p class="content-title-p">
+                                Address
+                            </p>
+                            <p class="text-capitalise">
+                                {{responseObj.basicInfo.future_residential_address+",
+                                "+responseObj.basicInfo.future_residential_address_apt+",
+                                "+responseObj.basicInfo.future_residential_city_name+",
+                                "+responseObj.basicInfo.future_residential_state_name+",
+                                "+responseObj.basicInfo.future_residential_country_name+" -
+                                "+responseObj.basicInfo.future_residential_zipcode}}
+                                <!--  -->
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.basicInfo.future_residential_type">
+                            <p class="content-title-p">
+                                Property Type
+                            </p>
+                            <p class="text-capitalise">
+                                {{responseObj.basicInfo.future_residential_type}}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-subtitle">
+                        <p>
+                            Education
+                        </p>
+                    </div>
+                </div>
+                <div class="detail-wrapper-grid-3" *ngFor="let edu of responseObj.education">
+                    <div class="section-text section-content-detail-flex">
+                        <p class="content-title-p">
+                            University
+                        </p>
+                        <p class="text-capitalise">
+                            {{edu.university_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex">
+                        <p class="content-title-p">
+                            Education Type
+                        </p>
+                        <p class="text-capitalise">
+                            {{edu.education_type_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="edu.education_name">
+                        <p class="content-title-p">
+                            Education
+                        </p>
+                        <p class="text-capitalise">
+                            {{edu.education_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="edu.description">
+                        <p class="content-title-p">
+                            Education Description
+                        </p>
+                        <p class="text-capitalise">
+                            {{edu.description}}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-subtitle">
+                        <p>
+                            Occupation
+                        </p>
+                    </div>
+                </div>
+
+                <div class="detail-wrapper-grid-3" *ngFor="let occu of responseObj.occupation">
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.occupation_type_name">
+                        <p class="content-title-p">
+                            Occupation Type
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.occupation_type_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.occupation_name">
+                        <p class="content-title-p">
+                            Occupation
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.occupation_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.company_name">
+                        <p class="content-title-p">
+                            Company Name
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.company_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.designation">
+                        <p class="content-title-p">
+                            Designation
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.designation}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.monthly_income">
+                        <p class="content-title-p">
+                            Monthly Income
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.monthly_income+" "+occu.monthly_income_value+" "+occu.monthly_income_currency}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.yearly_income">
+                        <p class="content-title-p">
+                            Yearly Income
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.yearly_income+" "+occu.yearly_income_value+" "+occu.yearly_income_currency}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.company_revenue">
+                        <p class="content-title-p">
+                            Company Revenue
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.company_revenue+" "+occu.company_revenue_value+" "+occu.company_revenue_currency}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.description">
+                        <p class="content-title-p">
+                            Description
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.description}}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-subtitle">
+                        <p>
+                            Family Details
+                        </p>
+                    </div>
+                </div>
+                <div class="inner-flex inner-flex-small">
+                    <div class="flex-header-rowjsc">
+                        <div class="section-content">
+                            <p class="semibold-fonts content-title-p">
+                                Father's Information
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail-wrapper-grid-3">
+                        <div class="section-text section-content-detail-flex">
+                            <p class="content-title-p">
+                                Father's Name
+                            </p>
+                            <p class="text-capitalise">
+                                {{responseObj.family_information.fathers_info.first_name+"
+                                "+responseObj.family_information.fathers_info.last_name}}
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.family_information.fathers_info.phone">
+                            <p class="content-title-p">
+                                Contact Number
+                            </p>
+                            <a href="tel:{{responseObj.family_information.fathers_info.phone}}">
+                                <p class="text-capitalise">
+                                    {{responseObj.family_information.fathers_info.phone}}
+                                </p>
+                            </a>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.family_information.fathers_info.email">
+                            <p class="content-title-p">
+                                Email
+                            </p>
+                            <a href="mailto:{{responseObj.family_information.fathers_info.email}}">
+                                <p class="text-capitalise">
+                                    {{responseObj.family_information.fathers_info.email}}
+                                </p>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex-header-rowjsc">
+                        <div class="section-content">
+                            <p class="semibold-fonts content-title-p">
+                                Mother's Information
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail-wrapper-grid-3">
+                        <div class="section-text section-content-detail-flex">
+                            <p class="content-title-p">
+                                Mother's Name
+                            </p>
+                            <p class="text-capitalise">
+                                {{responseObj.family_information.mothers_info.first_name+"
+                                "+responseObj.family_information.mothers_info.last_name}}
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.family_information.mothers_info.phone">
+                            <p class="content-title-p">
+                                Contact Number
+                            </p>
+                            <a href="tel:{{responseObj.family_information.mothers_info.phone}}">
+                                <p class="text-capitalise">
+                                    {{responseObj.family_information.mothers_info.phone}}
+                                </p>
+                            </a>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.family_information.mothers_info.email">
+                            <p class="content-title-p">
+                                Email
+                            </p>
+                            <a href="mailto:{{responseObj.family_information.mothers_info.email}}">
+                                <p class="text-capitalise">
+                                    {{responseObj.family_information.mothers_info.email}}
+                                </p>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="flex-header-rowjsc">
+                        <div class="section-content">
+                            <p class="semibold-fonts content-title-p">
+                                Siblings's Info
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail-wrapper-grid-3" *ngFor="let sibs of responseObj.family_information.siblings">
+                        <div class="section-text section-content-detail-flex">
+                            <p class="content-title-p">
+                                {{sibs.relationship_type}}'s Name
+                            </p>
+                            <p class="text-capitalise">
+                                {{sibs.first_name+" "+sibs.last_name}}
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex" *ngIf="sibs.phone">
+                            <p class="content-title-p">
+                                Contact Number
+                            </p>
+                            <a href="tel:{{sibs.phone}}">
+                                <p class="text-capitalise">
+                                    {{sibs.phone}}
+                                </p>
+                            </a>
+                        </div>
+                        <div class="section-text section-content-detail-flex" *ngIf="sibs.email">
+                            <p class="content-title-p">
+                                Email
+                            </p>
+                            <a href="mailto:{{sibs.email}}">
+                                <p class="text-capitalise">
+                                    {{sibs.email}}
+                                </p>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-subtitle">
+                        <p>
+                            Preferances
+                        </p>
+                    </div>
+                </div>
+
+                <div class="detail-wrapper-grid-3">
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.min_age_gap">
+                        <p class="content-title-p">
+                            Minimum Age
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.min_age_gap}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.max_age_gap">
+                        <p class="content-title-p">
+                            Maximum Age
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.max_age_gap}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.caste_name">
+                        <p class="content-title-p">
+                            Caste
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.caste_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.religion_name">
+                        <p class="content-title-p">
+                            Religion
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.religion_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.education_type_preference_name">
+                        <p class="content-title-p">
+                            Education Preferance
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.education_type_preference_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.believes_in_horoscopes">
+                        <p class="content-title-p">
+                            Believes In horoscope
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.believes_in_horoscopes}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.occupation_type_preference_name">
+                        <p class="content-title-p">
+                            Occupation Preferance
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.occupation_type_preference_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.family_background_name">
+                        <p class="content-title-p">
+                            Family Background
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.family_background_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.family_type">
+                        <p class="content-title-p">
+                            Family Type
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.family_type}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.city_of_settlement_name">
+                        <p class="content-title-p">
+                            City Of Settlement
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.city_of_settlement_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.state_of_settlement_name">
+                        <p class="content-title-p">
+                            State Of Settlement
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.state_of_settlement_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.country_of_settlement_name">
+                        <p class="content-title-p">
+                            Country Of Settlement
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.country_of_settlement_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.citizenship_name">
+                        <p class="content-title-p">
+                            Citizenship
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.citizenship_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.mother_tongue_preference_name">
+                        <p class="content-title-p">
+                            Mother Tongue Preferance
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.mother_tongue_preference_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.complexion_preference_name">
+                        <p class="content-title-p">
+                            Complexion Preferance
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.complexion_preference_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.minimum_weight">
+                        <p class="content-title-p">
+                            Minimum Weight Preferance
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.minimum_weight}} K.G.
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.maximum_weight">
+                        <p class="content-title-p">
+                            Maximum Weight Preferance
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.maximum_weight}} K.G.
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.body_type_preference_name">
+                        <p class="content-title-p">
+                            Body Type Preferance
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.body_type_preference_name}}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="mob-profile">
+    <div class="my-profile-detail-wrapper">
+        <div class="left-profile-wrapper inner-flex inner-flex-small">
+            <div class="myprofile-image-wrapper my-profile-detail-card">
+                <img src="{{responseObj.profile_pic}}" *ngIf="responseObj.profile_pic" alt="">
+                <img src="https://dummyimage.com/512x683/DEDEDE/DEDEDE" *ngIf="!responseObj.profile_pic" alt="">
+            </div>
+        </div>
+        <div class="btns-flex">
+            <!-- *ngIf="responseObj.bioData" -->
+            <div class="w100block" routerLink="/profile/update">
+                <button class="matched-forever-button button-style-primary-outline w100block">
+                    <span class="material-symbols-outlined">
+                        edit_square
+                    </span>
+                    <p>
+                        Edit Profile
+                    </p>
+                </button>
+            </div>
+            <a href="{{responseObj.bioData}}" class="w100block" target="_blank">
+                <button class="matched-forever-button button-style-primary w100block">
+                    <span class="material-symbols-outlined">
+                        contact_page
+                    </span>
+                    <p>
+                        Bio Data
+                    </p>
+                </button>
+            </a>
+        </div>
+
+        <div class="profile-basic-detail-wrapper inner-flex inner-flex-small2 ">
+            <div class="my-profile-detail-card inner-flex inner-flex-small2">
+                <div class="flex-header-rowjsc">
+                    <div class="section-content row-flex-header-subtitle">
+                        <span class="material-symbols-outlined">
+                            id_card
+                        </span>
+                        <p class="semibold-fonts" style="transform: translateY(1px);">
+                            Profile Detail
+                        </p>
+                    </div>
+                    <div class="inner-social-profilelinks">
+                        <ul
+                            *ngIf="responseObj.basicInfo.facebook_link || responseObj.basicInfo.instagram_link || responseObj.basicInfo.linkedin_link">
+                            <li *ngIf="responseObj.basicInfo.facebook_link">
+                                <a href="{{responseObj.basicInfo.facebook_link}}" class="social-icon-profile"
+                                    *ngIf="responseObj.basicInfo.facebook_link" target="_blank">
+                                    <img src="assets/images/social-icons/fb.svg " alt="">
+                                </a>
+                            </li>
+                            <li *ngIf="responseObj.basicInfo.instagram_link">
+                                <a href="{{responseObj.basicInfo.instagram_link}}" class="social-icon-profile"
+                                    *ngIf="responseObj.basicInfo.instagram_link" target="_blank">
+                                    <img src="assets/images/social-icons/insta.svg" alt="">
+                                </a>
+                            </li>
+                            <li *ngIf="responseObj.basicInfo.linkedin_link">
+                                <a href="{{responseObj.basicInfo.linkedin_link}}" class="social-icon-profile"
+                                    *ngIf="responseObj.basicInfo.linkedin_link" target="_blank">
+                                    <img src="assets/images/social-icons/linkedin.svg " alt="">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail-wrapper-grid-3">
+                    <div class="section-text section-content-detail-flex">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                person
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.first_name+" "+responseObj.middle_name+" "+responseObj.last_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.phone">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                call
+                            </span>
+                        </p>
+                        <a href="tel:{{responseObj.phone}}">
+                            <p class="text-capitalise">
+                                {{responseObj.phone}}
+                            </p>
+                        </a>
+                        <a href="tel:{{responseObj.alternate_number}}" class="left-alter-content-border"
+                            *ngIf="responseObj.alternate_number">
+                            <p class="text-capitalise">
+                                {{responseObj.alternate_number}}
+                            </p>
+                        </a>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.email">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                alternate_email
+                            </span>
+                        </p>
+                        <a href="mailto:{{responseObj.email}}">
+                            <p>
+                                {{responseObj.email}}
+                            </p>
+                        </a>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.caste_name">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                stream
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.caste_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.religion_name">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                spa
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.religion_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.gender">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                face_3
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.gender}}
+                        </p>
+                    </div>
+
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.languages.length > 0">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                translate
+                            </span>
+                        </p>
+                        <div class="text-capitalise comma-seprate-flex">
+                            <p *ngFor="let lang of responseObj.languages">
+                                {{ lang.language }}<span class="primary-color">,</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.relationshipStatusName">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                digital_wellbeing
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.relationshipStatusName}}
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-small2">
+                <div class="flex-header-rowjsc">
+                    <div class="section-content row-flex-header-subtitle">
+                        <span class="material-symbols-outlined">
+                            info
+                        </span>
+                        <p class="semibold-fonts">
+                            Basic Information
+                        </p>
+                    </div>
+                </div>
+                <div class="detail-wrapper-grid-3">
+                    <div class="section-text section-content-detail-flex">
+                        <p class="text-capitalise fullwidth-rowtitle">Birth Date, Time & Place</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                calendar_clock
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.birth_time+", "+responseObj.basicInfo.birth_date+" &
+                            "+responseObj.basicInfo.birth_place}}
+                        </p>
+                        <!-- <p class="text-capitalise">
+                            {{}}
+                        </p> -->
+                    </div>
+                    <!-- <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.birth_place">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                pin_drop
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.birth_place}}
+                        </p>
+                    </div> -->
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.manglik">
+                        <p class="text-capitalise fullwidth-rowtitle">Manglik</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                award_star
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.manglik}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.zodiac_sign">
+                        <p class="text-capitalise fullwidth-rowtitle">Zodiac</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                nightlight
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.zodiac_sign}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.complexion">
+                        <p class="text-capitalise fullwidth-rowtitle">Complexion</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                mood
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.complexion}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.body_type">
+                        <p class="text-capitalise fullwidth-rowtitle">Body Type</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                accessibility_new
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.body_type}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.blood_group">
+                        <p class="text-capitalise fullwidth-rowtitle">Blood Group</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                bloodtype
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.blood_group}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.smoking_habits">
+                        <p class="text-capitalise fullwidth-rowtitle">Habits</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                smoking_rooms
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.smoking_habits}}
+                        </p>
+
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                sports_bar
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.drinking_habits}}
+                        </p>
+                    </div>
+                    <!-- <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.drinking_habits">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                liquor
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.drinking_habits}}
+                        </p>
+                    </div> -->
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.medical_history">
+                        <p class="text-capitalise fullwidth-rowtitle">Medical History</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                medical_information
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.medical_history}}
+                        </p>
+                        <p
+                            *ngIf="responseObj.basicInfo.medical_history == 'Yes' && responseObj.basicInfo.medical_history_description">
+                            -
+                        </p>
+                        <p class="text-capitalise"
+                            *ngIf="responseObj.basicInfo.medical_history == 'Yes' && responseObj.basicInfo.medical_history_description">
+                            {{responseObj.basicInfo.medical_history_description}}
+                        </p>
+                    </div>
+                    <!-- <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.medical_history == 'Yes' && responseObj.basicInfo.medical_history_description">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                prescriptions
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.medical_history_description}}
+                        </p>
+                    </div> -->
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.native_place">
+                        <p class="text-capitalise fullwidth-rowtitle">Native Place</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                location_home
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.native_place}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.residential_city_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Residential City</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                location_city
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.residential_city_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.residential_state_name">
+                        <p class="text-capitalise fullwidth-rowtitle">State</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                map
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.residential_state_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.residential_country_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Citizenship</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                flag
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.residential_country_name}}
+                        </p>
+                    </div>
+
+                    <div class="section-text section-content-detail-flex flex-row-compulsory"
+                        *ngIf="responseObj.basicInfo.fathersalivestatus && responseObj.basicInfo.mothersalivestatus">
+                        <p class="text-capitalise fullwidth-rowtitle">Parents</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                face_6
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.fathersalivestatus}}
+                        </p>
+
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                face_3
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.mothersalivestatus}}
+                        </p>
+                    </div>
+                    <!-- <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.mothersalivestatus">
+                        
+                    </div> -->
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.user_family_type">
+                        <p class="text-capitalise fullwidth-rowtitle">Family Type</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                diversity_2
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.user_family_type}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.basicInfo.family_value">
+                        <p class="text-capitalise fullwidth-rowtitle">Family Values</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                volunteer_activism
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.family_value}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.basicInfo.net_family_income">
+                        <p class="text-capitalise fullwidth-rowtitle">Net Family Income</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                universal_currency
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.basicInfo.net_family_income+"
+                            "+responseObj.basicInfo.net_family_income_currency+"
+                            "+responseObj.basicInfo.net_family_income_value }}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="responseObj.hobby_names">
+                        <p class="text-capitalise fullwidth-rowtitle">Hobbies</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                palette
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.hobby_names}}&nbsp;{{responseObj.basicInfo.other_hobby}}
+                        </p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-small2">
+                <!-- <div class="flex-header-rowjsc">
+                    <div class="section-subtitle">
+                        <p>
+                            Address Details
+                        </p>
+                    </div>
+                </div> -->
+                <div class="inner-flex inner-flex-smallest">
+                    <div class="flex-header-rowjsc">
+                        <div class="section-text">
+                            <p class="semibold-fonts fullwidth-rowtitle content-title-p">
+                                Residential
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail-wrapper-grid-2">
+                        <div class="section-text section-content-detail-flex">
+                            <p class="text-capitalise w75imp">
+                                {{responseObj.basicInfo.residential_address+",
+                                "+responseObj.basicInfo.residential_address_apt+",
+                                "+responseObj.basicInfo.residential_city_name+",
+                                "+responseObj.basicInfo.residential_country_name+" -
+                                "+responseObj.basicInfo.residential_zipcode}}
+                                <!-- "+responseObj.basicInfo.preffered_setlement_state_name+" -->
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex flex-row-compulsory"
+                            *ngIf="responseObj.basicInfo.residential_type">
+                            <p class="text-capitalise fullwidth-rowtitle">Property Type</p>
+                            <!-- <p class="content-title-p">
+                                Property Type
+                            </p> -->
+                            <p class="text-capitalise">
+                                {{responseObj.basicInfo.residential_type}}
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <!-- <div class="flex-header-rowjsc">
+                    <div class="section-subtitle">
+                        <p>
+                            Address Details
+                        </p>
+                    </div>
+                </div> -->
+
+                <div class="inner-flex inner-flex-smallest">
+                    <div class="flex-header-rowjsc">
+                        <div class="section-text">
+                            <p class="semibold-fonts fullwidth-rowtitle content-title-p">
+                                Future Residential
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail-wrapper-grid-2">
+                        <div class="section-text section-content-detail-flex">
+
+                            <p class="text-capitalise w75imp">
+                                {{responseObj.basicInfo.future_residential_address+",
+                                "+responseObj.basicInfo.future_residential_address_apt+",
+                                "+responseObj.basicInfo.future_residential_city_name+",
+                                "+responseObj.basicInfo.future_residential_state_name+",
+                                "+responseObj.basicInfo.future_residential_country_name+" -
+                                "+responseObj.basicInfo.future_residential_zipcode}}
+                                <!--  -->
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex flex-row-compulsory"
+                            *ngIf="responseObj.basicInfo.future_residential_type">
+                            <p class="text-capitalise fullwidth-rowtitle">Property Type</p>
+                            <p class="text-capitalise">
+                                {{responseObj.basicInfo.future_residential_type}}
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-content row-flex-header-subtitle">
+                        <span class="material-symbols-outlined">
+                            book_3
+                        </span>
+                        <p class="semibold-fonts">
+                            Education
+                        </p>
+                    </div>
+                </div>
+                <div class="detail-wrapper-grid-3" *ngFor="let edu of responseObj.education">
+                    <div class="section-text section-content-detail-flex">
+                        <p class="text-capitalise fullwidth-rowtitle">University</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                corporate_fare
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{edu.university_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex">
+                        <p class="text-capitalise fullwidth-rowtitle">Education</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                school
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{edu.education_type_name}} & {{edu.education_name}}
+                        </p>
+                    </div>
+
+                    <div class="section-text section-content-detail-flex" *ngIf="edu.description">
+                        <p class="text-capitalise fullwidth-rowtitle">Description</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                menu_book
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{edu.description}}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-content row-flex-header-subtitle">
+                        <span class="material-symbols-outlined">
+                            developer_guide
+                        </span>
+                        <p class="semibold-fonts">
+                            Occupation
+                        </p>
+                    </div>
+                </div>
+
+                <div class="detail-wrapper-grid-3" *ngFor="let occu of responseObj.occupation">
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.designation">
+                        <p class="text-capitalise fullwidth-rowtitle">Designation</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                badge
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.designation}}
+                        </p>
+                    </div>
+                    <!-- <div class="section-text section-content-detail-flex" *ngIf="occu.occupation_type_name">
+                        <p class="content-title-p">
+                            Occupation Type
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.occupation_type_name}}
+                        </p>
+                    </div> -->
+                    <!-- <div class="section-text section-content-detail-flex" *ngIf="occu.occupation_name">
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                work
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.occupation_name}}
+                        </p>
+                    </div> -->
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.company_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Company</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                source_environment
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.company_name}}
+                        </p>
+                    </div>
+
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.monthly_income">
+                        <p class="text-capitalise fullwidth-rowtitle">Monthly Income</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                currency_rupee
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.monthly_income+" "+occu.monthly_income_value+" "+occu.monthly_income_currency}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.yearly_income">
+                        <p class="text-capitalise fullwidth-rowtitle">Annual Income</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                monitoring
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.yearly_income+" "+occu.yearly_income_value+" "+occu.yearly_income_currency}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.company_revenue">
+                        <p class="text-capitalise fullwidth-rowtitle">Company Revenue</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                equalizer
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{occu.company_revenue+" "+occu.company_revenue_value+" "+occu.company_revenue_currency}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex" *ngIf="occu.description">
+                        <p class="text-capitalise fullwidth-rowtitle">Job Description</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                format_image_left
+                            </span>
+                        </p>
+                        <p class="text-capitalise width-fitonly-row">
+                            {{occu.description}}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-content row-flex-header-subtitle">
+                        <span class="material-symbols-outlined">
+                            psychology
+                        </span>
+                        <p class="semibold-fonts">
+                            Preferances
+                        </p>
+                    </div>
+                </div>
+
+                <div class="detail-wrapper-grid-3">
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.min_age_gap">
+                        <div class="w100-2grid-wrapper">
+                            <!-- <div>
+                                <p class="text-capitalise fullwidth-rowtitle">Age</p>
+                            </div> -->
+                            <div>
+                                <p class="text-capitalise fullwidth-rowtitle">Minimum Age</p>
+                                <p class="text-capitalise">
+                                    {{responseObj.userPreferances.min_age_gap}}
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-capitalise fullwidth-rowtitle">Maximum Age</p>
+                                <p class="text-capitalise">
+                                    {{responseObj.userPreferances.max_age_gap}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.max_age_gap">
+                        
+                    </div> -->
+
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.caste_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Caste</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                stream
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.caste_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.religion_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Religion</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                spa
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.religion_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.education_type_preference_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Education</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                school
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.education_type_preference_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.believes_in_horoscopes">
+                        <p class="text-capitalise fullwidth-rowtitle">Belives in Horoscope</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                nightlight
+                            </span>
+                        </p>
+                        <!-- <p class="content-title-p">
+                            Believes In horoscope
+                        </p> -->
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.believes_in_horoscopes}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.occupation_type_preference_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Occupation</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                work
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.occupation_type_preference_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.family_background_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Family Background</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                diversity_4
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.family_background_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.family_type">
+                        <p class="text-capitalise fullwidth-rowtitle">Family Type</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                diversity_2
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.family_type}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.city_of_settlement_name">
+                        <p class="text-capitalise fullwidth-rowtitle">City Of Settlement</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                location_city
+                            </span>
+                        </p>
+                        <!-- <p class="content-title-p">
+                            City Of Settlement
+                        </p> -->
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.city_of_settlement_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.state_of_settlement_name">
+                        <p class="text-capitalise fullwidth-rowtitle">State Of Settlement</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                map
+                            </span>
+                        </p>
+                        <!-- <p class="content-title-p">
+                            State Of Settlement
+                        </p> -->
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.state_of_settlement_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.country_of_settlement_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Country Of Settlement</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                flag
+                            </span>
+                        </p>
+                        <!-- <p class="content-title-p">
+                            Country Of Settlement
+                        </p> -->
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.country_of_settlement_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.citizenship_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Citizenship</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                globe_location_pin
+                            </span>
+                        </p>
+                        <!-- <p class="content-title-p">
+                            Citizenship
+                        </p> -->
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.citizenship_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.mother_tongue_preference_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Mother Tongue Preferance</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                translate
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.mother_tongue_preference_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.complexion_preference_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Complexion</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                mood
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.complexion_preference_name}}
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.minimum_weight">
+                        <!-- <p class="content-title-p">
+                            Minimum Weight Preferance
+                        </p> -->
+                        <p class="text-capitalise fullwidth-rowtitle">Minimum Weight Preferance</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                fitness_center
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.minimum_weight}} K.G.
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.maximum_weight">
+                        <!-- <p class="content-title-p">
+                            Maximum Weight Preferance
+                        </p> -->
+                        <p class="text-capitalise fullwidth-rowtitle">Maximum Weight Preferance</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                fitness_center
+                            </span>
+                        </p>
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.maximum_weight}} K.G.
+                        </p>
+                    </div>
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="responseObj.userPreferances.body_type_preference_name">
+                        <p class="text-capitalise fullwidth-rowtitle">Body Type</p>
+                        <p class="content-title-p">
+                            <span class="material-symbols-outlined">
+                                accessibility_new
+                            </span>
+                        </p>
+                        <!-- <p class="content-title-p">
+                            Body Type Preferance
+                        </p> -->
+                        <p class="text-capitalise">
+                            {{responseObj.userPreferances.body_type_preference_name}}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+                <div class="flex-header-rowjsc">
+                    <div class="section-content row-flex-header-subtitle">
+                        <span class="material-symbols-outlined">
+                            diversity_1
+                        </span>
+                        <p class="semibold-fonts">
+                            Family Details
+                        </p>
+                    </div>
+                </div>
+                <div class="inner-flex inner-flex-small">
+                    <!-- <div class="flex-header-rowjsc">
+                        <div class="section-content">
+                            <p class="semibold-fonts content-title-p">
+                                Father's Information
+                            </p>
+                        </div>
+                    </div> -->
+                    <div class="detail-wrapper-grid-3">
+                        <div class="section-text section-content-detail-flex">
+                            <p class="text-capitalise fullwidth-rowtitle">Father</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    face_6
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{responseObj.family_information.fathers_info.first_name+"
+                                "+responseObj.family_information.fathers_info.last_name}}
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.family_information.fathers_info.phone">
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    call
+                                </span>
+                            </p>
+                            <a href="tel:{{responseObj.family_information.fathers_info.phone}}">
+                                <p class="text-capitalise">
+                                    {{responseObj.family_information.fathers_info.phone}}
+                                </p>
+                            </a>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.family_information.fathers_info.email">
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    mail
+                                </span>
+                            </p>
+                            <a href="mailto:{{responseObj.family_information.fathers_info.email}}">
+                                <p class="">
+                                    {{responseObj.family_information.fathers_info.email}}
+                                </p>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+                    <div class="flex-header-rowjsc">
+                        <div class="section-content">
+                            <p class="semibold-fonts content-title-p" style="opacity: 0;visibility: hidden;">
+                                Mother's Information
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail-wrapper-grid-3">
+                        <div class="section-text section-content-detail-flex">
+                            <p class="text-capitalise fullwidth-rowtitle">Mother</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    face_3
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{responseObj.family_information.mothers_info.first_name+"
+                                "+responseObj.family_information.mothers_info.last_name}}
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.family_information.mothers_info.phone">
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    call
+                                </span>
+                            </p>
+                            <a href="tel:{{responseObj.family_information.mothers_info.phone}}">
+                                <p class="">
+                                    {{responseObj.family_information.mothers_info.phone}}
+                                </p>
+                            </a>
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="responseObj.family_information.mothers_info.email">
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    mail
+                                </span>
+                            </p>
+                            <a href="mailto:{{responseObj.family_information.mothers_info.email}}">
+                                <p class="text-capitalise">
+                                    {{responseObj.family_information.mothers_info.email}}
+                                </p>
+                            </a>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="flex-header-rowjsc">
+                        <div class="section-content">
+                            <p class="semibold-fonts content-title-p" style="opacity: 0;visibility: hidden;">
+                                Siblings's Info
+                            </p>
+                        </div>
+                    </div>
+                    <div class="detail-wrapper-grid-3" *ngFor="let sibs of responseObj.family_information.siblings">
+                        <div class="section-text section-content-detail-flex">
+                            <p class="text-capitalise fullwidth-rowtitle">Siblings</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    groups_3
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{sibs.first_name+" "+sibs.last_name}} | {{sibs.relationship_type}}
+                            </p>
+                        </div>
+                        <div class="section-text section-content-detail-flex" *ngIf="sibs.phone">
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    call
+                                </span>
+                            </p>
+                            <a href="tel:{{sibs.phone}}">
+                                <p class="text-capitalise">
+                                    {{sibs.phone}}
+                                </p>
+                            </a>
+                        </div>
+                        <div class="section-text section-content-detail-flex" *ngIf="sibs.email">
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    mail
+                                </span>
+                            </p>
+                            <a href="mailto:{{sibs.email}}">
+                                <p class="">
+                                    {{sibs.email}}
+                                </p>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

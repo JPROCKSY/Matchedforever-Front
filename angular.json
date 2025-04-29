@@ -24,9 +24,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/swiper/swiper-bundle.min.css",
+              "src/styles.css",
+              "node_modules/@fancyapps/ui/dist/fancybox/fancybox.css"
+              
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/@fancyapps/ui/dist/fancybox/fancybox.umd.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -54,7 +59,7 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                  "maximumError": "15kb"
                 }
               ]
             }
@@ -120,6 +125,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "matched-front"
 }

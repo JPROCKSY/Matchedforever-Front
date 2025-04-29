@@ -1,18 +1,18 @@
-.tabs{
+.tabs {
     padding: 1rem;
     cursor: pointer;
-    border-left: 2px solid transparent;
+    border-bottom: 2px solid var(--highlight-color);
     transition: all ease 0.4s;
     font-size: 18px;
 }
 
-.tabs.active{
-    border-bottom: 2px solid var(--logo-color);
+.tabs.active {
+    border-bottom: 2px solid var(--secondary-color);
     transition: all ease 0.4s;
     color: var(--logo-color);
 }
 
-.activeBody{
+.activeBody {
     background-color: #fff;
     padding: 2rem 1rem;
     margin-top: 2rem;
@@ -21,48 +21,51 @@
 .form-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-   column-gap: 15px;
+    column-gap: 15px;
     row-gap: 24px;
     align-items: top;
 }
-.margin-top-50{
+
+.margin-top-50 {
     margin-top: 50px;
 }
-.nav-link.red-color.active{
+
+.nav-link.red-color.active {
     border-bottom: 2px solid var(--logo-color) !important;
 }
 
-.checkbox-preference{
+.checkbox-preference {
     display: flex;
     align-items: flex-start;
     gap: 10px;
 }
+
 .checkbox-pref {
     width: 12px;
     height: 12px;
     accent-color: var(--logo-color);
 }
+
 .checkbox-pref:focus {
     outline: none;
     box-shadow: none;
-  }
+}
 
-  /* .form-control.ng-invalid{
+/* .form-control.ng-invalid{
     border: 1px solid red !important;
   } */
 
+/* Css for age range sliders starts from here */
 
-  /* Css for age range sliders starts from here */
-
-  .range-slider {
+.range-slider {
     position: relative;
     width: 100%;
     height: 4px;
     margin-bottom: 16px;
     margin-top: 16px;
-  }
-  
-  .slider {
+}
+
+.slider {
     position: absolute;
     width: 100%;
     -webkit-appearance: none;
@@ -71,9 +74,9 @@
     pointer-events: none;
     z-index: 2;
     top: -8px;
-  }
-  
-  .slider::-webkit-slider-thumb {
+}
+
+.slider::-webkit-slider-thumb {
     pointer-events: all;
     width: 20px;
     height: 20px;
@@ -82,18 +85,18 @@
     cursor: pointer;
     -webkit-appearance: none;
     appearance: none;
-  }
-  
-  .slider::-moz-range-thumb {
+}
+
+.slider::-moz-range-thumb {
     pointer-events: all;
     width: 20px;
     height: 20px;
     background: #007bff;
     border-radius: 50%;
     cursor: pointer;
-  }
-  
-  .slider-track {
+}
+
+.slider-track {
     position: absolute;
     width: 100%;
     height: 4px;
@@ -101,88 +104,107 @@
     transform: translateY(-50%);
     background: linear-gradient(to right, #ddd 0%, #ddd 100%);
     z-index: 1;
-  }
-  
-  .range-inputs {
+}
+
+.range-inputs {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  .range-input {
+}
+
+.range-input {
     width: 60px;
     text-align: center;
-  }
+}
 
-
-  .content-flex{
+.content-flex {
     display: flex;
     flex-direction: column;
     gap: 24px;
+}
 
-  }
-
-  .categoryiconimg{
-    width: 110px;
-    object-fit: cover;
-  }
-
-  .form-grid-3{
+.form-grid-3 {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 15px;
     row-gap: 24px;
     align-items: top;
+}
 
-  }
+input[type="checkbox"] {
+    accent-color: rgb(0, 0, 0) !important;
+}
 
-
+form .ng-invalid {
+    border: 1px solid red !important;
+}
 
 @media (max-width: 1440px) {
-    .form-grid{
-        grid-template-columns: repeat(3,1fr);
+    .form-grid {
+        grid-template-columns: repeat(3, 1fr);
     }
-    .tabs-master{
+
+    .tabs-master {
         max-width: 100%;
         overflow-x: scroll;
         scrollbar-width: thin;
         padding-bottom: 0.5rem;
     }
+
     .tabs {
         font-size: 16px;
+        border-bottom: 0px solid var(--highlight-color);
+        padding: 1rem 2rem;
+        background: transparent;
     }
-    .form-grid-3{
-      display: grid;
-      grid-template-columns: calc(100% / 2 - 7.5px) calc(100% / 2 - 7.5px);
-      column-gap: 15px;
-      row-gap: 24px;
-      align-items: top;
-  
+
+    .tabs.active {
+        border-bottom: 0px solid var(--secondary-color);
+        transition: all ease 0.4s;
+        color: var(--white-color);
+        background: var(--secondary-color);
+        border-radius: 2.5rem;
+        padding: 1rem 2rem;
+    }
+
+    .form-grid-3 {
+        display: grid;
+        grid-template-columns: calc(100% / 2 - 7.5px) calc(100% / 2 - 7.5px);
+        column-gap: 15px;
+        row-gap: 24px;
+        align-items: top;
     }
 }
+
 @media (max-width: 1280px) {
-    .form-grid{
-        grid-template-columns: repeat(2,1fr);
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
+
     .activeBody[_ngcontent-she-c2] {
         background-color: #fff;
         padding: 2rem 1rem;
         margin-top: 0.5rem;
     }
 }
-@media (max-width: 1024px) {
 
+@media (max-width: 1024px) {
 }
+
 @media (max-width: 991px) {
-    .form-grid{
-        grid-template-columns: calc(100% / 2 - 7.5px) calc(100% / 2 - 7.5px);
+    .form-grid {
+        grid-template-columns: 100%;
     }
-    .form-grid-3{
-      grid-template-columns: calc(100% / 1);
+
+    .categoryiconimg {
+        height: 60vh;
     }
+
+    .form-grid-3 {
+        grid-template-columns: calc(100% / 1);
+    }
+
     .content-box-main {
         padding: 4px;
     }
 }
-
-  

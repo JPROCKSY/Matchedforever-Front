@@ -35,7 +35,7 @@
 
         <div *ngIf="activeTab == 'User'">
             <form name="form" (ngSubmit)="save(createProfileForm.form, 'false', 'Basic Information')"
-                #createProfileForm="ngForm" novalidate>
+                #createProfileForm="ngForm">
                 <div class="activeBody content-flex">
                     <div class="form-grid">
                         <div class="form-field">
@@ -61,12 +61,14 @@
                         <div class="form-field">
                             <label class="md-lable" for="last_name">Last Name*</label>
                             <input type="text" class="form-data" name="last_name" [(ngModel)]="profileObj.last_name"
-                                #last_name="ngModel" />
+                                #last_name="ngModel" required
+                                [ngClass]="{'is-invalid': createProfileForm.submitted && last_name.invalid}" />
                         </div>
 
                         <div class="form-field">
                             <label class="md-lable" for="gender">Gender*</label>
-                            <ng-select name="gender" id="gender" class="form-data-select"
+                            <ng-select name="gender" id="gender" class="form-data-select" required
+                                [ngClass]="{'is-invalid':createProfileForm.submitted && gender.invalid}"
                                 [(ngModel)]="profileObj.gender" #gender="ngModel">
                                 <ng-option value="">Select Gender</ng-option>
                                 <ng-option value="Male">Male</ng-option>
@@ -81,7 +83,7 @@
                                 <ng-option value="">-Select Country Code-</ng-option>
                                 <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
                                     <div class="row-flex aic small-gap">
-                                        <div>
+                                        <div class="country-flag-form">
                                             <img src="https://flagcdn.com/w40/{{toSmallerCase(country.iso2)}}.webp"
                                                 alt="flag" />
                                         </div>
@@ -127,7 +129,7 @@
                         </div>
 
                         <div class="form-field">
-                            <label class="md-lable" for="alternate_number">Alternate Number*</label>
+                            <label class="md-lable" for="alternate_number">Alternate Number</label>
                             <input type="text" class="form-data" name="alternate_number"
                                 [(ngModel)]="profileObj.alternate_number" #alternate_number="ngModel" minlength="8"
                                 maxlength="13"
@@ -138,7 +140,8 @@
                         <div class="form-field">
                             <label class="md-lable" for="caste">Caste*</label>
                             <ng-select name="caste" id="caste" [(ngModel)]="profileObj.caste" class="form-data-select"
-                                #caste="ngModel" (change)="getAllSubCaste(profileObj.caste)">
+                                #caste="ngModel" (change)="getAllSubCaste(profileObj.caste)"
+                                [ngClass]="{'is-invalid':createProfileForm.submitted && caste.invalid}" required>
                                 <ng-option value="">Select caste</ng-option>
                                 <ng-option *ngFor="let caste of casteList" [value]="caste.id">
                                     {{ caste.community }}
@@ -163,7 +166,8 @@
                         <div class="form-field">
                             <label class="md-lable" for="religion">Religion*</label>
                             <ng-select name="religion" id="religion" class="form-data-select"
-                                [(ngModel)]="profileObj.religion" #religion="ngModel">
+                                [(ngModel)]="profileObj.religion" #religion="ngModel"
+                                [ngClass]="{'is-invalid': createProfileForm.submitted && religion.invalid}" required>
                                 <ng-option value="">Select Religion</ng-option>
                                 <ng-option *ngFor="let religion of religionList" [value]="religion.id">
                                     {{ religion.religion }}
@@ -277,29 +281,43 @@
                         <div class="form-field">
                             <label class="md-lable" for="about">Bio*</label>
                             <textarea name="about" id="about" class="form-data form-data-textarea"
-                                [(ngModel)]="profileObj.about" #about="ngModel"></textarea>
+                                [(ngModel)]="profileObj.about" #about="ngModel"
+                                [ngClass]="{'is-invalid':createProfileForm.submitted && about.invalid}"
+                                required></textarea>
                         </div>
 
                         <div class="form-field">
                             <!-- <h4 style="font-size: 1.5rem; font-weight: 700"></h4> -->
                             <label class="md-lable" for="profile_pic">Profile Image</label>
 
-                            <div class="default_imageiconcategory">
-                                <img *ngIf="profileObj.profile_pic_view || profileObj.profile_pic;else placeholder"
-                                    [src]="profileObj.profile_pic_view? profileObj.profile_pic_view: profileObj.profile_pic"
-                                    class="categoryiconimg" />
-                                <ng-template #placeholder>
-                                    <img src="assets/images/istockphoto-1451587807-612x612.jpg"
+                            <div class="profile-pic-update-flex relative">
+                                <div class="default_imageiconcategory" *ngIf="profileObj.profile_pic;">
+                                    <img *ngIf="profileObj.profile_pic_view || profileObj.profile_pic;else placeholder"
+                                        [src]="profileObj.profile_pic_view? profileObj.profile_pic_view: profileObj.profile_pic"
                                         class="categoryiconimg" />
-                                </ng-template>
-                            </div>
+                                    <ng-template #placeholder>
+                                        <img src="assets/images/istockphoto-1451587807-612x612.jpg"
+                                            class="categoryiconimg" />
+                                    </ng-template>
+                                </div>
 
-                            <label class="md-lable" for="profilepic" class="pointer">
-                                <span class="btn choose_btn btn-default display-block no-mrg-btm md-lable">Choose
-                                    Image</span>
-                                <input type="file" id="profilepic" maxlength="" class="d-none" name="profilepic"
-                                    accept="image/*" (change)="profilePicture($event)" multiple />
-                            </label>
+                                <label class="md-lable" for="profilepic" class="pointer">
+
+                                    <span
+                                        class="btn choose_btn btn-default display-block no-mrg-btm md-lable choose-profile-pic"
+                                        *ngIf="!profileObj.profile_pic;else editImage">Choose
+                                        Image</span>
+                                    <ng-template #editImage>
+                                        <div class="change-profile-pic">
+                                            <span class="material-symbols-outlined">
+                                                edit_square
+                                            </span>
+                                        </div>
+                                    </ng-template>
+                                    <input type="file" id="profilepic" maxlength="" class="d-none" name="profilepic"
+                                        accept="image/*" (change)="profilePicture($event)" multiple />
+                                </label>
+                            </div>
 
                         </div>
                     </div>
@@ -840,8 +858,10 @@
             'is-invalid': createProfileForm.submitted && first_name.invalid
           }" -->
                             <input type="text" class="form-data" name="fathersfirstname" [(ngModel)]="
-                  profileObj.family_information.fathers_info.first_name
-                " #first_name="ngModel" />
+                  profileObj.family_information.fathers_info.first_name 
+                " #first_name="ngModel"
+                                [ngClass]="{'is-invalid':familyInformationForm.submitted && first_name.invalid}"
+                                required />
 
                             <!-- <div
             *ngIf="
@@ -1462,10 +1482,9 @@
                                     <div class="col" style="padding-left: 0">
                                         <div class="form-field">
                                             <label class="md-lable" for="type{{ i }}">Education Type</label>
+                                            <!-- [ngClass]="{'is-invalid':educationForm.submitted && type.invalid}" -->
                                             <ng-select class="form-data-select" [name]="'type' + i"
-                                                [(ngModel)]="educations.type" #type="ngModel"
-                                                [ngClass]="{'is-invalid':educationForm.submitted && type.invalid}"
-                                                required>
+                                                [(ngModel)]="educations.type" #type="ngModel">
                                                 <ng-option value="">Select Education Type</ng-option>
                                                 <ng-option value="{{ data.id }}" *ngFor="let data of educationTypeList">
                                                     {{ data.name }}
@@ -1513,8 +1532,9 @@
 
                                 <div class="form-field">
                                     <label class="md-lable" for="description{{ i }}">Education
-                                        Description</label>
-                                    <input description="text" class="form-data" [name]="'description' + i"
+                                        Description*</label>
+                                    <input description="text" class="form-data" [name]="'description' + i" required
+                                        [ngClass]="{'is-invalid':educationForm.submitted && description.invalid}"
                                         [(ngModel)]="educations.description" #description="ngModel" />
                                 </div>
 
@@ -1588,7 +1608,7 @@
                             <div style="padding-left: 0">
                                 <div class="form-field">
                                     <label class="md-lable" for="occupation_type{{ i }}">Occupation
-                                        Type</label>
+                                        Type*</label>
                                     <ng-select class="form-data-select" [name]="'occupation_type' + i"
                                         [(ngModel)]="occupations.occupation_type" #occupation_type="ngModel"
                                         [ngClass]="{'is-invalid':occupationForm.submitted &&occupation_type.invalid}"
@@ -1905,12 +1925,8 @@
                             </ng-select>
                             <label class="md-lable" class="checkbox-preference">
                                 <input type="checkbox" [checked]="isChecked('relationship_status_preferance')"
-                                    class="checkbox-pref" (change)="
-                    toggleFixedPreference(
-                      'relationship_status_preferance',
-                      $event
-                    )
-                  " />
+                                    class="checkbox-pref"
+                                    (change)="toggleFixedPreference('relationship_status_preferance',$event)" />
                                 Fixed
                             </label>
                         </div>
@@ -2346,7 +2362,7 @@
                         </div>
 
                         <div class="form-field">
-                            <label class="md-lable" for="fathers_preference">Parent's Prefrece</label>
+                            <label class="md-lable" for="fathers_preference">Parent's Preference</label>
                             <textarea class="form-data" name="fathers_preference" id="fathers_preference"
                                 [(ngModel)]="profileObj.fathers_preference" #fathers_preference="ngModel"></textarea>
                             <label class="md-lable" class="checkbox-preference">
@@ -2411,7 +2427,8 @@
 
                             <div class="clearfix"></div>
                             <label class="md-lable" for="images" class="pointer">
-                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose file</span>
+                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose
+                                    file</span>
                                 <input type="file" id="images" maxlength="" class="d-none" name="images"
                                     accept="image/*" (change)="profileImages($event)" multiple />
                             </label>
@@ -2443,9 +2460,10 @@
 
                             <div class="clearfix"></div>
                             <label class="md-lable" for="kycImages" class="pointer">
-                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose file</span>
+                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose
+                                    file</span>
                                 <input type="file" id="kycImages" maxlength="" class="d-none" name="kycImages"
-                                    accept="image/*" (change)="kycImages($event)" multiple />
+                                    accept="image/*" (change)="kycImages($event)" multiple required />
                             </label>
                         </div>
                     </div>
@@ -2473,7 +2491,8 @@
                             </div>
                             <div class="clearfix"></div>
                             <label class="md-lable" for="pdf" class="pointer">
-                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose file</span>
+                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose
+                                    file</span>
                                 <input type="file" id="pdf" maxlength="" class="d-none" name="pdf"
                                     (change)="document($event)" />
                             </label>
@@ -2503,7 +2522,8 @@
                             </div>
                             <div class="clearfix"></div>
                             <label class="md-lable" for="kundali" class="pointer">
-                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose file</span>
+                                <span class="button-style blue-button fix-button display-block no-mrg-btm">Choose
+                                    file</span>
                                 <input type="file" id="kundali" maxlength="" class="d-none" name="kundali"
                                     (change)="kundali($event)" />
                             </label>

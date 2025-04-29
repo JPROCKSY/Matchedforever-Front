@@ -1,0 +1,890 @@
+<div class="header-wrapper" id="matched-forever-header-wrapper">
+    <div class="header-flex main-container">
+        <div class="header-logo">
+            <a href="javascript:void(0);">
+                <img src="assets/images/logo/matched-forever-white.svg" alt="">
+            </a>
+        </div>
+        <div class="header-links-ul">
+            <ul>
+                <li>
+                    <a routerLink='/login'>
+                        <button class="matched-forever-button button-style-primary">
+                            <p>
+                                Get Matched
+                            </p>
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink='/login'>
+                        <button class="matched-forever-button button-style-secondary">
+                            <p>
+                                Login
+                            </p>
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="matched-forever-page-wrapper" id="home-page-wrapper-matched-forever">
+    <section class="matched-forever-section relative" id="matched-forever-home-section-1">
+        <div class="banner-container relative">
+            <img src="assets/images/home/side-view-partners-holding-hands.png" alt="Matched Forever"
+                class="banner-container-banner">
+            <div class="black-overlay-banner"></div>
+            <div class="outline-logo-banner">
+                <img src="assets/images/logo/matched-forever-white-outline.svg" alt="">
+            </div>
+            <div class="banner-abs-card inner-flex inner-flex-center inner-flex-smallest">
+                <div class="banner-title">
+                    <h1 class="white-color">
+                        Matched Forever
+                    </h1>
+                </div>
+                <div class="section-content">
+                    <p class="white-color">
+                        Elite Matchmaking for Educated Professionals & conscious leaders
+                    </p>
+                </div>
+                <div class="button-abs-flex">
+                    <button
+                        class="matched-forever-button matched-forever-button-large button-style-secondary button-border-gradient">
+                        <span class="material-symbols-outlined">
+                            female
+                        </span>
+                        <p>
+                            Looking for <span>Bride</span>
+                        </p>
+                    </button>
+                    <button
+                        class="matched-forever-button matched-forever-button-large button-style-secondary button-border-gradient">
+                        <span class="material-symbols-outlined">
+                            male
+                        </span>
+                        <p>
+                            Looking for <span>Groom</span>
+                        </p>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="matched-forever-section section-padding relative" id="matched-forever-home-section-2">
+        <div class="main-container">
+            <div class="grid-45-55-big grid-mobile-medium">
+                <div class="inner-flex inner-flex-medium">
+                    <div class="inner-flex inner-flex-small">
+                        <div class="section-title">
+                            <h2>
+                                Why we're here
+                            </h2>
+                        </div>
+                        <div class="section-content">
+                            <p>
+                                MatchedForever was founded by a mother-daughter duo who understand the preferences of
+                                both generations. They knew there was a need for a one-stop solution for educated
+                                professionals and business leaders seeking serious, marriage-oriented relationships,
+                                with the added support of offline assistance.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0);" class="wfc">
+                        <button class="matched-forever-button button-style-primary-outline">
+                            <p>
+                                Get to know us
+                            </p>
+                        </button>
+                    </a>
+                </div>
+                <div class="why-we-are-here-banner-home">
+                    <img src="assets/images/home/why-we-are-here.png" alt="Matched Forever - Why We're Here"
+                        class="img-small-radius">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="matched-forever-section section-padding relative" id="matched-forever-home-section-3">
+        <div class="main-container">
+            <div class="grid-55-45-big grid-55-45-big-revrse grid-mobile-medium">
+                <div class="why-we-are-here-banner-home">
+                    <img src="assets/images/home/crafting-lifelong.png"
+                        alt="Matched Forever - Crafting Lifelong Matches with Purpose and Precision"
+                        class="img-small-radius">
+                </div>
+                <div class="inner-flex inner-flex-medium">
+                    <div class="inner-flex inner-flex-small">
+                        <div class="section-title">
+                            <h2>
+                                Crafting Lifelong Matches with Purpose and Precision
+                            </h2>
+                        </div>
+                        <div class="section-content inner-flex">
+                            <p>
+                                Every client joining our community receives a personalized call from the MatchedForever
+                                team. We provide highly exclusive and discreet services for High Net Worth Individuals
+                                (HNIs) seeking a private, elite experience, as well as flexible, transparent plans for
+                                educated professionals.
+                            </p>
+                            <p>
+                                During the call, our experts ask insightful questions to understand your unique needs
+                                and preferences, address any concerns, and recommend the ideal plan to align with your
+                                personality, goals, and aspirations.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0);" class="wfc">
+                        <button class="matched-forever-button button-style-primary-outline">
+                            <p>
+                                Get to know us
+                            </p>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="matched-forever-section section-padding highlight-bg relative" id="matched-forever-home-section-4">
+        <div class="main-container">
+            <div class="inner-flex inner-flex-medium">
+                <div class="section-title">
+                    <h2>
+                        Building Lasting Connections <br class="hide-tab-mobile"> Through Meaningful Matchmaking
+                    </h2>
+                </div>
+                <div class="building-last-grid">
+                    <div>
+                        <div class="building-last-abs" [class.active]="Activebuilding == 'building'  ">
+                            <div class="inner-flex inner-flex-small">
+                                <div class="section-paragraph">
+                                    <p class="white-color">
+                                        Exclusive Clientele
+                                    </p>
+                                </div>
+                                <div class="section-content">
+                                    <p class="white-color">
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam, architecto cum
+                                        consequatur hic laborum vel repudiandae quasi doloribus, placeat minus dolorem
+                                        officia laboriosam in possimus nam reiciendis beatae facere id.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="building-last-inner inner-flex inner-flex-medium">
+                            <div class="building-last-icon">
+                                <img src="assets/images/home/building-lasting/exclusive-clientele.svg" alt="">
+                            </div>
+                            <div class="building-last-title-flex">
+                                <div class="section-paragraph">
+                                    <p>
+                                        Exclusive Clientele
+                                    </p>
+                                </div>
+                                <div class="building-last-title-icon" (click)="buildingClick('building')"
+                                    [class.active]="Activebuilding == 'building'  ">
+                                    <img src="assets/images/icons/plus.svg" alt=""
+                                        *ngIf="Activebuilding != 'building' ">
+                                    <img src="assets/images/icons/minus.svg" alt=""
+                                        *ngIf="Activebuilding == 'building' ">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="no-padding0 hide-tab-mobile">
+                        <img class="building-last-inner-image" src="assets/images/home/building-lasting-banner.png"
+                            alt="Matched Forever - Building Lasting Connections Through Meaningful Matchmaking">
+                    </div>
+                    <div>
+                        <div class="building-last-abs" [class.active]="Activebuilding == 'building2'  ">
+                            <div class="inner-flex inner-flex-small">
+                                <div class="section-paragraph">
+                                    <p class="white-color">
+                                        Exclusive Offline & Flexible Online Matchmaking Plans
+                                    </p>
+                                </div>
+                                <div class="section-content">
+                                    <p class="white-color">
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam, architecto cum
+                                        consequatur hic laborum vel repudiandae quasi doloribus, placeat minus dolorem
+                                        officia laboriosam in possimus nam reiciendis beatae facere id.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="building-last-inner inner-flex inner-flex-medium">
+                            <div class="building-last-icon">
+                                <img src="assets/images/home/building-lasting/exclusive-offline-flexible-online-matchmaking-plans.svg"
+                                    alt="">
+                            </div>
+                            <div class="building-last-title-flex">
+                                <div class="section-paragraph">
+                                    <p>
+                                        Exclusive Offline & Flexible Online Matchmaking Plans
+                                    </p>
+                                </div>
+                                <div class="building-last-title-icon" (click)="buildingClick('building2')"
+                                    [class.active]="Activebuilding == 'building2'  ">
+                                    <img src="assets/images/icons/plus.svg" alt=""
+                                        *ngIf="Activebuilding != 'building2' ">
+                                    <img src="assets/images/icons/minus.svg" alt=""
+                                        *ngIf="Activebuilding == 'building2' ">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="building-last-abs" [class.active]="Activebuilding == 'building3'  ">
+                            <div class="inner-flex inner-flex-small">
+                                <div class="section-paragraph">
+                                    <p class="white-color">
+                                        Global Reach with Local Touch
+                                    </p>
+                                </div>
+                                <div class="section-content">
+                                    <p class="white-color">
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam, architecto cum
+                                        consequatur hic laborum vel repudiandae quasi doloribus, placeat minus dolorem
+                                        officia laboriosam in possimus nam reiciendis beatae facere id.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="building-last-inner inner-flex inner-flex-medium">
+                            <div class="building-last-icon">
+                                <img src="assets/images/home/building-lasting/global-reach.svg" alt="">
+                            </div>
+                            <div class="building-last-title-flex">
+                                <div class="section-paragraph">
+                                    <p>
+                                        Global Reach with Local Touch
+                                    </p>
+                                </div>
+                                <div class="building-last-title-icon" (click)="buildingClick('building3')"
+                                    [class.active]="Activebuilding == 'building3'  ">
+                                    <img src="assets/images/icons/plus.svg" alt=""
+                                        *ngIf="Activebuilding != 'building3' ">
+                                    <img src="assets/images/icons/minus.svg" alt=""
+                                        *ngIf="Activebuilding == 'building3' ">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="building-last-abs" [class.active]="Activebuilding == 'building4'  ">
+                            <div class="inner-flex inner-flex-small">
+                                <div class="section-paragraph">
+                                    <p class="white-color">
+                                        Trusted Founders
+                                    </p>
+                                </div>
+                                <div class="section-content">
+                                    <p class="white-color">
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam, architecto cum
+                                        consequatur hic laborum vel repudiandae quasi doloribus, placeat minus dolorem
+                                        officia laboriosam in possimus nam reiciendis beatae facere id.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="building-last-inner inner-flex inner-flex-medium">
+                            <div class="building-last-icon">
+                                <img src="assets/images/home/building-lasting/trusted.svg" alt="">
+                            </div>
+                            <div class="building-last-title-flex">
+                                <div class="section-paragraph">
+                                    <p>
+                                        Trusted Founders
+                                    </p>
+                                </div>
+                                <div class="building-last-title-icon" (click)="buildingClick('building4')"
+                                    [class.active]="Activebuilding == 'building4'  ">
+                                    <img src="assets/images/icons/plus.svg" alt=""
+                                        *ngIf="Activebuilding != 'building4' ">
+                                    <img src="assets/images/icons/minus.svg" alt=""
+                                        *ngIf="Activebuilding == 'building4' ">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="building-last-abs" [class.active]="Activebuilding == 'building5'  ">
+                            <div class="inner-flex inner-flex-small">
+                                <div class="section-paragraph">
+                                    <p class="white-color">
+                                        Proven Success Record
+                                    </p>
+                                </div>
+                                <div class="section-content">
+                                    <p class="white-color">
+                                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam, architecto cum
+                                        consequatur hic laborum vel repudiandae quasi doloribus, placeat minus dolorem
+                                        officia laboriosam in possimus nam reiciendis beatae facere id.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="building-last-inner inner-flex inner-flex-medium">
+                            <div class="building-last-icon">
+                                <img src="assets/images/home/building-lasting/proven.svg" alt="">
+                            </div>
+                            <div class="building-last-title-flex">
+                                <div class="section-paragraph">
+                                    <p>
+                                        Proven Success Record
+                                    </p>
+                                </div>
+                                <div class="building-last-title-icon" (click)="buildingClick('building5')"
+                                    [class.active]="Activebuilding == 'building5'  ">
+                                    <img src="assets/images/icons/plus.svg" alt=""
+                                        *ngIf="Activebuilding != 'building5' ">
+                                    <img src="assets/images/icons/minus.svg" alt=""
+                                        *ngIf="Activebuilding == 'building5' ">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <section class="matched-forever-section section-padding relative" id="matched-forever-home-section-5">
+        <div class="inner-flex inner-flex-big">
+            <div class="mini-container">
+                <div class="inner-flex inner-flex-medium">
+                    <div class="section-title">
+                        <h2>
+                            A Seamless Journey to Finding Your <br class="hide-tab-mobile">Match
+                        </h2>
+                    </div>
+                    <div class="section-content web-para-container">
+                        <p>
+                            Begin your matchmaking journey with ease and confidence. Our streamlined process is designed
+                            to quickly and effortlessly guide you from application to membership, ensuring a
+                            personalized and smooth experience every step of the way.
+                        </p>
+                    </div>
+                    <a href="javascript:void(0);" class="wfc">
+                        <button class="matched-forever-button button-style-primary-outline">
+                            <p>
+                                Start Matching
+                            </p>
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="hide-tab-mobile">
+                <div class="timeline-container"  #timelineContainer >
+                    <div class="timeline-wrapper" #timelineWrapper style="position: sticky; top: 10%;">
+                        <div class="timeline-wrapper-ruler"></div>
+                        <div class="timeline-wrapper-card inner-flex inner-flex-medium">
+                            <div class="timeline-card-pointer">
+                                <img src="assets/images/icons/timeline-pointer.svg" alt="">
+                            </div>
+                            <div class="inner-flex inner-flex-small">
+                                <div class="timeline-count banner-title">
+                                    <h2 class="regular-fontTartuffo secondary-color">
+                                        1
+                                    </h2>
+                                </div>
+                                <div class="inner-flex">
+                                    <div class="section-paragraph">
+                                        <p>
+                                            Application Submission
+                                        </p>
+                                    </div>
+                                    <div class="section-content">
+                                        <p>
+                                            Complete our comprehensive application form to share your preferences, background,
+                                            and relationship goals. Our exclusive pre-screening questionnaire and interview
+                                            process not only help us understand your needs but also provide you with valuable
+                                            insights into what you're truly seeking in a partner, ensuring a personalised and
+                                            effective matchmaking experience.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-wrapper-card inner-flex inner-flex-medium">
+                            <div class="timeline-card-pointer">
+                                <img src="assets/images/icons/timeline-pointer.svg" alt="">
+                            </div>
+                            <div class="inner-flex inner-flex-small">
+                                <div class="timeline-count banner-title">
+                                    <h2 class="regular-fontTartuffo secondary-color">
+                                        2
+                                    </h2>
+                                </div>
+                                <div class="inner-flex">
+                                    <div class="section-paragraph">
+                                        <p>
+                                            Consultation & Verification
+                                        </p>
+                                    </div>
+                                    <div class="section-content">
+                                        <p>
+                                            Once we receive your application, you can schedule a consultation call, or our team
+                                            will reach out to guide you through the next steps. During this call, we verify your
+                                            details, understand your specific criteria, and assist you in choosing the ideal
+                                            plan for your needs. If you desire extreme exclusivity and privacy, we offer offline
+                                            plans with direct support from a dedicated relationship manager. For greater
+                                            convenience, transparency, and more options, our online plans are a perfect fit.
+                                            Additionally, our hybrid plans combine the benefits of both, offering flexibility
+                                            and privacy. We're happy to address any questions you may have along the way.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-wrapper-card inner-flex inner-flex-medium">
+                            <div class="timeline-card-pointer">
+                                <img src="assets/images/icons/timeline-pointer.svg" alt="">
+                            </div>
+                            <div class="inner-flex inner-flex-small">
+                                <div class="timeline-count banner-title">
+                                    <h2 class="regular-fontTartuffo secondary-color">
+                                        3
+                                    </h2>
+                                </div>
+                                <div class="inner-flex">
+                                    <div class="section-paragraph">
+                                        <p>
+                                            Select Your Plan & Become a Member
+                                        </p>
+                                    </div>
+                                    <div class="section-content">
+                                        <p>
+                                            After selecting the plan that best suits your requirements, you’ll officially become
+                                            a member of MatchedForever. From here, you can begin your partner search directly
+                                            through our platform. For our elite clients, our dedicated team takes over, working
+                                            closely with you to find and present matches that meet your unique preferences and
+                                            expectations.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="visible-tab-mobile">
+                <div class="timeline-container" >
+                    <div class="timeline-wrapper">
+                        <div class="timeline-wrapper-ruler"></div>
+                        <div class="timeline-wrapper-card inner-flex inner-flex-medium">
+                            <div class="timeline-card-pointer">
+                                <img src="assets/images/icons/timeline-pointer.svg" alt="">
+                            </div>
+                            <div class="inner-flex inner-flex-small">
+                                <div class="timeline-count banner-title">
+                                    <h2 class="regular-fontTartuffo secondary-color">
+                                        1
+                                    </h2>
+                                </div>
+                                <div class="inner-flex">
+                                    <div class="section-paragraph">
+                                        <p>
+                                            Application Submission
+                                        </p>
+                                    </div>
+                                    <div class="section-content">
+                                        <p>
+                                            Complete our comprehensive application form to share your preferences, background,
+                                            and relationship goals. Our exclusive pre-screening questionnaire and interview
+                                            process not only help us understand your needs but also provide you with valuable
+                                            insights into what you're truly seeking in a partner, ensuring a personalised and
+                                            effective matchmaking experience.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-wrapper-card inner-flex inner-flex-medium">
+                            <div class="timeline-card-pointer">
+                                <img src="assets/images/icons/timeline-pointer.svg" alt="">
+                            </div>
+                            <div class="inner-flex inner-flex-small">
+                                <div class="timeline-count banner-title">
+                                    <h2 class="regular-fontTartuffo secondary-color">
+                                        2
+                                    </h2>
+                                </div>
+                                <div class="inner-flex">
+                                    <div class="section-paragraph">
+                                        <p>
+                                            Consultation & Verification
+                                        </p>
+                                    </div>
+                                    <div class="section-content">
+                                        <p>
+                                            Once we receive your application, you can schedule a consultation call, or our team
+                                            will reach out to guide you through the next steps. During this call, we verify your
+                                            details, understand your specific criteria, and assist you in choosing the ideal
+                                            plan for your needs. If you desire extreme exclusivity and privacy, we offer offline
+                                            plans with direct support from a dedicated relationship manager. For greater
+                                            convenience, transparency, and more options, our online plans are a perfect fit.
+                                            Additionally, our hybrid plans combine the benefits of both, offering flexibility
+                                            and privacy. We're happy to address any questions you may have along the way.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline-wrapper-card inner-flex inner-flex-medium">
+                            <div class="timeline-card-pointer">
+                                <img src="assets/images/icons/timeline-pointer.svg" alt="">
+                            </div>
+                            <div class="inner-flex inner-flex-small">
+                                <div class="timeline-count banner-title">
+                                    <h2 class="regular-fontTartuffo secondary-color">
+                                        3
+                                    </h2>
+                                </div>
+                                <div class="inner-flex">
+                                    <div class="section-paragraph">
+                                        <p>
+                                            Select Your Plan & Become a Member
+                                        </p>
+                                    </div>
+                                    <div class="section-content">
+                                        <p>
+                                            After selecting the plan that best suits your requirements, you’ll officially become
+                                            a member of MatchedForever. From here, you can begin your partner search directly
+                                            through our platform. For our elite clients, our dedicated team takes over, working
+                                            closely with you to find and present matches that meet your unique preferences and
+                                            expectations.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="matched-forever-section section-padding background-top-gradient relative"
+        id="matched-forever-home-section-6">
+        <div class="main-container">
+            <div class="grid-45-55-big grid-mobile-medium">
+                <div class="inner-flex inner-flex-medium">
+                    <div class="section-title">
+                        <h2>
+                            About the Founders
+                        </h2>
+                    </div>
+                    <div class="section-content">
+                        <p>
+                            When my mom and I were helping my cousin find a match, we realized there was a need for a
+                            platform that truly understands the criteria of younger generations while offering
+                            flexibility in choosing services—whether online for transparency, offline for privacy, or a
+                            blended approach.
+                        </p>
+                    </div>
+                    <a href="javascript:void(0);" class="wfc">
+                        <button class="matched-forever-button button-style-primary-outline">
+                            <p>
+                                Know More
+                            </p>
+                        </button>
+                    </a>
+                </div>
+                <div class="why-we-are-here-banner-home">
+                    <img src="assets/images/home/about-the-founder.png" alt="Matched Forever - About the Founder"
+                        class="img-small-radius">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="matched-forever-section section-padding background-bottom-gradient relative"
+        id="matched-forever-home-section-7">
+        <div class="main-container">
+            <div class="grid-45-55-big grid-mobile-medium">
+                <div class="inner-flex inner-flex-small">
+                    <div class="section-title">
+                        <h2>
+                            Success Stories
+                        </h2>
+                    </div>
+                    <div class="section-content">
+                        <p>
+                            Our members' experiences speak for themselves. Hear how our personalized matchmaking
+                            services have helped countless individuals find meaningful, lasting relationships.
+                        </p>
+                    </div>
+                </div>
+                <div class="success-swiper-buttons">
+                    <!-- <img src="assets/images/home/about-the-founder.png" alt="Matched Forever - About the Founder"
+                        class="img-small-radius"> -->
+                </div>
+            </div>
+        </div>
+
+        <div class="success-swiper-wrapper">
+            <div class="success-swiper-card">
+                <div class="success-swiper-card-image">
+                    <img src="assets/images/home/success-stories/couple-1.png" alt="Matched Forever - Success Stories"
+                        class="img-small-radius">
+                </div>
+                <div class="success-swiper-card-content-area inner-flex inner-flex-small">
+                    <div class="quotes-img">
+                        <img src="assets/images/home/success-stories/quotes.svg"
+                            alt="Matched Forever - Success Stories Quote">
+                    </div>
+                    <div class="section-content">
+                        <p>
+                            Matched Forever helped me find a partner who not only shares my career aspirations but also
+                            my values. Karan and I connected immediately, and now we're building a future together. It
+                            feels like we've known each other forever.
+                        </p>
+                    </div>
+                    <div class="section-paragraph testimonial-title">
+                        <p>
+                            Aditi & Karan
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section class="matched-forever-section section-padding highlight-bg relative" id="matched-forever-home-section-8">
+        <div class="mini-container">
+            <div class="inner-flex inner-flex-medium">
+                <div class="section-title">
+                    <h2>
+                        Curious About Us? <br>
+                        Your Questions, Our Answers
+                    </h2>
+                </div>
+
+
+                <div id="faq-accordion" class="inner-flex inner-flex-small">
+                    <div class="accordion-faq-card" *ngFor="let faq of [1,2,3,4]; let i = index"
+                        [id]="'accordion-faq' + faq" [class.active]="activeFaq === i">
+                        <div class="accrodion-title-faq" (click)="toggleFaq(i)">
+                            <div class="section-content">
+                                <p class="semibold-fonts">
+                                    What makes Matched Forever different from other matchmaking services?
+                                </p>
+                            </div>
+                            <div class="faq-icon-accordion">
+                                <img src="assets/images/icons/plus.svg" alt="" *ngIf="activeFaq !== i">
+                                <img src="assets/images/icons/minus.svg" alt="" *ngIf="activeFaq === i">
+                            </div>
+                        </div>
+                        <div class="accrodion-content-faq" [@slideToggle]="activeFaq === i ? 'open' : 'closed'">
+                            <div class="section-content accrodion-content-faq-padding">
+                                <p>
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque iusto reprehenderit
+                                    ex ullam, nobis est saepe minima dolore temporibus debitis sit exercitationem, quo
+                                    placeat. Molestiae, autem voluptatem. Ratione, ullam voluptatum.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="matched-forever-section section-padding relative" id="matched-forever-home-section-9">
+        <div class="main-container">
+            <div class="play-store-app-store-bg relative"
+                style="background-image: url('assets/images/home/young-couple-together-autumn-park.png');">
+                <div class="app-overlay"></div>
+                <div class="inner-flex inner-flex-medium play-store-container">
+                    <div class="inner-flex inner-flex-smallest">
+                        <div class="section-title">
+                            <h2 class="white-color">
+                                Start Your Journey <br class="hide-tab-mobile">Anywhere, Anytime
+                            </h2>
+                        </div>
+                        <div class="section-content">
+                            <p class="white-color">
+                                Take your matchmaking experience wherever you go. Download our app for quick, seamless
+                                access to exclusive features and personalized matchmaking, right at your fingertips.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="button-row">
+                        <a href="javascript:void(0);" target="_blank">
+                            <img src="assets/images/icons/play store.svg" alt="">
+                        </a>
+                        <a href="javascript:void(0);" target="_blank">
+                            <img src="assets/images/icons/app store.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="footer-wrapper highlight-bg" id="matched-forever-footer-wrapper">
+    <div class="footer-content main-container">
+        <div class="footer-grid-wrapper">
+            <div class="footer-logo-wrapper inner-flex inner-flex-big">
+                <div class="footer-logo">
+                    <a href="javascript:void(0);">
+                        <img src="assets/images/logo/matched-forever-black.svg" alt="">
+                    </a>
+                </div>
+                <div class="social-icons-footer">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" class="social-icon-footer">
+                                <img src="assets/images/social-icons/linkedin.svg " alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="social-icon-footer">
+                                <img src="assets/images/social-icons/x.svg " alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="social-icon-footer">
+                                <img src="assets/images/social-icons/fb.svg " alt="">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="social-icon-footer">
+                                <img src="assets/images/social-icons/insta.svg" alt="">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-links-grid-wrapper">
+                <div class="inner-flex inner-flex-small">
+                    <div class="section-content">
+                        <p class="semibold-fonts secondary-color">
+                            Contact Us
+                        </p>
+                    </div>
+                    <div class="inner-flex inner-flex-common">
+                        <a class="section-content footer-link-flex wfc" href="tel:+91-9998895635">
+                            <span class="material-symbols-outlined">
+                                call
+                            </span>
+                            <p class="lh1">
+                                +91 99988 95635
+                            </p>
+                        </a>
+                        <a class="section-content footer-link-flex wfc" href="mailto:info@matchedforever.in">
+                            <span class="material-symbols-outlined">
+                                mail
+                            </span>
+                            <p class="lh1">
+                                info@matchedforever.in
+                            </p>
+                        </a>
+                        <a class="section-content footer-link-flex wfc" href="https://maps.app.goo.gl/e4mUL3APsgciPxRn7" target="_blank">
+                            <span class="material-symbols-outlined">
+                                location_on
+                            </span>
+                            <p class="lh1">
+                                3 Vasant Kunj, New Sharda Mandir Rd,<br class="hide-tab-mobile"> Paldi, Ahmedabad,
+                                Gujarat 380001
+                            </p>
+                        </a>
+                    </div>
+                </div>
+                <div class="inner-flex inner-flex-small">
+                    <div class="section-content">
+                        <p class="semibold-fonts secondary-color">
+                            Quick Links
+                        </p>
+                    </div>
+                    <div class="inner-flex inner-flex-common">
+                        <a class="section-content footer-link-flex wfc" href="javascript:void(0);">
+                            <p class="lh1">
+                                About us
+                            </p>
+                        </a>
+                        <a class="section-content footer-link-flex wfc" href="javascript:void(0);">
+                            <p class="lh1">
+                                Membership
+                            </p>
+                        </a>
+                        <a class="section-content footer-link-flex wfc" href="javascript:void(0);">
+                            <p class="lh1">
+                                Success stories
+                            </p>
+                        </a>
+                        <a class="section-content footer-link-flex wfc" href="javascript:void(0);">
+                            <p class="lh1">
+                                FAQ
+                            </p>
+                        </a>
+                        <a class="section-content footer-link-flex wfc" href="javascript:void(0);">
+                            <p class="lh1">
+                                Contact us
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-grid-wrapper">
+            <div class="section-container">
+                <p>
+                    &copy; Copyright-2025 MatchedForever. All Rights Reserved.
+                </p>
+            </div>
+            <div class="section-container row-flex-policies">
+                <p>
+                    <a href="javascript:void(0);">
+                        Terms of service
+                    </a>
+                </p>
+                <p>
+                    / 
+                </p>
+                <p>
+                    <a href="javascript:void(0);">
+                        Privacy Policy
+                    </a>
+                </p>
+                <p>
+                    /
+                </p>
+                <p>
+                    <a href="javascript:void(0);">
+                        Cookie Policy 
+                    </a>
+                </p>
+            </div>
+            <div class="section-container row-flex-powered">
+                <p>
+                    Powered By : 
+                </p>
+                <p>
+                    <a href="https://www.saltpixels.in/" class="salt-hover" target="_blank">
+                        Salt Pixels 
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

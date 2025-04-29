@@ -1,0 +1,351 @@
+<div class="register-wrapper">
+    <div class="signup_wrapper">
+        <div class="login-flex">
+            <div class="row-flex big-gap">
+                <div class="logo-login" routerLink='/landing'>
+                    <img src="assets/images/logo.svg">
+                </div>
+            </div>
+
+            <div class="visible-tab-mobile">
+                <div class="section-content">
+                    <p class="semibold-fonts" style="font-size: 24px;">
+                        Join Matched Forever
+                    </p>
+                </div>
+                <div class="section-text">
+                    <p style="font-size: 16px;">
+                        Register today and take the first step toward a meaningful connection.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Mobile Number Form -->
+            <form name="admin" id="admin" (ngSubmit)="register(signUpForm.form)" #signUpForm="ngForm" novalidate
+                class="form-wrapper" autocomplete="off">
+
+                <div class="inner-flex inner-flex-small">
+                    <div class="dg2form">
+
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="profile_for"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.profile_for == '' }">Profile
+                                Looking For</label>
+                            <ng-select class="form-control-matched-forever form-control-select" style="width: 100%"
+                                name="profile_for" id="profile_for" [(ngModel)]="signUpObj.profile_for"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.profile_for == '' }"
+                                [clearable]="false" #profile_for="ngModel" required>
+                                <ng-option value="">Select Profile Selection</ng-option>
+                                <ng-option value="Self">Myself</ng-option>
+                                <ng-option value="Daughter">Daughter</ng-option>
+                                <ng-option value="Son">Son</ng-option>
+                                <ng-option value="Sister">Sister</ng-option>
+                                <ng-option value="Brother">Brother</ng-option>
+                                <ng-option value="Relative">Relative</ng-option>
+                                <ng-option value="Friend">Friend</ng-option>
+                            </ng-select>
+
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.profile_for == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Select Profile</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="looking_for"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.looking_for == '' }">Looking
+                                For</label>
+                            <ng-select class="form-control-matched-forever form-control-select" style="width: 100%"
+                                name="looking_for" id="looking_for" [(ngModel)]="signUpObj.looking_for"
+                                [clearable]="false" #looking_for="ngModel" required
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.looking_for == '' }">
+                                <ng-option value="">Select Partner</ng-option>
+                                <ng-option value="Bride">Bride</ng-option>
+                                <ng-option value="Groom">Groom</ng-option>
+                            </ng-select>
+
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.looking_for == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Select Partner</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="first_name"
+                                [ngClass]="{ 'error': signUpForm.submitted && signUpObj.first_name == '' }">First
+                                Name</label>
+                            <div class="relative">
+                                <input id="first_name" name="first_name" type="text" required
+                                    [(ngModel)]="signUpObj.first_name" #first_name="ngModel"
+                                    class="form-control-matched-forever" tabindex="1"
+                                    [ngClass]="{'error': signUpForm.submitted && signUpObj.first_name == '' }">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.first_name == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Enter first name</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="last_name"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.last_name == '' }">Last
+                                Name</label>
+                            <div class="relative">
+                                <input id="last_name" name="last_name" type="text" required
+                                    [(ngModel)]="signUpObj.last_name" #last_name="ngModel"
+                                    class="form-control-matched-forever" tabindex="1"
+                                    [ngClass]="{'error': signUpForm.submitted && signUpObj.last_name == '' }">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.last_name == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Enter Last Name</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="phone"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.phone == '' }">Mobile
+                                Number</label>
+                            <div class="relative custom-input">
+                                <input id="phone" (keypress)="_keyPress($event)" minlength="10" maxlength="10"
+                                    name="phone" type="text" required [(ngModel)]="signUpObj.phone" #phone="ngModel"
+                                    class="form-control-matched-forever" tabindex="1"
+                                    [ngClass]="{'error': signUpForm.submitted && signUpObj.phone == '' }">
+
+                                <div class="form-field contry-drpdn">
+                                    <!-- <label class="md-lable" for="country_code">Country Code</label> -->
+                                    <ng-select class="form-data-select" name="country_code" id="country_code"
+                                        [(ngModel)]="signUpObj.country_code" #country_code="ngModel" style="width: 100%"
+                                        [clearable]="false">
+                                        <ng-option value="">-Select Country Code-</ng-option>
+                                        <ng-option value="{{ country.id }}" *ngFor="let country of countryList">
+                                            <div class="row-flex aic small-gap">
+                                                <div class="country-flag-form">
+                                                    <img src="https://flagcdn.com/w40/{{toSmallerCase(country.iso2)}}.webp"
+                                                        alt="flag" />
+                                                </div>
+                                                <div>+{{ country.phonecode }}</div>
+                                                <!-- <div>
+                                                            {{ country.name }}
+                                                        </div> -->
+                                            </div>
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.phone == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please enter valid mobile number</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="email"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.email == '' }">Email</label>
+                            <div class="relative">
+                                <input id="email" name="email" type="email" required [(ngModel)]="signUpObj.email"
+                                    #email="ngModel" class="form-control-matched-forever" tabindex="1"
+                                    [ngClass]="{'error': signUpForm.submitted && signUpObj.email == '' }">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.email == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Enter Email</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="preffered_setlement_country"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.preffered_setlement_country == '' }">Country</label>
+                            <ng-select class="form-control-matched-forever form-control-select" style="width: 100%"
+                                [clearable]="false" name="preffered_setlement_country" id="preffered_setlement_country"
+                                (change)="getMultiplestate(signUpObj.preffered_setlement_country)" multiple="true"
+                                [(ngModel)]="signUpObj.preffered_setlement_country"
+                                #preffered_setlement_country="ngModel"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.preffered_setlement_country == '' }">
+                                <ng-option value="">Select Country</ng-option>
+                                <ng-option value="{{ countryList.id }}"
+                                    *ngFor="let countryList of selctionList.country">
+                                    {{ countryList.name }}
+                                </ng-option>
+                            </ng-select>
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.preffered_setlement_country == ''"
+                                class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Enter Country</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="preffered_setlement_state"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.preffered_setlement_state == '' }">State</label>
+                            <ng-select class="form-control-matched-forever form-control-select" style="width: 100%"
+                                (change)="getMultiplecity(signUpObj.preffered_setlement_state)" [clearable]="false"
+                                name="preffered_setlement_state" id="preffered_setlement_state" multiple="true"
+                                [(ngModel)]="signUpObj.preffered_setlement_state" #preffered_setlement_state="ngModel"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.preffered_setlement_state == '' }">
+                                <ng-option value="">Select State</ng-option>
+                                <ng-option value="{{ state.id }}" *ngFor="let state of stateList">
+                                    {{ state.name }}
+                                </ng-option>
+                            </ng-select>
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.preffered_setlement_state == ''"
+                                class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Select State</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="preffered_setlement_city"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.preffered_setlement_city == '' }">City</label>
+                            <ng-select class="form-control-matched-forever form-control-select" style="width: 100%"
+                                name="preffered_setlement_city" id="preffered_setlement_city" multiple="true"
+                                [clearable]="false" [(ngModel)]="signUpObj.preffered_setlement_city"
+                                #preffered_setlement_city="ngModel"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.preffered_setlement_city == '' }">
+                                <ng-option value="">Select city</ng-option>
+                                <ng-option value="{{ city.id }}" *ngFor="let city of cityList">
+                                    {{ city.name }}
+                                </ng-option>
+                            </ng-select>
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.preffered_setlement_city == ''"
+                                class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Select State</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="education"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.education == '' }">Education</label>
+                            <ng-select class="form-control-matched-forever form-control-select" style="width: 100%"
+                                name="education" id="education" [(ngModel)]="signUpObj.education" #education="ngModel"
+                                [clearable]="false"
+                                [ngClass]="{'error': signUpForm.submitted && signUpObj.education == '' }">
+                                <ng-option value="">Select Education</ng-option>
+                                <ng-option value="{{ Education_listList.education }}"
+                                    *ngFor="let Education_listList of selctionList.education_list">
+                                    {{ Education_listList.education }}
+                                </ng-option>
+                            </ng-select>
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.education == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Select Education</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <div class="form-field">
+                                <label class="md-lable" for="birth_date"
+                                    [ngClass]="{ 'error': signUpForm.submitted && signUpObj.birth_date == '' }">Birth
+                                    Date*</label>
+                                <input type="text" [(ngModel)]="signUpObj.birth_date" #birth_date="ngModel"
+                                    name="birth_date" id="birth_date" class="form-data" [min]="minDate"
+                                    [ngClass]="{ 'error': signUpForm.submitted && signUpObj.birth_date == '' }"
+                                    [max]="maxDate" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+                                    placeholder="Birth Date" readonly required (ngModelChange)="handledate()" />
+                                <div class="invalid-feedback" *ngIf="signUpObj.birth_date == ''">
+                                    <div>Birthdate is required</div>
+                                </div>
+                                <owl-date-time #dt1 [showSecondsTimer]="false" [hour12Timer]="false"
+                                    [pickerType]="'calendar'"></owl-date-time>
+                            </div>
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.birth_date == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Select Birth Date</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="height">Height</label>
+                            <ng-select class="form-control-matched-forever form-control-select" style="width: 100%"
+                                [clearable]="false" name="height" id="height" [(ngModel)]="signUpObj.height"
+                                #height="ngModel">
+                                <ng-option value="">Select height</ng-option>
+                                <ng-option value="{{ height.cm }}" *ngFor="let height of heightArray">
+                                    {{height.feet +" ft " +height.inches +" inches " +"(" +height.cm +" cm " +")"}}
+                                </ng-option>
+                            </ng-select>
+
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.height == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Select height</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="religion">Religion</label>
+                            <ng-select class="form-control-matched-forever form-control-select" style="width: 100%"
+                                [clearable]="false" name="religion" id="religion" [(ngModel)]="signUpObj.religion"
+                                #religion="ngModel">
+                                <ng-option value="">Select Religion</ng-option>
+                                <ng-option value="{{ religion_listList.religion }}"
+                                    *ngFor="let religion_listList of selctionList.religion_list">
+                                    {{ religion_listList.religion }}
+                                </ng-option>
+                            </ng-select>
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.religion == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Select Religion</p>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="inner-flex inner-flex-common relative">
+                            <label class="md-lable md-label-custom" for="caste">Caste</label>
+                            <ng-select class="form-control-matched-forever form-control-select" style="width: 100%"
+                                [clearable]="false" name="caste" id="caste" [(ngModel)]="signUpObj.caste"
+                                #caste="ngModel">
+                                <ng-option value="">Select Caste</ng-option>
+                                <ng-option value="{{ caste_listList.community }}"
+                                    *ngFor="let caste_listList of selctionList.communities">
+                                    {{ caste_listList.community }}
+                                </ng-option>
+                            </ng-select>
+                            <div class="relative">
+                            </div>
+                            <!-- <div *ngIf="signUpForm.submitted && signUpObj.caste == ''" class="error-msg-label">
+                                <div class="error">
+                                    <p>Please Select Caste</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- <div class="forgot-password section-text">
+                        <p class="forgot-pass">
+                            Forgot Password?
+                        </p>
+                    </div> -->
+                </div>
+                <div class="submit-button admin-submit-button">
+                    <button class="matched-forever-button button-style-primary w-100" type="submit">
+                        <p>Register Now</p>
+                    </button>
+                </div>
+                <div class="signup-line-text-login">
+                    <p>
+                        Already Registered? <span class="semibold-fonts secondary-color cursor-pointer"
+                            routerLink="/login/">Login</span>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

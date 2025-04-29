@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
@@ -16,7 +17,11 @@ import { PagerService } from './_services/pager-service';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { OwlDateTimeModule,OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { MatchedProfileComponent } from './matched-profile/matched-profile.component';
-
+import { LandingComponent } from './landing/landing.component';
+import { MyProfileComponent } from './my-profile/my-profile.component';
+import { RegisterComponent } from './register/register.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+// import { SwiperModule } from 'ngx-swiper-wrapper';
 
 
 
@@ -30,9 +35,14 @@ import { MatchedProfileComponent } from './matched-profile/matched-profile.compo
     ProfileUpdateComponent,
     ViewProfileComponent,
     MatchedProfileComponent,
+    LandingComponent,
+    MyProfileComponent,
+    RegisterComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
+    //  SwiperModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,

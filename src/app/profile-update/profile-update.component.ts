@@ -358,14 +358,14 @@ export class ProfileUpdateComponent implements OnInit {
     education: string;
     description: string;
   }[] = [
-    {
-      university_name: "",
-      type: "",
-      is_higher_education: "",
-      education: "",
-      description: "",
-    },
-  ];
+      {
+        university_name: "",
+        type: "",
+        is_higher_education: "",
+        education: "",
+        description: "",
+      },
+    ];
 
   occupationList: {
     type_of_occupation: string;
@@ -383,23 +383,23 @@ export class ProfileUpdateComponent implements OnInit {
     yearly_income_value: string;
     yearly_income_currency: string;
   }[] = [
-    {
-      type_of_occupation: "",
-      occupation_type: "",
-      company_name: "",
-      company_revenue: "",
-      company_revenue_value: "",
-      company_revenue_currency: "",
-      designation: "",
-      description: "",
-      monthly_income: "",
-      monthly_income_value: "",
-      monthly_income_currency: "",
-      yearly_income: "",
-      yearly_income_value: "",
-      yearly_income_currency: "",
-    },
-  ];
+      {
+        type_of_occupation: "",
+        occupation_type: "",
+        company_name: "",
+        company_revenue: "",
+        company_revenue_value: "",
+        company_revenue_currency: "",
+        designation: "",
+        description: "",
+        monthly_income: "",
+        monthly_income_value: "",
+        monthly_income_currency: "",
+        yearly_income: "",
+        yearly_income_value: "",
+        yearly_income_currency: "",
+      },
+    ];
 
   public heightArray = [
     { feet: 4, inches: 0, cm: 122 },
@@ -464,7 +464,7 @@ export class ProfileUpdateComponent implements OnInit {
       this.profileDetail();
     }
 
-    
+
   }
 
   selectedTab: number = 1;
@@ -910,91 +910,678 @@ export class ProfileUpdateComponent implements OnInit {
     }
   }
 
+  getLabel(field: string): string { // add 17/4
+    const labels: any = {
+      first_name: 'First Name',
+      last_name: 'Last Name',
+      gender: 'Gender',
+      phone: 'Phone Number',
+      caste: 'Caste',
+      religion: 'Religion',
+      looking_for: 'Looking For',
+      email: 'Email',
+      relationship_status: 'Relationship Status',
+      about: 'Bio data',
+      birth_date: 'Birth Date',
+      description: 'Education Description',
+      kyc: 'KYC Images',
+      fathersfirstname: 'Father Name',
+    };
+    return labels[field] || field;
+  }
+
+  // save(form, routingFlag, nextTab) {
+  //   if (form.valid) {
+  //     this.isLoading = true;
+  //     this.profileObj.education = this.educationList;
+  //     this.profileObj.occupation = this.occupationList;
+
+  //     for (var key in this.profileObj) {
+  //       if (this.profileObj[key] === undefined) {
+  //         this.profileObj[key] = "";
+  //       }
+  //     }
+
+  //     let formData = new FormData();
+
+  //     for (var key in this.profileObj) {
+  //       formData.append(key, this.profileObj[key]);
+  //       if (key == "images") {
+  //         for (var index in this.profileObj.imagesPreview) {
+  //           formData.append(
+  //             "images[" + index + "]",
+  //             this.profileObj.imagesPreview[index]
+  //           );
+  //         }
+  //       }
+
+  //       if (key == "kyc") {
+  //         for (var index in this.profileObj.kycPreview) {
+  //           formData.append(
+  //             "kyc[" + index + "]",
+  //             this.profileObj.kycPreview[index]
+  //           );
+  //         }
+  //       }
+
+  //       if (key == "education") {
+  //         formData.append("education", JSON.stringify(this.educationList));
+  //       }
+
+  //       if (key == "occupation") {
+  //         formData.append("occupation", JSON.stringify(this.occupationList));
+  //       }
+
+  //       if (key == "family_information") {
+  //         if (
+  //           (this.profileObj.family_information.fathers_info &&
+  //             this.profileObj.family_information.fathers_info.first_name) ||
+  //           (this.profileObj.family_information.mothers_info &&
+  //             this.profileObj.family_information.mothers_info.first_name)
+  //         ) {
+  //           formData.append(
+  //             "family_information",
+  //             JSON.stringify(this.profileObj.family_information)
+  //           );
+  //         } else {
+  //           formData.delete("family_information");
+  //         }
+  //       }
+  //     }
+
+  //     if (this.profileObj.id || this.profileObj.id) {
+  //       this.profileObj.id = this.profileObj.id;
+  //       this.adminService.updateProfile(formData).subscribe((response: any) => {
+  //         if (response.success) {
+  //           this.activeTab = nextTab;
+  //           if (routingFlag == "true") {
+  //             this.toastr.success(response.message);
+  //             this.router.navigate(["/"]);
+  //           }
+  //         }
+  //         this.isLoading = false;
+  //       });
+  //     }
+  //   }
+  // }
+
+
+
+  // getLabel(field: string): string {
+
+
+
   save(form, routingFlag, nextTab) {
+
+    // if (form.valid) {
+    //   this.isLoading = true;
+    //   this.profileObj.education = this.educationList;
+    //   this.profileObj.occupation = this.occupationList;
+
+    //   for (var key in this.profileObj) {
+    //     if (this.profileObj[key] === undefined) {
+    //       this.profileObj[key] = "";
+    //     }
+    //   }
+
+    //   let formData = new FormData();
+
+    //   for (var key in this.profileObj) {
+    //     formData.append(key, this.profileObj[key]);
+    //     if (key == "images") {
+    //       for (var index in this.profileObj.imagesPreview) {
+    //         formData.append(
+    //           "images[" + index + "]",
+    //           this.profileObj.imagesPreview[index]
+    //         );
+    //       }
+    //     }
+
+    //     if (key == "kyc") {
+    //       for (var index in this.profileObj.kycPreview) {
+    //         formData.append(
+    //           "kyc[" + index + "]",
+    //           this.profileObj.kycPreview[index]
+    //         );
+    //       }
+    //     }
+
+    //     if (key == "education") {
+    //       formData.append("education", JSON.stringify(this.educationList));
+    //     }
+
+    //     if (key == "occupation") {
+    //       formData.append("occupation", JSON.stringify(this.occupationList));
+    //     }
+
+    //     if (key == "family_information") {
+    //       if (
+    //         (this.profileObj.family_information.fathers_info &&
+    //           this.profileObj.family_information.fathers_info.first_name) ||
+    //         (this.profileObj.family_information.mothers_info &&
+    //           this.profileObj.family_information.mothers_info.first_name)
+    //       ) {
+    //         formData.append(
+    //           "family_information",
+    //           JSON.stringify(this.profileObj.family_information)
+    //         );
+    //       } else {
+    //         formData.delete("family_information");
+    //       }
+    //     }
+    //   }
+
+    //   if (this.profileObj.id || this.loggedInUser.id) {
+    //     this.profileObj.id = this.loggedInUser.id;
+    //     this.adminService.updateProfile(formData).subscribe((response: any) => {
+    //       if (response.success) {
+    //         // this.activeTab = nextTab;
+    //         let redirectionTab = nextTab.replace(" ","-").toLowerCase();
+
+    //         if (routingFlag == "true") {
+    //           this.toastr.success(response.message);
+    //           this.router.navigate(["/profiles"]);
+    //         } else {
+    //           this.router.navigate(["/profiles/create/"+this.profileObj.id+"/"+redirectionTab]);
+    //         }
+    //       }
+    //       this.isLoading = false;
+    //     });
+    //   } else {
+    //     this.adminService.saveProfile(formData).subscribe((response: any) => {
+    //       if (response.success) {
+    //         this.toastr.success(response.message);
+    //         this.loggedInUser.id = response.user_id;
+    //         this.profileObj.id = this.loggedInUser.id;
+    //         let redirectionTab = nextTab.replace(" ","-").toLowerCase();
+    //         this.router.navigate(["/profiles/create/"+this.profileObj.id+"/"+redirectionTab]);
+    //         // this.activeTab = nextTab;
+    //         // this.router.navigate(["/profiles"]);
+    //       }
+    //       this.isLoading = false;
+    //     });
+    //   }
+    // }
+
+
+    console.log(this.profileObj);
+
+    if (form.invalid) {
+      console.log("getlable");
+
+
+
+      const invalidFields: string[] = [];
+
+      Object.keys(form.controls).forEach(field => {
+        const control = form.get(field);
+        if (control && control.invalid) {
+          const errors = control.errors;
+
+          if (errors['required']) {
+            invalidFields.push(`${this.getLabel(field)} is required.`);
+          } else if (errors['email']) {
+            invalidFields.push(`${this.getLabel(field)} is an invalid email.`);
+          } else if (errors['pattern']) {
+            invalidFields.push(`${this.getLabel(field)} has an invalid format.`);
+          }
+        }
+      });
+
+      invalidFields.forEach((msg: any) => this.toastr.error(msg));
+      return;
+    }
+    console.log("getlable");
+
+
     if (form.valid) {
-      this.isLoading = true;
-      this.profileObj.education = this.educationList;
-      this.profileObj.occupation = this.occupationList;
 
-      for (var key in this.profileObj) {
-        if (this.profileObj[key] === undefined) {
-          this.profileObj[key] = "";
+
+
+      if (nextTab == "Basic Information") {
+
+
+        var basicObj: any = {};
+        basicObj.first_name = this.profileObj.first_name ? this.profileObj.first_name : "";
+        basicObj.last_name = this.profileObj.last_name ? this.profileObj.last_name : "";
+        basicObj.middle_name = this.profileObj.middle_name ? this.profileObj.middle_name : "";
+        basicObj.email = this.profileObj.email ? this.profileObj.email : "";
+        basicObj.country_id = this.profileObj.country_id ? this.profileObj.country_id : "";
+        basicObj.country_code = this.profileObj.country_code ? this.profileObj.country_code : "";
+        basicObj.alternate_country_id = this.profileObj.alternate_country_id ? this.profileObj.alternate_country_id : "";
+        basicObj.alternate_country_code = this.profileObj.alternate_country_code ? this.profileObj.alternate_country_code : "";
+        basicObj.phone = this.profileObj.phone ? this.profileObj.phone : "";
+        basicObj.alternate_number = this.profileObj.alternate_number ? this.profileObj.alternate_number : "";
+        basicObj.caste = this.profileObj.caste ? this.profileObj.caste : "";
+        basicObj.subcaste = this.profileObj.subcaste ? this.profileObj.subcaste : "";
+        basicObj.religion = this.profileObj.religion ? this.profileObj.religion : "";
+        basicObj.gender = this.profileObj.gender ? this.profileObj.gender : "";
+        basicObj.looking_for = this.profileObj.looking_for ? this.profileObj.looking_for : "";
+        basicObj.user_type = this.profileObj.user_type ? this.profileObj.user_type : "";
+        basicObj.profile_for = this.profileObj.profile_for ? this.profileObj.profile_for : "";
+        basicObj.is_candidate = this.profileObj.is_candidate ? this.profileObj.is_candidate : "";
+        basicObj.reference = this.profileObj.reference ? this.profileObj.reference : "";
+        basicObj.reference_name = this.profileObj.reference_name ? this.profileObj.reference_name : "";
+        basicObj.reference_number = this.profileObj.reference_number ? this.profileObj.reference_number : "";
+        basicObj.reference_profession = this.profileObj.reference_profession ? this.profileObj.reference_profession : "";
+        basicObj.reference_remark = this.profileObj.reference_remark ? this.profileObj.reference_remark : "";
+        basicObj.is_active = this.profileObj.is_active ? this.profileObj.is_active : "";
+        basicObj.relationship_status = this.profileObj.relationship_status ? this.profileObj.relationship_status : "";
+        basicObj.about = this.profileObj.about ? this.profileObj.about : "";
+        basicObj.profile_pic = this.profileObj.profile_pic ? this.profileObj.profile_pic : "";
+        basicObj.plan_id = this.profileObj.plan_id ? this.profileObj.plan_id : "";
+
+        if (this.profileObj.id || this.loggedInUser.id) {
+          basicObj.id = this.profileObj.id ? this.profileObj.id : this.loggedInUser.id;
         }
-      }
 
-      let formData = new FormData();
 
-      for (var key in this.profileObj) {
-        formData.append(key, this.profileObj[key]);
-        if (key == "images") {
-          for (var index in this.profileObj.imagesPreview) {
-            formData.append(
-              "images[" + index + "]",
-              this.profileObj.imagesPreview[index]
-            );
-          }
+        let formData = new FormData();
+
+        for (var key in basicObj) {
+          formData.append(key, basicObj[key]);
         }
 
-        if (key == "kyc") {
-          for (var index in this.profileObj.kycPreview) {
-            formData.append(
-              "kyc[" + index + "]",
-              this.profileObj.kycPreview[index]
-            );
-          }
-        }
-
-        if (key == "education") {
-          formData.append("education", JSON.stringify(this.educationList));
-        }
-
-        if (key == "occupation") {
-          formData.append("occupation", JSON.stringify(this.occupationList));
-        }
-
-        if (key == "family_information") {
-          if (
-            (this.profileObj.family_information.fathers_info &&
-              this.profileObj.family_information.fathers_info.first_name) ||
-            (this.profileObj.family_information.mothers_info &&
-              this.profileObj.family_information.mothers_info.first_name)
-          ) {
-            formData.append(
-              "family_information",
-              JSON.stringify(this.profileObj.family_information)
-            );
-          } else {
-            formData.delete("family_information");
-          }
-        }
-      }
-
-      if (this.profileObj.id || this.profileObj.id) {
-        this.profileObj.id = this.profileObj.id;
-        this.adminService.updateProfile(formData).subscribe((response: any) => {
-          if (response.success) {
-            this.activeTab = nextTab;
-            if (routingFlag == "true") {
+        if (this.profileObj.id || this.loggedInUser.id) {
+          this.adminService.updateProfileUser(formData).subscribe((response: any) => {
+            if (response.success) {
               this.toastr.success(response.message);
-              this.router.navigate(["/"]);
+              // let redirectionTab = nextTab.replace(" ", "-").toLowerCase();
+              this.activeTab = nextTab;
+              // if (routingFlag == "true") {
+              //   this.router.navigate(["/profiles"]);
+              // } else {
+              //   this.router.navigate(["/profiles/create/" + this.profileObj.id + "/" + redirectionTab]);
+              // }
             }
+            this.isLoading = false;
+          });
+        }
+
+      }
+
+      if (nextTab == "Family Information") {
+        var userObj: any = {};
+
+        if (this.profileObj.id || this.loggedInUser.id) {
+          userObj.id = this.profileObj.id ? this.profileObj.id : this.loggedInUser.id;
+        }
+        userObj.birth_place = this.profileObj.birth_place ? this.profileObj.birth_place : "";
+        userObj.height = this.profileObj.height ? this.profileObj.height : "";
+        userObj.birth_date = this.profileObj.birth_date ? this.profileObj.birth_date : "";
+        userObj.birth_time = this.profileObj.birth_time ? this.profileObj.birth_time : "";
+        userObj.age = this.profileObj.age ? this.profileObj.age : "";
+        userObj.weight = this.profileObj.weight ? this.profileObj.weight : "";
+        userObj.smoking_habits = this.profileObj.smoking_habits ? this.profileObj.smoking_habits : "";
+        userObj.drinking_habits = this.profileObj.drinking_habits ? this.profileObj.drinking_habits : "";
+        userObj.doctor = this.profileObj.doctor ? this.profileObj.doctor : "";
+        userObj.medical_history = this.profileObj.medical_history ? this.profileObj.medical_history : "";
+        userObj.medical_history_description = this.profileObj.medical_history_description ? this.profileObj.medical_history_description : "";
+        userObj.food_habits = this.profileObj.food_habits ? this.profileObj.food_habits : "";
+        userObj.instagram_link = this.profileObj.instagram_link ? this.profileObj.instagram_link : "";
+        userObj.facebook_link = this.profileObj.facebook_link ? this.profileObj.facebook_link : "";
+        userObj.linkedin_link = this.profileObj.linkedin_link ? this.profileObj.linkedin_link : "";
+        userObj.other_hobby = this.profileObj.other_hobby ? this.profileObj.other_hobby : "";
+        userObj.user_citizenship = this.profileObj.user_citizenship ? this.profileObj.user_citizenship : "";
+        userObj.user_visa = this.profileObj.user_visa ? this.profileObj.user_visa : "";
+        userObj.preffered_setlement_country = this.profileObj.preffered_setlement_country ? this.profileObj.preffered_setlement_country : "";
+        userObj.preffered_setlement_state = this.profileObj.preffered_setlement_state ? this.profileObj.preffered_setlement_state : "";
+        userObj.preffered_setlement_city = this.profileObj.preffered_setlement_city ? this.profileObj.preffered_setlement_city : "";
+        userObj.current_country = this.profileObj.current_country ? this.profileObj.current_country : "";
+        userObj.mother_tongue = this.profileObj.mother_tongue ? this.profileObj.mother_tongue : "";
+        userObj.native_place = this.profileObj.native_place ? this.profileObj.native_place : "";
+        userObj.complexion = this.profileObj.complexion ? this.profileObj.complexion : "";
+        userObj.blood_group = this.profileObj.blood_group ? this.profileObj.blood_group : "";
+        userObj.body_type = this.profileObj.body_type ? this.profileObj.body_type : "";
+        userObj.cuisines = this.profileObj.cuisines ? this.profileObj.cuisines : "";
+        userObj.manglik = this.profileObj.manglik ? this.profileObj.manglik : "";
+        userObj.zodiac_sign = this.profileObj.zodiac_sign ? this.profileObj.zodiac_sign : "";
+        userObj.family_value = this.profileObj.family_value ? this.profileObj.family_value : "";
+        userObj.additionalInformation = this.profileObj.additionalInformation ? this.profileObj.additionalInformation : "";
+        userObj.languages = this.profileObj.languages ? this.profileObj.languages : "";
+        userObj.hobbies = this.profileObj.hobbies ? this.profileObj.hobbies : "";
+
+        let formData = new FormData();
+
+        for (var key in userObj) {
+          formData.append(key, userObj[key]);
+        }
+
+        this.adminService.updateProfileBasic(formData).subscribe((response: any) => {
+          if (response.success) {
+            this.toastr.success(response.message);
+            // let redirectionTab = nextTab.replace(" ", "-").toLowerCase();
+            this.activeTab = nextTab;
+            // if (routingFlag == "true") {
+            //   this.router.navigate(["/profiles"]);
+            // } else {
+            //   this.router.navigate(["/profiles/create/" + this.profileObj.id + "/" + redirectionTab]);
+            // }
           }
           this.isLoading = false;
         });
       }
+
+      if (nextTab == "Address") {
+
+
+
+        var familyObj: any = {};
+
+        familyObj.remove_siblings = this.profileObj.remove_siblings;
+        familyObj.user_family_background = this.profileObj.user_family_background ? this.profileObj.user_family_background : "";
+        familyObj.user_family_type = this.profileObj.user_family_type ? this.profileObj.user_family_type : "";
+        familyObj.net_family_income = this.profileObj.net_family_income ? this.profileObj.net_family_income : "";
+        familyObj.net_family_income_value = this.profileObj.net_family_income_value ? this.profileObj.net_family_income_value : "";
+        familyObj.net_family_income_currency = this.profileObj.net_family_income_currency ? this.profileObj.net_family_income_currency : "";
+        familyObj.fathersalivestatus = this.profileObj.fathersalivestatus ? this.profileObj.fathersalivestatus : "";
+        familyObj.mothersalivestatus = this.profileObj.mothersalivestatus ? this.profileObj.mothersalivestatus : "";
+        familyObj.additionalFamilyInformation = this.profileObj.additionalFamilyInformation ? this.profileObj.additionalFamilyInformation : "";
+        familyObj.id = this.profileObj.id ? this.profileObj.id : this.loggedInUser.id;
+        if ((this.profileObj.family_information.fathers_info && this.profileObj.family_information.fathers_info.first_name) ||
+          (this.profileObj.family_information.mothers_info && this.profileObj.family_information.mothers_info.first_name)) {
+          familyObj.family_information = JSON.stringify(this.profileObj.family_information);
+        }
+
+        let formData = new FormData();
+
+        for (var key in familyObj) {
+          formData.append(key, familyObj[key]);
+        }
+
+        this.adminService.updateProfileFamily(formData).subscribe((response: any) => {
+          if (response.success) {
+            this.toastr.success(response.message);
+            // let redirectionTab = nextTab.replace(" ", "-").toLowerCase();
+            this.activeTab = nextTab;
+            // if (routingFlag == "true") {
+            //   this.router.navigate(["/profiles"]);
+            // } else {
+            //   this.router.navigate(["/profiles/create/" + this.profileObj.id + "/" + redirectionTab]);
+            // }
+          }
+          this.isLoading = false;
+        });
+      }
+
+      if (nextTab == "Education") {
+
+        var addressObj: any = {};
+
+        addressObj.id = this.profileObj.id ? this.profileObj.id : this.loggedInUser.id;
+        addressObj.residential_address = this.profileObj.residential_address ? this.profileObj.residential_address : "";
+        addressObj.residential_address_apt = this.profileObj.residential_address_apt ? this.profileObj.residential_address_apt : "";
+        addressObj.residential_country = this.profileObj.residential_country ? this.profileObj.residential_country : "";
+        addressObj.residential_state = this.profileObj.residential_state ? this.profileObj.residential_state : "";
+        addressObj.residential_city = this.profileObj.residential_city ? this.profileObj.residential_city : "";
+        addressObj.residential_zipcode = this.profileObj.residential_zipcode ? this.profileObj.residential_zipcode : "";
+        addressObj.residential_type = this.profileObj.residential_type ? this.profileObj.residential_type : "";
+        addressObj.residential_house_type = this.profileObj.residential_house_type ? this.profileObj.residential_house_type : "";
+        addressObj.residential_other_house_type = this.profileObj.residential_other_house_type ? this.profileObj.residential_other_house_type : "";
+        addressObj.future_residential_address = this.profileObj.future_residential_address ? this.profileObj.future_residential_address : "";
+        addressObj.future_residential_address_apt = this.profileObj.future_residential_address_apt ? this.profileObj.future_residential_address_apt : "";
+        addressObj.future_residential_country = this.profileObj.future_residential_country ? this.profileObj.future_residential_country : "";
+        addressObj.future_residential_state = this.profileObj.future_residential_state ? this.profileObj.future_residential_state : "";
+        addressObj.future_residential_city = this.profileObj.future_residential_city ? this.profileObj.future_residential_city : "";
+        addressObj.future_residential_zipcode = this.profileObj.future_residential_zipcode ? this.profileObj.future_residential_zipcode : "";
+        addressObj.future_residential_type = this.profileObj.future_residential_type ? this.profileObj.future_residential_type : "";
+        addressObj.future_residential_house_type = this.profileObj.future_residential_house_type ? this.profileObj.future_residential_house_type : "";
+        addressObj.future_residential_other_house_type = this.profileObj.future_residential_other_house_type ? this.profileObj.future_residential_other_house_type : "";
+        addressObj.parents_address = this.profileObj.parents_address ? this.profileObj.parents_address : "";
+        addressObj.company_address = this.profileObj.company_address ? this.profileObj.company_address : "";
+        addressObj.weekend_address = this.profileObj.weekend_address ? this.profileObj.weekend_address : "";
+
+        let formData = new FormData();
+
+        for (var key in addressObj) {
+          formData.append(key, addressObj[key]);
+        }
+
+        this.adminService.updateProfileAddress(formData).subscribe((response: any) => {
+          if (response.success) {
+            this.toastr.success(response.message);
+            // let redirectionTab = nextTab.replace(" ", "-").toLowerCase();
+            this.activeTab = nextTab;
+            // if (routingFlag == "true") {
+            //   this.router.navigate(["/profiles"]);
+            // } else {
+            //   this.router.navigate(["/profiles/create/" + this.profileObj.id + "/" + redirectionTab]);
+            // }
+          }
+          this.isLoading = false;
+        });
+
+      }
+
+      if (nextTab == "Occupation") {
+
+
+
+        var educationObj: any = {};
+
+        educationObj.education = JSON.stringify(this.educationList);
+        educationObj.abroad_studies = this.profileObj.abroad_studies ? this.profileObj.abroad_studies : "";
+        educationObj.additionalEducationInformation = this.profileObj.additionalEducationInformation ? this.profileObj.additionalEducationInformation : "";
+        educationObj.id = this.profileObj.id ? this.profileObj.id : this.loggedInUser.id;
+
+        let formData = new FormData();
+
+        for (var key in educationObj) {
+          formData.append(key, educationObj[key]);
+        }
+
+        this.adminService.updateProfileEducation(formData).subscribe((response: any) => {
+          if (response.success) {
+            this.toastr.success(response.message);
+            // let redirectionTab = nextTab.replace(" ", "-").toLowerCase();
+            this.activeTab = nextTab;
+            // if (routingFlag == "true") {
+            //   this.router.navigate(["/profiles"]);
+            // } else {
+            //   this.router.navigate(["/profiles/create/" + this.profileObj.id + "/" + redirectionTab]);
+            // }
+          }
+          this.isLoading = false;
+        });
+
+      }
+
+      if (nextTab == "Preference") {
+
+
+
+        var occupationObj: any = {};
+
+        occupationObj.occupation = JSON.stringify(this.occupationList);
+        occupationObj.additionalOccupationInformation = this.profileObj.additionalOccupationInformation ? this.profileObj.additionalOccupationInformation : "";
+        occupationObj.id = this.profileObj.id ? this.profileObj.id : this.loggedInUser.id;
+
+        let formData = new FormData();
+
+        for (var key in occupationObj) {
+          formData.append(key, occupationObj[key]);
+        }
+
+        this.adminService.updateProfileOccupation(formData).subscribe((response: any) => {
+          if (response.success) {
+            this.toastr.success(response.message);
+            // let redirectionTab = nextTab.replace(" ", "-").toLowerCase();
+            this.activeTab = nextTab;
+            // if (routingFlag == "true") {
+            //   this.router.navigate(["/profiles"]);
+            // } else {
+            //   this.router.navigate(["/profiles/create/" + this.profileObj.id + "/" + redirectionTab]);
+            // }
+          }
+          this.isLoading = false;
+        });
+
+      }
+
+      if (nextTab == "Profile Images") {
+
+        var preferenceObj: any = {};
+
+        preferenceObj.id = this.profileObj.id ? this.profileObj.id : this.loggedInUser.id;
+        preferenceObj.age_gap = this.profileObj.age_gap ? this.profileObj.age_gap : "";
+        preferenceObj.min_age_gap = this.profileObj.min_age_gap ? this.profileObj.min_age_gap : "";
+        preferenceObj.max_age_gap = this.profileObj.max_age_gap ? this.profileObj.max_age_gap : "";
+        preferenceObj.height_preferance = this.profileObj.height_preferance ? this.profileObj.height_preferance : "";
+        preferenceObj.believes_in_horoscopes = this.profileObj.believes_in_horoscopes ? this.profileObj.believes_in_horoscopes : "";
+        preferenceObj.education_preferance = this.profileObj.education_preferance ? this.profileObj.education_preferance : "";
+        preferenceObj.education_type_preference = this.profileObj.education_type_preference ? this.profileObj.education_type_preference : "";
+        preferenceObj.occupation_type_preference = this.profileObj.occupation_type_preference ? this.profileObj.occupation_type_preference : "";
+        preferenceObj.relationship_status_preferance = this.profileObj.relationship_status_preferance ? this.profileObj.relationship_status_preferance : "";
+        preferenceObj.doctor_preference = this.profileObj.doctor_preference ? this.profileObj.doctor_preference : "";
+        preferenceObj.occuppation_preferance = this.profileObj.occuppation_preferance ? this.profileObj.occuppation_preferance : "";
+        preferenceObj.country_of_settlement = this.profileObj.country_of_settlement ? this.profileObj.country_of_settlement : "";
+        preferenceObj.state_of_settlement = this.profileObj.state_of_settlement ? this.profileObj.state_of_settlement : "";
+        preferenceObj.city_of_settlement = this.profileObj.city_of_settlement ? this.profileObj.city_of_settlement : "";
+        preferenceObj.food_habits_preferance = this.profileObj.food_habits_preferance ? this.profileObj.food_habits_preferance : "";
+        preferenceObj.drinking_habits_preferance = this.profileObj.drinking_habits_preferance ? this.profileObj.drinking_habits_preferance : "";
+        preferenceObj.smoking_habits_preferance = this.profileObj.smoking_habits_preferance ? this.profileObj.smoking_habits_preferance : "";
+        preferenceObj.discription = this.profileObj.discription ? this.profileObj.discription : "";
+        preferenceObj.family_background = this.profileObj.family_background ? this.profileObj.family_background : "";
+        preferenceObj.family_type = this.profileObj.family_type ? this.profileObj.family_type : "";
+        preferenceObj.min_net_worth = this.profileObj.min_net_worth ? this.profileObj.min_net_worth : "";
+        preferenceObj.caste_preference = this.profileObj.caste_preference ? this.profileObj.caste_preference : "";
+        preferenceObj.subcaste_preference = this.profileObj.subcaste_preference ? this.profileObj.subcaste_preference : "";
+        preferenceObj.religion_preference = this.profileObj.religion_preference ? this.profileObj.religion_preference : "";
+        preferenceObj.citizenship = this.profileObj.citizenship ? this.profileObj.citizenship : "";
+        preferenceObj.visa = this.profileObj.visa ? this.profileObj.visa : "";
+        preferenceObj.abroad_studies_preference = this.profileObj.abroad_studies_preference ? this.profileObj.abroad_studies_preference : "";
+        preferenceObj.fathers_preference = this.profileObj.fathers_preference ? this.profileObj.fathers_preference : "";
+        preferenceObj.mothers_preference = this.profileObj.mothers_preference ? this.profileObj.mothers_preference : "";
+        preferenceObj.fixed_preferences = this.profileObj.fixed_preferences ? this.profileObj.fixed_preferences : "";
+        preferenceObj.mother_tongue_preference = this.profileObj.mother_tongue_preference ? this.profileObj.mother_tongue_preference : "";
+        preferenceObj.complexion_preference = this.profileObj.complexion_preference ? this.profileObj.complexion_preference : "";
+        preferenceObj.minimum_weight = this.profileObj.minimum_weight ? this.profileObj.minimum_weight : "";
+        preferenceObj.maximum_weight = this.profileObj.maximum_weight ? this.profileObj.maximum_weight : "";
+        preferenceObj.body_type_preference = this.profileObj.body_type_preference ? this.profileObj.body_type_preference : "";
+
+        let formData = new FormData();
+        for (var key in preferenceObj) {
+          formData.append(key, preferenceObj[key]);
+        }
+
+        this.adminService.updateProfilePreferenec(formData).subscribe((response: any) => {
+          if (response.success) {
+            this.toastr.success(response.message);
+            // let redirectionTab = nextTab.replace(" ", "-").toLowerCase();
+            this.activeTab = nextTab;
+            // if (routingFlag == "true") {
+            //   this.router.navigate(["/profiles"]);
+            // } else {
+            //   this.router.navigate(["/profiles/create/" + this.profileObj.id + "/" + redirectionTab]);
+            // }
+          }
+          this.isLoading = false;
+        });
+
+
+      }
+
+      if (nextTab == "User") {
+
+        if (this.profileObj.kyc == '') {
+          this.toastr.error('Please upload Kyc image.');
+          return;
+        }
+
+        var imagesObj: any = {};
+
+        imagesObj.id = this.profileObj.id ? this.profileObj.id : this.loggedInUser.id;
+        imagesObj.remove_kyc_ids = this.profileObj.remove_kyc_ids;
+        imagesObj.remove_ids = this.profileObj.remove_ids;
+        imagesObj.document = this.profileObj.document;
+        imagesObj.kundali = this.profileObj.kundali;
+        imagesObj.images = this.profileObj.images;
+        imagesObj.kyc = this.profileObj.kyc;
+
+
+
+
+        let formData = new FormData();
+
+        for (var key in imagesObj) {
+          if (key == "images") {
+            for (var index in this.profileObj.imagesPreview) {
+              formData.append(
+                "images[" + index + "]",
+                this.profileObj.imagesPreview[index]
+              );
+            }
+          }
+          if (key == "kyc") {
+            for (var index in this.profileObj.kycPreview) {
+              formData.append(
+                "kyc[" + index + "]",
+                this.profileObj.kycPreview[index]
+              );
+            }
+          }
+          formData.append(key, imagesObj[key]);
+        }
+
+        this.adminService.updateProfileMedia(formData).subscribe((response: any) => {
+          if (response.success) {
+            this.toastr.success(response.message);
+            // let redirectionTab = nextTab.replace(" ", "-").toLowerCase();
+            this.activeTab = nextTab;
+            // if (routingFlag == "true") {
+            //   this.router.navigate(["/profiles"]);
+            // } else {
+            //   this.router.navigate(["/profiles/create/" + this.profileObj.id + "/" + redirectionTab]);
+            // }
+            // this.router.navigate(['/my-profile']);
+            this.router.navigate([`/preview/${this.loggedInUser.id}`]);
+          }
+          this.isLoading = false;
+        });
+
+      }
+
     }
   }
-
   public formError: boolean = false;
 
   saveAndNext(form, routingFlag, nextTab) {
-    if (form.valid && routingFlag == "false") {
+    // if (form.valid && routingFlag == "false") {
+    if (nextTab == 'Address' && this.profileObj.family_information.fathers_info.first_name == '') {
+      console.log("hello");
+      this.toastr.error("Father name is required.");
+      return;
+    }
+
+
+    if (form.valid) {
       this.save(form, false, nextTab);
       this.formError = false;
     } else {
       this.formError = true;
+      // this.toastr.error("Please fill in all fields marked with an *");
+      // if (this.profileObj.family_information.fathers_info.first_name == '') {
+
+      //   this.toastr.error(" Father Name is required");
+      // }
+      if (nextTab == 'Occupation') {
+        // console.log("hello");
+        this.toastr.error(" Education Description is required.");
+        return;
+      }
+      if (nextTab == 'Preference') {
+        for (let i = 0; i < this.occupationList.length; i++) {
+          const occupation = this.occupationList[i];
+          if (!occupation.occupation_type) {
+            this.toastr.error(`Occupation Type is required.`);
+            return; // Stop submission if validation fails
+          }
+        }
+      }
     }
   }
+
+
 
   // Api for dropdowns
 

@@ -2,63 +2,204 @@
     <div class="login_wrapper">
         <div class="login-flex">
             <div class="row-flex big-gap">
-                <div class="logo-login">
+                <div class="logo-login" routerLink='/landing'>
                     <img src="assets/images/logo.svg">
                 </div>
-           
             </div>
 
-            <form name="admin" id="admin" (ngSubmit)="submitotp(loginForm.form)" #loginForm="ngForm" novalidate
-                class="form-wrapper" autocomplete="off" *ngIf="!otpsentF">
+            <!-- Tabs for switching login methods -->
+            <div class="login-tabs" *ngIf="!otpsentF">
+                <!-- <button (click)="loginMethod = 'phone'" [class.active]="loginMethod === 'phone'">Login with
+                    Phone</button> -->
+                <button (click)="loginMethod = 'phone'; response_message = '' ; loginObj.email = ''"
+                    [class.active]="loginMethod === 'phone'">Login with
+                    Phone</button>
+                <button (click)="loginMethod = 'email' ; response_message = '';loginObj.contact_no=''"
+                    [class.active]="loginMethod === 'email'">Login with
+                    Email</button>
+            </div>
 
-                <div class="form-field relative">
-                    <label class="md-lable" style="font-size: 18px;" for="contact_no">Mobile Number<span>*</span></label>
-                    <input id="contact_no" (keypress)=_keyPress($event) minlength="8" maxlength="12" name="contact_no" type="text"  required
-                        [(ngModel)]="loginObj.contact_no" #contact_no="ngModel" class="form-data" tabindex="1">
+            <!-- Mobile Number Form -->
 
-                    <div *ngIf="loginForm.submitted && loginObj.contact_no == ''" class="">
-                        <div class="error">
-                            <p>Please enter valid mobile number for login</p>
+            <form *ngIf="loginMethod === 'phone' && !otpsentF" name="admin" id="admin"
+                (ngSubmit)="submitotp(loginForm.form)" #loginForm="ngForm" novalidate class="form-wrapper"
+                autocomplete="off">
+                <div class="inner-flex inner-flex-common relative">
+                    <!-- <label class="md-lable" style="font-size: 24px;" for="contact_no">Enter your number,<br> please?
+                    </label> -->
+                    <label class="md-lable font-weight-light" style="font-size: 24px; text-align: center; "
+                        for="contact_no">Please enter
+                        your Number to log in
+                        & <br>
+                        Find Your Forever.
+                    </label>
+
+
+
+                    <!-- <div class="section-text">
+                        <p>Please enter your number to log in.</p>
+                    </div> -->
+                    <div class="relative custom-input">
+                        <input id="contact_no" (keypress)="_keyPress($event)" minlength="10" maxlength="10"
+                            name="contact_no" type="text" [(ngModel)]="loginObj.contact_no" #contact_no="ngModel"
+                            placeholder="00000 00000" class="form-control-matched-forever" tabindex="1"
+                            (keyup.enter)="submitotp(loginForm.form)" required
+                            (ngModelChange)="response_message_clear()"
+                            [class.red-border]="contact_no.invalid && (loginForm.submitted || contact_no.touched) || response_message ">
+
+                        <div class="form-field contry-drpdn">
+                            <ng-select class="form-data-select" name="country_code" id="country_code"
+                                [(ngModel)]="loginObj.country_code" #country_code="ngModel" style="width: 100%"
+                                [clearable]="false">
+                                <ng-option value="">-Select Country Code-</ng-option>
+                                <ng-option value="{{ country.phonecode }}" *ngFor="let country of countryList">
+                                    <div class="row-flex aic small-gap">
+                                        <div class="country-flag-form">
+                                            <img src="https://flagcdn.com/w40/{{toSmallerCase(country.iso2)}}.webp"
+                                                alt="flag" />
+                                        </div>
+                                        <div>+{{ country.phonecode }}</div>
+                                        <!-- <div>
+                                            {{ country.name }}
+                                        </div> -->
+                                    </div>
+                                </ng-option>
+                            </ng-select>
+
                         </div>
                     </div>
+                    <div *ngIf="contact_no.invalid && (contact_no.touched || loginForm.submitted) && !response_message"
+                        class="error-msg-label">
+                        <div class="error">
+                            <p>Please enter a valid mobile number for login</p>
+                        </div>
+                    </div>
+                    <div *ngIf="response_message && response_message != ''" class="error-msg-label">
+                        <div class="error">
+                            <p>{{response_message}}</p>
+                        </div>
+                    </div>
+                    <!-- <div *ngIf="loginForm.submitted && loginObj.contact_no == ''" class="error-msg-label">
+                        <div class="error">
+                            <p>Please enter a valid mobile number for login</p>
+                        </div>
+                    </div> -->
                 </div>
-                
-
                 <div class="submit-button admin-submit-button">
-                    <button class="button-style blue-button " type="submit">
-                        <p>Send Otp</p>
+                    <button class="matched-forever-button button-style-primary w-100" type="submit"
+                        [disabled]="isSubmiting">
+                        <p>{{isSubmiting ? 'Please Wait..' : 'Send OTP'}}</p>
                     </button>
                 </div>
             </form>
 
-            <form name="admin" id="admin" (ngSubmit)="submitadmin(loginForm.form)" #loginForm="ngForm" novalidate
-            class="form-wrapper" autocomplete="off" *ngIf="otpsentF">
+            <!-- Email Form -->
+            <form *ngIf="loginMethod === 'email' && !otpsentF" name="admin" id="admin"
+                (ngSubmit)="submitotp(loginForm.form)" #loginForm="ngForm" novalidate class="form-wrapper"
+                autocomplete="off">
+                <div class="inner-flex inner-flex-common relative">
+                    <!-- <label class="md-lable" style="font-size: 24px;" for="email">Login with Email</label> -->
+                    <label class="md-lable" style="font-size: 24px; text-align: center;" for="email">Please enter
+                        your Email to log in
+                        & <br>
+                        Find Your Forever.</label>
+                    <div class="relative ">
+                        <input id="email" name="email" type="email" [(ngModel)]="loginObj.email" #email="ngModel"
+                            class="form-control-matched-forever" placeholder="user@matchedforever.in" required
+                            [class.red-border]="email.invalid && (loginForm.submitted || email.touched) || response_message"
+                            (keyup.enter)="submitotp('')" (ngModelChange)="response_message_clear()" />
+                        <!-- (keyup.enter)="submitotp('')" -->
 
-                <div class="form-field relative">
-                    <label class="md-lable" style="font-size: 18px;" for="otp">Enter OTP<span>*</span></label>
 
-                    <div class="otp-container">
-                        <input id="otp1" name="otp1" type="text" maxlength="1" required
-                            [(ngModel)]="loginObj.otp1" #otp1="ngModel" (input)="moveFocus($event, 2)" class="otp-box" tabindex="1">
-                        <input id="otp2" name="otp2" type="text" maxlength="1" required
-                            [(ngModel)]="loginObj.otp2" #otp2="ngModel" (input)="moveFocus($event, 3)" class="otp-box" tabindex="2">
-                        <input id="otp3" name="otp3" type="text" maxlength="1" required
-                            [(ngModel)]="loginObj.otp3" #otp3="ngModel" (input)="moveFocus($event, 4)" class="otp-box" tabindex="3">
-                        <input id="otp4" name="otp4" type="text" maxlength="1" required
-                            [(ngModel)]="loginObj.otp4" #otp4="ngModel" (input)="moveFocus($event, 5)" class="otp-box" tabindex="4">
+                    </div>
+                    <!-- <div *ngIf="loginForm.submitted && loginObj.email == ''" class="error-msg-label">
+                        <div class="error">
+                            <p>Please enter a valid email</p>
+                        </div>
+                    </div> -->
+                    <div *ngIf="email.invalid && (email.touched || loginForm.submitted)" class="error-msg-label">
+                        <div class="error">
+                            <p *ngIf="email.errors?.required">Please enter a valid email</p>
+                            <!-- <p *ngIf="email.errors?.email && !email.errors?.required">Email format is invalid</p> -->
+                        </div>
+                    </div>
+                    <div *ngIf="response_message && response_message != ''" class="error-msg-label">
+                        <div class="error">
+                            <p>{{response_message}}</p>
+                        </div>
                     </div>
 
-                    <div *ngIf="loginForm.submitted && !loginObj.otp1 && !loginObj.otp2 && !loginObj.otp3 && !loginObj.otp4" class="error">
+                </div>
+                <!-- <div class="submit-button admin-submit-button">
+                    <button class="matched-forever-button button-style-primary w-100" type="submit"
+                        [disabled]="isSubmiting">
+                        <p>Send OTP</p>
+                        {{isSubmiting ? 'Please Wait..' : 'Send OTP'}}
+                    </button>
+                </div> -->
+                <div class="submit-button admin-submit-button">
+                    <button class="matched-forever-button button-style-primary w-100" type="submit"
+                        [disabled]="isSubmiting">
+                        <p>{{isSubmiting ? 'Please Wait..' : 'Send OTP'}}</p>
+                    </button>
+                </div>
+            </form>
+
+            <!-- OTP Form -->
+            <form *ngIf="otpsentF" name="admin" id="admin" (ngSubmit)="submitotp('')" #loginForm="ngForm" novalidate
+                class="form-wrapper" autocomplete="off">
+                <div class="form-field relative">
+                    <label class="md-lable" style="font-size: 24px;" for="otp">Verify your OTP </label>
+                    <!-- <div class="section-text">
+                        <p>Enter the code we've sent to your registered contact. <span
+                                class="change-number secondary-color" (click)="resendOtp()">Resend OTP</span></p>
+                    </div> -->
+                    <div class="section-text">
+                        <p>
+                            Enter the code we've sent to your registered email. <br>
+                            <span class="change-number secondary-color" (click)="resendOtp()"
+                                [ngClass]="{'disabled':isResendDisabled}"
+                                [attr.disabled]="isResendDisabled ? true : null">
+                                {{ isResendDisabled ? 'Resend OTP in ' + countdown + 's' : 'Resend OTP' }}
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="otp-container">
+                        <input id="otp1" name="otp1" type="text" maxlength="1" required [(ngModel)]="loginObj.otp1"
+                            #otp1="ngModel" (input)="moveFocus($event, 2)" class="otp-box" tabindex="1"
+                            (keyup.backspace)="changeTab(1)" (keypress)="_keyPress($event)">
+                        <input id="otp2" name="otp2" type="text" maxlength="1" required [(ngModel)]="loginObj.otp2"
+                            #otp2="ngModel" (input)="moveFocus($event, 3)" class="otp-box" tabindex="2"
+                            (keyup.backspace)="changeTab(2)" (keypress)="_keyPress($event)">
+                        <input id="otp3" name="otp3" type="text" maxlength="1" required [(ngModel)]="loginObj.otp3"
+                            #otp3="ngModel" (input)="moveFocus($event, 4)" class="otp-box" tabindex="3"
+                            (keyup.backspace)="changeTab(3)" (keypress)="_keyPress($event)">
+                        <input id="otp4" name="otp4" type="text" maxlength="1" required [(ngModel)]="loginObj.otp4"
+                            #otp4="ngModel" (input)="onOtp4Change()" class="otp-box" tabindex="4"
+                            (keyup.enter)="submitotp('')" (keyup.backspace)="changeTab(4)"
+                            (keypress)="_keyPress($event)">
+                    </div>
+                    <div *ngIf="loginForm.submitted && (!loginObj.otp1 || !loginObj.otp2 || !loginObj.otp3 || !loginObj.otp4)"
+                        class="error">
                         <p>Please enter a valid OTP</p>
                     </div>
                 </div>
-
                 <div class="submit-button admin-submit-button">
-                    <button class="button-style blue-button" type="submit" [disabled]="isLoading">
+                    <button class="matched-forever-button button-style-primary w-100" type="submit"
+                        [disabled]="isLoading">
+                        <!-- <p>Login</p> -->
                         <p>Login</p>
                     </button>
                 </div>
             </form>
+
+            <div class="signup-line-text-login">
+                <p>
+                    Don't have an account? <span class="semibold-fonts cursorpointer secondary-color"
+                        routerLink="/register/">Register Now</span>
+                </p>
+            </div>
         </div>
     </div>
 </div>
