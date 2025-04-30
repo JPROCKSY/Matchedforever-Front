@@ -212,8 +212,8 @@
 
                 </div>
             </div>
-            <div class="flex-row alc" (click)="openPopup()">
-                <div class="notification-icon relative">
+            <div class="flex-row alc">
+                <div class="notification-icon relative" (click)="openPopup()">
                     <span class="material-symbols-outlined">
                         notifications
                     </span>
@@ -222,12 +222,19 @@
                     </div>
                 </div>
 
+                <div class="notification-icon" routerLink="/user-chat">
+                    <span class="material-symbols-outlined">
+                        forum
+                    </span>
+                </div>
+
                 <div class="notification-icon" (click)="getlogout()">
                     <span class="material-symbols-outlined">
                         logout
                     </span>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -265,6 +272,29 @@
             <div>
                 {{list.message}}
             </div>
+
+            <ng-container *ngIf="list.type == 'chat_request'">
+                <div class="accept-chat-reject-flex">
+                    <div class="accept-chat-btn chat-actionbtn" (click)="changeStatus(list.link, 'accept')">
+                        <span class="material-symbols-outlined">
+                            check
+                        </span>
+                        <p>
+                            Accept
+                        </p>
+                    </div>
+                    <div class="reject-chat-btn chat-actionbtn" (click)="changeStatus(list.link, 'reject')">
+                        <span class="material-symbols-outlined">
+                            close
+                        </span>
+                        <p>
+                            Reject
+                        </p>
+                    </div>
+                </div>
+            </ng-container>
+
+            <!-- {{list.type}} -->
         </div>
         <button class="matched-forever-button button-style-primary-outline" style="max-height: 40px!important;"
             *ngIf="unread_count > 0" (click)="markallRead()">

@@ -168,4 +168,13 @@ export class HomeComponent implements OnInit {
     this.router.navigate([`/preview/${id}`]);
 
   }
+
+  changeStatus(candidate_id,status){
+    this.adminService.changeChatStatus({candidate_id:candidate_id, user_id:this.loggedInUser.id, status:status}).subscribe((response:any) => {
+      if(response.success){
+        this.notificationList();
+      } else {
+      }
+    })
+  }
 }

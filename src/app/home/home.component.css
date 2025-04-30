@@ -56,6 +56,50 @@
     visibility: visible;
 }
 
+.chat-actionbtn {
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;
+    background-color: #dedede;
+    border: 1px solid #dedede;
+}
+.chat-actionbtn.accept-chat-btn {
+    background-color: green;
+    border-color: green;
+}
+.chat-actionbtn.reject-chat-btn {
+    background-color: #ff0000;
+    border-color: #ff0000;
+}
+.accept-chat-reject-flex{
+    display: grid;
+    grid-template-columns: calc(100% / 2 - 0.5rem) calc(100% / 2 - 0.5rem);
+    gap: 1rem;
+    align-items: center; 
+    margin-top: 0.75rem;
+}
+.chat-actionbtn p,
+.chat-actionbtn span.material-symbols-outlined {
+    color: #ffffff;
+}
+
+.chat-actionbtn.accept-chat-btn:hover p,
+.chat-actionbtn.accept-chat-btn:hover span.material-symbols-outlined {
+    color: green;
+}
+.chat-actionbtn.reject-chat-btn:hover p,
+.chat-actionbtn.reject-chat-btn:hover span.material-symbols-outlined {
+    color: #ff0000;
+}
+.chat-actionbtn.accept-chat-btn:hover,
+.chat-actionbtn.reject-chat-btn:hover {
+    background-color: #fff;
+}
+
 .notification-count {
     position: absolute;
     width: 1.3rem;

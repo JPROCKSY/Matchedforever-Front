@@ -116,7 +116,7 @@
 }
 
 .signup_wrapper {
-    width: 50% !important;
+    /* width: 50% !important; */
     max-width: unset !important;
     padding: 2rem !important;
 }

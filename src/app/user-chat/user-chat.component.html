@@ -1,0 +1,31 @@
+<div class="main-container">
+    <div class="chat-grid-wrapper">
+        <div class="chat-profile-list-wrapper">
+            <div class="chat-user" *ngFor="let user of chatUsers" (click)="selectUser(user)">
+                <div class="name-wrapper">
+                    <div class="user-avatar">
+                        <img [src]="user.candidate_info.profile_pic || 'assets/images/avatar-placeholder.png'"
+                            alt="User" />
+                    </div>
+                    <div class="user-details">
+                        <h5>{{ user.candidate_info.first_name }}</h5>
+                        <p>
+                            {{user.last_message}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-area-section-wrapper">
+            <ng-container *ngIf="selectedUser">
+                <!-- <app-chat [user]="selectedUser" [loggedInUser]="loggedInUser"></app-chat> -->
+                <app-chat 
+                [user]="selectedUser" 
+                [loggedInUser]="loggedInUser"
+                (messageSent)="handleMessageSent($event)">
+              </app-chat>
+            </ng-container>
+        </div>
+    </div>
+</div>

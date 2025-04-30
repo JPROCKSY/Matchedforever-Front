@@ -23,7 +23,7 @@ export class AdminServiceService {
 
     private apiUrl = environment.apiUrl;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
     adminSignIn(userData): Observable<any> {
         const httpOptions = {
@@ -101,9 +101,15 @@ export class AdminServiceService {
 
     profileBiodata(data): Observable<any> {
         const httpOptions = {
-            headers: this.getAuthHeaders()
+            headers: this.getAuthHeaders(),
         };
-        return this.http.post<any>(this.apiUrl + 'profile/download_biodata', JSON.stringify(data), httpOptions).pipe();
+        return this.http
+            .post<any>(
+                this.apiUrl + "profile/download_biodata",
+                JSON.stringify(data),
+                httpOptions
+            )
+            .pipe();
     }
 
     checkcode(userData): Observable<any> {
@@ -149,9 +155,15 @@ export class AdminServiceService {
 
     getUsers(data): Observable<any> {
         const httpOptions = {
-            headers: this.getAuthHeaders()
+            headers: this.getAuthHeaders(),
         };
-        return this.http.post<any>(this.apiUrl + 'profile/list', JSON.stringify(data), httpOptions).pipe();
+        return this.http
+            .post<any>(
+                this.apiUrl + "profile/list",
+                JSON.stringify(data),
+                httpOptions
+            )
+            .pipe();
     }
 
     profileDetail(data): Observable<any> {
@@ -249,7 +261,11 @@ export class AdminServiceService {
             headers: this.getAuthdataHeaders(),
         };
         return this.http
-            .post<any>(environment.apiUrl + "sharedProfile/profilecounts", data, httpOptions)
+            .post<any>(
+                environment.apiUrl + "sharedProfile/profilecounts",
+                data,
+                httpOptions
+            )
             .pipe();
     }
 
@@ -361,14 +377,9 @@ export class AdminServiceService {
             // headers: this.getAuthHeaders(),
         };
         return this.http
-            .post<any>(
-                environment.apiUrl + "country",
-                JSON.stringify(data),
-
-            )
+            .post<any>(environment.apiUrl + "country", JSON.stringify(data))
             .pipe();
     }
-
 
     states(data): Observable<any> {
         const httpOptions = {
@@ -705,7 +716,6 @@ export class AdminServiceService {
             .pipe();
     }
 
-
     clearNotification(data): Observable<any> {
         const httpOptions = {
             headers: this.getAuthHeaders(),
@@ -713,6 +723,58 @@ export class AdminServiceService {
         return this.http
             .post<any>(
                 this.apiUrl + "notification/clear",
+                JSON.stringify(data),
+                httpOptions
+            )
+            .pipe();
+    }
+
+    chatList(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders(),
+        };
+        return this.http
+            .post<any>(
+                this.apiUrl + "chatRequests/list",
+                JSON.stringify(data),
+                httpOptions
+            )
+            .pipe();
+    }
+
+    sentChatRequest(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders(),
+        };
+        return this.http
+            .post<any>(
+                this.apiUrl + "chatRequests/send_request",
+                JSON.stringify(data),
+                httpOptions
+            )
+            .pipe();
+    }
+
+    changeChatStatus(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders(),
+        };
+        return this.http
+            .post<any>(
+                this.apiUrl + "chatRequests/change_status",
+                JSON.stringify(data),
+                httpOptions
+            )
+            .pipe();
+    }
+
+    updateLastMessage(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders(),
+        };
+        return this.http
+            .post<any>(
+                this.apiUrl + "chatRequests/update_last_message",
                 JSON.stringify(data),
                 httpOptions
             )

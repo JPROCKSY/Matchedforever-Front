@@ -1,8 +1,8 @@
 <div class="web-profile inner-flex">
-    <!-- <div class="back-button" (click)="backbutton();">
+    <div class="back-button" (click)="backbutton();">
         <span class="material-symbols-outlined">arrow_back</span>
         <p>Back</p>
-    </div> -->
+    </div>
     <div class="my-profile-detail-wrapper">
         <div class="left-profile-wrapper inner-flex inner-flex-small">
             <div class="myprofile-image-wrapper my-profile-detail-card"
@@ -118,6 +118,32 @@
                 </button>
 
             </div>
+
+            <ng-container *ngIf="profileId != this.login_user_id">
+                <div *ngIf="!profileObj.chat_flag">
+                    <button class="matched-forever-button button-style-primary"
+                    style="width: 100% !important;" (click)="sendMesageRequest(profileObj.id)">
+                        <p>
+                            Chat
+                        </p>
+                        <span class=" material-symbols-outlined">
+                            forum
+                        </span>
+                    </button>
+                </div>
+
+                <div *ngIf="profileObj.chat_flag">
+                    <button class="matched-forever-button button-style-primary"
+                        disabled style="width: 100% !important;">
+                        <p> 
+                            Chat Requested
+                        </p>
+                        <span class=" material-symbols-outlined">
+                            schedule
+                        </span>
+                    </button>
+                </div>
+            </ng-container>
             <!-- <div class="gallery-images-grid">
                 <div class="gallery-image-card-thumbs" *ngFor="let data of profileObj.images">
                     <a href="{{data.image}}" data-fancybox="gallery" data-caption="Test" target="_self"
@@ -265,7 +291,7 @@
                         </div>
                         <div class="section-text section-content-detail-flex">
                             <p class="content-title-p">
-                               Sub Caste
+                                Sub Caste
                             </p>
                             <p class="text-capitalise">
                                 {{profileObj.subcaste_name}}
@@ -339,7 +365,8 @@
                     </div>
                 </div>
                 <div class="detail-wrapper-grid-3">
-                    <div class="webo-icon-flex-card" *ngIf="profileObj.basicInfo.birth_date_show || profileObj.basicInfo.birth_time">
+                    <div class="webo-icon-flex-card"
+                        *ngIf="profileObj.basicInfo.birth_date_show || profileObj.basicInfo.birth_time">
                         <div class="icon-web-wrapper">
                             <img src="assets/images/front-icons/time.png" alt="">
                         </div>
@@ -835,7 +862,7 @@
 
                                 <p class="text-capitalise w75imp addess-wrapper">
                                     <span *ngIf="profileObj.basicInfo.parents_address">
-                                        {{ profileObj.basicInfo.parents_address  }}
+                                        {{ profileObj.basicInfo.parents_address }}
                                     </span>
                                 </p>
                             </div>
@@ -862,7 +889,7 @@
 
                                 <p class="text-capitalise w75imp addess-wrapper">
                                     <span *ngIf="profileObj.basicInfo.company_address">
-                                        {{ profileObj.basicInfo.company_address  }}
+                                        {{ profileObj.basicInfo.company_address }}
                                     </span>
                                 </p>
                             </div>
@@ -889,7 +916,7 @@
 
                                 <p class="text-capitalise w75imp addess-wrapper">
                                     <span *ngIf="profileObj.basicInfo.weekend_address">
-                                        {{ profileObj.basicInfo.weekend_address  }}
+                                        {{ profileObj.basicInfo.weekend_address }}
                                     </span>
                                 </p>
                             </div>
@@ -978,7 +1005,8 @@
                     <div class="icon-web-wrapper">
                         <img src="assets/images/front-icons/education.png" alt="">
                     </div>
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.additionalEducationInformation">
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="profileObj.basicInfo.additionalEducationInformation">
                         <p class="content-title-p">
                             Education Other Information
                         </p>
@@ -1121,7 +1149,8 @@
                     <div class="icon-web-wrapper">
                         <img src="assets/images/front-icons/education.png" alt="">
                     </div>
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.additionalOccupationInformation">
+                    <div class="section-text section-content-detail-flex"
+                        *ngIf="profileObj.basicInfo.additionalOccupationInformation">
                         <p class="content-title-p">
                             Occupation Other Information
                         </p>
@@ -1194,7 +1223,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="webo-icon-flex-card"  *ngIf="profileObj.family_information && profileObj.family_information.fathers_info && profileObj.family_information.fathers_info.occupation">
+                        <div class="webo-icon-flex-card"
+                            *ngIf="profileObj.family_information && profileObj.family_information.fathers_info && profileObj.family_information.fathers_info.occupation">
                             <div class="icon-web-wrapper">
                                 <img src="assets/images/front-icons/occupation-type-name.png" alt="">
                             </div>
@@ -1210,7 +1240,8 @@
                             </div>
                         </div>
 
-                        <div class="webo-icon-flex-card"  *ngIf="profileObj.family_information && profileObj.family_information.fathers_info && profileObj.family_information.fathers_info.additional_info">
+                        <div class="webo-icon-flex-card"
+                            *ngIf="profileObj.family_information && profileObj.family_information.fathers_info && profileObj.family_information.fathers_info.additional_info">
                             <div class="icon-web-wrapper">
                                 <img src="assets/images/front-icons/Edit.png" alt="">
                             </div>
@@ -1284,7 +1315,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="webo-icon-flex-card"  *ngIf="profileObj.family_information && profileObj.family_information.mothers_info && profileObj.family_information.mothers_info.occupation">
+                        <div class="webo-icon-flex-card"
+                            *ngIf="profileObj.family_information && profileObj.family_information.mothers_info && profileObj.family_information.mothers_info.occupation">
                             <div class="icon-web-wrapper">
                                 <img src="assets/images/front-icons/occupation-type-name.png" alt="">
                             </div>
@@ -1300,7 +1332,8 @@
                             </div>
                         </div>
 
-                        <div class="webo-icon-flex-card"  *ngIf="profileObj.family_information && profileObj.family_information.mothers_info && profileObj.family_information.mothers_info.additional_info">
+                        <div class="webo-icon-flex-card"
+                            *ngIf="profileObj.family_information && profileObj.family_information.mothers_info && profileObj.family_information.mothers_info.additional_info">
                             <div class="icon-web-wrapper">
                                 <img src="assets/images/front-icons/Edit.png" alt="">
                             </div>
@@ -1372,7 +1405,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="webo-icon-flex-card"  *ngIf="sibs.occupation">
+                        <div class="webo-icon-flex-card" *ngIf="sibs.occupation">
                             <div class="icon-web-wrapper">
                                 <img src="assets/images/front-icons/occupation-type-name.png" alt="">
                             </div>
@@ -1388,7 +1421,7 @@
                             </div>
                         </div>
 
-                        <div class="webo-icon-flex-card"  *ngIf="sibs.additional_info">
+                        <div class="webo-icon-flex-card" *ngIf="sibs.additional_info">
                             <div class="icon-web-wrapper">
                                 <img src="assets/images/front-icons/Edit.png" alt="">
                             </div>
@@ -1783,7 +1816,7 @@
                             {{profileObj.subcaste_name}}
                         </p>
                     </div>
-                    
+
                     <div class="section-text section-content-detail-flex" *ngIf="profileObj.religion_name">
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2242,7 +2275,7 @@
 
                                 <p class="text-capitalise w75imp addess-wrapper">
                                     <span *ngIf="profileObj.basicInfo.company_address">
-                                        {{ profileObj.basicInfo.company_address  }}
+                                        {{ profileObj.basicInfo.company_address }}
                                     </span>
                                 </p>
                             </div>
@@ -2269,7 +2302,7 @@
 
                                 <p class="text-capitalise w75imp addess-wrapper">
                                     <span *ngIf="profileObj.basicInfo.weekend_address">
-                                        {{ profileObj.basicInfo.weekend_address  }}
+                                        {{ profileObj.basicInfo.weekend_address }}
                                     </span>
                                 </p>
                             </div>

@@ -11,6 +11,8 @@ import { LandingComponent } from './landing/landing.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChatComponent } from './chat/chat.component';
+import { UserChatComponent } from './user-chat/user-chat.component';
 
 
 const routes: Routes = [
@@ -50,6 +52,16 @@ const routes: Routes = [
         path: 'profile/update',
         canActivate: [AdminAuthGuard],
         component: ProfileUpdateComponent,
+      },
+      {
+        path: 'chat',
+        canActivate: [AdminAuthGuard],
+        component: ChatComponent,
+      },
+      {
+        path: 'user-chat',
+        canActivate: [AdminAuthGuard],
+        component: UserChatComponent,
       },
     ]
   },

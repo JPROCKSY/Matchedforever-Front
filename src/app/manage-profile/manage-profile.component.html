@@ -446,11 +446,19 @@
 
                     </div> -->
                         </div>
-                        <button
-                            class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
-                            routerLink="/preview/{{data.profile_details.id}}" type="button">
-                            View Profile
-                        </button>
+                        <div style="display: flex; gap: 1rem;">
+                            <button
+                                class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn"
+                                routerLink="/preview/{{data.profile_details.id}}" type="button">
+                                View Profile
+                            </button>
+
+                            <button
+                                class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
+                                routerLink="/preview/{{data.profile_details.id}}" type="button">
+                                Chat
+                            </button>
+                        </div>
                     </div>
                 </a>
             </div>
@@ -469,7 +477,8 @@
 
             <div class="custom-dropdown">
 
-                <button class="matched-forever-button button-style-primary-outline dropdown-toggle big-font" type="button">
+                <button class="matched-forever-button button-style-primary-outline dropdown-toggle big-font"
+                    type="button">
                     All Profiles({{all_total}})
                 </button>
 
@@ -847,11 +856,19 @@
 
                             </div>
                         </div>
-                        <button
-                            class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn"
-                            routerLink="/preview/{{data.profile_details.id}}" type="button">
-                            View Profile
-                        </button>
+                        <div style="display: flex; gap: 1rem; width: fit-content; margin-left: auto;">
+                            <button
+                                class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn"
+                                routerLink="/preview/{{data.profile_details.id}}" type="button">
+                                View Profile
+                            </button>
+
+                            <button
+                                class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
+                                type="button" (click)="sendMesageRequest(data)" [disabled]="data.profile_details.chat_flag">
+                                {{data.profile_details.chat_flag ? 'Requested' : 'Chat'}}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -939,7 +956,8 @@
                                         {{data.profile_details.caste_name}}
                                     </p>
                                 </div>
-                                <div class="profile-chips-content" *ngIf="data.profile_details.basicInfo.residential_city_name">
+                                <div class="profile-chips-content"
+                                    *ngIf="data.profile_details.basicInfo.residential_city_name">
                                     <div class="chips-icon">
                                         <img src="assets/images/front-icons/location.svg" alt="">
                                     </div>
@@ -1094,11 +1112,19 @@
                         </div> -->
 
 
-                        <button
-                            class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn"
-                            routerLink="/preview/{{data.profile_details.id}}" type="button">
-                            View Profile
-                        </button>
+                        <div style="display: flex; gap: 1rem;">
+                            <button
+                                class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn"
+                                routerLink="/preview/{{data.profile_details.id}}" type="button">
+                                View Profile
+                            </button>
+
+                            <button
+                                class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
+                                routerLink="/preview/{{data.profile_details.id}}" type="button">
+                                Chat
+                            </button>
+                        </div>
                     </div>
                 </div>
 

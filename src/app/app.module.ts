@@ -21,10 +21,15 @@ import { LandingComponent } from './landing/landing.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChatComponent } from './chat/chat.component';
 // import { SwiperModule } from 'ngx-swiper-wrapper';
 
-
-
+import { AngularFireAuthModule } from '@angular/fire/auth';   // For Firebase Authentication
+import { AngularFirestoreModule } from '@angular/fire/firestore';  // For Firestore
+import { AngularFireModule } from '@angular/fire';   // For initializing Firebase
+import { environment } from '../environments/environment';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { UserChatComponent } from './user-chat/user-chat.component';
 
 @NgModule({
   declarations: [
@@ -39,12 +44,18 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MyProfileComponent,
     RegisterComponent,
     ChangePasswordComponent,
+    ChatComponent,
+    UserChatComponent,
   ],
   imports: [
     BrowserModule,
     //  SwiperModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
     FormsModule,
     HttpClientModule,
     NgSelectModule,

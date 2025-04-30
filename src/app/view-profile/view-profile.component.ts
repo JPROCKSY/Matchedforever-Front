@@ -37,6 +37,7 @@ export class ViewProfileComponent implements OnInit {
     if (this.plan_id != '19') {
       this.valid_userF = true;
     }
+    this.getLoggedInUser();
 
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
@@ -46,7 +47,6 @@ export class ViewProfileComponent implements OnInit {
       }
     });
 
-    this.getLoggedInUser();
 
   }
 
@@ -148,7 +148,7 @@ export class ViewProfileComponent implements OnInit {
   public familyFlag: boolean = false;
   profileDetail() {
     this.adminService
-      .profileDetail({ id: this.profileId })
+      .profileDetail({ id: this.profileId, candidate_id : this.login_user_id })
       .subscribe(
         (response: any) => {
           if (response.success == 1) {
@@ -328,4 +328,14 @@ export class ViewProfileComponent implements OnInit {
   no_profile_pic() {
     this.toastr.error("No Profile Picture found.")
   }
+
+  sendMesageRequest(candidate){
+    this.adminService.sentChatRequest({candidate_id: candidate, user_id:this.login_user_id, status:"request_sent"}).subscribe((response:any) => {
+        if(response.success){
+            this.toastr.success(response.message);
+        } else {
+            this.toastr.error(response.message);
+        }
+    })
+}
 }
