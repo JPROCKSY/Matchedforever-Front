@@ -222,7 +222,7 @@
                     </div>
                 </div>
 
-                <div class="notification-icon" routerLink="/user-chat">
+                <div class="notification-icon" routerLink="/user-chat" *ngIf="valid_userF">
                     <span class="material-symbols-outlined">
                         forum
                     </span>
@@ -238,7 +238,7 @@
         </div>
     </div>
 </div>
-<div class="page-view">
+<div class="page-view "  >
     <div class="main-container">
         <router-outlet></router-outlet>
     </div>
@@ -274,7 +274,7 @@
             </div>
 
             <ng-container *ngIf="list.type == 'chat_request'">
-                <div class="accept-chat-reject-flex">
+                <div class="accept-chat-reject-flex" *ngIf="list.read_timestamp == ''">
                     <div class="accept-chat-btn chat-actionbtn" (click)="changeStatus(list.link, 'accept')">
                         <span class="material-symbols-outlined">
                             check
@@ -292,6 +292,7 @@
                         </p>
                     </div>
                 </div>
+               
             </ng-container>
 
             <!-- {{list.type}} -->

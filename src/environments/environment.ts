@@ -15,8 +15,8 @@ export const environment = {
     appId: "1:834493715554:web:86c087dd5b60558217ed3b",
     measurementId: "G-KB1DNPN31X"
   },
-  // apiUrl: 'https://matchedforever.saltpixels.in/api/Services_new/',
-  apiUrl: 'http://192.168.1.97/matched_forever/api/Services_new/',
+  apiUrl: 'https://matchedforever.saltpixels.in/api/Services_new/',
+  // apiUrl: 'http://192.168.1.97/matched_forever/api/Services_new/',
 };
 
 /*

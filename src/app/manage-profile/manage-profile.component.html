@@ -6,6 +6,12 @@
                     Profiles <span *ngIf="dataObj.total">({{dataObj.total}})</span>
                 </h4>
             </div> -->
+<!-- 
+
+            {{Activetab}}
+            {{isLoadingAllF}}
+            {{allProfilesList.length}} -->
+
             <div class="custom-dropdown" (clickOutside)="dropdownOpen = false" #dropdown>
                 <button class="matched-forever-button button-style-primary-outline dropdown-toggle"
                     (click)="toggleDropdown($event)" type="button">
@@ -454,7 +460,7 @@
                             </button>
 
                             <button
-                                class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
+                                class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn"
                                 routerLink="/preview/{{data.profile_details.id}}" type="button">
                                 Chat
                             </button>
@@ -464,10 +470,10 @@
             </div>
         </ng-container>
 
-        <div *ngIf="(profileList && profileList.length == 0) && !isLoadingF && Activetab != 'all'"
+        <!-- <div *ngIf="(profileList && profileList.length == 0) && !isLoadingF && Activetab != 'all'"
             class="section-subtitle text-center no-data">
             <h4>No Profile Found !!</h4>
-        </div>
+        </div> -->
         <!-- <div class="profile-cards-listing-wrapper" *ngIf="Activetab=='all'"> -->
 
         <!-- <p>All start here</p> -->
@@ -863,11 +869,29 @@
                                 View Profile
                             </button>
 
-                            <button
-                                class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
-                                type="button" (click)="sendMesageRequest(data)" [disabled]="data.profile_details.chat_flag">
-                                {{data.profile_details.chat_flag ? 'Requested' : 'Chat'}}
-                            </button>
+                            <ng-container *ngIf="!data.profile_details.chat_flag && valid_userF">
+                                <button
+                                    class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
+                                    type="button" (click)="openChatPopup(data)">
+                                    Chat
+                                </button>
+                            </ng-container>
+
+                            <ng-container *ngIf="data.profile_details.chat_flag && !data.profile_details.message_flag && valid_userF">
+                                <button
+                                    class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
+                                    type="button">
+                                    Requested
+                                </button>
+                            </ng-container>
+
+                            <ng-container *ngIf="data.profile_details.chat_flag && data.profile_details.message_flag && valid_userF">
+                                <button
+                                    class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
+                                    type="button" (click)="sendMesageRequest()">
+                                    <a routerLink="/user-chat">Message</a>
+                                </button>
+                            </ng-container>
                         </div>
                     </div>
                 </div>
@@ -879,10 +903,16 @@
             class="section-subtitle text-center no-data">
             <h4>No Profile Found !!</h4>
         </div>
-        <div *ngIf="allProfilesList && allProfilesList.length == 0 && !isLoadingAllF && Activetab == ''"
+        <!-- <div *ngIf="allProfilesList && allProfilesList.length == 0 && !isLoadingAllF && Activetab != 'all'"
+            class="section-subtitle text-center no-data">
+            <h4>No Profile Found 2 !!</h4>
+        </div> -->
+
+        <div *ngIf="profileList && profileList.length == 0 && !isLoadingF && Activetab != 'all'"
             class="section-subtitle text-center no-data">
             <h4>No Profile Found !!</h4>
         </div>
+
         <ng-container *ngIf="Activetab != ''">
             <div class="profile-cards-listing-wrapper">
                 <div class="profile-card-wrapper" *ngFor="let data of profileList; let i = index">
@@ -1073,7 +1103,7 @@
                                 </div>
                                 </div> -->
                                 <div class="inner-flex">
-                                    <div class="profile-row-flex section-text" *ngIf="data.message">
+                                    <div class="profile-row-flex section-text" *ngIf="data.message && valid_userF">
                                         <span class="material-symbols-outlined gray-color material-width-small">
                                             chat
                                         </span>
@@ -1112,7 +1142,7 @@
                         </div> -->
 
 
-                        <div style="display: flex; gap: 1rem;">
+                        <div style="display: flex; gap: 1rem; width: fit-content; margin-left: auto;">
                             <button
                                 class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn"
                                 routerLink="/preview/{{data.profile_details.id}}" type="button">
@@ -1121,7 +1151,7 @@
 
                             <button
                                 class="matched-forever-button button-style-primary-outline dropdown-toggle margin-left-auto view-btn "
-                                routerLink="/preview/{{data.profile_details.id}}" type="button">
+                                routerLink="/preview/{{data.profile_details.id}}" type="button" *ngIf="valid_userF">
                                 Chat
                             </button>
                         </div>
@@ -2143,6 +2173,27 @@
         </div>
     </div>
 
+    <div class="overlay-comment-intrested" *ngIf="chatMessageF" (click)="closeChatMessage()"></div>
+
+    <div class="intersted-popup-connent" *ngIf="chatMessageF">
+        <div class="intersted-popup-connent-inner inner-flex inner-flex-common">
+            <div class="form-field form-field-comment">
+                <!-- <label class="md-lable" for="request_comment">Add a comment</label> -->
+                <textarea name="" class="form-data" id="" placeholder="Add a comment" [(ngModel)]="requestObj.message"
+                    rows="4"></textarea>
+            </div>
+            <div class="inner-flex inner-flex-common cancel-btn-copmment-flex inner-flex-center">
+                <button class="matched-forever-button button-style-primary" (click)="sendMesageRequest()">
+                    <p>
+                        Send Request
+                    </p>
+                </button>
+                <!-- <p class="cancel-btn">
+                
+            </p> -->
+            </div>
+        </div>
+    </div>
     <div class="overlay-comment-intrested" *ngIf="isinterestedF" (click)="closePopUp()"></div>
 
     <div class="intersted-popup-connent" *ngIf="isinterestedF">

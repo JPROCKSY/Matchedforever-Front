@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
 
 
   public otpsentF: Boolean = false;
+  public pinF: Boolean = false;
 
   response_message: any = "";
 
@@ -96,9 +97,77 @@ export class LoginComponent implements OnInit {
 
   }
 
+  enterPin(form) {
+    if (form.valid) {
+      // this.isSubmiting = true;
+      // this.isLoading = true;
+
+      if (this.loginObj.country_code) {
+        this.loginObj.country_code = this.loginObj.country_code.replace(/\+/g, '');
+      }
+
+      this.loginObj.pin_login = true;
+      this.pinF = true;
+      console.log(this.loginObj);
+      // this.isSubmiting = false;
+      // this.isLoading = false;
+
+    }
+    // this.response_message = '';
+
+  }
+
+  submitPin() {
+    // if (form.valid) {
+      this.isSubmiting = true;
+      this.isLoading = true;
+
+      const combinedPin = this.getCombinedPin();
+      this.loginObj.pin = combinedPin;
+
+      if (this.loginObj.country_code) {
+        this.loginObj.country_code = this.loginObj.country_code.replace(/\+/g, '');
+      }
+
+      this.loginObj.pin_login = true;
+
+
+      this.adminService.pinLogin(this.loginObj).subscribe((response: any) => {
+        if (response.success == 1) {
+          // this.response_message = response.message;
+          this.isSubmiting = false;
+          this.adminService.setObjservableUser(JSON.stringify(response.user));
+          this.toastr.success(response.message);
+          this.router.navigate(['/']);
+        } else {
+          this.isSubmiting = false;
+          // this.toastr.error(response.message);
+          this.response_message = response.message;
+        }
+        this.isLoading = false; // Stop loading spinner
+      });
+
+  }
+
+  resetPin(){
+    if(this.loginObj.contact_no != ''){
+      this.adminService.resetPin(this.loginObj).subscribe((response:any) => {
+        if(response.success) {
+          this.toastr.success("New pin has been sent on you registered mobile number");
+        }
+      })
+    } else {
+      this.toastr.error("Please provide contact number");
+    }
+  }
+
   // Combine OTP digits into a single string before submitting for login
   getCombinedOTP(): string {
     return this.loginObj.otp1 + this.loginObj.otp2 + this.loginObj.otp3 + this.loginObj.otp4;
+  }
+
+  getCombinedPin(): string {
+    return this.loginObj.pin1 + this.loginObj.pin2 + this.loginObj.pin3 + this.loginObj.pin4 + this.loginObj.pin5 + this.loginObj.pin6;
   }
 
   // Submit Admin Form (with OTP)
@@ -150,11 +219,32 @@ export class LoginComponent implements OnInit {
       }
     }
   }
+  movePinFocus(event, nextInput?) {
+    if (event.target.value.length === 1) {
+      if (nextInput) {
+        const nextElement = document.getElementById(`pin${nextInput}`);
+        if (nextElement) {
+          nextElement.focus();
+        }
+      }
+    }
+  }
   changeTab(tab: any) {
     if (tab > 1) {
 
       tab = tab - 1;
       const nextElement = document.getElementById(`otp${tab}`);
+      if (nextElement) {
+        nextElement.focus();
+      }
+    }
+  }
+
+  changePinTab(tab: any) {
+    if (tab > 1) {
+
+      tab = tab - 1;
+      const nextElement = document.getElementById(`pin${tab}`);
       if (nextElement) {
         nextElement.focus();
       }
@@ -188,6 +278,7 @@ export class LoginComponent implements OnInit {
   //   this.countdown = 60;
   //   this.startCountdown();
   // }
+
   resendOtp() {
     if (this.isResendDisabled) {
       return;

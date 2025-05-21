@@ -17,6 +17,9 @@
                 <button (click)="loginMethod = 'email' ; response_message = '';loginObj.contact_no=''"
                     [class.active]="loginMethod === 'email'">Login with
                     Email</button>
+                <button (click)="loginMethod = 'pin' ; response_message = '';loginObj.contact_no=''"
+                    [class.active]="loginMethod === 'pin'">Login with
+                    Pin</button>
             </div>
 
             <!-- Mobile Number Form -->
@@ -145,6 +148,73 @@
                 </div>
             </form>
 
+            <!-- Pin Form -->
+
+            <form *ngIf="loginMethod === 'pin' && !pinF" name="admin" id="admin"
+                (ngSubmit)="enterPin(pinFOrm.form)" #pinFOrm="ngForm" novalidate class="form-wrapper"
+                autocomplete="off">
+                <div class="inner-flex inner-flex-common relative">
+                    <label class="md-lable font-weight-light" style="font-size: 24px; text-align: center; "
+                        for="contact_no">Please enter
+                        your Number to log in
+                        & <br>
+                        Find Your Forever.
+                    </label>
+
+                    <div class="relative custom-input">
+                        <input id="contact_no" (keypress)="_keyPress($event)" minlength="10" maxlength="10"
+                            name="contact_no" type="text" [(ngModel)]="loginObj.contact_no" #contact_no="ngModel"
+                            placeholder="00000 00000" class="form-control-matched-forever" tabindex="1"
+                            (keyup.enter)="enterPin(pinFOrm.form)" required
+                            (ngModelChange)="response_message_clear()"
+                            [class.red-border]="contact_no.invalid && (pinFOrm.submitted || contact_no.touched) || response_message ">
+
+                        <div class="form-field contry-drpdn">
+                            <ng-select class="form-data-select" name="country_code" id="country_code"
+                                [(ngModel)]="loginObj.country_code" #country_code="ngModel" style="width: 100%"
+                                [clearable]="false">
+                                <ng-option value="">-Select Country Code-</ng-option>
+                                <ng-option value="{{ country.phonecode }}" *ngFor="let country of countryList">
+                                    <div class="row-flex aic small-gap">
+                                        <div class="country-flag-form">
+                                            <img src="https://flagcdn.com/w40/{{toSmallerCase(country.iso2)}}.webp"
+                                                alt="flag" />
+                                        </div>
+                                        <div>+{{ country.phonecode }}</div>
+                                        <!-- <div>
+                                            {{ country.name }}
+                                        </div> -->
+                                    </div>
+                                </ng-option>
+                            </ng-select>
+
+                        </div>
+                    </div>
+                    <div *ngIf="contact_no.invalid && (contact_no.touched || pinFOrm.submitted) && !response_message"
+                        class="error-msg-label">
+                        <div class="error">
+                            <p>Please enter a valid mobile number for login</p>
+                        </div>
+                    </div>
+                    <div *ngIf="response_message && response_message != ''" class="error-msg-label">
+                        <div class="error">
+                            <p>{{response_message}}</p>
+                        </div>
+                    </div>
+                    <!-- <div *ngIf="pinFOrm.submitted && loginObj.contact_no == ''" class="error-msg-label">
+                        <div class="error">
+                            <p>Please enter a valid mobile number for login</p>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="submit-button admin-submit-button">
+                    <button class="matched-forever-button button-style-primary w-100" type="submit"
+                        [disabled]="isSubmiting">
+                        <p>{{isSubmiting ? 'Please Wait..' : 'Next'}}</p>
+                    </button>
+                </div>
+            </form>
+
             <!-- OTP Form -->
             <form *ngIf="otpsentF" name="admin" id="admin" (ngSubmit)="submitotp('')" #loginForm="ngForm" novalidate
                 class="form-wrapper" autocomplete="off">
@@ -188,6 +258,50 @@
                 <div class="submit-button admin-submit-button">
                     <button class="matched-forever-button button-style-primary w-100" type="submit"
                         [disabled]="isLoading">
+                        <!-- <p>Login</p> -->
+                        <p>Login</p>
+                    </button>
+                </div>
+            </form>
+
+            <form *ngIf="loginMethod === 'pin' && pinF" name="pin" id="pin" (ngSubmit)="submitPin()" #pinForm="ngForm" novalidate
+                class="form-wrapper" autocomplete="off">
+                <div class="form-field relative">
+                    <label class="md-lable" style="font-size: 24px;" for="otp">Verify your PIN </label>
+
+                    <div class="otp-container">
+                        <input id="pin1" name="pin1" type="text" maxlength="1" required [(ngModel)]="loginObj.pin1"
+                            #pin1="ngModel" (input)="movePinFocus($event, 2)" class="otp-box" tabindex="1"
+                            (keyup.backspace)="changePinTab(1)" (keypress)="_keyPress($event)">
+                        <input id="pin2" name="pin2" type="text" maxlength="1" required [(ngModel)]="loginObj.pin2"
+                            #pin2="ngModel" (input)="movePinFocus($event, 3)" class="otp-box" tabindex="2"
+                            (keyup.backspace)="changePinTab(2)" (keypress)="_keyPress($event)">
+                        <input id="pin3" name="pin3" type="text" maxlength="1" required [(ngModel)]="loginObj.pin3"
+                            #pin3="ngModel" (input)="movePinFocus($event, 4)" class="otp-box" tabindex="3"
+                            (keyup.backspace)="changePinTab(3)" (keypress)="_keyPress($event)">
+                        <input id="pin4" name="pin4" type="text" maxlength="1" required [(ngModel)]="loginObj.pin4"
+                            #pin4="ngModel" (input)="movePinFocus($event, 5)" class="otp-box" tabindex="4"
+                            (keyup.backspace)="changePinTab(4)" (keypress)="_keyPress($event)">
+                        <input id="pin5" name="pin5" type="text" maxlength="1" required [(ngModel)]="loginObj.pin5"
+                            #pin5="ngModel" (input)="movePinFocus($event, 6)" class="otp-box" tabindex="5"
+                            (keyup.backspace)="changePinTab(5)" (keypress)="_keyPress($event)">
+                        <input id="pin6" name="pin6" type="text" maxlength="1" required [(ngModel)]="loginObj.pin6"
+                            #pin6="ngModel" (input)="onOtp4Change()" class="otp-box" tabindex="6"
+                            (keyup.enter)="submitotp('')" (keyup.backspace)="changePinTab(6)"
+                            (keypress)="_keyPress($event)">
+                    </div>
+                    <div *ngIf="pinForm.submitted && (!loginObj.pin1 || !loginObj.pin2 || !loginObj.pin3 || !loginObj.pin4 || !loginObj.pin5 || !loginObj.pin6)"
+                        class="error">
+                        <p>Please enter a valid PIN</p>
+                    </div>
+
+                    <div style="padding: 10px 0; text-align: right; color: #995a54;">
+                        <a href="javascript:void(0)" (click)="resetPin()">Forgot your pin ?</a>
+                    </div>
+                </div>
+                <div class="submit-button admin-submit-button">
+                    <button class="matched-forever-button button-style-primary w-100" type="submit"
+                        [disabled]="isLoading" (click)="submitPin()">
                         <!-- <p>Login</p> -->
                         <p>Login</p>
                     </button>

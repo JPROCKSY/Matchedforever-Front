@@ -96,16 +96,42 @@
                     {{ profileObj.is_publish == '1' ? 'Unpublish' : 'Publish' }}
                 </a>
             </div>
-            <div class="profile-row-flex btn-profile-cards" *ngIf="profileId != login_user_id">
-                <button class="matched-forever-button button-style-primary interrested-btn"
-                    (click)="openPopUp('Interested', profileId)">
-                    <p>
-                        Interested
-                    </p>
+            <div class="" *ngIf="profileId == login_user_id" style="margin-top: -12px;">
+                <button class="matched-forever-button button-style-primary-outline w100block whitesp-no-wrap"
+                    (click)="handlePin()">
                     <span class="material-symbols-outlined">
-                        check
+                        password
                     </span>
+                    <p>
+                        {{profileObj.pinFlag ? 'Change Pin' : 'Set Pin'}}
+                    </p>
                 </button>
+            </div>
+            <div class="profile-row-flex btn-profile-cards" *ngIf="profileId != login_user_id">
+
+                <ng-container *ngIf="tabName != 'request_received'">
+                    <button class="matched-forever-button button-style-primary interrested-btn"
+                        (click)="openPopUp('Interested', profileId)">
+                        <p>
+                            Interested
+                        </p>
+                        <span class="material-symbols-outlined">
+                            check
+                        </span>
+                    </button>
+                </ng-container>
+
+                <ng-container *ngIf="tabName == 'request_received'">
+                    <button class="matched-forever-button button-style-primary interrested-btn"
+                        (click)="selectOption('Interested',profileObj.id,login_user_id,profileObj.message)">
+                        <p>
+                            Accept
+                        </p>
+                        <span class="material-symbols-outlined">
+                            check
+                        </span>
+                    </button>
+                </ng-container>
 
                 <button class="matched-forever-button button-style-primary not-interrested-btn"
                     (click)="selectOption('Not-Interested', profileObj.id, login_user_id,'')">
@@ -119,10 +145,10 @@
 
             </div>
 
-            <ng-container *ngIf="profileId != this.login_user_id">
+            <ng-container *ngIf="profileId != this.login_user_id && valid_userF">
                 <div *ngIf="!profileObj.chat_flag">
-                    <button class="matched-forever-button button-style-primary"
-                    style="width: 100% !important;" (click)="sendMesageRequest(profileObj.id)">
+                    <button class="matched-forever-button button-style-primary" style="width: 100% !important;"
+                        (click)="openChatPopup(profileObj.id)">
                         <p>
                             Chat
                         </p>
@@ -133,9 +159,9 @@
                 </div>
 
                 <div *ngIf="profileObj.chat_flag">
-                    <button class="matched-forever-button button-style-primary"
-                        disabled style="width: 100% !important;">
-                        <p> 
+                    <button class="matched-forever-button button-style-primary" disabled
+                        style="width: 100% !important;">
+                        <p>
                             Chat Requested
                         </p>
                         <span class=" material-symbols-outlined">
@@ -188,30 +214,32 @@
                                 style="display: none;"></a>
                         </div>
                     </div>
-                    <div class="inner-social-profilelinks"
-                        *ngIf="profileObj.basicInfo.facebook_link || profileObj.basicInfo.instagram_link || profileObj.basicInfo.linkedin_link">
-                        <ul
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="inner-social-profilelinks"
                             *ngIf="profileObj.basicInfo.facebook_link || profileObj.basicInfo.instagram_link || profileObj.basicInfo.linkedin_link">
-                            <li *ngIf="profileObj.basicInfo.facebook_link">
-                                <a href="{{profileObj.basicInfo.facebook_link}}" class="social-icon-profile"
-                                    *ngIf="profileObj.basicInfo.facebook_link" target="_blank">
-                                    <img src="assets/images/social-icons/fb.svg " alt="">
-                                </a>
-                            </li>
-                            <li *ngIf="profileObj.basicInfo.instagram_link">
-                                <a href="{{profileObj.basicInfo.instagram_link}}" class="social-icon-profile"
-                                    *ngIf="profileObj.basicInfo.instagram_link" target="_blank">
-                                    <img src="assets/images/social-icons/insta.svg" alt="">
-                                </a>
-                            </li>
-                            <li *ngIf="profileObj.basicInfo.linkedin_link">
-                                <a href="{{profileObj.basicInfo.linkedin_link}}" class="social-icon-profile"
-                                    *ngIf="profileObj.basicInfo.linkedin_link" target="_blank">
-                                    <img src="assets/images/social-icons/linkedin.svg " alt="">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                            <ul
+                                *ngIf="profileObj.basicInfo.facebook_link || profileObj.basicInfo.instagram_link || profileObj.basicInfo.linkedin_link">
+                                <li *ngIf="profileObj.basicInfo.facebook_link">
+                                    <a href="{{profileObj.basicInfo.facebook_link}}" class="social-icon-profile"
+                                        *ngIf="profileObj.basicInfo.facebook_link" target="_blank">
+                                        <img src="assets/images/social-icons/fb.svg " alt="">
+                                    </a>
+                                </li>
+                                <li *ngIf="profileObj.basicInfo.instagram_link">
+                                    <a href="{{profileObj.basicInfo.instagram_link}}" class="social-icon-profile"
+                                        *ngIf="profileObj.basicInfo.instagram_link" target="_blank">
+                                        <img src="assets/images/social-icons/insta.svg" alt="">
+                                    </a>
+                                </li>
+                                <li *ngIf="profileObj.basicInfo.linkedin_link">
+                                    <a href="{{profileObj.basicInfo.linkedin_link}}" class="social-icon-profile"
+                                        *ngIf="profileObj.basicInfo.linkedin_link" target="_blank">
+                                        <img src="assets/images/social-icons/linkedin.svg " alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </ng-container>
                 </div>
                 <div class="detail-wrapper-grid-3">
                     <div class="webo-icon-flex-card">
@@ -365,25 +393,27 @@
                     </div>
                 </div>
                 <div class="detail-wrapper-grid-3">
-                    <div class="webo-icon-flex-card"
-                        *ngIf="profileObj.basicInfo.birth_date_show || profileObj.basicInfo.birth_time">
-                        <div class="icon-web-wrapper">
-                            <img src="assets/images/front-icons/time.png" alt="">
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="webo-icon-flex-card"
+                            *ngIf="profileObj.basicInfo.birth_date_show || profileObj.basicInfo.birth_time">
+                            <div class="icon-web-wrapper">
+                                <img src="assets/images/front-icons/time.png" alt="">
+                            </div>
+                            <div class="section-text section-content-detail-flex">
+                                <p class="content-title-p">
+                                    Birth Time & Date
+                                </p>
+                                <p class="text-capitalise addess-wrapper">
+                                    <!-- {{profileObj.basicInfo.birth_time+", "+profileObj.basicInfo.birth_date}} -->
+                                    <span *ngIf="profileObj.basicInfo.birth_time">{{profileObj.basicInfo.birth_time}},
+                                    </span>
+                                    <!-- <span *ngIf="profileObj.basicInfo.birth_date">{{profileObj.basicInfo.birth_date}}</span> -->
+                                    <span
+                                        *ngIf="profileObj.basicInfo.birth_date_show">{{profileObj.basicInfo.birth_date_show}}</span>
+                                </p>
+                            </div>
                         </div>
-                        <div class="section-text section-content-detail-flex">
-                            <p class="content-title-p">
-                                Birth Time & Date
-                            </p>
-                            <p class="text-capitalise addess-wrapper">
-                                <!-- {{profileObj.basicInfo.birth_time+", "+profileObj.basicInfo.birth_date}} -->
-                                <span *ngIf="profileObj.basicInfo.birth_time">{{profileObj.basicInfo.birth_time}},
-                                </span>
-                                <!-- <span *ngIf="profileObj.basicInfo.birth_date">{{profileObj.basicInfo.birth_date}}</span> -->
-                                <span
-                                    *ngIf="profileObj.basicInfo.birth_date_show">{{profileObj.basicInfo.birth_date_show}}</span>
-                            </p>
-                        </div>
-                    </div>
+                    </ng-container>
                     <div class="webo-icon-flex-card" *ngIf="profileObj.basicInfo && profileObj.basicInfo.birth_place">
                         <div class="icon-web-wrapper">
                             <img src="assets/images/front-icons/citizenship.png" alt="">
@@ -532,7 +562,7 @@
                         </div>
                     </div>
                     <div class="webo-icon-flex-card"
-                        *ngIf="profileObj.basicInfo && profileObj.basicInfo.residential_city_name">
+                        *ngIf="profileObj.basicInfo && profileObj.basicInfo.preffered_setlement_city_name">
                         <div class="icon-web-wrapper">
                             <img src="assets/images/front-icons/state-of-settlement.png" alt="">
                         </div>
@@ -541,12 +571,12 @@
                                 City of Settlement
                             </p>
                             <p class="text-capitalise">
-                                {{profileObj.basicInfo.residential_city_name}}
+                                {{profileObj.basicInfo.preffered_setlement_city_name}}
                             </p>
                         </div>
                     </div>
                     <div class="webo-icon-flex-card"
-                        *ngIf="profileObj.basicInfo && profileObj.basicInfo.residential_state_name">
+                        *ngIf="profileObj.basicInfo && profileObj.basicInfo.preffered_setlement_state_name">
                         <div class="icon-web-wrapper">
                             <img src="assets/images/front-icons/state-of-settlement.png" alt="">
                         </div>
@@ -555,7 +585,7 @@
                                 State of Settlement
                             </p>
                             <p class="text-capitalise">
-                                {{profileObj.basicInfo.residential_state_name}}
+                                {{profileObj.basicInfo.preffered_setlement_state_name}}
                             </p>
                         </div>
                     </div>
@@ -684,25 +714,27 @@
                             </p>
                         </div>
                     </div>
-                    <div class="webo-icon-flex-card webo-icon-flex-card100www" *ngIf="profileObj.basicInfo.about">
-                        <div class="icon-web-wrapper">
-                            <img src="assets/images/front-icons/bio.svg" alt="">
-                        </div>
-                        <div class="section-text section-content-detail-flex">
-                            <p class="content-title-p">
-                                Bio
-                            </p>
-                            <div class="text-capitalise">
-                                <p>
-                                    {{ profileObj.basicInfo.about }}
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="webo-icon-flex-card webo-icon-flex-card100www" *ngIf="profileObj.basicInfo.about">
+                            <div class="icon-web-wrapper">
+                                <img src="assets/images/front-icons/bio.svg" alt="">
+                            </div>
+                            <div class="section-text section-content-detail-flex">
+                                <p class="content-title-p">
+                                    Bio
                                 </p>
+                                <div class="text-capitalise">
+                                    <p>
+                                        {{ profileObj.basicInfo.about }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </ng-container>
 
                 </div>
             </div>
-            <div class="my-profile-detail-card inner-flex inner-flex-medium">
+            <div class="my-profile-detail-card inner-flex inner-flex-medium" *ngIf="valid_userF">
                 <div class="flex-header-rowjsc">
                     <div class="section-subtitle">
                         <p>
@@ -719,11 +751,11 @@
                         </div>
                     </div>
                     <div class="detail-wrapper-grid-2">
-                        <div class="webo-icon-flex-card" *ngIf="valid_userF">
+                        <div class="webo-icon-flex-card">
                             <div class="icon-web-wrapper">
                                 <img src="assets/images/front-icons/address.png" alt="">
                             </div>
-                            <div class="section-text section-content-detail-flex" *ngIf="valid_userF">
+                            <div class="section-text section-content-detail-flex">
                                 <p class="content-title-p">
                                     Address
                                 </p>
@@ -745,8 +777,8 @@
                                     <span *ngIf="profileObj.basicInfo.residential_city_name">
                                         {{ profileObj.basicInfo.residential_city_name }}
                                     </span>
-                                    <span *ngIf="profileObj.basicInfo.preffered_setlement_state_name">
-                                        , {{ profileObj.basicInfo.preffered_setlement_state_name }}
+                                    <span *ngIf="profileObj.basicInfo.residential_state_name">
+                                        , {{ profileObj.basicInfo.residential_state_name }}
                                     </span>
                                     <span *ngIf="profileObj.basicInfo.residential_country_name">
                                         , {{ profileObj.basicInfo.residential_country_name }}
@@ -775,7 +807,7 @@
                     </div>
 
                 </div>
-                <div class="inner-flex inner-flex-small">
+                <div class="inner-flex inner-flex-small" *ngIf="valid_userF">
                     <div class="flex-header-rowjsc">
                         <div class="section-content">
                             <p class="semibold-fonts content-title-p">
@@ -792,16 +824,6 @@
                                 <p class="content-title-p">
                                     Address
                                 </p>
-                                <!-- <p class="text-capitalise">
-                                {{profileObj.basicInfo.future_residential_address +",
-                                "+profileObj.basicInfo.future_residential_address_apt+",
-                                "+profileObj.basicInfo.future_residential_city_name+",
-                                "+profileObj.basicInfo.future_residential_state_name+",
-                                "+profileObj.basicInfo.future_residential_country_name+" -
-                                "+profileObj.basicInfo.future_residential_zipcode}}
-
-
-                            </p> -->
                                 <p class="text-capitalise w75imp addess-wrapper">
                                     <span *ngIf="profileObj.basicInfo.future_residential_address">
                                         {{ profileObj.basicInfo.future_residential_address }}
@@ -842,7 +864,7 @@
                     </div>
                 </div>
 
-                <div class="inner-flex inner-flex-small" *ngIf="profileObj.basicInfo.parents_address">
+                <div class="inner-flex inner-flex-small" *ngIf="profileObj.basicInfo.parents_address && valid_userF">
                     <div class="flex-header-rowjsc">
                         <div class="section-content">
                             <p class="semibold-fonts content-title-p">
@@ -869,7 +891,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="inner-flex inner-flex-small" *ngIf="profileObj.basicInfo.company_address">
+                <div class="inner-flex inner-flex-small" *ngIf="profileObj.basicInfo.company_address && valid_userF">
                     <div class="flex-header-rowjsc">
                         <div class="section-content">
                             <p class="semibold-fonts content-title-p">
@@ -896,7 +918,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="inner-flex inner-flex-small" *ngIf="profileObj.basicInfo.weekend_address">
+                <div class="inner-flex inner-flex-small" *ngIf="profileObj.basicInfo.weekend_address && valid_userF">
                     <div class="flex-header-rowjsc">
                         <div class="section-content">
                             <p class="semibold-fonts content-title-p">
@@ -1001,20 +1023,22 @@
                     </div> -->
 
                 </div>
-                <div class="webo-icon-flex-card" *ngIf="profileObj.basicInfo.additionalEducationInformation">
-                    <div class="icon-web-wrapper">
-                        <img src="assets/images/front-icons/education.png" alt="">
+                <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                    <div class="webo-icon-flex-card" *ngIf="profileObj.basicInfo.additionalEducationInformation">
+                        <div class="icon-web-wrapper">
+                            <img src="assets/images/front-icons/education.png" alt="">
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="profileObj.basicInfo.additionalEducationInformation">
+                            <p class="content-title-p">
+                                Education Other Information
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.additionalEducationInformation}}
+                            </p>
+                        </div>
                     </div>
-                    <div class="section-text section-content-detail-flex"
-                        *ngIf="profileObj.basicInfo.additionalEducationInformation">
-                        <p class="content-title-p">
-                            Education Other Information
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.additionalEducationInformation}}
-                        </p>
-                    </div>
-                </div>
+                </ng-container>
             </div>
             <div class="my-profile-detail-card inner-flex inner-flex-medium">
                 <div class="flex-header-rowjsc">
@@ -1145,20 +1169,22 @@
                         </div>
                     </div> -->
                 </div>
-                <div class="webo-icon-flex-card" *ngIf="profileObj.basicInfo.additionalOccupationInformation">
-                    <div class="icon-web-wrapper">
-                        <img src="assets/images/front-icons/education.png" alt="">
+                <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                    <div class="webo-icon-flex-card" *ngIf="profileObj.basicInfo.additionalOccupationInformation">
+                        <div class="icon-web-wrapper">
+                            <img src="assets/images/front-icons/education.png" alt="">
+                        </div>
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="profileObj.basicInfo.additionalOccupationInformation">
+                            <p class="content-title-p">
+                                Occupation Other Information
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.additionalOccupationInformation}}
+                            </p>
+                        </div>
                     </div>
-                    <div class="section-text section-content-detail-flex"
-                        *ngIf="profileObj.basicInfo.additionalOccupationInformation">
-                        <p class="content-title-p">
-                            Occupation Other Information
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.additionalOccupationInformation}}
-                        </p>
-                    </div>
-                </div>
+                </ng-container>
             </div>
             <div class="my-profile-detail-card inner-flex inner-flex-medium">
                 <div class="flex-header-rowjsc">
@@ -1168,7 +1194,34 @@
                         </p>
                     </div>
                 </div>
+
                 <div class="inner-flex inner-flex-small">
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="flex-header-rowjsc" *ngIf="profileObj.basicInfo.user_family_background">
+                            <div class="section-content">
+                                <p class="semibold-fonts content-title-p">
+                                    Family Background
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="detail-wrapper-grid-3" *ngIf="profileObj.basicInfo.user_family_background">
+                            <div class="webo-icon-flex-card">
+                                <div class="icon-web-wrapper">
+                                    <img src="assets/images/front-icons/occupation-type-name.png" alt="">
+                                </div>
+                                <div class="section-text section-content-detail-flex">
+                                    <p class="content-title-p">
+                                        Background
+                                    </p>
+                                    <p class="text-capitalise">
+                                        {{profileObj.basicInfo.user_family_background}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+
                     <div class="flex-header-rowjsc">
                         <div class="section-content">
                             <p class="semibold-fonts content-title-p">
@@ -1185,7 +1238,7 @@
                                 <p class="content-title-p">
                                     Father's Name
                                 </p>
-                                <p class="text-capitalise">
+                                <p class="text-capitalise" *ngIf="profileObj.family_information.fathers_info">
                                     {{profileObj.family_information.fathers_info.first_name+"
                                     "+profileObj.family_information.fathers_info.last_name}}
                                 </p>
@@ -1277,7 +1330,7 @@
                                 <p class="content-title-p">
                                     Mother's Name
                                 </p>
-                                <p class="text-capitalise">
+                                <p class="text-capitalise" *ngIf="profileObj.family_information.mothers_info">
                                     {{profileObj.family_information.mothers_info.first_name+"
                                     "+profileObj.family_information.mothers_info.last_name}}
                                 </p>
@@ -1439,6 +1492,31 @@
 
                     </div>
 
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="flex-header-rowjsc" *ngIf="profileObj.basicInfo.additionalFamilyInformation">
+                            <div class="section-content">
+                                <p class="semibold-fonts content-title-p">
+                                    Family Information
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="detail-wrapper-grid-3" *ngIf="profileObj.basicInfo && profileObj.basicInfo.additionalFamilyInformation">
+                            <div class="webo-icon-flex-card">
+                                <div class="icon-web-wrapper">
+                                    <img src="assets/images/front-icons/Edit.png" alt="">
+                                </div>
+                                <div class="section-text section-content-detail-flex">
+                                    <p class="content-title-p">
+                                        Family Information
+                                    </p>
+                                    <p class="text-capitalise">
+                                        {{profileObj.basicInfo.additionalFamilyInformation}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
                 </div>
 
             </div>
@@ -1838,30 +1916,35 @@
                         </p>
                     </div>
 
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.languages.length > 0">
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                translate
-                            </span>
-                        </p>
-                        <div class="text-capitalise comma-seprate-flex">
-                            <p *ngFor="let lang of profileObj.languages">
-                                {{ lang.language }}<span class="primary-color">,</span>
+                    <ng-container *ngIf="profileObj.languages">
+                        <div class="section-text section-content-detail-flex" *ngIf="profileObj.languages.length > 0">
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    translate
+                                </span>
+                            </p>
+                            <div class="text-capitalise comma-seprate-flex">
+                                <p *ngFor="let lang of profileObj.languages">
+                                    {{ lang.language }}<span class="primary-color">,</span>
+                                </p>
+                            </div>
+                        </div>
+                    </ng-container>
+
+
+                    <ng-container *ngIf="profileObj.basicInfo && profileObj.basicInfo.relationshipStatusName">
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="profileObj.basicInfo.relationshipStatusName">
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    digital_wellbeing
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.relationshipStatusName}}
                             </p>
                         </div>
-                    </div>
-
-                    <div class="section-text section-content-detail-flex"
-                        *ngIf="profileObj.basicInfo.relationshipStatusName">
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                digital_wellbeing
-                            </span>
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.relationshipStatusName}}
-                        </p>
-                    </div>
+                    </ng-container>
 
 
                 </div>
@@ -1889,10 +1972,19 @@
                             <!-- {{profileObj.basicInfo.birth_time+", "+profileObj.basicInfo.birth_date+" &
                             "+profileObj.basicInfo.birth_place}} -->
                             <!-- <span *ngIf="profileObj.basicInfo.birth_date">{{profileObj.basicInfo.birth_date}}, </span> -->
-                            <span *ngIf="profileObj.basicInfo.birth_date_show">{{profileObj.basicInfo.birth_date_show}},
-                            </span>
-                            <span *ngIf="profileObj.basicInfo.birth_time">{{profileObj.basicInfo.birth_time}}, </span>
-                            <span *ngIf="profileObj.basicInfo.birth_place">{{profileObj.basicInfo.birth_place}} </span>
+                            <ng-container *ngIf="profileObj.languages">
+                                <span
+                                    *ngIf="profileObj.basicInfo.birth_date_show">{{profileObj.basicInfo.birth_date_show}},
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="profileObj.languages">
+                                <span *ngIf="profileObj.basicInfo.birth_time">{{profileObj.basicInfo.birth_time}},
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="profileObj.languages">
+                                <span *ngIf="profileObj.basicInfo.birth_place">{{profileObj.basicInfo.birth_place}}
+                                </span>
+                            </ng-container>
                         </p>
                         <!-- <p class="text-capitalise">
                             {{}}
@@ -1908,81 +2000,100 @@
                             {{profileObj.basicInfo.birth_place}}
                         </p>
                     </div> -->
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.manglik">
-                        <p class="text-capitalise fullwidth-rowtitle">Manglik</p>
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                award_star
-                            </span>
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.manglik}}
-                        </p>
-                    </div>
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.zodiac_sign">
-                        <p class="text-capitalise fullwidth-rowtitle">Zodiac</p>
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                nightlight
-                            </span>
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.zodiac_sign}}
-                        </p>
-                    </div>
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.complexion">
-                        <p class="text-capitalise fullwidth-rowtitle">Complexion</p>
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                mood
-                            </span>
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.complexion}}
-                        </p>
-                    </div>
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.body_type">
-                        <p class="text-capitalise fullwidth-rowtitle">Body Type</p>
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                accessibility_new
-                            </span>
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.body_type}}
-                        </p>
-                    </div>
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.blood_group">
-                        <p class="text-capitalise fullwidth-rowtitle">Blood Group</p>
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                bloodtype
-                            </span>
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.blood_group}}
-                        </p>
-                    </div>
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.smoking_habits">
-                        <p class="text-capitalise fullwidth-rowtitle">Habits</p>
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                smoking_rooms
-                            </span>
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.smoking_habits}}
-                        </p>
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.manglik">
+                            <p class="text-capitalise fullwidth-rowtitle">Manglik</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    award_star
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.manglik}}
+                            </p>
+                        </div>
+                    </ng-container>
 
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                sports_bar
-                            </span>
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.drinking_habits}}
-                        </p>
-                    </div>
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.zodiac_sign">
+                            <p class="text-capitalise fullwidth-rowtitle">Zodiac</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    nightlight
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.zodiac_sign}}
+                            </p>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.complexion">
+                            <p class="text-capitalise fullwidth-rowtitle">Complexion</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    mood
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.complexion}}
+                            </p>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.body_type">
+                            <p class="text-capitalise fullwidth-rowtitle">Body Type</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    accessibility_new
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.body_type}}
+                            </p>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.blood_group">
+                            <p class="text-capitalise fullwidth-rowtitle">Blood Group</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    bloodtype
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.blood_group}}
+                            </p>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="profileObj.basicInfo.smoking_habits">
+                            <p class="text-capitalise fullwidth-rowtitle">Habits</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    smoking_rooms
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.smoking_habits}}
+                            </p>
+
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    sports_bar
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.drinking_habits}}
+                            </p>
+                        </div>
+                    </ng-container>
+
                     <!-- <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.drinking_habits">
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -1993,25 +2104,28 @@
                             {{profileObj.basicInfo.drinking_habits}}
                         </p>
                     </div> -->
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.medical_history">
-                        <p class="text-capitalise fullwidth-rowtitle">Medical History</p>
-                        <p class="content-title-p">
-                            <span class="material-symbols-outlined">
-                                medical_information
-                            </span>
-                        </p>
-                        <p class="text-capitalise">
-                            {{profileObj.basicInfo.medical_history}}
-                        </p>
-                        <p
-                            *ngIf="profileObj.basicInfo.medical_history == 'Yes' && profileObj.basicInfo.medical_history_description">
-                            -
-                        </p>
-                        <p class="text-capitalise"
-                            *ngIf="profileObj.basicInfo.medical_history == 'Yes' && profileObj.basicInfo.medical_history_description">
-                            {{profileObj.basicInfo.medical_history_description}}
-                        </p>
-                    </div>
+                    <ng-container *ngIf="profileObj && profileObj.basicInfo">
+                        <div class="section-text section-content-detail-flex"
+                            *ngIf="profileObj.basicInfo.medical_history">
+                            <p class="text-capitalise fullwidth-rowtitle">Medical History</p>
+                            <p class="content-title-p">
+                                <span class="material-symbols-outlined">
+                                    medical_information
+                                </span>
+                            </p>
+                            <p class="text-capitalise">
+                                {{profileObj.basicInfo.medical_history}}
+                            </p>
+                            <p
+                                *ngIf="profileObj.basicInfo.medical_history == 'Yes' && profileObj.basicInfo.medical_history_description">
+                                -
+                            </p>
+                            <p class="text-capitalise"
+                                *ngIf="profileObj.basicInfo.medical_history == 'Yes' && profileObj.basicInfo.medical_history_description">
+                                {{profileObj.basicInfo.medical_history_description}}
+                            </p>
+                        </div>
+                    </ng-container>
                     <!-- <div class="section-text section-content-detail-flex"
                         *ngIf="profileObj.basicInfo.medical_history == 'Yes' && profileObj.basicInfo.medical_history_description">
                         <p class="content-title-p">
@@ -2023,7 +2137,7 @@
                             {{profileObj.basicInfo.medical_history_description}}
                         </p>
                     </div> -->
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.native_place">
+                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo && profileObj.basicInfo.native_place">
                         <p class="text-capitalise fullwidth-rowtitle">Native Place</p>
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2035,7 +2149,7 @@
                         </p>
                     </div>
                     <div class="section-text section-content-detail-flex"
-                        *ngIf="profileObj.basicInfo.residential_city_name">
+                        *ngIf="profileObj.basicInfo && profileObj.basicInfo.residential_city_name">
                         <p class="text-capitalise fullwidth-rowtitle">Residential City</p>
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2047,7 +2161,7 @@
                         </p>
                     </div>
                     <div class="section-text section-content-detail-flex"
-                        *ngIf="profileObj.basicInfo.residential_state_name">
+                        *ngIf="profileObj.basicInfo && profileObj.basicInfo.residential_state_name">
                         <p class="text-capitalise fullwidth-rowtitle">State</p>
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2059,7 +2173,7 @@
                         </p>
                     </div>
                     <div class="section-text section-content-detail-flex"
-                        *ngIf="profileObj.basicInfo.residential_country_name">
+                        *ngIf="profileObj.basicInfo && profileObj.basicInfo.residential_country_name">
                         <p class="text-capitalise fullwidth-rowtitle">Citizenship</p>
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2072,7 +2186,7 @@
                     </div>
 
                     <div class="section-text section-content-detail-flex flex-row-compulsory"
-                        *ngIf="profileObj.basicInfo.fathersalivestatus && profileObj.basicInfo.mothersalivestatus">
+                        *ngIf="profileObj.basicInfo && profileObj.basicInfo.fathersalivestatus && profileObj.basicInfo.mothersalivestatus">
                         <p class="text-capitalise fullwidth-rowtitle">Parents</p>
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2096,7 +2210,7 @@
                         *ngIf="profileObj.basicInfo.mothersalivestatus">
                         
                     </div> -->
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.user_family_type">
+                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo && profileObj.basicInfo.user_family_type">
                         <p class="text-capitalise fullwidth-rowtitle">Family Type</p>
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2107,7 +2221,7 @@
                             {{profileObj.basicInfo.user_family_type}}
                         </p>
                     </div>
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo.family_value">
+                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.basicInfo && profileObj.basicInfo.family_value">
                         <p class="text-capitalise fullwidth-rowtitle">Family Values</p>
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2119,7 +2233,7 @@
                         </p>
                     </div>
                     <div class="section-text section-content-detail-flex"
-                        *ngIf="profileObj.basicInfo.net_family_income">
+                        *ngIf="profileObj.basicInfo && profileObj.basicInfo.net_family_income">
                         <p class="text-capitalise fullwidth-rowtitle">Net Family Income</p>
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2223,19 +2337,19 @@
                     <div class="detail-wrapper-grid-2">
                         <div class="section-text section-content-detail-flex">
                             <p class="text-capitalise w75imp addess-wrapper">
-                                <span *ngIf="profileObj.basicInfo.future_residential_address">
+                                <span *ngIf="profileObj.basicInfo && profileObj.basicInfo.future_residential_address">
                                     {{ profileObj.basicInfo.future_residential_address }}
                                 </span>
-                                <span *ngIf="profileObj.basicInfo.future_residential_address_apt">
+                                <span *ngIf="profileObj.basicInfo && profileObj.basicInfo.future_residential_address_apt">
                                     , {{ profileObj.basicInfo.future_residential_address_apt }},
                                 </span>
-                                <span *ngIf="profileObj.basicInfo.future_residential_city_name">
+                                <span *ngIf="profileObj.basicInfo && profileObj.basicInfo.future_residential_city_name">
                                     {{ profileObj.basicInfo.future_residential_city_name }}
                                 </span>
-                                <span *ngIf="profileObj.basicInfo.future_residential_state_name">
+                                <span *ngIf="profileObj.basicInfo && profileObj.basicInfo.future_residential_state_name">
                                     , {{ profileObj.basicInfo.future_residential_state_name }}
                                 </span>
-                                <span *ngIf="profileObj.basicInfo.future_residential_country_name">
+                                <span *ngIf="profileObj.basicInfo && profileObj.basicInfo.future_residential_country_name">
                                     , {{ profileObj.basicInfo.future_residential_country_name }}
                                 </span>
                                 <!-- <span *ngIf="profileObj.basicInfo.future_residential_zipcode">
@@ -2245,7 +2359,7 @@
 
                         </div>
                         <div class="section-text section-content-detail-flex flex-row-compulsory"
-                            *ngIf="profileObj.basicInfo.future_residential_type">
+                            *ngIf="profileObj.basicInfo && profileObj.basicInfo.future_residential_type">
                             <p class="text-capitalise fullwidth-rowtitle">Property Type</p>
                             <p class="text-capitalise">
                                 {{profileObj.basicInfo.future_residential_type}}
@@ -2255,7 +2369,7 @@
                     </div>
                 </div>
 
-                <div class="inner-flex inner-flex-smallest" *ngIf="profileObj.basicInfo.company_address">
+                <div class="inner-flex inner-flex-smallest" *ngIf="profileObj.basicInfo && profileObj.basicInfo.company_address">
                     <div class="flex-header-rowjsc">
                         <div class="section-text">
                             <p class="semibold-fonts fullwidth-rowtitle content-title-p">
@@ -2282,7 +2396,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="inner-flex inner-flex-small" *ngIf="profileObj.basicInfo.weekend_address">
+                <div class="inner-flex inner-flex-small" *ngIf="profileObj.basicInfo && profileObj.basicInfo.weekend_address">
                     <div class="flex-header-rowjsc">
                         <div class="section-text">
                             <p class="semibold-fonts fullwidth-rowtitle content-title-p">
@@ -2472,9 +2586,9 @@
                     </div>
                 </div>
 
-                <div class="detail-wrapper-grid-3">
+                <div class="detail-wrapper-grid-3" *ngIf="profileObj.userPreferances">
                     <div class="section-text section-content-detail-flex"
-                        *ngIf="profileObj.userPreferances.min_age_gap">
+                        *ngIf="profileObj.userPreferances && profileObj.userPreferances.min_age_gap">
                         <div class="w100-2grid-wrapper">
                             <!-- <div>
                                 <p class="text-capitalise fullwidth-rowtitle">Age</p>
@@ -2498,7 +2612,7 @@
                         
                     </div> -->
 
-                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.userPreferances.caste_name">
+                    <div class="section-text section-content-detail-flex" *ngIf="profileObj.userPreferances && profileObj.userPreferances.caste_name">
                         <p class="text-capitalise fullwidth-rowtitle">Caste</p>
                         <p class="content-title-p">
                             <span class="material-symbols-outlined">
@@ -2735,97 +2849,104 @@
                             </p>
                         </div>
                     </div> -->
-                    <div class="detail-wrapper-grid-3">
-                        <div class="section-text section-content-detail-flex">
-                            <p class="text-capitalise fullwidth-rowtitle">Father</p>
-                            <p class="content-title-p">
-                                <span class="material-symbols-outlined">
-                                    face_6
-                                </span>
-                            </p>
-                            <p class="text-capitalise">
-                                {{profileObj.family_information.fathers_info.first_name+"
-                                "+profileObj.family_information.fathers_info.last_name}}
-                            </p>
-                        </div>
-                        <div class="section-text section-content-detail-flex"
-                            *ngIf="profileObj.family_information.fathers_info.phone">
-                            <p class="content-title-p">
-                                <span class="material-symbols-outlined">
-                                    call
-                                </span>
-                            </p>
-                            <a href="tel:{{profileObj.family_information.fathers_info.phone}}">
-                                <p class="text-capitalise">
-                                    {{profileObj.family_information.fathers_info.phone}}
-                                </p>
-                            </a>
-                        </div>
-                        <div class="section-text section-content-detail-flex"
-                            *ngIf="profileObj.family_information.fathers_info.email">
-                            <p class="content-title-p">
-                                <span class="material-symbols-outlined">
-                                    mail
-                                </span>
-                            </p>
-                            <a href="mailto:{{profileObj.family_information.fathers_info.email}}">
-                                <p class="">
-                                    {{profileObj.family_information.fathers_info.email}}
-                                </p>
-                            </a>
-                        </div>
+                    <ng-container *ngIf="profileObj && profileObj.family_information">
+                        <ng-container *ngIf="profileObj.family_information.fathers_info">
+                            <div class="detail-wrapper-grid-3">
+                                <div class="section-text section-content-detail-flex">
+                                    <p class="text-capitalise fullwidth-rowtitle">Father</p>
+                                    <p class="content-title-p">
+                                        <span class="material-symbols-outlined">
+                                            face_6
+                                        </span>
+                                    </p>
+                                    <p class="text-capitalise">
+                                        {{profileObj.family_information.fathers_info.first_name+"
+                                        "+profileObj.family_information.fathers_info.last_name}}
+                                    </p>
+                                </div>
+                                <div class="section-text section-content-detail-flex"
+                                    *ngIf="profileObj.family_information.fathers_info.phone">
+                                    <p class="content-title-p">
+                                        <span class="material-symbols-outlined">
+                                            call
+                                        </span>
+                                    </p>
+                                    <a href="tel:{{profileObj.family_information.fathers_info.phone}}">
+                                        <p class="text-capitalise">
+                                            {{profileObj.family_information.fathers_info.phone}}
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="section-text section-content-detail-flex"
+                                    *ngIf="profileObj.family_information.fathers_info.email">
+                                    <p class="content-title-p">
+                                        <span class="material-symbols-outlined">
+                                            mail
+                                        </span>
+                                    </p>
+                                    <a href="mailto:{{profileObj.family_information.fathers_info.email}}">
+                                        <p class="">
+                                            {{profileObj.family_information.fathers_info.email}}
+                                        </p>
+                                    </a>
+                                </div>
 
-                    </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
 
+                    <ng-container *ngIf="profileObj && profileObj.family_information">
+                        <ng-container *ngIf="profileObj.family_information.mothers_info">
+                            <div class="flex-header-rowjsc">
+                                <div class="section-content">
+                                    <p class="semibold-fonts content-title-p" style="opacity: 0;visibility: hidden;">
+                                        Mother's Information
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="detail-wrapper-grid-3">
+                                <div class="section-text section-content-detail-flex">
+                                    <p class="text-capitalise fullwidth-rowtitle">Mother</p>
+                                    <p class="content-title-p">
+                                        <span class="material-symbols-outlined">
+                                            face_3
+                                        </span>
+                                    </p>
+                                    <p class="text-capitalise">
+                                        {{profileObj.family_information.mothers_info.first_name+"
+                                        "+profileObj.family_information.mothers_info.last_name}}
+                                    </p>
+                                </div>
+                                <div class="section-text section-content-detail-flex"
+                                    *ngIf="profileObj.family_information.mothers_info.phone">
+                                    <p class="content-title-p">
+                                        <span class="material-symbols-outlined">
+                                            call
+                                        </span>
+                                    </p>
+                                    <a href="tel:{{profileObj.family_information.mothers_info.phone}}">
+                                        <p class="">
+                                            {{profileObj.family_information.mothers_info.phone}}
+                                        </p>
+                                    </a>
+                                </div>
+                                <div class="section-text section-content-detail-flex"
+                                    *ngIf="profileObj.family_information.mothers_info.email">
+                                    <p class="content-title-p">
+                                        <span class="material-symbols-outlined">
+                                            mail
+                                        </span>
+                                    </p>
+                                    <a href="mailto:{{profileObj.family_information.mothers_info.email}}">
+                                        <p class="text-capitalise">
+                                            {{profileObj.family_information.mothers_info.email}}
+                                        </p>
+                                    </a>
+                                </div>
 
-                    <div class="flex-header-rowjsc">
-                        <div class="section-content">
-                            <p class="semibold-fonts content-title-p" style="opacity: 0;visibility: hidden;">
-                                Mother's Information
-                            </p>
-                        </div>
-                    </div>
-                    <div class="detail-wrapper-grid-3">
-                        <div class="section-text section-content-detail-flex">
-                            <p class="text-capitalise fullwidth-rowtitle">Mother</p>
-                            <p class="content-title-p">
-                                <span class="material-symbols-outlined">
-                                    face_3
-                                </span>
-                            </p>
-                            <p class="text-capitalise">
-                                {{profileObj.family_information.mothers_info.first_name+"
-                                "+profileObj.family_information.mothers_info.last_name}}
-                            </p>
-                        </div>
-                        <div class="section-text section-content-detail-flex"
-                            *ngIf="profileObj.family_information.mothers_info.phone">
-                            <p class="content-title-p">
-                                <span class="material-symbols-outlined">
-                                    call
-                                </span>
-                            </p>
-                            <a href="tel:{{profileObj.family_information.mothers_info.phone}}">
-                                <p class="">
-                                    {{profileObj.family_information.mothers_info.phone}}
-                                </p>
-                            </a>
-                        </div>
-                        <div class="section-text section-content-detail-flex"
-                            *ngIf="profileObj.family_information.mothers_info.email">
-                            <p class="content-title-p">
-                                <span class="material-symbols-outlined">
-                                    mail
-                                </span>
-                            </p>
-                            <a href="mailto:{{profileObj.family_information.mothers_info.email}}">
-                                <p class="text-capitalise">
-                                    {{profileObj.family_information.mothers_info.email}}
-                                </p>
-                            </a>
-                        </div>
-
-                    </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
 
 
 
@@ -2883,10 +3004,33 @@
     </div>
 </div>
 
+<div class="overlay-comment-intrested" *ngIf="chatMessageF" (click)="closeChatMessage()"></div>
 
-<div class="overlay-comment-intrested" *ngIf="isinterestedF" (click)="closePopUp()"></div>
+<div class="intersted-popup-connent" *ngIf="chatMessageF">
+    <div class="intersted-popup-connent-inner inner-flex inner-flex-common">
+        <div class="form-field form-field-comment">
+            <!-- <label class="md-lable" for="request_comment">Add a comment</label> -->
+            <textarea name="" class="form-data" id="" placeholder="Add a comment" [(ngModel)]="requestObj.message"
+                rows="4"></textarea>
+        </div>
+        <div class="inner-flex inner-flex-common cancel-btn-copmment-flex inner-flex-center">
+            <button class="matched-forever-button button-style-primary" (click)="sendMesageRequest()">
+                <p>
+                    Send Request
+                </p>
+            </button>
+            <!-- <p class="cancel-btn">
+                
+            </p> -->
+        </div>
+    </div>
+</div>
 
-<div class="intersted-popup-connent" *ngIf="isinterestedF">
+
+<div class="overlay-comment-intrested" *ngIf="isinterestedF && tabName != 'request_received'" (click)="closePopUp()">
+</div>
+
+<div class="intersted-popup-connent" *ngIf="isinterestedF && tabName != 'request_received'">
     <div class="intersted-popup-connent-inner inner-flex inner-flex-common">
         <div class="section-paragraph">
             <!-- <p>Raj</p> -->
@@ -2912,6 +3056,52 @@
             <!-- <p class="cancel-btn">
             
         </p> -->
+        </div>
+    </div>
+</div>
+
+<div class="overlay-pin" *ngIf="setpinFlag" (click)="closePinF()"></div>
+<div class="pin-popup-connent" *ngIf="setpinFlag">
+    <div class="intersted-popup-connent-inner inner-flex inner-flex-common">
+        <p style="font-size: 22px; font-weight: 700;">Set Pin</p>
+
+        <div class="form-field form-field-comment">
+            <!-- <label class="md-lable" for="request_comment">Add a comment</label> -->
+            <input type="text" class="form-data" id="" placeholder="Pin" [(ngModel)]="pinObj.pin">
+
+        </div>
+        <div class="inner-flex inner-flex-common cancel-btn-copmment-flex inner-flex-center">
+            <button class="matched-forever-button button-style-primary" (click)="updatePin()">
+                <p>
+                    Submit
+                </p>
+            </button>
+            <!-- <p class="cancel-btn">
+                
+            </p> -->
+        </div>
+    </div>
+</div>
+
+<div class="overlay-pin" *ngIf="changePinFlag" (click)="closePinF()"></div>
+<div class="pin-popup-connent" *ngIf="changePinFlag">
+    <div class="intersted-popup-connent-inner inner-flex inner-flex-common">
+        <p style="font-size: 22px; font-weight: 700;">Change Pin</p>
+        <div class="form-field form-field-comment">
+            <!-- <label class="md-lable" for="request_comment">Add a comment</label> -->
+             <input type="text" class="form-data" id="" placeholder="Old Pin" [(ngModel)]="pinObj.currrent_pin">
+             <input type="text" class="form-data" id="" placeholder="New Pin" [(ngModel)]="pinObj.new_pin">
+            
+        </div>
+        <div class="inner-flex inner-flex-common cancel-btn-copmment-flex inner-flex-center">
+            <button class="matched-forever-button button-style-primary" (click)="updatePin()">
+                <p>
+                    Submit
+                </p>
+            </button>
+            <!-- <p class="cancel-btn">
+                
+            </p> -->
         </div>
     </div>
 </div>

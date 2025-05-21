@@ -1,11 +1,9 @@
-<div class="chat-wrapper" id="chatlistPage" *ngIf="selectUser">
+<!-- <div class="chat-wrapper" id="chatlistPage" *ngIf="selectUser">
     <div class="chat-container-list">
-        <!-- Display 'No Comments' if the chat list is empty -->
         <div *ngIf="existingChatList.length === 0" class="no-comments">
             <p>No Messages</p>
         </div>
 
-        <!-- Display grouped messages for each day -->
         <div *ngFor="let date of groupedChatList.other | keyvalue" class="chat-day">
             <div class="chat-day-header">
                 <p>{{ date.value.formatted_date }}</p>
@@ -13,8 +11,7 @@
             <div *ngFor="let message of date.value.records" class="chat-message">
                 <div class="chat-message-body">
                     <pre>{{ message.message }}</pre>
-                    <!-- <img *ngIf="message.profile_picture" [src]="message.profile_picture" alt="User Profile"
-                        class="user-profile-img"> -->
+                    
                 </div>
                 <div class="chat-message-header">
                     <span class="user-name">{{ message.user_name }}</span>
@@ -24,17 +21,12 @@
             </div>
         </div>
 
-        <!-- Display 'Yesterday' messages -->
         <div *ngIf="groupedChatList.yesterday.length > 0" class="chat-day">
             <div class="chat-day-header">
                 <p>Yesterday</p>
             </div>
             <div *ngFor="let message of groupedChatList.yesterday" class="chat-message">
-                <!-- <div class="chat-message-body">
-                    <pre>{{ message.message }}</pre>
-                    <img *ngIf="message.profile_picture" [src]="message.profile_picture" alt="User Profile"
-                        class="user-profile-img">
-                </div> -->
+                
                 <div class="chat-message-body"
                     [ngClass]="{ 'right': message.user_id === loggedInUser.id, 'left': message.user_id !== loggedInUser.id }">
                     <pre>{{ message.message }}</pre>
@@ -47,33 +39,11 @@
             </div>
         </div>
 
-        <!-- Display 'Today' messages -->
         <div *ngIf="groupedChatList.today.length > 0" class="chat-day">
             <div class="chat-day-header">
                 <p>Today</p>
             </div>
             <div *ngFor="let message of groupedChatList.today" class="chat-message">
-                <!-- <div class="chat-message-body">
-                    <pre>{{ message.message }}</pre>
-
-                    
-                    <img *ngIf="message.profile_picture" [src]="message.profile_picture" alt="User Profile"
-                        class="user-profile-img">
-                    <ng-container *ngIf="message.user_id === senderId">
-                        <span *ngIf="message.read_by && message.read_by.includes(receiverId)"
-                            class="tick read">✓✓</span>
-
-                        <span
-                            *ngIf="message.delivered_to && message.delivered_to.includes(receiverId) && (!message.read_by || !message.read_by.includes(receiverId))"
-                            class="tick">✓✓</span>
-
-                        <span *ngIf="!message.delivered_to || !message.delivered_to.includes(receiverId)"
-                            class="tick">✓</span>
-                    </ng-container>
-
-
-                </div> -->
-
                 <div class="chat-message-body"
                     [ngClass]="{ 'right': message.user_id === loggedInUser.id, 'left': message.user_id !== loggedInUser.id }">
                     <pre>{{ message.message }}</pre>
@@ -88,7 +58,6 @@
         </div>
     </div>
 
-    <!-- Chat Input Area -->
     <div class="chat-input-area">
 
         <form name="chatForm" id="chatForm" (ngSubmit)="submitChat(submitChatForm)" #submitChatForm="ngForm" novalidate
@@ -116,4 +85,4 @@
     <p>
         Welcome. Select user to get started
     </p>
-</div>
+</div> -->

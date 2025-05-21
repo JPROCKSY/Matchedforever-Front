@@ -54,6 +54,36 @@ export class AdminServiceService {
             )
             .pipe();
     }
+
+    pinLogin(userData): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            }),
+        };
+        return this.http
+            .post<any>(
+                environment.apiUrl + "verifyOtp",
+                JSON.stringify(userData),
+                httpOptions
+            )
+            .pipe();
+    }
+    
+    resetPin(userData): Observable<any> {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+            }),
+        };
+        return this.http
+            .post<any>(
+                environment.apiUrl + "forget_pin",
+                JSON.stringify(userData),
+                httpOptions
+            )
+            .pipe();
+    }
     register(userData): Observable<any> {
         const httpOptions = {
             headers: new HttpHeaders({
@@ -749,6 +779,31 @@ export class AdminServiceService {
         return this.http
             .post<any>(
                 this.apiUrl + "chatRequests/send_request",
+                JSON.stringify(data),
+                httpOptions
+            )
+            .pipe();
+    }
+
+    updatePin(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders(),
+        };
+        return this.http
+            .post<any>(
+                this.apiUrl + "change_pin",
+                JSON.stringify(data),
+                httpOptions
+            )
+            .pipe();
+    }
+    setPin(data): Observable<any> {
+        const httpOptions = {
+            headers: this.getAuthHeaders(),
+        };
+        return this.http
+            .post<any>(
+                this.apiUrl + "set_pin",
                 JSON.stringify(data),
                 httpOptions
             )

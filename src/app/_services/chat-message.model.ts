@@ -19,5 +19,6 @@ export interface ChatMessages {
     user_id: string,
     video_thumbnail: string,
     delivered_to: string, // array of user IDs who received it
-    read_by: string  
+    read_by: string,
+    
 }

@@ -39,7 +39,7 @@ export class ManageProfileComponent implements OnInit {
     }
     //
 
-    public Activetab: any = "";
+    public Activetab: any = "all";
 
     dropdownOpen = false;
 
@@ -111,7 +111,7 @@ export class ManageProfileComponent implements OnInit {
                 this.getprofile();
             }
         });
-        
+
         this.getLoggedInUser();
         this.chatList();
         this.getProfilesByRm();
@@ -670,9 +670,7 @@ export class ManageProfileComponent implements OnInit {
     getprofile() {
         this.isLoading = true;
         this.profileList = [];
-
-        // this.isLoadingF = true;
-        this.dataObj.page = 0; // add
+        this.dataObj.page = 0;
         if (this.dataObj.type == "") {
             this.isLoadingF = true;
 
@@ -710,6 +708,8 @@ export class ManageProfileComponent implements OnInit {
                         this.allObj.page = 0;
                         this.toastr.error(response.message, "Error", {});
                         this.isLoadingAllF = false;
+                        this.allProfilesList = [];
+
                     }
                     this.isLoading = false;
                     // this.isLoadingAllF = false;
@@ -731,6 +731,7 @@ export class ManageProfileComponent implements OnInit {
                     } else {
                         this.allObj.page = 0;
                         this.toastr.error(response.message, "Error", {});
+                        this.allProfilesList = [];
                     }
                     this.isLoading = false;
                     this.isLoadingF = false;
@@ -1096,26 +1097,57 @@ export class ManageProfileComponent implements OnInit {
 
     public chatUsers: any = [];
     chatList() {
-        this.adminService.chatList({user_id:this.loggedInUser.id,status:'accept'}).subscribe((response: any) => {
-            if (response.success) {
-                this.chatUsers = response.data;
-            } else {
-                this.chatUsers = [];
-            }
-        });
+        this.adminService
+            .chatList({ user_id: this.loggedInUser.id, status: "accept" })
+            .subscribe((response: any) => {
+                if (response.success) {
+                    this.chatUsers = response.data;
+                } else {
+                    this.chatUsers = [];
+                }
+            });
     }
 
+    /* Code for sending the chat request starts from here */
 
-    /* Code for sending the chat request starts from here */ 
+    sendMesageRequest() {
+        this.adminService
+            .sentChatRequest(this.requestObj)
+            .subscribe((response: any) => {
+                if (response.success) {
+                    this.requestObj.candidate_id = "";
+                    this.requestObj.status = "";
+                    this.requestObj.message = "";
+                    this.requestObj.user_id = "";
+                    this.toastr.success(response.message);
+                } else {
+                    this.toastr.success(response.message);
+                }
+            });
+    }
 
-    sendMesageRequest(data){
-        this.adminService.sentChatRequest({candidate_id: data.id, user_id:this.loggedInUser.id, status:"request_sent"}).subscribe((response:any) => {
-            if(response.success){
-                this.toastr.success(response.message);
-            } else {
-                this.toastr.success(response.message);
+    public chatMessageF: boolean = false;
 
-            }
-        })
+    public requestObj: any = {
+        candidate_id: "",
+        status: "",
+        message: "",
+        user_id: "",
+    };
+
+    openChatPopup(data) {
+        console.log(data);
+        this.chatMessageF = true;
+        this.requestObj.candidate_id = data.profile_details.id;
+        this.requestObj.status = "request_sent";
+        this.requestObj.user_id = this.loggedInUser.id;
+    }
+
+    closeChatMessage() {
+        this.chatMessageF = false;
+        this.requestObj.candidate_id = "";
+        this.requestObj.status = "";
+        this.requestObj.message = "";
+        this.requestObj.user_id = "";
     }
 }
